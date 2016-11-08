@@ -11,7 +11,7 @@ categories: 杂记
 <img src="http://i1.piimg.com/567571/8338c9170ee94051.jpg" width="50%">
 
 公司业务网站上有一个可以Free input的textarea，长度没有限制，可是存到DB的时候Oracle varchar2最大长度限制是4000，于是聪明的同事使用分而治之的方式解决了这个问题。如果长度大于某个值就新建一个record存储，然后使用seq_num记录表示其顺序。
-
+<!-- more -->
 # listagg
 
 上周做report的时候需要把这个column的数据生成给VDC的同事，于是首先想到的是用Oracle的listagg函数。

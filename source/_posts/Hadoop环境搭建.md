@@ -18,7 +18,7 @@ ubuntu-16.04-desktop-amd64
 
 安装虚拟机和操作系统的教程可以参考之前的Blog: [Ubuntu系统初识](http://www.lz5z.com/Ubuntu%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/)
 
-
+<!-- more -->
 ## 下载Hadoop
 
 如果你在官网上下载比较慢的话可以去这个网站看下

@@ -12,7 +12,7 @@ categories: Windows
 [nssm](http://nssm.cc/)是一个Windows服务管理器，可以把应用写入服务，以达到自动重启的功能。
 
 目前最新的版本是2.24，[下载地址](http://nssm.cc/download)。 下载完成以后解压到某个路径下，然后将win64/win32文件路径（D:\nssm-2.24\win64）添加的环境变量Path。
-
+<!-- more -->
 # 使用
 
 ## Node

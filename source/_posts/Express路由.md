@@ -12,7 +12,7 @@ categories: Node
 前面说到Express有两个核心概念：Middleware和Routing。什么是Routing呢，简单来说就是http请求与服务端应答逻辑之间的映射关系。
 
 ![routing](http://p1.bqimg.com/567571/ae38457a9cc5a93a.png)
-
+<!-- more -->
 路由是由一个 URI、HTTP 请求（GET、POST等）和若干个句柄组成，它的结构如下： app.METHOD(path, [callback...], callback)， app 是 express 对象的一个实例， METHOD 是一个 HTTP 请求方法， path 是服务器上的路径， callback 是当路由匹配时要执行的函数。
 
 上篇由if else处理不同的get请求就是最原始的路由，但是如果项目稍微大一点，维护无数else将是开发者的噩梦。幸好Express有强大的路由机制，比如解析url，正则表达式匹配等等，给开发者带来小小便利。

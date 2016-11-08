@@ -20,7 +20,7 @@ Type in expressions to have them evaluated.
 Type :help for more information.
 scala>
 ```
-
+<!-- more -->
 ## RELP
 
 刚才我们已经启动了Scala RELP，它是一个基于命令行的交互式编程环境。我们可以在RELP中做一些代码尝试而不用启动IDE，这在我们思考问题时非常的方便。对于Java有一个好消息，JDK 9干始将内建支持RELP功能。

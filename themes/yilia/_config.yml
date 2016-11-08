@@ -2,7 +2,8 @@
 
 menu:
   主页: /
-  相册: /photos
+  列表: /archives
+  # 照片: /photos
 
 # SubNav
 subnav:

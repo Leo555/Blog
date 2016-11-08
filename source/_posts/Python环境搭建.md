@@ -9,7 +9,7 @@ categories: 入门系列
 # Python 环境搭建
 ---
 因为工作的需要，要运行一个Py脚本，电脑里的只有一个原生的py27，去年安装的，于是就从零开始搭建py环境。
-
+<!-- more -->
 ## 安装 
 首先去[Python官网][2]下载安装最新版的py，这里我选择的是最新的Python3.5.2, 建议使用Python3.4以后的版本，因为3.4之后，Python自带了Pip。 3.5.2是目前最新的有64位的Python版本，选择最容易安装的[Windows x86-64 executable installer][3]下载。
 

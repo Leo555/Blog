@@ -13,6 +13,7 @@ MongoDB在3.2 版本更新后，正式将WiredTiger引擎设为默认引擎。
 
 本文是MongoDB存储策略的一个简单翻译加讲解，存储引擎部分只介绍 **wiredTiger**，只有企业版支持的inMemory和落后于wiredTiger的mmapv1你可以参考[官方文档](https://docs.mongodb.com/manual/reference/configuration-options/)。
 官方给出[存储策略](https://docs.mongodb.com/manual/reference/configuration-options/)如下：
+<!-- more -->
 ```
 storage:
    dbPath: <string>
