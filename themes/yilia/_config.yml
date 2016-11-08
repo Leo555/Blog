@@ -1,0 +1,63 @@
+# Header
+
+menu:
+  主页: /
+  相册: /photos
+
+# SubNav
+subnav:
+  github: "https://github.com/Leo555"
+  weibo: "http://weibo.com/515679943"
+  rss: /atom.xml
+  #douban: "#"
+  #mail: "#"
+  #facebook: "#"
+  #google: "#"
+  #twitter: "#"
+  #linkedin: "#"
+
+# 是否需要修改 root 路径
+# 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
+# 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
+root: 
+
+# Content
+excerpt_link: more
+fancybox: true
+mathjax: false
+
+# 是否开启动画效果
+animate: true
+
+# 是否在新窗口打开链接
+open_in_new: true
+
+# Miscellaneous
+google_analytics: ''
+favicon: /assets/img/favicon.ico
+
+#你的头像url
+avatar: /assets/img/avatar.png
+
+#是否开启分享
+share_jia: true
+share_addthis: false
+
+duoshuo: "leo555"
+
+smart_menu:
+  innerArchive: '所有文章'
+  tagcloud: '标签'
+  friends: false
+  aboutme: '关于我'
+
+friends:
+  友情链接1: http://www.lz5z.com/
+  友情链接2: http://www.lz5z.com/
+  友情链接3: http://www.lz5z.com/
+  友情链接4: http://www.lz5z.com/
+  友情链接5: http://www.lz5z.com/
+  友情链接6: http://www.lz5z.com/
+
+aboutme: 
+  

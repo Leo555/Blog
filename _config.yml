@@ -1,0 +1,119 @@
+# Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Leo's Blog
+subtitle: 人生苦短，我再睡会
+description: 凡事浅尝辄止，万物。 
+author: 李振
+email: lizhen55521@gmail.com
+keywords: "JavaScript, Python"
+avatar: /uploads/avatar.png
+duoshuo_shortname: leo555
+baidu_analytics: f9325ff33f8e6d5a2bb101146d6a4bcf
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://www.lz5z.com
+root: /
+permalink: :title/
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+permalink_defaults:
+
+search:
+  path: search.xml
+  field: post
+
+# Directory
+source_dir: source
+public_dir: public
+i18n_dir: :lang
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+highlight:                                                                                                                                                                                                   
+  enable: true                                                                                                                                                                                               
+  auto_detect: true                                                                                                                                                                                          
+  line_number: true                                                                                                                                                                                          
+  tab_replace: ''
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Archives
+## 2: Enable pagination
+## 1: Disable pagination
+## 0: Fully Disable
+archive: 1
+category: 1
+tag: 1
+
+# Server
+## Hexo uses Connect as a server
+## You can customize the logger format as defined in
+## http://www.senchalabs.org/connect/logger.html
+port: 4000
+server_ip: localhost
+logger: false
+logger_format: dev
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 8
+pagination_dir: page
+
+# Disqus
+disqus_shortname:
+
+# Extensions
+## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
+## Themes: https://github.com/hexojs/hexo/wiki/Themes
+# plugins:
+#  - hexo-generator-feed
+#  - hexo-generator-baidu-sitemap
+#  - hexo-generator-sitemap
+
+theme: yilia
+exclude_generator:
+
+# Deployment
+deploy:
+  type: git
+  repo: git@github.com:Leo555/Leo555.github.io.git
+  branch: master
+
+sitemap:
+    path: sitemap.xml
+baidusitemap:
+    path: baidusitemap.xm
+
+feed:
+    type: atom
+    path: atom.xml
+    limit: 100
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+#RSS订阅
+plugin:
+- hexo-generator-feed 
