@@ -6,6 +6,9 @@ tags:
 - Hadoop
 categories: Big Data
 ---
+
+![](http://yotuku.cn/link?url=EyQRMN2xf&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+
 # 学习背景
 
 很早就想学习大数据相关的知识，无奈一直没有契机，而且没有实际项目的学习其实比较困难，所以无从下手。这次借机ITA技术学习，正巧项目组已经开始探索大数据相关知识，所以想靠自学摸索一下。

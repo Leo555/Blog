@@ -5,12 +5,14 @@ tags:
 - Python
 categories: Python
 ---
+
+![](http://i1.piimg.com/567571/a82439199ab27e51.png)
+
 # 背景 
 ---
 
 目前所在的项目组需要经常执行一些定时任务，之前都是用Node.JS的 [cron](https://github.com/ncb000gt/node-cron)来实现schedule job。可是这次需要连接不同的DB，而且实现的逻辑也有些许不同，于是选择使用Python的定时器。
 
-![](http://i1.piimg.com/567571/a82439199ab27e51.png)
 <!-- more -->
 # Python实现定时任务
 

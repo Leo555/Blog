@@ -6,20 +6,18 @@ tags:
 - ES7
 - async
 categories: JavaScript
-
 ---
+![](http://yotuku.cn/link?url=E1PpTXhez&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
 
 # 简介
 
 异步操作一直都是 JavaScript 中一个比较麻烦的事情，从最早的 callback hell，到TJ大神的 co，再到 Promise 对象，然后ES6中的 Generator 函数，每次都有所改进，但都不是那么彻底，而且理解起来总是很复杂。 
 
 直到 async/await 出现，让写异步的人根本不用关心它是不是异步，可以说是目前最好的 JavaScript 异步解决方案。
-
+<!-- more -->
 ECMAScript 2016(ES7) 中已经确定支持 async/await，那我们怎么能够落后呢？
 
 本文是 async/await 的学习笔记，涵盖基本用法以及一些小demo。
-
-<!-- more -->
 
 ## async 函数是什么
 

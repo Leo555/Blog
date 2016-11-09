@@ -6,6 +6,9 @@ tags:
 - 入门
 categories: Android
 ---
+
+![](http://yotuku.cn/link?url=4yBQX4hgG&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+
 # Android简介
 
 Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。

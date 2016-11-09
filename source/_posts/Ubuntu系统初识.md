@@ -7,6 +7,9 @@ tags:
 - Python
 categories: Linux
 ---
+
+![](http://yotuku.cn/link?url=4JYxgNnlz&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+
 # 简介
 
 Ubuntu是一个以桌面应用为主的Linux操作系统，可在智能手机、平板电脑、个人电脑、服务器和云VPS的上面看到Ubuntu的身影，是目前最为流行的Linux桌面操作系统。本文我们就来学习Ubuntu操作系统的安装和简单使用。

@@ -6,6 +6,9 @@ tags:
 - Spark
 categories: Big Data
 ---
+
+![](http://yotuku.cn/link?url=NyPaRQ2xG&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+
 # 安装Scala
 
 到Scala官方下载地址下载：[http://scala-lang.org/download/](http://scala-lang.org/download/)

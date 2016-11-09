@@ -3,9 +3,11 @@ title: Python 基础知识学习
 date: 2016-08-31 22:38:42
 tags: 
 - Python
-- 入门
 categories: 入门系列
 ---
+
+![](http://yotuku.cn/link?url=V1W1pm3gf&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+
 # Python 数据类型
 ---
 这里只列举一些Python与Java和JavaScript不一样的地方，如果你有任何语言基础，相信看完这篇文章就可以轻松写Python程序。
