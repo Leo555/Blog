@@ -7,10 +7,10 @@ tags:
 categories: MongoDB
 ---
 
+![](http://yotuku.cn/link?url=V1uIH4nez&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+
 # MongoDB存储策略
 ---
-
-![](http://yotuku.cn/link?url=EJ0wQE2gG&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
 
 MongoDB在3.2 版本更新后，正式将WiredTiger引擎设为默认引擎。
 

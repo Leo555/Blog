@@ -5,7 +5,9 @@ tags:
 - JavaScript
 categories: JavaScript
 ---
+
 ![](http://tuku02-qn.icp114.cn/public/16-11-9/47166681.jpg)
+
 # 简介
 
 严格模式是 ECMAScript 5 中增加的对 JavaScript 运行条件限制更强的一种模式。
