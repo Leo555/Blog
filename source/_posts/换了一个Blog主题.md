@@ -16,7 +16,7 @@ categories: 杂记
 这次选择的主题是腾讯的工程师Litten制作的 [「yilia」](https://github.com/litten/hexo-theme-yilia)
 
 「yilia」 同样是我喜欢的简洁样式，作者甚至移除了搜索框。而且对于移动端的优化也做得很不错。
-
+<!-- more -->
 # yotuku
 
 之前Blog里面的图片一直都选择 [「yotuku」](http://yotuku.cn/) 生成在线图片，然后在markdown里面引用，如果图片大小或者位置不合适的话，会在md里面手写一段html，这样做很省事。
