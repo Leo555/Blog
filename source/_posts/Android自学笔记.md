@@ -7,7 +7,7 @@ tags:
 categories: Android
 ---
 
-![](http://yotuku.cn/link?url=4yBQX4hgG&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
+<img src="/assets/img/android.png" alt="android">
 
 # Android简介
 
