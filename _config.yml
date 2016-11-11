@@ -117,3 +117,8 @@ feed:
 #RSS订阅
 plugin:
 - hexo-generator-feed 
+
+admin:
+  username: leo555
+  password_hash: $2a$08$F6KqRWIbkJkC7LMzsymHSu4CLeT8YBNh3ga9wk/SagSv5Tv31d4W.
+  secret: secret*5+secret*3+secret%3
