@@ -8,6 +8,15 @@ date: 2016-11-11 11:44:11
 ---
 # 简介
 
-Electron提供了丰富的本地（操作系统）的API，使你能够使用纯JavaScript来创建桌面应用程序。与其它各种的Node.js运行时不同的是Electron专注于桌面应用程序而不是Web服务器。
+Build cross platform desktop apps with JavaScript, HTML, and CSS.
+<img src="/assets/img/electron.png" alt="我是一只的图片" width="20%">
+当JavaScript占领Browser端，Server端，[Mobile端后](https://www.developereconomics.com/why-javascript-will-win-on-mobile)，Electron的出现弥补了它在桌面端的空白。
+<!--more-->
+## 什么是[Electron](http://electron.atom.io/)
 
-这并不意味着Electron是一个绑定图形用户界面（GUI）的JavaScript库。取而代之的是，Electron使用Web页面作为它的图形界面，所以你也可以将它看作是一个由JavaScript控制的迷你的Chrominum浏览器。
+1. Electron是一个使用纯前端技术(JavaScript, HTML, CSS)来创建跨平台桌面应用程序的JavaScript环境。
+2. Electron使用Web页面作为它的图形界面，所以你也可以将它看作是一个由JavaScript控制的迷你的Chrominum浏览器。
+3. Electron提供丰富的本地API，能够让你方便地使用操作系统层面的功能。
+4. Electron的起源是Github推出的开源文本编辑器 Atom。
+
+## 快速入门
