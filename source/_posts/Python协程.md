@@ -1,15 +1,11 @@
----
 title: Python协程
-date: 2016-10-25 22:02:48
-tags: 
-- Python
+tags:
+  - Python
 categories: Python
+date: 2016-10-25 22:02:48
 ---
-
-![](http://yotuku.cn/link?url=EJlP7Cm3lG&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
-
 # 背景
-
+![](http://p1.bpimg.com/567571/ff584819879044dc.png)
 第一次听同学提到协程Coroutine，说是一个类似于多线程而又不是多线程的东西，听得云里雾里，不觉明厉。后来找了个机会好好看了一下相关的知识，发现协程是一个很有趣的东西。
 <!-- more -->
 [Wiki百科](https://zh.wikipedia.org/wiki/%E5%8D%8F%E7%A8%8B)给协程的定义是：“与子例程一样，协程也是一种程序组件。。。协程更适合于用来实现彼此熟悉的程序组件，如合作式多任务，迭代器，无限列表和管道。”

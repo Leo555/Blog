@@ -7,7 +7,7 @@ tags:
 - Mean
 categories: 杂记
 ---
-
+<img src="/assets/img/寻找.jpg" alt="我是一只的图片" width="20%">
 # 背景
 ---
 最近从公司SOP项目转到Data Analysis「DA」项目，开始从事Mean堆栈的开发，一些新的坑也要从头踩起。昨天就遇到了一个深坑，特此记录下来。

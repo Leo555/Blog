@@ -7,8 +7,7 @@ tags:
 categories: MongoDB
 ---
 
-![](http://yotuku.cn/link?url=V1uIH4nez&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
-
+<img src="/assets/img/MongoDB-Logo.png" alt="我是一只的图片" width="20%">
 # MongoDB存储策略
 ---
 

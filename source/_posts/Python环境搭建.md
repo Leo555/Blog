@@ -5,9 +5,7 @@ tags:
 - Python
 categories: 入门系列
 ---
-
-![](http://yotuku.cn/link?url=V1W1pm3gf&tk_plan=free&tk_storage=tietuku&tk_vuid=30dc6df6-6221-4328-896f-84fece6938b8&tk_time=2016110923)
-
+<img src="/assets/img/Python_logo.png" alt="我是一只的图片" width="20%">
 # Python 环境搭建
 ---
 因为工作的需要，要运行一个Py脚本，电脑里的只有一个原生的py27，去年安装的，于是就从零开始搭建py环境。
