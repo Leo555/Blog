@@ -7,11 +7,11 @@ menu:
 
 # SubNav
 subnav:
+  mail: "mailto:lizhen55521@gmail.com"
   github: "https://github.com/Leo555"
   weibo: "http://weibo.com/515679943"
   rss: /atom.xml
   #douban: "#"
-  #mail: "#"
   #facebook: "#"
   #google: "#"
   #twitter: "#"

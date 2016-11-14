@@ -77,9 +77,10 @@ logger_format: dev
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 
+auto_spacing: true
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 8
+per_page: 8 
 pagination_dir: page
 
 # Disqus
@@ -122,3 +123,32 @@ admin:
   username: leo555
   password_hash: $2a$08$F6KqRWIbkJkC7LMzsymHSu4CLeT8YBNh3ga9wk/SagSv5Tv31d4W.
   secret: secret*5+secret*3+secret%3
+
+#压缩文件
+html_minifier:
+  enable: true
+  exclude:
+
+css_minifier:
+  enable: true
+  exclude: 
+    - '*.min.css'
+
+js_minifier:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude: 
+    - '*.min.js'
+
+image_minifier:
+  enable: true
+  interlaced: false
+  multipass: false
+  optimizationLevel: 2
+  pngquant: false
+  progressive: false
+
+
+
