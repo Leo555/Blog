@@ -9,7 +9,7 @@ date: 2016-11-11 11:44:11
 # 简介
 
 Build cross platform desktop apps with JavaScript, HTML, and CSS.
-<img src="/assets/img/electron.png" alt="我是一只的图片" width="20%">
+<img src="/assets/img/electron.png" alt="我是一只的图片">
 当JavaScript占领Browser端，Server端，[Mobile端后](https://www.developereconomics.com/why-javascript-will-win-on-mobile)，Electron的出现弥补了它在桌面端的空白。
 <!--more-->
 ## 什么是[Electron](http://electron.atom.io/)

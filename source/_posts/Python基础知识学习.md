@@ -5,7 +5,7 @@ tags:
 - Python
 categories: 入门系列
 ---
-<img src="/assets/img/Python_logo.png" alt="我是一只的图片" width="20%">
+<img src="/assets/img/Python_logo.png" alt="我是一只的图片">
 # Python 数据类型
 ---
 这里只列举一些Python与Java和JavaScript不一样的地方，如果你有任何语言基础，相信看完这篇文章就可以轻松写Python程序。
