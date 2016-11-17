@@ -9,7 +9,7 @@ categories: Node
 
 # 简介
 
-Node.js 的单线程模型给了它无数的赞美，也带给它无数的诟病。使用事件驱动，使得开发者不使用多线程也能开发出一个高并发的服务器。单线程模型，让程序员远离了线程调度的复杂性；同样也是因为单线程，让CPU密集型计算应用完全不适用。
+Node.js 的单线程模型给了它无数的赞美，也带给它无数的诟病。单线程模型，让开发者远离了线程调度的复杂性，使用事件驱动也能开发出一个高并发的服务器；同样也是因为单线程，让CPU密集型计算应用完全不适用。
 
 Node.js 中内建了一个 [child_process](https://nodejs.org/api/child_process.html)模块，可以在程序中创建子进程，从而实现多核并行计算。
 <!-- more -->
@@ -18,7 +18,7 @@ Node.js 中内建了一个 [child_process](https://nodejs.org/api/child_process.
 
 child_process是 Node.js 中一个非常重要的模块，主要功能有：
 1. 创建子进程
-2. 子进程与子进程通信
+2. 主进程与子进程通信
 3. 主进程读取子进程返回结果
 
 使用 child_process 模块创建进程一共有六种方法（Node.js v7.1.0）

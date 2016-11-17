@@ -7,10 +7,11 @@ date: 2016-10-25 22:02:48
 # 背景
 ![](http://p1.bpimg.com/567571/ff584819879044dc.png)
 第一次听同学提到协程Coroutine，说是一个类似于多线程而又不是多线程的东西，听得云里雾里，不觉明厉。后来找了个机会好好看了一下相关的知识，发现协程是一个很有趣的东西。
-<!-- more -->
+
 [Wiki百科](https://zh.wikipedia.org/wiki/%E5%8D%8F%E7%A8%8B)给协程的定义是：“与子例程一样，协程也是一种程序组件。。。协程更适合于用来实现彼此熟悉的程序组件，如合作式多任务，迭代器，无限列表和管道。”
 
 那什么是子程序呢？[Wiki百科](https://zh.wikipedia.org/wiki/%E5%AD%90%E7%A8%8B%E5%BA%8F)给出的定义是：“在计算机科学中，子程序（英语：Subroutine, procedure, function, routine, method, subprogram, callable unit），是一个大型程序中的某部分代码，由一个或多个语句块组成。它负责完成某项特定任务，而且相较于其他代码，具备相对的独立性。”
+<!-- more -->
 
 看完这段解释，当时我的反应是这样的：
 
@@ -90,7 +91,7 @@ z
 ![](http://p1.bpimg.com/567571/8ec32950a6ea1e7a.jpg)
 
 多线程：
-<img src='http://p1.bpimg.com/567571/8a1dbea42410bec0.jpg', width="47%">
+<img src='http://p1.bpimg.com/567571/8a1dbea42410bec0.jpg', width="25%">
 
 
 # 协程的使用
