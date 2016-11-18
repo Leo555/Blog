@@ -25,7 +25,7 @@ after_script:
 
 branches:
   only:
-    - Blog
+    - master
 env:
  global:
    - GH_REF: github.com/Leo555/Leo555.github.io.git
