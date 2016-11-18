@@ -93,7 +93,7 @@ after_script:
   - git config user.email "YOUR GITHUB EMAIL"
   - git add .
   - git commit -m "Update docs"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git push --force --quiet "https://${GitHub_token}@${GH_REF}" master:master
 
 branches:
   only:
@@ -103,6 +103,8 @@ env:
    - GH_REF: github.com/Leo555/Leo555.github.io.git
 ```
 记得将上面的nama和email还有GH_REF修改成你自己的。
+还记得刚才在 Travis Settings 页面配置的环境变量**GitHub_token**吗？
+这下你知道 Travis 是如何获取GitHub push的权限了吧。
 
 此时就万事俱备了。
 
