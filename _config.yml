@@ -86,14 +86,6 @@ pagination_dir: page
 # Disqus
 disqus_shortname:
 
-# Extensions
-## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
-## Themes: https://github.com/hexojs/hexo/wiki/Themes
-# plugins:
-#  - hexo-generator-feed
-#  - hexo-generator-baidu-sitemap
-#  - hexo-generator-sitemap
-
 theme: yilia
 exclude_generator:
 
