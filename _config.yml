@@ -105,8 +105,6 @@ deploy:
 
 sitemap:
     path: sitemap.xml
-baidusitemap:
-    path: baidusitemap.xm
 
 feed:
     type: atom
