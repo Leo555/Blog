@@ -17,10 +17,17 @@ Travis CI 是一个持续集成的平台，我们可以使用其自动构建部�
 
 因为懒。
 
-<!--more-->
-虽然Hexo部署Blog到GitPage只需要几个命令，但是如果是一个新的环境，你需要安装一大堆依赖，比如要装Node，要装Hexo，还有package.json里面的各种依赖，虽然Npm提供了强大的包管理功能，但是有时候就是不方便。
+Hexo 部署 Blog 到 GitPage 通常需要三部曲：
 
-使用Travis，你只需要本地有一个git就可以了。
+```shell
+$ hexo clean
+$ hexo g
+$ hexo deploy
+```
+<!--more-->
+很简单吧，但是如果是一个新的环境，你需要安装一大堆工具和依赖，比如要装Node，要装Hexo，还有package.json里面的各种依赖，虽然Npm提供了强大的包管理功能，但是有时候就是不方便。
+
+使用 Travis，你只需要本地有一个 git 就可以了。
 
 每当你 Push 一个 commit 到 Github 时，Travis CI 会检测到你的提交，并根据配置文件自动运行一些命令，通常这些命令用于测试，构建等等。
 
@@ -55,9 +62,11 @@ Travis CI 是一个持续集成的平台，我们可以使用其自动构建部�
 * Build only if .travis.yml is present：是只有在.travis.yml文件中配置的分支改变了才构建
 * Build pushes：当推送完这个分支后开始构建
 
-这个时候，我们已经开启要构建的仓库，但是如何将构建完成后的文件推送到github上呢？于是我们需要GitHub的Access Token了。
+这个时候，我们已经开启要构建的仓库，但是如何将构建完成后的文件推送到 Github 上呢？
 
 ## GitHub Access Token
+
+Github 支持一种特殊的 URL 来执行 push/pull 等等操作，而不需要输入用户名密码。但这需要事先在 Github 上创建一个 token。
 
 首先去GitHub Settings页面选择 [**Personal access tokens**](https://github.com/settings/tokens)，如果你已经登录了，点击链接进去即可。
 
@@ -103,7 +112,7 @@ env:
    - GH_REF: github.com/Leo555/Leo555.github.io.git
 ```
 将上面的nama和email还有GH_REF修改成你自己的。
-还记得刚才在 Travis Settings 页面配置的环境变量**GitHub_token**吗？这里把它配入Git push参数，让 Travis 获取 GitHub 权限。
+还记得刚才在 Travis Settings 页面配置的环境变量 **GitHub_token** 吗？这里用 Linux 环境变量的引用方式将其引入 git push 的url，因为push方法就能通过 GitHub OAuth授权，完成自动push的功能。
 
 此时就万事俱备了。
 
@@ -111,7 +120,10 @@ env:
 
 使用Hexo创建新的Blog文件，然后push到GitHub上。
 ```shell
-hexo new test.md
+$ hexo new test.md
+$ git add .
+$ git commit -m "add new post test"
+$ git push origin master
 ```
 然后回到 Travis 主页面，发现部署已经开始了
 
