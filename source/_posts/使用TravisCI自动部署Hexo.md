@@ -42,7 +42,7 @@ Travis CI 是一个持续集成的平台，我们可以使用其自动构建部�
 
 点击「My Repositories」后面的 **+**，添加要自动构建的仓库
 
-<img src="/assets/img/Travis1.png" alt="我是一只的图片">
+<img src="/assets/img/Travis.png" alt="我是一只的图片">
 
 这里会显示你GitHub下所有的项目，选中博客仓库，我的博客在GitHub上的仓库名字就叫做 **Blog**。然后点击仓库名进入仓库配置页面。
 
@@ -108,3 +108,7 @@ env:
 
 # 测试
 
+使用Hexo创建新的Blog文件，然后push到GitHub上。
+```shell
+hexo new 使用
+```
