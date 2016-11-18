@@ -7,8 +7,6 @@ tags:
 categories: 杂记
 date: 2016-11-18 10:00:36
 ---
-
-
 # Travis CI
 
 [Travis CI](https://travis-ci.org/) 是一个持续集成的平台，我们可以使用其自动构建部署的功能帮我们简化Hexo博客的部署流程。
