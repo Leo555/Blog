@@ -1,5 +1,5 @@
 language: node_js
-node_js: 4.4.4
+node_js: stable
 
 install:
   - npm install
@@ -12,7 +12,7 @@ after_script:
   - cd ./public
   - ls
   - git init
-  - git config user.name "Leo555"
+  - git config user.name "LeoLi"
   - git config user.email "lizhen55521@gmail.com"
   - git add .
   - git commit -m "Update"

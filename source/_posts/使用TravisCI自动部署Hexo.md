@@ -114,3 +114,13 @@ env:
 ```shell
 hexo new test.md
 ```
+然后回到 Travis 主页面，发现部署已经开始了
+
+<img src="/assets/img/Travis_deploy.png" alt="我是一只的图片">
+
+在下面的log中可以看到部署的详细情况。
+
+包括 **nvm install**，**npm install**，**hexo g**等命令都在这里执行。
+
+
+
