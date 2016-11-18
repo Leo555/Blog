@@ -5,6 +5,7 @@ install:
   - npm install
 
 script:
+  - hexo clean
   - hexo g
 
 after_script:
@@ -13,7 +14,7 @@ after_script:
   - git config user.name "Leo555"
   - git config user.email "lizhen55521@gmail.com"
   - git add .
-  - git commit -m "Update docs"
+  - git commit -m "Update"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 branches:
