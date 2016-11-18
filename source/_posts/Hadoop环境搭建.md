@@ -1,10 +1,9 @@
----
 title: Hadoop环境搭建
-date: 2016-09-15 20:11:00
-tags: 
-- Big Data
-- Hadoop
+tags:
+  - Big Data
+  - Hadoop
 categories: Big Data
+date: 2016-09-15 20:11:00
 ---
 # 开发环境搭建
 
@@ -377,56 +376,6 @@ hbase(main):013:0> drop 'test'
 hbase(main):014:0> exit
 ```
 
-# Hive
-
-Apache Hive是一个建立在Hadoop架构之上的数据仓库。它能够提供数据的精炼，查询和分析。
-
-Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供简单的SQL查询功能，可以将SQL语句转换为MapReduce任务进行运行。
-
-简单地说，Hive让我们用SQL的方式进行数据统计分析，不需要专门开发MapReduce。
-
-Hive总体架构如下：
-![](http://i1.piimg.com/567571/453f9b8942a0ecd6.png)
-
-可以看到Hive提供三种连接方式： JDBC, Thrift, ODBC
-
-## 下载安装
-
-下载地址：
-http://mirrors.cnnic.cn/apache/hive/
-
-我下载的是 apache-hive-2.1.0-bin.tar.gz
-
-下载后解压到 /usr/local/hive 文件夹里面 
-
-## 环境变量
-
-```
-export HIVE_HOME=/usr/local/hive
-export PATH=$PATH:${HIVE_HOME}/bin
-```
-
-## 启动Hive
-
-```shell
-$ 
-```
-
-## 安装MySql作为metadata数据仓库
-
-```shell
-$ sudo apt-get install mysql-server-5.6
-```
-
-MySql 安装完成后，在/lib 文件夹下面有一个 **mysql-connector-java-5.1.39-bin.jar**的jar包，将其copy到 $HIVE_HOME/lib
-
-```shell
-sudo cp mysql-connector-java-5.1.39-bin.jar $HIVE_HOME/lib
-```
-
-## Hive Local模式配置
-
-
 
 
 # 总结
@@ -438,5 +387,4 @@ $ hdfs namenode -format
 $ start-dfs.sh  #http://localhost:50070
 $ start-yarn.sh  #http://localhost:8088/cluster
 $ start-hbase.sh  #http://localhost:16010/master-status
-$ 
 ```
