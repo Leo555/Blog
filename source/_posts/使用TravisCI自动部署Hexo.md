@@ -110,5 +110,5 @@ env:
 
 使用Hexo创建新的Blog文件，然后push到GitHub上。
 ```shell
-hexo new 使用
+hexo new test.md
 ```
