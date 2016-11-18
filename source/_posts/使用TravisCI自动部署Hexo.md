@@ -4,7 +4,7 @@ tags:
   - Travis
   - 持续集成
   - Hexo
-categories: Hexo
+categories: 杂记
 date: 2016-11-18 10:00:36
 ---
 
