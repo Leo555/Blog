@@ -10,6 +10,7 @@ script:
 
 after_script:
   - cd ./public
+  - ls
   - git init
   - git config user.name "Leo555"
   - git config user.email "lizhen55521@gmail.com"
@@ -20,6 +21,7 @@ after_script:
 branches:
   only:
     - master
+
 env:
  global:
    - GH_REF: github.com/Leo555/Leo555.github.io.git
