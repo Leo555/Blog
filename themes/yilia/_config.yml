@@ -34,7 +34,11 @@ animate: true
 open_in_new: true
 
 # Miscellaneous
-google_analytics: ''
+google_analytics: 
+  enable: true
+  id: UA-87693103-1
+  site: auto
+
 favicon: /assets/img/favicon.ico
 
 #你的头像url
