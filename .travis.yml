@@ -1,0 +1,31 @@
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+#before_script:
+ # - npm install -g gulp
+
+script:
+  - hexo clean
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "Leo555"
+  - git config user.email "lizhen55521@gmail.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    - Blog
+env:
+ global:
+   - GH_REF: github.com/Leo555/Leo555.github.io.git
