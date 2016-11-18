@@ -84,6 +84,7 @@ Github 支持一种特殊的 URL 来执行 push/pull 等等操作，而不需要
 
 上述步骤完成后，只需要在你Blog源代码的根目录下增加一个 **.travis.yml** 文件，
 我的文件内容如下：
+
 ```yml
 language: node_js
 node_js: stable
