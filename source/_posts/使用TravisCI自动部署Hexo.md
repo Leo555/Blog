@@ -15,7 +15,7 @@ Travis CI 是一个持续集成的平台，我们可以使用其自动构建部�
 
 ## 为什么要用 Travis CI
 
-因为懒。
+因为懒。 <img src="/assets/img/what_can_i_say.jpg" alt="what_can_i_say">
 
 Hexo 部署 Blog 到 GitPage 通常需要三部曲：
 
@@ -118,7 +118,7 @@ env:
 
 # 测试
 
-使用Hexo创建新的Blog文件，然后push到GitHub上。
+使用 Hexo 创建新的 Blog 文件，然后 push 到 GitHub 上。
 ```shell
 $ hexo new test.md
 $ git add .
@@ -134,4 +134,6 @@ $ git push origin master
 包括 **nvm install**，**npm install**，**hexo g**等命令都在这里执行。
 
 
+# 总结
 
+有了自动部署的功能，从此以后就可以将关注点集中在博客内容上，换了平台和环境也没有任何影响。
