@@ -39,7 +39,7 @@ person.hi();
 我们再看一个例子：
 
 ```javascript
-window.name = 'window';
+var name = 'window'; //相当于 window.name = 'window'
 var person = {
     name: 'Leo',
     hi: function() {
@@ -95,7 +95,7 @@ j();
 
 ```javascript
 'use strict';
-window.name = 'window';
+var name = 'window';
 var person = {
     name: 'Leo',
     hi: function() {
