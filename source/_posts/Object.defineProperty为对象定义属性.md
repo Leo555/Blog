@@ -12,7 +12,7 @@ categories: JavaScript
 目前前端开发中比较流行的两个框架： [Angular](https://angularjs.org/) 和 [Vue](https://cn.vuejs.org/) 都采用了数据双向绑定的技术。
 Angular1 中数据双向绑定是通过「脏检测」的方式实现，每当数据发生变更，对所有的数据和视图的绑定关系进行一次检测，识别是否有数据发生了变化以及这个变化是否会影响其它数据的变化，然后将变更的数据发送到视图，更新页面展示。
 
-Vue 数据双向绑定的原理与Angular有所不同，网上人称「数据劫持」。Vue使用的是 ES5 提供的 Object.defineProperty() 结合发布者-订阅者模式，通过Object.defineProperty() 来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
+Vue 数据双向绑定的原理与Angular有所不同，网上人称「数据劫持」<img src="/assets/img/scary.gif" alt="scary" width="5%">。Vue使用的是 ES5 提供的 Object.defineProperty() 结合发布者-订阅者模式，通过Object.defineProperty() 来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
 <!-- more -->
 # Object.defineProperty 
