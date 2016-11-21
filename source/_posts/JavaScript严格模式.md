@@ -10,7 +10,7 @@ categories: JavaScript
 
 # 简介
 
-严格模式是 ECMAScript 5 中增加的对 JavaScript 运行条件限制更强的一种模式。
+ECMAScript 5 引入了严格模式（strict mode）的概念。严格模式是为JavaScript定义了一种不同的解析与执行模型。在严格模式下，ECMAScript 3中的一些不确定的行为将得到处理，而且对于某些不安全的操作也会抛出错误。（[JavaScript高级程序设计](https://github.com/Leo555/JavaScript/blob/master/books/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC3%E7%89%88%EF%BC%89%E3%80%91%E4%B8%AD%E6%96%87%20%E9%AB%98%E6%B8%85%20%E5%AE%8C%E6%95%B4%20%E8%AF%A6%E7%BB%86%E4%B9%A6%E7%AD%BE%E7%89%88.pdf)）
 
 <!-- more -->
 严格模式的目的：
