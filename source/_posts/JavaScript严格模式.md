@@ -25,7 +25,7 @@ ECMAScript 5 引入了严格模式（strict mode）的概念。严格模式为Ja
 
 ## 为整个script标签开启严格模式
 
-```JavaScript
+```javascript
 // 整个语句都开启严格模式的语法
 "use strict";
 console.log('严格模式script')
@@ -35,7 +35,7 @@ console.log('严格模式script')
 
 ## 为某个函数开启严格模式
 
-```JavaScript
+```javascript
 function strict() {
     "use strict";　　
     return "严格模式函数";
@@ -51,7 +51,7 @@ function notStrict() {
 
 在正常模式下，如果一个变量未声明就直接赋值，相当于创建一个全局变量。这给新人开发者带来便利的同时，给整个项目留下巨大隐患。严格模式将这种失误当成错误。
 
-```JavaScript
+```javascript
 'use strict';
 a = '严格模式';  //ReferenceError: a is not defined
 ```
@@ -64,14 +64,14 @@ a = '严格模式';  //ReferenceError: a is not defined
 
 例如： NaN 是一个不可写的全局变量. 在正常模式下, 给 NaN 赋值不会产生任何作用; 开发者也不会受到任何错误反馈. 但在严格模式下, 给 NaN 赋值会抛出一个异常。
 
-```JavaScript
+```javascript
 'use strict';
 NaN = 3; //TypeError: Cannot assign to read only property 'NaN' of #<Object>
 ```
 
 给不可写属性赋值, 给只读属性(getter-only)赋值赋值, 给不可扩展对象(non-extensible object)的新属性赋值) 都会抛出异常:
 
-```JavaScript
+```javascript
 "use strict";
 
 // 给不可写属性赋值
@@ -100,7 +100,7 @@ fixed.newProp = "haha"; // TypeError: Can't add property newProp, object is not 
 
 在严格模式下, 试图删除不可删除的属性时会抛出异常(之前这种操作不会产生任何效果)
 
-```JavaScript
+```javascript
 "use strict";
 delete Object.prototype; //TypeError: Cannot delete property 'prototype' of function Object()
 ```
@@ -109,7 +109,7 @@ delete Object.prototype; //TypeError: Cannot delete property 'prototype' of func
 
 严格模式要求函数的参数名唯一。在正常模式下, 最后一个重名参数名会掩盖之前的重名参数。 之前的参数仍然可以通过 arguments[i] 来访问。
 
-```JavaScript
+```javascript
 function sum(a, a, c) { //SyntaxError: Strict mode function may not have duplicate parameter names
     "use strict";
     return a + b + c;
@@ -118,7 +118,7 @@ function sum(a, a, c) { //SyntaxError: Strict mode function may not have duplica
 
 ### 禁止八进制数字语法
 
-```JavaScript
+```javascript
 "use strict";
 var sum = 015 + // SyntaxError: Octal literals are not allowed in strict mode.
           197 +
@@ -131,7 +131,7 @@ var sum = 015 + // SyntaxError: Octal literals are not allowed in strict mode.
 
 先看一个with的例子：
 
-```JavaScript
+```javascript
 var x = 17;
 var obj = {
     //x: 4
@@ -144,7 +144,7 @@ console.log(x);
 ```
 结果是2， with块内x为全局变量x。
 
-```JavaScript
+```javascript
 var x = 17;
 var obj = {
     x: 4
@@ -166,7 +166,7 @@ console.log(x);
 在正常模式下,  代码 eval("var x;") 会给上层函数(surrounding function)或者全局引入一个新的变量 x 。
 严格模式下，eval语句本身就是一个作用域，它所生成的变量只能用于eval内部。
 
-```JavaScript
+```javascript
 var x = 17;
 var evalX = eval("'use strict'; var x = 32; x");
 console.log(x); //17
@@ -179,7 +179,7 @@ console.log(y); //32
 
 严格模式禁止删除声明变量。delete name 在严格模式下会引起语法错误
 
-```JavaScript
+```javascript
 "use strict";
 
 var x;
@@ -194,7 +194,7 @@ eval("var x; delete x;"); // SyntaxError
 
 eval 和 arguments 不能通过程序语法被绑定或赋值。 以下的所有尝试将引起语法错误:
 
-```JavaScript
+```javascript
 "use strict";
 eval = 17;
 arguments++;
@@ -216,7 +216,7 @@ var f = new Function("arguments", "'use strict'; return 17;");
 
 arguments对象不再追踪参数的变化
 
-```JavaScript
+```javascript
 function f(a) {
     "use strict";
     a = 42;
@@ -231,7 +231,7 @@ console.assert(pair[1] === 17);
 
 正常模式下，arguments.callee 指向当前正在执行的函数。这个作用很小：直接给执行函数命名就可以了。
 
-```JavaScript
+```javascript
 "use strict";
 var f = function() { return arguments.callee; };
 f(); // TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
@@ -246,7 +246,7 @@ f(); // TypeError: 'caller', 'callee', and 'arguments' properties may not be acc
 
 在严格模式下通过this传递给一个函数的值不会被强制转换为一个对象。
 
-```JavaScript
+```javascript
 function f() {　　　　
     console.log(this);　　
 }　
@@ -265,7 +265,7 @@ f1.bind(3)();  //3
 
 所以对于一个开启严格模式的函数，指定的this不再被封装为对象，而且如果没有指定this的话它值是undefined。
 
-```JavaScript
+```javascript
 "use strict";
 function fun() { return this; }
 assert(fun() === undefined);
@@ -283,7 +283,7 @@ assert(fun.bind(true)() === true);
 在严格模式中一部分字符变成了保留的关键字。这些字符包括implements, interface, let, package, private, protected, public, 
 static和yield。在严格模式下，你不能再用这些名字作为变量名或者形参名。
 
-```JavaScript
+```javascript
 function package(protected) // !!!
 {
     "use strict";
@@ -306,7 +306,7 @@ function fun(static) {
 
 严格模式只允许在全局作用域或函数作用域的顶层声明函数。也就是说，不允许在非函数的代码块内声明函数。
 
-```JavaScript
+```javascript
 "use strict";
 if (true)
 {
