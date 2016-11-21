@@ -4,14 +4,12 @@ tags:
   - Travis
   - 持续集成
   - Hexo
-categories: Hexo
+categories: 杂记
 date: 2016-11-18 10:00:36
 ---
+# Travis CI
 
-
-# [Travis CI](https://travis-ci.org/)
-
-Travis CI 是一个持续集成的平台，我们可以使用其自动构建部署的功能帮我们简化Hexo博客的部署流程。
+[Travis CI](https://travis-ci.org/) 是一个持续集成的平台，我们可以使用其自动构建部署的功能帮我们简化Hexo博客的部署流程。
 
 ## 为什么要用 Travis CI
 
@@ -76,7 +74,7 @@ Github 支持一种特殊的 URL 来执行 push/pull 等等操作，而不需要
 
 <img src="/assets/img/Travis_token.png" alt="我是一只的图片">
 
-点击绿色确认按钮，copy刚刚生成的token。回到Travis Settings页面，将复制的token加入到环境变量。
+点击绿色确认按钮，copy刚刚生成的token。回到Travis Settings页面，将复制的token加入到环境变量，并命名为 **GitHub_token**。
 
 <img src="/assets/img/Travis_add_token.png" alt="我是一只的图片">
 
@@ -84,6 +82,7 @@ Github 支持一种特殊的 URL 来执行 push/pull 等等操作，而不需要
 
 上述步骤完成后，只需要在你Blog源代码的根目录下增加一个 **.travis.yml** 文件，
 我的文件内容如下：
+
 ```yml
 language: node_js
 node_js: stable
@@ -112,7 +111,8 @@ env:
    - GH_REF: github.com/Leo555/Leo555.github.io.git
 ```
 将上面的nama和email还有GH_REF修改成你自己的。
-还记得刚才在 Travis Settings 页面配置的环境变量 **GitHub_token** 吗？这里用 Linux 环境变量的引用方式将其引入 git push 的url，因为push方法就能通过 GitHub OAuth授权，完成自动push的功能。
+
+这里用 Linux 环境变量的引用方式将 **GH_REF** 和 **GitHub_token** 其引入 git push 的url，因此push方法就能通过 GitHub OAuth授权，完成自动push的功能。
 
 此时就万事俱备了。
 
