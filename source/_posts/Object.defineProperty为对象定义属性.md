@@ -182,4 +182,4 @@ let Leo = Object.defineProperty({}, 'name', {
 
 # 最后
 
-了解了 Object.defineProperty 的用法，接下来就是写一个自己的 Vue.js 了。敬请期待。
+了解了 Object.defineProperty 的用法，接下来就是写一个自己的 Vue.js 了。敬请期待。<img src="/assets/img/smiling.png" alt="smiling">
