@@ -1,6 +1,10 @@
-title: 音乐与视频
+title: 在Hexo中插入音乐与视频
 date: 2016-11-22 21:28:11
 tags:
+- Hexo
+- Music
+- Video
+categories: 杂记
 ---
 ## 网易云音乐iframe
 
