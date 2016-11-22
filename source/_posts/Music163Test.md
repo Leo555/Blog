@@ -8,10 +8,3 @@ tags:
 
 <!-- more -->
 ## 测试B站视频
-
-<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://www.bilibili.com/video/av7125002/"></iframe> -->
-
-
-<video width="480" height="320" controls>
-<source src="http://www.bilibili.com/video/av7125002/">
-</video>
