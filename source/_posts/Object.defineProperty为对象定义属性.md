@@ -165,7 +165,7 @@ Leo.name = 'Jack'; // 'set'
 console.log(Leo.name); // 'get' 'Jack'
 ```
 
-在对Leo.name进行赋值的时候，其实是调用了name的set方法；而使用Leo.name的时候则调用了get方法。这就是Vue数据双向绑定的原理：每当数据方式改变，其实是调用了set方法，set方法里面发布数据变动的消息给订阅者，触发相应的监听回调。
+在对Leo.name进行赋值的时候，其实是调用了name的set方法；而使用Leo.name的时候则调用了get方法。这就是Vue数据双向绑定的原理：每当数据发生改变，其实是调用了set方法，set方法里面发布数据变动的消息给订阅者，触发相应的监听回调。
 
 注意： 如果 get 方法与 value 同时出现，会报错。
 ```javascript
