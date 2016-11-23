@@ -44,7 +44,7 @@ Object.defineProperty(obj, prop, descriptor)
 
 所以 **Object.defineProperty(obj, 'name', { value: 'Leo'})** 相当于 **obj.name = 'Leo'** 或者 **obj['name'] = 'Leo'**喽。
 
-那我们之间使用「对象.属性」就好了，为什么要用 Object.defineProperty 这么复杂的方法呢？
+那我们直接使用「对象.属性」就好了，为什么要用 Object.defineProperty 这么复杂的方法呢？
 
 ## Object.defineProperty 解决什么问题
 
