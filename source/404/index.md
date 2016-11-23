@@ -67,9 +67,22 @@ comments: false
   		display: none;
   	}
 	#container .article-info-post.article-info {
-  	display: none;
+  		display: none;
   	}
 	#container .article .article-title {
-	padding: 0;
+		padding: 0;
 	}
+	.archive-article-date {
+		display: none;
+	}
+	.jiathis_txt {
+		display: none;
+	}
+	.share_jia {
+		display: none;
+	}
+	#footer {
+		display: none;
+	}
+}
 </style>
