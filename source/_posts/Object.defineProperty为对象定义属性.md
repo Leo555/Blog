@@ -15,7 +15,7 @@ Angular1 中数据双向绑定是通过「脏检测」的方式实现，每当�
 Vue 数据双向绑定的原理与Angular有所不同，网上人称「数据劫持」<img src="/assets/img/scary.gif" alt="scary" width="5%">。Vue使用的是 ES5 提供的 Object.defineProperty() 结合发布者-订阅者模式，通过Object.defineProperty() 来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
 <!-- more -->
-# Object.defineProperty 
+# Object.defineProperty()
 
 ## 定义以及使用
 Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
@@ -179,6 +179,33 @@ let Leo = Object.defineProperty({}, 'name', {
 });
 
 ```
+
+# 相关的方法
+
+## Object.getOwnPropertyDescriptor(obj, prop)
+
+Object.getOwnPropertyDescriptor() 返回指定对象上一个自有属性对应的属性描述符。
+
+```javascript
+let Leo = Object.defineProperty({}, 'name', {
+    value: 'Leo'
+});
+
+console.log(Object.getOwnPropertyDescriptor(Leo, 'name')); 
+//{ value: 'Leo',
+//  writable: false,
+//  enumerable: false,
+//  configurable: false }
+```
+
+## Object.defineProperties(object, descriptors)
+
+Object.defineProperties 与 Object.defineProperty 作用相同，不过可以同时将多个属性添加/修改到对象。
+
+## Object.freeze(obj)
+
+Object.freeze() 方法可以冻结一个对象，冻结指的是不能向这个对象添加新的属性，不能修改其已有属性的值，不能删除已有属性，以及不能修改该对象已有属性的可枚举性、可配置性、可写性。也就是说，这个对象永远是不可变的。该方法返回被冻结的对象。
+
 
 # 最后
 
