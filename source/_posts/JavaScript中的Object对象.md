@@ -8,9 +8,9 @@ categories: JavaScript
 
 # Object--JavaScript世界的起源
 
-JavaScript的世界中“一切皆是对象”，而所有对象的起源就是 Object 对象。
+JavaScript的世界中「一切皆是对象」，而所有对象的起源就是 Object 对象。
 
-----神說：「要有光」。就有了光。
+神說：「要有光」。就有了光。
 
 <!-- more -->
 ## Object简介
