@@ -53,16 +53,11 @@ duoshuo: "leo555"
 smart_menu:
   innerArchive: '所有文章'
   tagcloud: '标签'
-  friends: false
-  aboutme: '关于我'
+  friends: '友链'
+  aboutme: false
 
 friends:
-  友情链接1: http://www.lz5z.com/
-  友情链接2: http://www.lz5z.com/
-  友情链接3: http://www.lz5z.com/
-  友情链接4: http://www.lz5z.com/
-  友情链接5: http://www.lz5z.com/
-  友情链接6: http://www.lz5z.com/
+  Leo的学习日志: http://poacherbro.github.io/
 
 aboutme: 
   
