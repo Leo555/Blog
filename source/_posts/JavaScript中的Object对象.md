@@ -2,7 +2,7 @@ title: 深入学习JavaScript——Object对象
 date: 2016-11-25 15:52:44
 tags:
 - JavaScript
-- 闭包
+- Object
 categories: JavaScript
 ---
 
@@ -32,6 +32,7 @@ Object 对象一共有三个属性： \__proto__, constructor, prototype。
 ### Object.\__proto__ 
 
 1. 为对象设置原型
+
 ```javascript
 function Rectangle() {
 }
@@ -43,6 +44,7 @@ rec.__proto__ === Rectangle.prototype; //false
 ```
 
 2. \__proto__ 属性可用于设置对象的原型
+
 ```javascript
 let proto = { y: 2 };
 
@@ -58,6 +60,7 @@ obj.z === 40;  // true
 ```
 
 3. 这只适用于可扩展的对象，一个不可扩展的对象的 \__proto__ 属性是不可变的
+
 ```javascript
 let obj = {};
 Object.preventExtensions(obj);
@@ -80,7 +83,7 @@ n.constructor === Number; // true
 
 ### Object.prototype
 
-Object.prototype 属性表示对象 Object 的原型对象，由于所有的对象都是基于 Object，所以所有的对象都继承了Object.prototype的属性和方法，除非这些属性和方法被其他原型链更里层的改动所覆盖。
+Object.prototype 属性表示对象 Object 的原型对象，由于所有的对象都是基于 Object，所以 **所有的对象都继承了Object.prototype的属性和方法**，除非这些属性和方法被其他原型链更里层的改动所覆盖。
 
 1. **Object.prototype.hasOwnProperty()**
 
@@ -109,6 +112,7 @@ Rectangle.prototype.isPrototypeOf(rec); // true
 3. **Object.prototype.propertyIsEnumerable()**
 
 判断指定属性是否可枚举。
+
 ```javascript 
 object.propertyIsEnumerable(proName)
 ```
@@ -125,9 +129,44 @@ a.propertyIsEnumerable(3); // false
 
 返回对象的字符串表示。
 
+```javascript
+let o = {};
+o.toString() // "[object Object]"
+```
+上面代码调用空对象的 toString 方法，结果返回一个字符串 **"[object Object]"**，其中第二个Object表示该值的构造函数，
+实例对象可能会自定义 toString 方法，覆盖掉 Object.prototype.toString 方法。通过函数的 call 方法，可以在任意值上调用 Object.prototype.toString 方法，帮助我们判断这个值的类型。
+
+```javascript
+Object.prototype.toString.call(0) // "[object Number]"
+Object.prototype.toString.call('') // "[object String]"
+Object.prototype.toString.call(true) // "[object Boolean]"
+Object.prototype.toString.call(undefined) // "[object Undefined]"
+Object.prototype.toString.call(null) // "[object Null]"
+Object.prototype.toString.call(Math) // "[object Math]"
+Object.prototype.toString.call({}) // "[object Object]"
+Object.prototype.toString.call([]) // "[object Array]"
+Object.prototype.toString.call(Symbol()) //"[object Symbol]"
+Object.prototype.toString.call(/./) //"[object RegExp]"
+```
+
 5. **Object.prototype.valueOf()**
 
-返回指定对象的原始值。
+返回指定对象的原始值。valueOf() 方法的作用是返回一个对象的“值”，默认情况下返回对象本身。
+
+valueOf方法的主要用途是，JavaScript自动类型转换时会默认调用这个方法。
+
+```javascript
+let o = new Object();
+1 + o // "1[object Object]"  //默认调用valueOf()方法
+
+//自定义valueOf() 方法
+
+Object.prototype.valueOf = function() {
+	return 2;
+}
+
+1 + new Object; // 3
+```
 
 
 ## Object对象方法
@@ -148,12 +187,13 @@ a.propertyIsEnumerable(3); // false
 |Object.isFrozen(obj)|如果无法在对象中修改现有属性的特性和值，并且无法将新属性添加到对象，则返回 true。|
 |Object.seal(obj) |防止修改现有属性的特性，并防止添加新属性。|
 |Object.isSealed(obj) |如果无法在对象中修改现有属性特性，并且无法将新属性添加到对象，则返回 true。|
-|Object.keys(obj) |返回对象的可枚举属性和方法的名称。|
+|Object.keys(obj) |返回对象的 **可枚举**属性和方法的名称。|
 |Object.preventExtensions(obj) |防止向对象添加新属性。|
 |Object.setPrototypeOf(obj, prototype) |设置对象的原型。|
 
 ---
 ### Object.assign(target, ...sources) 
+
 Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。
 
 如果存在分配错误，此函数将引发 TypeError，这将终止复制操作。如果目标属性不可写，则将引发 TypeError。
@@ -217,6 +257,19 @@ rect instanceof Shape //true.
 
 rect.move(1, 1); //Outputs, "Shape moved."
 ```
+### Object.keys(obj)
+
+返回对象可枚举的属性名组成的数组。
+
+```javascript
+let a = ["Hello", "World"];
+
+Object.keys(a)
+// ["0", "1"]
+
+Object.getOwnPropertyNames(a)
+// ["0", "1", "length"]
+```
 
 ### Object.getOwnPropertyNames(obj)
 
@@ -261,16 +314,21 @@ Object.preventExtensions() 用来限制对象的扩展，设置之后，对象�
 3. Object.isExtensible() 方法用来判断一个对象是否可扩展。
 
 #### 将对象密封
+
 Object.seal() 可以密封一个对象并返回被密封的对象。
 密封对象无法添加或删除已有属性，也无法修改属性的enumerable，writable，configurable，但是可以修改属性值。
 
+通过 Object.isSealed() 判断一个对象是否密封。
+
 #### 冻结对象
+
 Object.freeze() 方法用来冻结一个对象，被冻结的对象将无法添加，修改，删除属性值，也无法修改属性的特性值，即这个对象无法被修改。被冻结的对象无法删除自身的属性，但是通过其原型对象还是可以新增属性的。
 
-通过Object.isFrozen可以用来判断一个对象是否被冻结了。
+通过 Object.isFrozen() 可以用来判断一个对象是否被冻结了。
 
 
 ### 其它
+
 Object.defineProperties、Object.defineProperty、Object.freeze、Object.getOwnPropertyDescriptor 的用法请参考[使用Object.defineProperty为对象定义属性](http://www.lz5z.com/Object.defineProperty%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7/)。
 
 ## 总结
