@@ -79,3 +79,12 @@ res2: Int = 30
 3. textFile 方法也可以选择第二个可选参数来控制切片(slices)的数目。默认情况下，Spark 为每一个文件块(HDFS 默认文件块大小是 64M)创建一个切片(slice)。但是你也可以通过一个更大的值来设置一个更高的切片数目。注意，你不能设置一个小于文件块数目的切片值。
 
 
+### ScalaAPI 对其它数据格式的支持
+1. SparkContext.wholeTextFiles 让你读取一个包含多个小文本文件的文件目录并且返回每一个(filename, content)对。与 textFile 的差异是：它记录的是每个文件中的每一行。
+
+2. 对于 [SequenceFiles](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapred/SequenceFileInputFormat.html)，可以使用 SparkContext 的 sequenceFile[K, V] 方法创建，K 和 V 分别对应的是 key 和 values 的类型。像 [IntWritable](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/IntWritable.html) 与 [Text](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/Text.html) 一样，它们必须是 Hadoop 的 [Writable](http://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/Writable.html) 接口的子类。另外，对于几种通用的 Writables，Spark 允许你指定原生类型来替代。例如： sequenceFile[Int, String] 将会自动读取 IntWritables 和 Text。
+
+3. 对于其他的 Hadoop InputFormats，你可以使用 SparkContext.hadoopRDD 方法，它可以指定任意的 JobConf，输入格式(InputFormat)，key 类型，values 类型。你可以跟设置 Hadoop job 一样的方法设置输入源。你还可以在新的 MapReduce 接口(org.apache.hadoop.mapreduce)基础上使用 SparkContext.newAPIHadoopRDD(译者注：老的接口是 SparkContext.newHadoopRDD)。
+
+4. RDD.saveAsObjectFile 和 SparkContext.objectFile 支持保存一个RDD，保存格式是一个简单的 Java 
+对象序列化格式。这是一种效率不高的专有格式，如 Avro，它提供了简单的方法来保存任何一个 RDD。
