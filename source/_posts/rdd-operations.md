@@ -1,27 +1,27 @@
 ---
-title: Spark RDD 操作——Transformations
+title: Spark RDD 操作详解——Transformations
 date: 2016-11-29 15:08:50
 categories: Big Data
 tags:
 - Spark
 - Scala
 - RDD
+- Transformations
 ---
 
-# RDD 操作
+# RDD 操作有哪些
 
 Spark RDD 支持2种类型的操作: transformations 和 actions。transformations： 从已经存在的数据集中创建一个新的数据集，如 map。actions： 数据集上进行计算之后返回一个值，如 reduce。
 
 在 Spark 中，所有的 transformations 都是 lazy 的，它们不会马上计算它们的结果，而是仅仅记录转换操作是应用到哪些基础数据集上的，只有当 actions 要返回结果的时候计算才会发生。
-
-默认情况下，每一个转换过的 RDD 会在每次执行 actions 的时候重新计算一次。但是可以使用 persist (或 cache)方法持久化一个 RDD 到内存中，这样Spark 会在集群上保存相关的元素，下次查询的时候会变得更快，也可以持久化 RDD 到磁盘，或在多个节点间复制。
 <!-- more -->
+默认情况下，每一个转换过的 RDD 会在每次执行 actions 的时候重新计算一次。但是可以使用 persist (或 cache)方法持久化一个 RDD 到内存中，这样Spark 会在集群上保存相关的元素，下次查询的时候会变得更快，也可以持久化 RDD 到磁盘，或在多个节点间复制。
 
 ## 基础
 
 在 Spark-shell 中运行如下脚本
 
-```shell
+```scala
 scala> val lines = sc.textFile("test.txt")
 scala> val lineLengths = lines.map(s => s.length)
 scala> val totalLength = lineLengths.reduce((a, b) => a + b))
@@ -34,7 +34,7 @@ totalLength: Int = 30
 
 如果我们想要再次使用 lineLengths，我们可以使用 persist 或者 cache 将 lineLengths 保存到内存中。
 
-```shell
+```scala
 scala> lineLengths.persist()
 scala> lineLengths.collect()
 res7: Array[Int] = Array(5, 3, 15, 7)
@@ -42,11 +42,13 @@ res7: Array[Int] = Array(5, 3, 15, 7)
 
 # Transformations
 
+Transformations 是 RDD 的基本转换操作，主要方法有： map， filter， flatMap， mapPartitions， mapPartitionsWithIndex， sample， union， intersection， distinct， groupByKey， reduceByKey， aggregateByKey， sortByKey， join， cogroup， cartesian， pipe， coalesce， repartition。
+
 ## filter(func)
 
 filter 返回一个新的数据集，从源数据中选出 func 返回 true 的元素。
 
-```shell
+```scala
 scala> val a = sc.parallelize(1 to 9)
 scala> val b = a.filter(x => x > 5)
 scala> b.collect
@@ -59,7 +61,7 @@ res11: Array[Int] = Array(6, 7, 8, 9)
 
 举例：对原RDD中的每个元素x产生y个元素（从1到y，y为元素x的值）
 
-```shell
+```scala
 scala> val a = sc.parallelize(1 to 4, 2)
 scala> val b = a.flatMap(x => 1 to x)
 scala> b.collect
@@ -95,3 +97,32 @@ res14: Int = 2
 上述例子中 rdd2 将 rdd 每个分区中的数值累加。
 
 ## mapPartitionsWithIndex(func)
+
+函数定义
+
+```scala
+def mapPartitionsWithIndex[U](f: (Int, Iterator[T]) => Iterator[U], preservesPartitioning: Boolean = false)(implicit arg0: ClassTag[U]): RDD[U]
+```
+
+mapPartitionsWithIndex 的作用与 mapPartitions 相同，不过提供了两个参数，第一个参数为分区的索引。
+
+```scala
+scala> val rdd = sc.makeRDD(1 to 5, 2)
+scala> val rdd2 = rdd.mapPartitionsWithIndex(
+     | 	(x, iter) => {
+     | 	  var result = List[Int]()
+     | 	  var i = 0
+     |    while(iter.hasNext) {
+     | 	    i += iter.next
+     |    }
+     |   result.::(x + "|" + i).iterator
+     |})
+scala> rdd2.collect
+res14: Array[String] = Array(0|3, 1|12)
+
+scala> rdd2.partitions.size
+res15: Int = 2
+```
+
+## sample(withReplacement, fraction, seed)
+
