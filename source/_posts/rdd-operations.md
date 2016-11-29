@@ -87,10 +87,10 @@ scala> val rdd2 = rdd.mapPartitions(x => {
      | 	}
      | 	result.::(i).iterator
      |})
-scala> rdd2.collect()
+scala> rdd2.collect
 res13: Array[Int] = Array(3, 12)
 
-scala> rdd2.partitions.size()
+scala> rdd2.partitions.size
 res14: Int = 2
 ```
 
