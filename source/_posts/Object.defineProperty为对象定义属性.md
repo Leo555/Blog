@@ -23,7 +23,6 @@ Object.defineProperty() 方法会直接在一个对象上定义一个新属性�
 我们来看下一般使用方法：
 
 ```javascript
-'use strict';
 let Leo = Object.defineProperty({}, 'name', {
     value: 'Leo'
 });
@@ -63,7 +62,6 @@ Object.defineProperty(obj, prop, descriptor)
 
 ### value、writable
 ```javascript
-'use strict';
 let Leo = Object.defineProperty({}, 'name', {
     writable: true, //writable 为true的时候name属性才可以被更改
     value: 'Leo'
@@ -76,7 +74,6 @@ console.log(Leo.name);
 ### configurable
 
 ```javascript
-'use strict';
 let Leo = Object.defineProperty({}, 'name', {
     configurable: true,
     value: 'Leo'
@@ -88,7 +85,6 @@ delete Leo.name; //configurable为false的时候删除属性会报错
 configurable 参数不仅负责属性的删除，也与属性修改有关。
 
 ```javascript
-'use strict';
 let Leo = Object.defineProperty({}, 'name', {
     configurable: false,
     value: 'Leo'
@@ -105,7 +101,6 @@ Object.defineProperty(Leo, 'name', {
 假如一个属性被定义成 configurable 为 false，则这个属性既不能修改值（value），又不能修改属性的属性（configurable，writable，enumerable）；如果 configurable 为 true 就可以放心修改了。
 
 ```javascript
-'use strict';
 let Leo = Object.defineProperty({}, 'name', {
     configurable: true,
     value: 'Leo'
@@ -124,7 +119,6 @@ Object.defineProperty(Leo, 'name', {
 属性特性 enumerable 定义了对象的属性是否可以在 for...in 循环和 Object.keys() 中被枚举。
 
 ```javascript
-'use strict';
 let o = Object.defineProperty({}, "a", {value: 1, enumerable: true});
 Object.defineProperty(o, "b", {value: 2, enumerable: false});
 Object.defineProperty(o, "c", {value: 3}); // enumerable defaults to false
@@ -145,8 +139,6 @@ o.propertyIsEnumerable('c'); // false
 ### get、set
 
 ```javascript
-'use strict';
-'use strict';
 let name = 'Leo';
 let Leo = Object.defineProperty({}, 'name', {
     get: function() {
@@ -169,7 +161,6 @@ console.log(Leo.name); // 'get' 'Jack'
 
 注意： 如果 get 方法与 value 同时出现，会报错。
 ```javascript
-'use strict';
 let name = 'Leo';
 let Leo = Object.defineProperty({}, 'name', {
     value: name, // A property cannot both have accessors and be writable or have a value
