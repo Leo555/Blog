@@ -4,7 +4,7 @@ date: 2016-11-16 20:53:46
 tags: 
 - Node
 - 进程
-categories: Node
+categories: JavaScript
 ---
 
 # 简介

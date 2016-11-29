@@ -51,6 +51,9 @@ highlight:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  JavaScript: JavaScript
+  杂记: Notes
+
 tag_map:
 
 # Archives

@@ -3,7 +3,7 @@ title: Python 环境搭建
 date: 2016-07-01 22:38:42
 tags: 
 - Python
-categories: 入门系列
+categories: Python
 ---
 <img src="/assets/img/Python_logo.png" alt="我是一只的图片" width="20%">
 # Python 环境搭建

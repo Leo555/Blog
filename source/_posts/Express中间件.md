@@ -4,7 +4,7 @@ date: 2016-9-12 13:39:18
 tags: 
 - Node
 - Express
-categories: Node
+categories: JavaScript
 ---
 
 ![](http://p1.bpimg.com/567571/bb6a3b877f2a8024.png)

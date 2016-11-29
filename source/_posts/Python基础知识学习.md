@@ -3,7 +3,7 @@ title: Python 基础知识学习
 date: 2016-08-31 22:38:42
 tags: 
 - Python
-categories: 入门系列
+categories: Python
 ---
 <img src="/assets/img/Python_logo.png" alt="我是一只的图片">
 # Python 数据类型

@@ -2,7 +2,7 @@
 
 menu:
   主页: /
-  列表: /archives
+  归档: /archives
   # 照片: /photos
 
 # SubNav
@@ -53,7 +53,7 @@ duoshuo: "leo555"
 smart_menu:
   innerArchive: '所有文章'
   tagcloud: '标签'
-  friends: '友链'
+  friends: 'Links'
   aboutme: false
 
 friends:
