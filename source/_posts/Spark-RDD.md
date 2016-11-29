@@ -1,5 +1,5 @@
 ---
-title: Spark-RDD 学习
+title: Spark RDD 基础
 date: 2016-11-29 11:29:07
 tags:
 - Spark
@@ -10,8 +10,9 @@ categories: Big Data
 
 # RDD 是什么？
 
-<img src="http://cdn2.infoqstatic.com/statics_s2_20161122-0331/resource/articles/spark-core-rdd/zh/resources/1spark_architecture.jpg" alt="rdd" width="40%">
-[图片摘自[infoQ](http://www.infoq.com/cn/articles/spark-core-rdd)]
+
+<img src="/assets/img/spark-stack.png" alt="rdd">
+[图片摘自[Spark 官网](http://spark.apache.org/)]
 
 [RDD](http://spark.apache.org/docs/latest/programming-guide.html) 全称 **Resilient Distributed Datasets**，是 Spark 中的抽象数据结构类型，任何数据在Spark中都被表示为RDD。 Spark 建立在统一抽象的RDD之上，使得它可以以基本一致的方式应对不同的大数据处理场景，包括MapReduce，Streaming，SQL，Machine Learning 等。
 
@@ -19,7 +20,7 @@ categories: Big Data
 简单的理解就是 RDD 就是一个数据结构，不过这个数据结构中的数据是分布式存储的，Spark 中封装了对 RDD 的各种操作，可以让用户显式地将数据存储到磁盘和内存中，并能控制数据的分区。
 
 
-## RDD特性
+## RDD 特性
 
 RDD 是 Spark 的核心，也是整个 Spark 的架构基础。它的特性可以总结如下：
 
