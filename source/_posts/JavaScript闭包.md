@@ -1,3 +1,4 @@
+---
 title: 深入学习JavaScript——闭包
 date: 2016-11-24 22:39:45
 tags:
@@ -102,6 +103,7 @@ foo.name; // Type error，访问不能
 ```
 
 ## 实现类和继承
+
 ```
 function Person() {
   let name = 'God';
