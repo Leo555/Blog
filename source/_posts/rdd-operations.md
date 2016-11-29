@@ -23,11 +23,7 @@ RDD 支持 2 种类型的操作: transformations 和 actions。transformations�
 
 ```shell
 scala> val lines = sc.textFile("test.txt")
-lines: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[10] at textFile at <console>:21
-
 scala> val lineLengths = lines.map(s => s.length)
-lineLengths: org.apache.spark.rdd.RDD[Int] = MapPartitionsRDD[11] at map at <console>:23
-
 scala> val totalLength = lineLengths.reduce((a, b) => a + b))
 totalLength: Int = 30
 ```
@@ -40,8 +36,34 @@ totalLength: Int = 30
 
 ```shell
 scala> lineLengths.persist()
-res6: lineLengths.type = MapPartitionsRDD[11] at map at <console>:23
-
 scala> lineLengths.collect()
 res7: Array[Int] = Array(5, 3, 15, 7)
 ```
+
+## Transformations
+
+### filter(func)
+
+filter 返回一个新的数据集，从源数据中选出 func 返回 true 的元素。
+
+```shell
+scala> val a = sc.parallelize(1 to 9)
+scala> val b = a.filter(x => x > 5)
+scala> b.collect
+res11: Array[Int] = Array(6, 7, 8, 9)
+```
+
+### flatMap(func)
+
+与map类似，区别是原RDD中的元素经map处理后只能生成一个元素，而原RDD中的元素经flatmap处理后可生成多个元素来构建新RDD。 所以 func 必须返回一个 Seq，而不是单个 item。
+举例：对原RDD中的每个元素x产生y个元素（从1到y，y为元素x的值）
+
+```shell
+scala> val a = sc.parallelize(1 to 4, 2)
+scala> val b = a.flatMap(x => 1 to x)
+scala> b.collect
+res12: Array[Int] = Array(1, 1, 2, 1, 2, 3, 1, 2, 3, 4)
+```
+### mapPartitions(func)
+
+类似于 map，但是 func 分别运行在 RDD 的每个分区上，所以 func 的类型必须是 Iterator<T> => Iterator<U> 当运行在类型为 T 的 RDD 上。
