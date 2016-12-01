@@ -60,17 +60,14 @@ sched模块是Python内置的模块，它是一个调度（延时处理机制）
 import sched
 import time
 import datetime
-
 # 初始化sched模块的scheduler类
 # 第一个参数是一个可以返回时间戳的函数，第二个参数可以在定时未到达之前阻塞。
 schedule = sched.scheduler(time.time, time.sleep)
-
 
 # 被周期性调度触发的函数
 def printTime(inc):
     print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     schedule.enter(inc, 0, printTime, (inc,))
-
 
 def main(inc=60):
     # enter四个参数分别为：间隔事件、优先级（用于同时间到达的两个事件同时执行时定序）、被调用触发的函数，
@@ -114,10 +111,8 @@ from datetime import datetime
 
 def job():
     print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-
 scheduler = BlockingScheduler()
 scheduler.add_job(job, 'cron', day_of_week='1-5', hour=6, minute=30)
-
 scheduler.start()
 ```
 
@@ -216,9 +211,7 @@ job_defaults = {
 }
 scheduler = BlockingScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults)
 scheduler.add_job(job, 'interval', seconds=5, jobstore='mongo')
-
 scheduler.start()
-
 ```
 在运行程序5秒后，第一次输出时间。
 在MongoDB中可以看到job的状态
@@ -294,7 +287,6 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()
 
 ```Python
 job.modify(max_instances=6, name='Alternate name')
-
 modify_job('my_job_id', trigger='cron', minute='*/5')
 ```
 
@@ -334,25 +326,16 @@ scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
 
 ```Python
 from datetime import date
-
 from apscheduler.schedulers.blocking import BlockingScheduler
-
-
 sched = BlockingScheduler()
-
 def my_job(text):
     print(text)
-
 # The job will be executed on November 6th, 2009
 sched.add_job(my_job, 'date', run_date=date(2009, 11, 6), args=['text'])
-
 sched.add_job(my_job, 'date', run_date=datetime(2009, 11, 6, 16, 30, 5), args=['text'])
-
 sched.add_job(my_job, 'date', run_date='2009-11-06 16:30:05', args=['text'])
-
 # The 'date' trigger and datetime.now() as run_date are implicit
 sched.add_job(my_job, args=['text'])
-
 sched.start()
 ```
 
@@ -385,10 +368,8 @@ sched = BlockingScheduler()
 # Schedules job_function to be run on the third Friday
 # of June, July, August, November and December at 00:00, 01:00, 02:00 and 03:00
 sched.add_job(job_function, 'cron', month='6-8,11-12', day='3rd fri', hour='0-3')
-
 # Runs from Monday to Friday at 5:30 (am) until 2014-05-30 00:00:00
 sched.add_job(job_function, 'cron', day_of_week='mon-fri', hour=5, minute=30, end_date='2014-05-30')
-
 sched.start()
 ```
 
@@ -416,10 +397,8 @@ sched = BlockingScheduler()
 
 # Schedule job_function to be called every two hours
 sched.add_job(job_function, 'interval', hours=2)
-
 # The same as before, but starts on 2010-10-10 at 9:30 and stops on 2014-06-15 at 11:00
 sched.add_job(job_function, 'interval', hours=2, start_date='2010-10-10 09:30:00', end_date='2014-06-15 11:00:00)
-
 sched.start()
 ```
 
