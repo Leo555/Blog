@@ -91,10 +91,50 @@ console.log(leo.sayName === jack.sayName) // true
 
 ## 原型模式
 
+JavaScript 中创建的每个函数都有一个 prototype 属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的 **所有实例共享的属性和方法**。prototype是通过调用构造函数而创建的那个对象实例的对象原型，使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法。
 
+```javascript
+function Person() {}
+Person.prototype.name = 'Leo';
+Person.prototype.age = 18;
+Person.prototype.sayName = function() {
+	console.log(this.name);
+}
+let leo1 = new Person;
+let leo2 = new Person;
+leo1.sayName();
+leo2.sayName();
+```
+在此，我们将 sayName() 方法和所有的属性直接添加到了 Person 的 prototype 属性中，构造函数变成了空函数，而通过 new 创建出来的对象具有相同的属性和方法。但是与构造函数模式不同对的是，新对象的这些属性和方法是由所有的实例共享的，也就是说
 
+```javascript
+leo1.sayName === leo2.sayName; // true
+```
 
 ## 组合使用构造函数模式和原型模式
+
+创建自定义对象最常见的形式就是组合使用构造函数模式和原型模式，构造函数用于定义类的实例属性，而原型模式用于定义对象的共享属性。
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.friends = [];
+}
+Person.prototype = {
+    constructor: Person,
+    sayName: function() {
+        console.log(this.name);
+    }
+}
+let leo = new Person('Leo', 18);
+let jack = new Person('Jack', 18);
+leo.friends.push('Elsa');
+jack.friends.push('Lucy');
+leo.sayName === jack.sayName; // true
+jack.friends === leo.friends; // false
+```
+实例属性都是在构造函数中定义的，而实例共享属性 constructor 和方法 sayName() 则是在原型中定义的。这种构造函数与原型混成的模式，是目前 ECMAScript 中使用最广泛、认同度最高的一种创建自定义对象的方法。
 
 ## 动态原型模式
 
