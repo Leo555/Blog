@@ -67,6 +67,7 @@ scala> val b = a.flatMap(x => 1 to x)
 scala> b.collect
 res12: Array[Int] = Array(1, 1, 2, 1, 2, 3, 1, 2, 3, 4)
 ```
+
 ## mapPartitions(func)
 
 mapPartitions 是 map 的一个变种。map 的输入函数是应用于 RDD 中每个元素，而 mapPartitions 的输入函数是应用于每个分区，也就是把每个分区中的内容作为整体来处理的。 
@@ -126,3 +127,79 @@ res15: Int = 2
 
 ## sample(withReplacement, fraction, seed)
 
+## union(otherDataset)
+
+函数定义：
+```scala
+def union(other: RDD[T]): RDD[T]
+```
+
+该函数比较简单，就是将两个 RDD 进行合并，不去重。
+
+```scala
+scala> var rdd1 = sc.makeRDD(1 to 2,1)
+scala> var rdd2 = sc.makeRDD(2 to 3,1)
+scala> rdd1.union(rdd2).collect
+res18: Array[Int] = Array(1, 2, 2, 3)
+```
+
+## intersection(otherDataset)
+
+函数定义：
+```scala
+def intersection(other: RDD[T]): RDD[T]
+def intersection(other: RDD[T], numPartitions: Int): RDD[T]
+def intersection(other: RDD[T], partitioner: Partitioner)(implicit ord: Ordering[T] = null): RDD[T]
+```
+
+该函数返回两个 RDD 的交集，并且去重。
+参数numPartitions指定返回的RDD的分区数。
+参数partitioner用于指定分区函数
+
+```scala
+scala> var rdd1 = sc.makeRDD(1 to 2,1)
+scala> rdd1.collect
+res19: Array[Int] = Array(1, 2)
+ 
+scala> var rdd2 = sc.makeRDD(2 to 3,1)
+scala> rdd2.collect
+res20: Array[Int] = Array(2, 3)
+ 
+scala> rdd1.intersection(rdd2).collect
+res21: Array[Int] = Array(2)
+```
+
+## distinct([numTasks])
+
+返回一个新的 RDD，里面包含源 RDD 中所有的（distinct）元素。
+
+
+
+## groupByKey([numTasks])
+
+
+## reduceByKey(func, [numTasks])
+
+
+## aggregateByKey(zeroValue)(seqOp, combOp, [numTasks])
+
+
+## sortByKey([ascending], [numTasks])
+
+
+## join(otherDataset, [numTasks])
+
+
+## cogroup(otherDataset, [numTasks])
+
+
+## cartesian(otherDataset)
+
+
+## pipe(command, [envVars])
+
+
+## coalesce(numPartitions)
+
+
+## repartition(numPartitions)
