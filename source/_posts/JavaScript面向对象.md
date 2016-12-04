@@ -134,6 +134,7 @@ jack.friends.push('Lucy');
 leo.sayName === jack.sayName; // true
 jack.friends === leo.friends; // false
 ```
+
 实例属性都是在构造函数中定义的，而实例共享属性 constructor 和方法 sayName() 则是在原型中定义的。这种构造函数与原型混成的模式，是目前 ECMAScript 中使用最广泛、认同度最高的一种创建自定义对象的方法。
 
 ## 动态原型模式
@@ -232,4 +233,5 @@ leo.sayName();
 
 # 总结
 
+组合使用构造函数模式和原型模式是目前使用最广的方法，如果不希望构造函数和原型相互分离的话，可以使用动态原型模式。
 
