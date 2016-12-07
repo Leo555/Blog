@@ -12,6 +12,8 @@ tags:
 Pandas 是 Python 做数据分析最重要的模块之一，本文源自Pandas 作者 Wes McKinney 写的 [10-minute tour of pandas](http://pandas.pydata.org/pandas-docs/stable/10min.html)。
 
 首先安装 Pandas 和相关的两个包 numpy、matplotlib
+<!-- more -->
+
 
 ```shell
 pip install pandas
