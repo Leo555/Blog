@@ -51,6 +51,8 @@ DatetimeIndex(['2017-01-01', '2017-01-02', '2017-01-03', '2017-01-04',
                '2017-01-05', '2017-01-06'],
               dtype='datetime64[ns]', freq='D')
 >>> df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=list('ABCD'))
+>>> >>> df.shape
+(6, 5)
 >>> df
                    A         B         C         D
 2017-01-01  0.147072  1.235226  0.143952  0.831411
