@@ -26,3 +26,7 @@ sessionStorage 用于本地存储一个会话（session）中的数据，这些�
 | localStorage  | 4  | 3.5 | 8 |  10.50 | 4 |
 | sessionStorage | 5  | 2 |  8  | 10.50 | 4 |
 
+## 差别
+
+Cookie 一般由服务器生成，可设置失效时间。如果在浏览器端生成 Cookie，默认是关闭浏览器后失效。Http 通信的时候 Cookie 的信息会保存的 Http 头中
+
