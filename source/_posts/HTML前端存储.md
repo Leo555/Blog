@@ -1,9 +1,9 @@
 ---
-title: HTML前端存储
+title: HTML5 前端存储
 date: 2016-11-16 00:33:38
 categories: HTML
 tags:
-- HTML
+- HTML5
 - JavaScript
 ---
 # Cookie, LocalStorage 与 SessionStorage
