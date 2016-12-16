@@ -18,6 +18,7 @@ sessionStorage 用于本地存储一个会话（session）中的数据，这些�
 
 而 localStorage 用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。浏览器中同一个域下的窗口可以共享 localStorage 数据。
 
+<!-- more -->
 ## 兼容性
 
 | 特性 | Chrome | Firefox (Gecko) | Internet Explorer | Opera | Safari (WebKit)|
