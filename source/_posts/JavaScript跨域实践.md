@@ -4,14 +4,242 @@ date: 2016-12-16 01:04:17
 categories: JavaScript
 tags:
 - JavaScript
-- HTML
+- Flask
+- HTTP
+- CORS
 - 跨域
 ---
 
 # 背景
 
-最近写了一个 Flask 服务，然后用本地的 angular 页面去 call 这个服务的时候，一直报错，错误信息如下
-> XMLHttpRequest cannot load http://XXX:8085/predict. Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
+最近在 ITA 写了一个聊天机器人的 Flask 服务，自己写了一些 node 单元测试脚本跑没有问题，但是测试的同学也想覆盖到所有的 case，于是就帮忙写一个 html 页面去测试，然后就遇到了下面的问题：
+> XMLHttpRequest cannot load http://localhost:8085/predict. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
 
+这个是典型的跨域问题(跨域是指：协议、域名、端口有任何一个不同，都被当做是不同的域)，想想之前也了解过跨域的知识，现在借着这个机会总结一下了。关于 GET 请求的跨域，使用 JSONP 是目前最好的解决方案，各大浏览器也基本都支持 JSONP，而 jQuery，AngularJS 等前端框架也都默认添加了对 JSONP 的封装，并且这次遇到的跨域问题是 POST 请求的，于是暂时先不写关于 JSONP 的相关知识。
+<!-- more -->
 
+## 简化代码
 
+（1） 简化的服务器代码:
+
+```python
+from flask import Flask
+if __name__ == "__main__":
+    print('Start server')
+    app = Flask(__name__)
+    # 路由
+    @app.route('/predict', methods=['POST'])
+    def predict():
+        return 'result'
+    app.run(host='0.0.0.0', port=8085, debug=True)
+```
+
+（2） 简化页面代码：
+
+```html
+<!doctype html>
+<html ng-app="chatApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    <script src="./main.js"></script>
+</head>
+<body>
+    <div ng-controller="ChatController">
+        <input type="text" ng-model="chat" placeholder="Enter content here">
+        <button ng-click="onclick()">POST</button>
+        <p> {{ result }} </p>
+    </div>
+</body>
+</html>
+```
+ -- 原谅我用 Angular 做页面 ☹ 
+
+（3） main.js
+
+```javascript
+angular.module('chatApp', [])
+    .controller('ChatController', ['$scope', '$http', function($scope, $http) {
+        $scope.onclick = function() {
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8085/predict'
+            }).then((data) => {
+                $scope.result = data;
+            });
+        };
+    }]);
+```
+## 解决方案
+
+要想解决跨域，必先理解跨域。那什么是跨域呢？ 
+对于 web 开发来讲，由于浏览器的同源策略，我们需要经常使用一些 hack 的方法去跨域获取资源，直到 W3C 出了一个标准－[CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)－“跨域资源共享”（Cross-origin resource sharing），
+它允许浏览器向跨源服务器，发出 XMLHttpRequest 请求，从而克服了 AJAX 只能同源使用的限制。
+
+CORS 与 JSONP 的使用目的相同，但是比 JSONP 更强大。
+**JSONP 只支持 GET 请求，CORS 支持所有类型的 HTTP 请求。JSONP 的优势在于支持老式浏览器，以及可以向不支持 CORS 的网站请求数据。**
+
+CORS 解决方案：
+
+(1) 服务器代码
+
+```python
+from flask import Flask, Response, request
+if __name__ == "__main__":
+    print('Start server')
+    app = Flask(__name__)
+    # post
+    @app.route('/predict', methods=['POST'])
+    def predict():
+        if request.form.get('content') is None:
+            exp = 'Missing content'
+        else:
+            exp = request.form.get('content')
+        print(exp)
+        headers = {"Access-Control-Allow-Origin": "*"}
+        return Response(exp, headers=headers)
+    # port=8085
+    app.run(host='0.0.0.0', port=8085, debug=True)
+```
+（2） main.js
+
+```javascript
+angular.module('chatApp', [])
+    .controller('ChatController', ['$scope', '$http', function($scope, $http) {
+        $scope.onclick = function() {
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8085/predict',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: 'content= ' + $scope.chat
+
+            }).then((data) => {
+                $scope.result = data.data;
+            });
+        };
+    }]);
+```
+此时再次发送 Ajax call就可以拿到结果了:
+
+<img src="/assets/img/cors-post.png" alt="cors-post">
+
+注意到服务器端代码发生了一点改动，那就是在Response header中增加了一个参数 "Access-Control-Allow-Origin"，表示接受某域名的请求，“*” 表示允许所有的请求。
+也可以使用确定的值，如： “http://api.abc.com”。
+
+于是代码中增加 **headers = {"Access-Control-Allow-Origin": "*"}** 后服务器就可以响应所有的请求了。
+
+再看 Web 端的代码，我们在请求头里面添加了 "Content-Type"，为了能向服务端传递数据。这里使用的 "Content-Type" 为 "application/x-www-form-urlencoded" 表示以表单提交的形式传递参数。
+
+**为什么要用表单的形式提交POST请求呢？**
+	
+## 两种请求
+
+浏览器将 CORS 请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。
+
+只要同时满足以下两大条件，就属于简单请求。
+
+>(1) 请求方法是以下三种方法中的一个：
+- **HEAD**
+- **GET**
+- **POST**
+(2) HTTP的头信息不超出以下几种字段：
+- **Accept**
+- **Accept-Language**
+- **Content-Language**
+- **Last-Event-ID**
+- **Content-Type**  其值仅限于 **application/x-www-form-urlencoded、multipart/form-data、text/plain**
+
+上文中的请求属于简单请求。
+
+### 简单请求（simple request）
+
+对于简单的跨域请求，浏览器会自动在请求的头信息加上 Origin 字段，表示本次请求来自哪个源（协议 + 域名 + 端口），服务端会获取到这个值，然后判断是否同意这次请求并返回。
+
+> // 请求
+GET /cors HTTP/1.1
+Origin: http://api.abc.com
+Host: api.bcd.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0...
+
+如果服务端许可本次请求，就会在返回的头信息多出关于 **Access-Control** 的信息，比如上述服务器返回的信息：
+
+<img src="/assets/img/cors-res-header.png" alt="cors-res-header">
+
+### 非简单请求（not-so-simple request）
+
+非简单请求是那种对服务器有特殊要求的请求，比如请求方法是 PUT 或 DELETE，或者 Content-Type 字段的类型是 application/json。
+
+非简单请求的 CORS 请求，会在正式通信之前，增加一次 HTTP 查询请求，称为“预检”请求（preflight）。
+浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些 HTTP 动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的 XMLHttpRequest 请求，否则就报错。
+
+“预检”请求用的请求方法是 **OPTIONS**，表示这个请求是用来询问的。头信息里面，关键字段是Origin，表示请求来自哪个源。
+
+## 非简单请求解决方案
+
+项目中使用的 Content-Type 为 **application/json**，属于非简单请求，将上述程序修改为
+
+(1) main.js:
+
+```javascript
+angular.module('chatApp', [])
+    .controller('ChatController', ['$scope', '$http', function($scope, $http) {
+        $scope.onclick = function() {
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8086/predict',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    'content': $scope.chat
+                })
+            }).then((data) => {
+                $scope.result = data.data;
+            });
+        };
+    }]);
+```
+
+服务器代码：
+
+```python
+from flask import Flask, Response, request
+
+if __name__ == "__main__":
+    print('Start server')
+    app = Flask(__name__)
+    # 路由
+    @app.route('/predict', methods=['POST', 'OPTIONS'])
+    def predict():
+    	# 返回头
+        headers = {"Access-Control-Allow-Origin": "*",
+                   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type",
+                   "Access-Control-Allow-Methods": "POST, PUT, GET, OPTIONS, DELETE"}
+        # preflight
+        if request.method == 'OPTIONS':
+            return Response(headers=headers)
+        # request
+        if 'content' in request.json:
+            exp = request.json.get('content')
+        else:
+            exp = 'Missing content'
+        print(exp)
+        return Response(exp, headers=headers)
+    # run server
+    app.run(host='0.0.0.0', port=8086, debug=True)
+```
+
+启动后发送请求，发现可以跑通，但是获取不到参数，原因是使用 **application/json** 的形式发送 request， 参数并没有放在 form 里面，而是放在 request.data 里面了。
+request.data 里面为 bytes 类型的数据，通过 request.json 可以获取其 dict 类型。
+
+通过以上方式，完美地解决了复杂请求的跨域问题。
+
+才怪嘞！！！♋
+
+## 问题所在
+
+以上解决跨域的方式为 CORS，准确地说，这是一种服务器端的技术。而现实生产环境中，如果一个前端想要用这种方式实现跨域，不知道要跟后端做多少沟通，那有没有纯前端的解决方案呢？
+且听下回分解。☛
