@@ -38,7 +38,7 @@ child_process是 Node.js 中一个非常重要的模块，主要功能有：
     
 ## spawn()
 spawn从定义来看，有3个参数。
-```JavaScript
+```javascript
 child_process.spawn(command[, args][, options])
 ```
 1. command: 执行的命令
@@ -59,7 +59,7 @@ child_process.spawn(command[, args][, options])
 
 
 spawn方法创建一个子进程来执行特定命令，它没有回调函数，只能通过监听事件，来获取运行结果。属于异步执行，适用于子进程长时间运行的情况。
-```JavaScript
+```javascript
 let child_process = require('child_process');
 
 let path = '.';
@@ -82,14 +82,14 @@ spawn 方法通过stream的方式发数据传给主进程，从而实现了多�
 ## exec()
 
 exec 方法的定义如下：
-```JavaScript
+```javascript
 child_process.exec(command[, options][, callback])
 ```
 
 exec方法是对spawn方法的封装，增加了shell/bash命令解析和回调函数，更加符合JavaScript的函数调用习惯。
 
 command参数是一个命令字符串
-```JavaScript
+```javascript
 let exec = require('child_process').exec;
 
 let ls = exec('ls -l', function (error, stdout, stderr) {
@@ -104,7 +104,7 @@ let ls = exec('ls -l', function (error, stdout, stderr) {
 exec方法第二个参数是回调函数，该函数接受三个参数，分别是发生的错误、标准输出的显示结果、标准错误的显示结果。
 
 由于标准输出和标准错误都是流对象（stream），可以监听data事件，因此上面的代码也可以写成下面这样。
-```JavaScript
+```javascript
 let exec = require('child_process').exec;
 let child = exec('ls -l');
 
@@ -124,7 +124,7 @@ exec方法会直接调用bash（/bin/sh程序）来解释命令，如果用户�
 ## execFile()
 
 execFile的定义如下：
-```JavaScript
+```javascript
 child_process.execFile(file[, args][, options][, callback])
 ```
 execFile 命令有四个参数，file和callbakc为必传参数，options、args为可选参数：
@@ -137,7 +137,7 @@ execFile 命令有四个参数，file和callbakc为必传参数，options、args
 
 execFile从可执行程序启动子进程。与exec相比，execFile不启动独立的bash/shell，因此更加轻量级，也更加安全。 execFile也可以用于执行命令。
 
-```JavaScript
+```javascript
 let childProcess = require('child_process');
 let path = ".";
 childProcess.execFile('ls', ['-l', path], (err, result) => {
@@ -157,7 +157,7 @@ childProcess.execFile('ls', ['-l', path], (err, result) => {
 fork函数，用于在子进程中运行的模块，如 fork('./son.js') 相当于 spawn('node', ['./son.js']) 。与spawn方法不同的是，fork会在父进程与子进程之间，建立一个通信管道，用于进程之间的通信。
 
 假设有一个主进程文件 mian.js:
-```JavaScript
+```javascript
 let childProcess = require('child_process');
 let son = childProcess.fork('./son.js');
 
@@ -197,7 +197,7 @@ Main Listen:  { Hello: 'main' }
 
 ### spawn
 
-```JavaScript
+```javascript
 const spawn = require('child_process').spawn;
 const bat = spawn('cmd.exe', ['/c', 'my.bat']);
 
@@ -217,7 +217,7 @@ bat.on('exit', (code) => {
 
 ### exec
 
-```JavaScript
+```javascript
 const exec = require('child_process').exec;
 exec('my.bat', (err, stdout, stderr) => {
   if (err) {
@@ -230,7 +230,7 @@ exec('my.bat', (err, stdout, stderr) => {
 
 如果文件名中有空格：
 
-```JavaScript
+```javascript
 const bat = spawn('"my script.cmd"', ['a', 'b'], { shell:true });
 // or:
 exec('"my script.cmd" a b', (err, stdout, stderr) => {

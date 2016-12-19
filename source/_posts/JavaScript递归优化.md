@@ -25,7 +25,7 @@ categories: Algorithm
 
 首先查看 ExtJS 源码， TreeNode 中的 expand 方法的源码如下
 
-```JavaScript
+```javascript
 /**
  * Expand this node.
  * @param {Boolean} deep (optional) True to expand all children as well
@@ -69,7 +69,7 @@ expand : function(deep, anim, callback, scope){
 
 expandChildNodes 的源码如下
 
-```JavaScript
+```javascript
 /**
  * Expand all child nodes
  * @param {Boolean} deep (optional) true if the child nodes should also expand their child nodes
@@ -93,7 +93,7 @@ expandChildNodes : function(deep, anim) {
 
 ### 循环
 
-```JavaScript
+```javascript
 function sum(n) {
   var result = n;
   while (n > 1) {
@@ -107,7 +107,7 @@ function sum(n) {
 
 ### 普通递归
 
-```JavaScript
+```javascript
 function sum(n) {
   if (n === 1) {
     return 1;
@@ -139,7 +139,7 @@ sum(5)
 
 ### 尾递归
 
-```JavaScript
+```javascript
 function sum(x, total = 0) {
     if (x === 1) {
         return x + total;
@@ -173,7 +173,7 @@ ES6中将会资磁zīcí尾递归优化，通过尾递归优化，JavaScript代�
 
 下面来看Babel编译的效果，将上述为递归的sum函数编译后如下：
 
-```JavaScript
+```javascript
 "use strict";
 
 function sum(_x2) {
@@ -216,7 +216,7 @@ ES6的尾递归优化只在严格模式下开启，正常模式是无效的。
 
 要展开一棵树，首先将树的根结点入栈，然后一个节点一个节点出栈，每次出栈后，将出栈节点的所有子节点入栈，以此达到遍历一颗树的效果。出栈的过程中逐一展开当前节点的字结点。
 
-```JavaScript
+```javascript
 expandAllChildNodes: function(node) {
     var nodeStack = [];
     nodeStack.push(node);

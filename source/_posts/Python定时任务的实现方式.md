@@ -38,7 +38,7 @@ timer(5)
 
 threading模块中的Timer是一个非阻塞函数，比sleep稍好一点，不过依然无法喊我起床。
 
-```Python
+```python
 import datetime
 from threading import Timer
 
@@ -56,7 +56,7 @@ Timer函数第一个参数是时间间隔（单位是秒），第二个参数是
 
 sched模块是Python内置的模块，它是一个调度（延时处理机制），每次想要定时执行某任务都必须写入一个调度。
 
-```Python
+```python
 import sched
 import time
 import datetime
@@ -105,7 +105,7 @@ $ pip install apscheduler
 ```
 
 首先来看一个周一到周五每天早上6点半喊我起床的例子
-```Python
+```python
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
 
@@ -165,7 +165,7 @@ APScheduler提供了许多不同的方式来配置调度器，你可以使用一
 
 下面来看一个简单的BlockingScheduler例子
 
-```Python
+```python
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
 
@@ -182,7 +182,7 @@ sched.start()
 
 如果想要显示设置job store(使用mongo存储)和 executor可以这样写：
 
-```Python
+```python
 from datetime import datetime
 from pymongo import MongoClient
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -228,7 +228,7 @@ scheduler.start()
 
 第二种方法只适用于应用运行期间不会改变的job，而第一种方法返回一个[apscheduler.job.Job](http://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job)的实例，可以用来改变或者移除job。
 
-```Python
+```python
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
@@ -251,7 +251,7 @@ sched.start()
 remove_job使用jobID移除
 job.remove()使用add_job()返回的实例
 
-```Python
+```python
 job = scheduler.add_job(myfunc, 'interval', minutes=2)
 job.remove()
 
@@ -262,13 +262,13 @@ scheduler.remove_job('my_job_id')
 ### 暂停和恢复job
 
 暂停一个job：
-```Python
+```python
 apscheduler.job.Job.pause()
 apscheduler.schedulers.base.BaseScheduler.pause_job()
 ```
 
 恢复一个job：
-```Python
+```python
 apscheduler.job.Job.resume()
 apscheduler.schedulers.base.BaseScheduler.resume_job()
 ```
@@ -285,7 +285,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()
 ### 修改job
 除了jobID之外job的所有属性都可以修改，使用 apscheduler.job.Job.modify() 或者 modify_job() 修改一个job的属性
 
-```Python
+```python
 job.modify(max_instances=6, name='Alternate name')
 modify_job('my_job_id', trigger='cron', minute='*/5')
 ```
@@ -294,7 +294,7 @@ modify_job('my_job_id', trigger='cron', minute='*/5')
 
 默认情况下调度器会等待所有的job完成后，关闭所有的调度器和作业存储。将wait选项设置为False可以立即关闭。
 
-```Python
+```python
 scheduler.shutdown()
 scheduler.shutdown(wait=False)
 ```
@@ -303,7 +303,7 @@ scheduler.shutdown(wait=False)
 
 scheduler可以添加事件监听器，并在特殊的时间触发。
 
-```Python
+```python
 def my_listener(event):
     if event.exception:
         print('The job crashed :(')
@@ -324,7 +324,7 @@ scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
 + run_date (datetime|str) – the date/time to run the job at
 + timezone (datetime.tzinfo|str) – time zone for run_date if it doesn’t have one already
 
-```Python
+```python
 from datetime import date
 from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler()
@@ -357,7 +357,7 @@ sched.start()
 表达式:
 ![](http://p1.bpimg.com/567571/e60b1f77f80e5f1b.png)
 
-```Python
+```python
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 def job_function():
@@ -394,7 +394,6 @@ def job_function():
     print("Hello World")
 
 sched = BlockingScheduler()
-
 # Schedule job_function to be called every two hours
 sched.add_job(job_function, 'interval', hours=2)
 # The same as before, but starts on 2010-10-10 at 9:30 and stops on 2014-06-15 at 11:00

@@ -24,7 +24,7 @@ ECMAScript 2016(ES7) 中已经确定支持 async/await，那我们怎么能够�
 
 假如有一个Generator函数：
 
-```JavaScript
+```javascript
 /**
  * Created by leo on 2016/11/1.
  */
@@ -46,7 +46,7 @@ const gen = function* () {
 
 调用方法:
 
-```JavaScript
+```javascript
 let generator = gen();
 
 let ret = generator.next();
@@ -61,7 +61,7 @@ ret.value.then((data)=> {
 
 将 gen 函数写成 async 函数，就是下面这样:
 
-```JavaScript
+```javascript
 const asyncF = async(()=> {
     let f1 = await(f(1000));
     let f2 = await(f(2000));
@@ -90,7 +90,7 @@ $ npm install asyncawait
 
 可以看到使用 Generator 的时候获取返回值必须使用 .then() 方法，而使用 async/await 就简单很多：
 
-```JavaScript
+```javascript
 'use strict';
 let async = require('asyncawait/async');
 let await = require('asyncawait/await');
@@ -119,7 +119,7 @@ await等待的虽然是promise对象，但不必写使用 .then()，也可以得
 既然 .then() 不用写了，那 .catch()也不用写，可以直接用标准的try 
 catch语法捕捉错误
 
-```JavaScript
+```javascript
 const f = (time) => {
     return new Promise(function (resolve, reject) {
         setTimeout(() => {
@@ -143,7 +143,7 @@ await 命令后面的 Promise 对象，运行结果可能是 rejected，所以�
 
 await 最好用的地方是可以写在 for 循环里面，这是Promise无法做到的，使得 async/await 看起来更像是同步代码
 
-```JavaScript
+```javascript
 const f = (time) => {
     return new Promise(function (resolve) {
         setTimeout(() => {

@@ -22,19 +22,19 @@ categories: JavaScript
 路由方法是http请求时Express对应的方法，主要有app.get()、app.put()、app.post()、app.delete()等。
 比如，匹配起GET /和负责回应主页的方法homepageHandler，可以这么写：
 
-```JavaScript
+```javascript
 app.get('/', function homepageHandler(request, response) { ... });
 ```
 
 而要匹配POST /reivew/new和负责添加新评论的方法addNewReview（假设它已经在别处定义好了）则可以是：
 
-```JavaScript
+```javascript
 app.post('/review/new', addNewReview);
 ```
 
 app.all()是一个特殊的方法，它的作用是对于一个路径上的所有请求加载中间件，在下面的例子中，来自 “/secret” 的请求，不管使用 GET、POST、PUT、DELETE 或其他任何 http 模块支持的 HTTP 请求，句柄都会得到执行。
 
-```JavaScript
+```javascript
 app.all('/secret', function (req, res, next) {
   console.log('Accessing the secret section ...');
   next(); // pass control to the next handler
@@ -43,7 +43,7 @@ app.all('/secret', function (req, res, next) {
 
 如果处理某个HTTP方法+path对的逻辑很复杂的话，我们也可以把它拆分成middleware栈的形式，依次传给app.METHOD()方法，也就是app.METHOD(path, [middleware...], last_middleware)。
 
-```JavaScript
+```javascript
 var http = require('http');
 var express = require('express');
 var logger = require('morgan');
@@ -88,13 +88,13 @@ Express的Router对象，也就是之前提到的router-level middleware，可�
 
 在开发Express应用的时候，我们可以想想，整个应用是不是可以分拆为许多子应用，例如像上面所提到的，可以有个子应用专门来负责和数据库沟通并返回JSON格式的信息，即一个RESTful API。那么，在代码里，我们就可以新建一个子应用如下：
 
-```JavaScript
+```javascript
 var apiRouter = express.Router();
 ```
 
 然后，像主应用一样，我们可以为这个子应用添加middleware和routing：
 
-```JavaScript
+```javascript
 apiRouter.get('/id', ...);
 apiRouter.post('/review/new', ...);
 apiRouter.put(...);
@@ -103,7 +103,7 @@ apiRouter.delete(...);
 
 最后，把所有path以/api开头的HTTP请求都导入到这个子应用去：
 
-```JavaScript
+```javascript
 app.use('/api', apiRouter);
 ```
 
@@ -130,13 +130,13 @@ app.use('/api', apiRouter);
 
 最简单的方法就是将这一类path中不同的那一部分看作一个参数，给它取个名字，并在其前加上一个引号。
 
-```JavaScript
+```javascript
 app.get('/:name/article', handleArticleRequest);
 ```
 
 这样就把所有的形如GET+/xxxxxxx/article的请求和这段负责回复博客的逻辑handleArticleRequest对应了起来。其中:name表示path的这一部分是一个参数，Express会自动把这部分的值存在对应的req.params.name这个对象里，以便这段逻辑使用。假如handleArticleRequest是一个方法，那么它大概会是这么个结构：
 
-```JavaScript
+```javascript
 function handleArticleRequest(req, res) {
     var name = req.params.name;
     // ...

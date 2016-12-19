@@ -32,7 +32,7 @@ date: 2016-10-25 22:02:48
 
 比如有这个两个函数
 
-```Python
+```python
 def A():
     print('1')
     print('2')
@@ -100,7 +100,7 @@ z
 
 创建一个斐波那契序列的生成器
 
-```Python
+```python
 def fib(n):
     index = 0
     a, b = 0, 1
@@ -126,7 +126,7 @@ yield在这里可以保留fib函数的计算现场（a, b的值），暂停fib�
 
 平时写程序的时候总是会遇到一些比较耗时的操作，比如读写文件，读取网络等，所以我们给刚才的fib()函数加上一段休眠变成慢速fib()
 
-```Python
+```python
 import time
 import random
 
@@ -160,7 +160,7 @@ while True:
 
 Python实现的grep也是一个很好的协程的例子
 
-```Python
+```python
 def grep(pattern):
     print("Searching for", pattern)
     while True:
@@ -171,21 +171,21 @@ def grep(pattern):
 
 调用方式：使用next()启动一个协程，协程中包含的生成器并不是立刻执行，而是通过next()方法来响应send()方法。因此，你必须通过next()方法来执行yield表达式。
 
-```Python
+```python
 search = grep('coroutine') 
 next(search)  #Searching for coroutine
 ```
 
 使用send()向search传值,当传入的值中包含'coroutine'时，输出传入的值
 
-```Python
+```python
 search.send("I love you")
 search.send("Don't you love me?")
 search.send("I love coroutine instead!")  #I love coroutine instead!
 ```
 
 通过close()方法来关闭一个协程
-```Python
+```python
 search.close()
 ```
 
@@ -193,7 +193,7 @@ search.close()
 
 下面来看一个完整的生产者消费者的例子：
 
-```Python
+```python
 def consumer():
     r = ''
     while True:

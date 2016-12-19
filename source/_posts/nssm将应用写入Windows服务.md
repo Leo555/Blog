@@ -19,7 +19,7 @@ categories: Windows
 ## Node
 
 假设有一个最简单的node服务器程序
-```JavaScript
+```javascript
 var express = require('express');
 var app = express();
 
@@ -127,11 +127,11 @@ py -3 main.py
 # 注意
 
 注意非常不推荐把一个运行一次就结束的程序写入Windows Services的，比如Node或者Python脚本里面只有一句输出
-```JavaScript
+```javascript
 console.log('Hello');
 ```
 
-```Python
+```python
 print('Hello')
 ```
 使用Windows自带的Services手动启动：

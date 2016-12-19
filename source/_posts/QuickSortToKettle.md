@@ -26,7 +26,7 @@ categories: Algorithm
 
 代码描述：
 
-```JavaScript
+```javascript
 const quickSort = arr=> {
     if (arr.length <= 1) {
         return arr;
@@ -84,7 +84,7 @@ const quickSort = arr=> {
 ```
 
 代码描述：
-```JavaScript
+```javascript
 'use strict';
 
 Array.prototype.pivot = -1;
@@ -117,7 +117,7 @@ const quickMatch = (key, arr) => {
 ```
 
 测试：
-```JavaScript
+```javascript
 let arrRed = [3, 5, 1, 4, 8, 2, 6];
 let arrBlue = [6, 2, 3, 1, 8, 5, 4];
 

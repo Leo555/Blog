@@ -37,7 +37,7 @@ Express是什么意思呢，特快列车，或者快递服务，在生活中通�
 
 下面我们将这两个功能点抽象为两个Middleware
 
-```JavaScript
+```javascript
 
 var http = require('http');
 var express = require('express');
@@ -87,7 +87,7 @@ logMid中间件由于后面要执行下一个中间件，因此手动调用了ne
 ## 应用级中间件
 应用级中间件绑定到 app 对象（express实例）使用 app.use() 和 app.METHOD()， 其中， METHOD 是需要处理的 HTTP 请求的方法，例如 GET, PUT, POST 等等，全部小写。例如：
 
-```JavaScript
+```javascript
 var app = express();
 
 // 没有挂载路径的中间件，应用的每个请求都会执行该中间件
@@ -111,7 +111,7 @@ app.get('/user/:id', (req, res, next) => {
 
 一个请求装载一组中间件栈。
 
-```JavaScript
+```javascript
 // 一个中间件栈，对任何指向 /user/:id 的 HTTP 请求打印出相关信息
 app.use('/user/:id', (req, res, next) => {
   console.log('Request URL:', req.originalUrl);
@@ -124,7 +124,7 @@ app.use('/user/:id', (req, res, next) => {
 
 作为中间件系统的路由句柄，使得为路径定义多个路由成为可能。在下面的例子中，为指向 /user/:id 的 GET 请求定义了两个路由。第二个路由永远不会被调用，因为第一个路由已经终止了请求-响应循环。
 
-```JavaScript
+```javascript
 // 一个中间件栈，处理指向 /user/:id 的 GET 请求
 app.get('/user/:id', (req, res, next) => {
   console.log('ID:', req.params.id);
@@ -142,7 +142,7 @@ app.get('/user/:id', (req, res, next) => {
 这两个路由均对应指向 /user/:id的get请求，但是第二个路由永远不会执行，因为第一个路由已经终止了请求-响应循环。
 如果在中间栈中跳过剩余的中间件，可以手动调用next('route')将控制权交给下一个中间件。<!--**注意：** next('route') 只对使用 app.VERB() 或 router.VERB() 加载的中间件有效。--> 如下：
 
-```JavaScript
+```javascript
 // 一个中间件栈，处理指向 /user/:id 的 GET 请求
 app.get('/user/:id', (req, res, next) => {
   // 如果 user id 为 0, 跳到下一个路由
@@ -172,7 +172,7 @@ var router = express.Router();
 路由级使用 router.use() 或 router.VERB() 加载。
 上述在应用级创建的中间件系统，可通过如下代码改写为路由级：
 
-```JavaScript
+```javascript
 var app = express();
 var router = express.Router();
 
@@ -217,7 +217,7 @@ app.use('/', router);
 
 错误处理中间件有4个参数，定义错误处理中间件时必须使用这4个参数。即使不需要next对象，也必须在签名中声明它，否则中间件会被识别为一个常规中间件，不能处理错误。
 
-```JavaScript
+```javascript
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
@@ -226,7 +226,7 @@ app.use((err, req, res, next) => {
 
 错误处理中间件一般定义在其他 app.use() 和路由调用后，例如：
 
-```JavaScript
+```javascript
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -239,7 +239,7 @@ app.use((err, req, res, next) => {
 
 为不同的错误定义不同的中间件
 
-```JavaScript
+```javascript
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
@@ -307,7 +307,7 @@ express.static是处理静态文件的中间件，参数 root 指提供静态资
 下面来实践一个这个中间件的用法，假如有一张图片 avatar.png放在public文件夹下面：
 <img src="http://i4.piimg.com/567571/b98245d5e094886d.png" width = "10%" />
 
-```JavaScript
+```javascript
 var http = require('http');
 var express = require('express');
 
@@ -344,7 +344,7 @@ server.listen(3000);
 
 > $ npm install cookie-parser
  
-```JavaScript
+```javascript
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');

@@ -25,7 +25,7 @@ categories: 杂记
 苦心人天不负，终于在一个计算时间的函数里面看到了端倪。这个函数是一个计算时间差的函数，中间要排除节假日和下班时间，然后计算真正工作时间花费了多久。
 
 之前同事的逻辑是:
-```JavaScript
+```javascript
 while (endTime > current) {
     if (currnt是工作时间){
         total += 1 分钟
@@ -44,7 +44,7 @@ while (endTime > current) {
 于是改写之前的逻辑，把逐分钟递增改成逐天增加，首先构造一个工作日的对象，里面存着每天的上下班时间和这天总工作时间，然后构造一个节假日对象，存每个节日的年、月、日。
 循环的时候，首先判断当天是否为节假日，如果为节假日则直接进入下一天，如果不是节假日就计算当天工作的时间，最后将所有工作时间加起来。
 
-```JavaScript
+```javascript
 for (let i=0; i<间隔days; i++){
     if (current是工作日) {
         if (current是start date){

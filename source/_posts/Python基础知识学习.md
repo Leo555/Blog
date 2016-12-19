@@ -138,7 +138,7 @@ static final double PI=3.1415926;
 ```
 在JavaScript中，ES6标准也增加了对常量的支持，使用const关键字
 
-```JavaScript
+```javascript
 const MY_FAV = 7;
 ```
 Python中没有真正意义的常量，不过如果你见到全部用大写字母表示的值，最好谨慎一些。
