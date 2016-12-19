@@ -386,7 +386,7 @@ sched.start()
 + end_date (datetime|str) – latest possible date/time to trigger on
 + timezone (datetime.tzinfo|str) – time zone to use for the date/time calculations
 
-```Python
+```python
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 
