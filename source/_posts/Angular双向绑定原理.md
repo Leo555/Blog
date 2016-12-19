@@ -7,7 +7,7 @@ tags:
 - Angular
 - socket.io
 - $digest
-- WebSocket
+- $apply
 - 双向数据绑定
 ---
 
