@@ -15,7 +15,7 @@ tags:
 
 用 Angular + socket.io 做了一个聊天 demo，消息通信没有问题，在 Angular 数据绑定的地方却栽了跟头：明明 model 已经发生了改变，在视图上就是看不到更新。
 
-后来仔细研究，发现是对 Angular 数据双向绑定的原理理解不透彻，通过使用 “$scope.$digest()” 解决了这个问题，趁这个机会好好学习一下数据绑定的过程。
+后来仔细研究，发现是对 Angular 数据双向绑定的原理理解不透彻，通过使用 “$scope.$apply()” 解决了这个问题，趁这个机会好好学习一下数据绑定的过程。
 <!-- more -->
 
 ## 简化代码
@@ -103,6 +103,9 @@ debug 发现 $scope.chatMessage 的值已经发生改变了，按理说 Angular 
 
 ## 分析
 
-要想搞懂这个，还要从 Angular 数据绑定讲起。
+$scope.chatMessage 发生变化后，没有强制 $digest 循环，监视 chatMessage 的 $watch 没有执行，而我们自己执行一次 $apply，那么这些 $watch 就会看见这些变化，然后根据需要更新 DOM。
+
+要想搞懂上面这句话，还要从 $watch, $apply 和 $digest 讲起。
 
 （1）$watch 队列（$watch list）
+
