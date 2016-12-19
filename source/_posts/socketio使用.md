@@ -15,12 +15,10 @@ tags:
 
 用 Angular + socket.io 做了一个聊天 demo，消息通信没有问题，在 Angular 数据绑定的地方却栽了跟头：明明 model 已经发生了改变，在视图上就是看不到更新。
 
-后来仔细研究，发现是对 Angular 数据双向绑定的原理理解不透彻，通过使用 “$scope.$digest()” 解决了这个问题，趁这个机会好好学习一下数据绑定过程。
+后来仔细研究，发现是对 Angular 数据双向绑定的原理理解不透彻，通过使用 “$scope.$digest()” 解决了这个问题，趁这个机会好好学习一下数据绑定的过程。
 <!-- more -->
 
 ## 简化代码
-
-[demo地址](https://github.com/Leo555/socket.io-demo)
 
 服务端代码：
 
@@ -95,6 +93,8 @@ angular.module('chatApp', [])
         };
     }]);
 ```
+
+[完整demo地址](https://github.com/Leo555/socket.io-demo)
 
 socket.io 通过 socket.emit() 发送事件，通过 socket.on() 监听事件。
 
