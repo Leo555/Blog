@@ -1,5 +1,5 @@
 ---
-title: Angular双向绑定实现原理
+title: Angular双向绑定原理
 date: 2016-12-19 21:33:09
 categories: JavaScript
 tags:
