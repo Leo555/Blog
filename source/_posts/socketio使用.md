@@ -12,7 +12,7 @@ tags:
 
 # 从一个 demo 讲起
 
-白天写了一个 socket.io 的简单demo，用 Angular 做前端实现，却发现数据绑定出现了点问题：明明 model 已经发生了改变，在视图上就是看不到更新。
+用 Angular + socket.io 做了一个聊天 demo，消息通信没有问题，在 Angular 数据绑定的地方却出现了点问题：明明 model 已经发生了改变，在视图上就是看不到更新。
 <!-- more -->
 
 ## 简化代码
