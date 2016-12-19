@@ -1,5 +1,5 @@
 ---
-title: Angular双向绑定原理
+title: Angular双向绑定实现原理
 date: 2016-12-19 21:33:09
 categories: JavaScript
 tags:
@@ -13,14 +13,12 @@ tags:
 
 # 从一个 demo 讲起
 
-用 Angular + socket.io 做了一个聊天 demo，消息通信没有问题，在 Angular 数据绑定的地方却出现了点问题：明明 model 已经发生了改变，在视图上就是看不到更新。
+用 Angular + socket.io 做了一个聊天 demo，消息通信没有问题，在 Angular 数据绑定的地方却栽了跟头：明明 model 已经发生了改变，在视图上就是看不到更新。
 
-后来仔细研究，发现是对 Angular 数据双向绑定的原理理解不透彻，趁这个机会好好学习一下。
+后来仔细研究，发现是对 Angular 数据双向绑定的原理理解不透彻，通过使用 “$scope.$apply()” 解决了这个问题，趁这个机会好好学习一下数据绑定的过程。
 <!-- more -->
 
 ## 简化代码
-
-[demo地址](https://github.com/Leo555/socket.io-demo)
 
 服务端代码：
 
@@ -96,6 +94,8 @@ angular.module('chatApp', [])
     }]);
 ```
 
+[完整demo地址](https://github.com/Leo555/socket.io-demo)
+
 socket.io 通过 socket.emit() 发送事件，通过 socket.on() 监听事件。
 
 上面代码似乎没有什么问题，可是运行的时候总是发生视图不更新的情况。
@@ -103,6 +103,9 @@ debug 发现 $scope.chatMessage 的值已经发生改变了，按理说 Angular 
 
 ## 分析
 
-要想搞懂这个，还要从 Angular 数据绑定讲起。
+$scope.chatMessage 发生变化后，没有强制 $digest 循环，监视 chatMessage 的 $watch 没有执行，而我们自己执行一次 $apply，那么这些 $watch 就会看见这些变化，然后根据需要更新 DOM。
+
+要想搞懂上面这句话，还要从 $watch, $apply 和 $digest 讲起。
 
 （1）$watch 队列（$watch list）
+
