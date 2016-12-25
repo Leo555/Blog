@@ -402,7 +402,7 @@ if (out.addEventListener) {
 };
 
 function changeStyle(ele) {
-  ele.innerHTML = "已点击"
+  ele.innerHTML = "已点击";
   ele.style.background = "#900";
   ele.style.color = "#fff";
 }
@@ -457,7 +457,7 @@ function changeStyle(ele) {
         };
 
         function changeStyle(ele) {
-          ele.innerHTML = "已点击"
+          ele.innerHTML = "已点击";
           ele.style.background = "#900";
           ele.style.color = "#fff";
         }
