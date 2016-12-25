@@ -261,10 +261,6 @@ child.addEventListener("click",function(e){
     <script type="text/javascript">
         let parent2 = document.getElementById("parent2");
         let child2 = document.getElementById("child2");
-    
-        document.body.addEventListener("click",function(e){
-            console.log("click-body");
-        },false);
         
         parent2.addEventListener("click",function(e){
             console.log("click-parent");
@@ -286,10 +282,6 @@ child.addEventListener("click",function(e){
 ```javascript
 let parent = document.getElementById("parent");
 let child = document.getElementById("child");
-
-document.body.addEventListener("click", function(e) {
-    console.log("click-body");
-}, false);
 
 parent.addEventListener("click", function(e) {
     console.log("click-parent---事件传播");
@@ -338,10 +330,6 @@ child.addEventListener("click", function(e) {
         let parent3 = document.getElementById("parent3");
         let child3 = document.getElementById("child3");
 
-        document.body.addEventListener("click", function(e) {
-            console.log("click-body");
-        }, false);
-
         parent3.addEventListener("click", function(e) {
             console.log("click-parent---事件传播");
         }, false);　　　　　　　　
@@ -370,9 +358,9 @@ child.addEventListener("click", function(e) {
 HTML
 
 ```html
-<table id="outside">
-	<tr><td class='t' id="t1">one</td></tr>
-	<tr><td class='t' id="t2">two</td></tr>
+<table id="outside" border="1" style="cursor: pointer;">
+	<tr><td>one</td></tr>
+	<tr><td>two</td></tr>
 </table>
 ```
 
