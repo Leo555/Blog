@@ -168,7 +168,6 @@ child.addEventListener("click",function(e){
 
 事件触发顺序是由内到外的，这就是事件冒泡，虽然只点击子元素，但是它的父元素也会触发相应的事件。
 
-（F12 打开控制台，点击查看效果）
 {% raw %}
 <!DOCTYPE html>
 <html>
@@ -216,7 +215,7 @@ child.addEventListener("click",function(e){
     </script>
 </body>
 </html>
-{% endraw %}
+{% endraw %}（F12 打开控制台，点击查看效果）
 
 如果点击子元素不想触发父元素的事件怎么办？
 那就是停止事件传播---event.stopPropagation();
@@ -228,7 +227,6 @@ child.addEventListener("click",function(e){
 },false)
 ```
 
-（F12 打开控制台，点击查看效果）
 {% raw %}
 <!DOCTYPE html>
 <html>
@@ -273,7 +271,7 @@ child.addEventListener("click",function(e){
     </script>
 </body>
 </html>
-{% endraw %}
+{% endraw %}（F12 打开控制台，点击查看效果）
 
 ## 事件捕获
 
@@ -296,7 +294,6 @@ child.addEventListener("click", function(e) {
 }, false);
 ```
 
-（F12 打开控制台，点击查看效果）
 {% raw %}
 <!DOCTYPE html>
 <html>
@@ -344,7 +341,7 @@ child.addEventListener("click", function(e) {
     </script>
 </body>
 </html>
-{% endraw %}
+{% endraw %}（F12 打开控制台，点击查看效果）
 
 父元素通过事件捕获的方式注册了 click 事件，所以在事件捕获阶段就会触发，然后到了目标阶段，即事件源，之后进行事件传播，parent 同时也用冒泡方式注册了 click 事件，所以这里会触发冒泡事件，最后到根节点。这就是整个事件流程。
 
@@ -359,12 +356,20 @@ HTML
 
 ```html
 <table id="outside" border="1" style="cursor: pointer;">
-	<tr><td>one</td></tr>
-	<tr><td>two</td></tr>
+<tr>
+　　<td>table01</td>
+　　<td>table02</td>
+　　<td>table03</td>
+　　<td>table04</td>
+　　<td>table05</td>
+　　<td>table06</td>
+　　<td>table07</td>
+　　<td>table08</td>
+　　<td>table09</td>
+　　<td>table10</td>
+</tr>
 </table>
 ```
-
-
 
 JavaScript
 
