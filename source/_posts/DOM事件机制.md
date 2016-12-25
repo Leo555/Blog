@@ -34,7 +34,6 @@ ele.addEventListener('click', function(){ }, false);
 ele.removeEventListener(event.type, handle, boolean);
 ```
 
-
 (3)attachEvent(event.type, handle ); IE特有，兼容IE8及以下，可添加多个事件处理程序，只支持冒泡阶段
 
 ```javascript
@@ -113,6 +112,8 @@ function removeEvent(element, eType, handle, bol) {
 event.stopPropagation();    // 阻止事件的进一步传播，包括（冒泡，捕获），无参数
 event.cancelBubble = true;   // true 为阻止冒泡
 ```
+
+# 事件流
 
 ## 事件冒泡
 
