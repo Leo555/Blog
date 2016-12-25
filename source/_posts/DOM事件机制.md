@@ -31,6 +31,9 @@ ele.addEventListener('click', function(){ }, false);
 ele.removeEventListener(event.type, handle, boolean);
 ```
 
+addEventListener(event, listener, useCapture)　　
+参数定义：event---（事件名称，如click，不带on），listener---事件监听函数，useCapture---是否采用事件捕获进行事件捕捉，默认为false，即采用事件冒泡方式。
+
 (3)attachEvent(event.type, handle ); IE特有，兼容IE8及以下，可添加多个事件处理程序，只支持冒泡阶段
 
 ```javascript
@@ -41,7 +44,9 @@ ele.detachEvent("onclick", function(){ });
 ```
 
 (4)默认事件行为：href=""链接，submit表单提交等
+
 * return false; 阻止独享属性（通过on这种方式）绑定的事件的默认事件
+
 ```javascript
 ele.onclick = function() {
  ……                         //你的代码
@@ -60,6 +65,7 @@ element.addEventListener("click", function(e){
 ```
 
 * event.returnValue = false; 阻止通过 attachEvent( ) 添加的事件的默认事件
+
 ```javascript
 element.attachEvent("onclick", function(e){
    var event = e || window.event;
@@ -68,7 +74,7 @@ element.attachEvent("onclick", function(e){
 });
 ```
 
-## 时间绑定
+## 例子
 
 JavaScript 中实现事件绑定主要使用两个方法： [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)、[attachEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/attachEvent)。
 
@@ -109,9 +115,7 @@ el.addEventListener("click", modify, false);
 ```
 
 
-addEventListener(event, listener, useCapture)　　
 
-·参数定义：event---（事件名称，如click，不带on），listener---事件监听函数，useCapture---是否采用事件捕获进行事件捕捉，默认为false，即采用事件冒泡方式。
 
 addEventListener在 IE11、Chrome 、Firefox、Safari等浏览器都得到支持。
 
