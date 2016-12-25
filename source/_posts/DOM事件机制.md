@@ -6,6 +6,7 @@ tags:
 - 事件流
 - JavaScript
 - HTML
+- 事件委托/代理
 ---
 
 DOM 事件流（event  flow）存在三个阶段：事件捕获 --> 事件目标 --> 事件冒泡。
@@ -19,7 +20,8 @@ DOM 事件流（event  flow）存在三个阶段：事件捕获 --> 事件目标
 (1)onlick -->事件冒泡，重写onlick会覆盖之前属性，没有兼容性问题
 
 ```javascript
-el.onclik = null; //解绑单击事件，将onlick属性设为null即可
+//解绑单击事件，将onlick属性设为null即可
+el.onclik = null; 
 ```
 
 (2)addEventListener(event, listener, useCapture)　　
@@ -53,17 +55,17 @@ ele.onclick = function() {
 };
 ```
 
-* event.preventDefault( ); 阻止通过 addEventListener( ) 添加的事件的默认事件
+* event.preventDefault(); 阻止通过 addEventListener() 添加的事件的默认事件
 
 ```javascript
 element.addEventListener("click", function(e){
  let event = e || window.event;
  ……
- event.preventDefault( );      //阻止默认事件
+ event.preventDefault();      //阻止默认事件
 },false);
 ```
 
-* event.returnValue = false; 阻止通过 attachEvent( ) 添加的事件的默认事件
+* event.returnValue = false; 阻止通过 attachEvent() 添加的事件的默认事件
 
 ```javascript
 element.attachEvent("onclick", function(e){
@@ -108,7 +110,7 @@ function removeEvent(element, eType, handle, bol) {
 ## 阻止事件冒泡、事件捕获
 
 ```javascript
-event.stopPropagation( );    // 阻止事件的进一步传播，包括（冒泡，捕获），无参数
+event.stopPropagation();    // 阻止事件的进一步传播，包括（冒泡，捕获），无参数
 event.cancelBubble = true;   // true 为阻止冒泡
 ```
 
@@ -471,4 +473,4 @@ function changeStyle(ele) {
 
 事件冒泡的优点为： 
 （1）可以大量节省内存占用，减少事件注册，比如在 table 上代理所有 td 的 click 事件。
-（2）可以实现为动态增加的 DOM 上绑定事件的功能。
+（2）可以实现为动态增加的 DOM 绑定事件的功能。
