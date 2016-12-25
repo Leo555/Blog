@@ -374,18 +374,92 @@ HTML
 JavaScript
 
 ```javascript
-function modify() {
-  let t2 = document.getElementById("t2");
-  if (t2.firstChild.nodeValue === "three") {
-    t2.firstChild.nodeValue = "two";
-  } else {
-    t2.firstChild.nodeValue = "three";
-  }
-}
+let out = document.getElementById("outside");
+if (out.addEventListener) {
+  out.addEventListener("click", function(e) {
+    let e = e || window.event;
+    //IE没有e.target，有e.srcElement
+    let target = e.target || e.srcElement;
+    //判断事件目标是否是td，是的话target即为目标节点td
+    if (target.tagName.toLowerCase() == "td") {
+      changeStyle(target);
+      console.log(target.innerHTML);
+    }
+  }, false);
+} else {
+  out.attachEvent("onclick", function(e) {
+    let e = e || window.event;
+    //IE没有e.target，有e.srcElement
+    let target = e.target || e.srcElement;
+    //判断事件目标是否是td，是的话target即为目标节点td
+    if (target.tagName.toLowerCase() == "td") {
+      changeStyle(target);
+      console.log(target.innerHTML);
+    }
+  });
+};
 
-let el = document.getElementById("outside");
-el.addEventListener("click", modify, false);
+function changeStyle(ele) {
+  ele.innerHTML = "已点击"
+  ele.style.background = "#900";
+  ele.style.color = "#fff";
+}
 ```
 
+{% raw %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM 事件</title>
+</head>
+<body>
+    <table id="outside" border="1" style="cursor: pointer;">
+    <tr>
+    　　<td>table01</td>
+    　　<td>table02</td>
+    　　<td>table03</td>
+    　　<td>table04</td>
+    　　<td>table05</td>
+    　　<td>table06</td>
+    　　<td>table07</td>
+    　　<td>table08</td>
+    　　<td>table09</td>
+    　　<td>table10</td>
+    </tr>
+    </table>
+    <script type="text/javascript">
+        var out = document.getElementById("outside");
+        if (out.addEventListener) {
+          out.addEventListener("click", function(e) {
+            var e = e || window.event;
+            //IE没有e.target，有e.srcElement
+            var target = e.target || e.srcElement;
+            //判断事件目标是否是td，是的话target即为目标节点td
+            if (target.tagName.toLowerCase() == "td") {
+              changeStyle(target);
+              console.log(target.innerHTML);
+            }
+          }, false);
+        } else {
+          out.attachEvent("onclick", function(e) {
+            var e = e || window.event;
+            //IE没有e.target，有e.srcElement
+            var target = e.target || e.srcElement;
+            //判断事件目标是否是td，是的话target即为目标节点td
+            if (target.tagName.toLowerCase() == "td") {
+              changeStyle(target);
+              console.log(target.innerHTML);
+            }
+          });
+        };
 
-
+        function changeStyle(ele) {
+          ele.innerHTML = "已点击"
+          ele.style.background = "#900";
+          ele.style.color = "#fff";
+        }
+    </script>
+</body>
+</html>
+{% endraw %}（F12 打开控制台，点击查看效果）
