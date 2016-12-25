@@ -22,7 +22,8 @@ DOM 事件流（event  flow）存在三个阶段：事件捕获 --> 事件目标
 el.onclik = null; //解绑单击事件，将onlick属性设为null即可
 ```
 
-(2)addEventListener(event.type, handle, boolean); IE8 及以下不支持，属于DOM级的方法，可添加多个方法不被覆盖
+(2)addEventListener(event, listener, useCapture)　　
+参数定义：event---（事件名称，如click，不带on），listener---事件监听函数，useCapture---是否采用事件捕获进行事件捕捉，默认为false，即采用事件冒泡方式。 IE8 及以下不支持，属于DOM级的方法，可添加多个方法不被覆盖
 
 ```javascript
 //事件类型没有on，false 表示在事件第三阶段（冒泡）触发，true表示在事件第一阶段（捕获）触发。 如果handle是同一个方法，只执行一次。
@@ -31,8 +32,6 @@ ele.addEventListener('click', function(){ }, false);
 ele.removeEventListener(event.type, handle, boolean);
 ```
 
-addEventListener(event, listener, useCapture)　　
-参数定义：event---（事件名称，如click，不带on），listener---事件监听函数，useCapture---是否采用事件捕获进行事件捕捉，默认为false，即采用事件冒泡方式。
 
 (3)attachEvent(event.type, handle ); IE特有，兼容IE8及以下，可添加多个事件处理程序，只支持冒泡阶段
 
@@ -115,7 +114,4 @@ el.addEventListener("click", modify, false);
 ```
 
 
-
-
-addEventListener在 IE11、Chrome 、Firefox、Safari等浏览器都得到支持。
 
