@@ -57,7 +57,7 @@ ele.onclick = function() {
 
 ```javascript
 element.addEventListener("click", function(e){
- var event = e || window.event;
+ let event = e || window.event;
  ……
  event.preventDefault( );      //阻止默认事件
 },false);
@@ -67,7 +67,7 @@ element.addEventListener("click", function(e){
 
 ```javascript
 element.attachEvent("onclick", function(e){
-   var event = e || window.event;
+   let event = e || window.event;
    ……
    event.returnValue = false;       //阻止默认事件
 });
@@ -105,6 +105,137 @@ function removeEvent(element, eType, handle, bol) {
 }
 ```
 
+## 阻止事件冒泡、事件捕获
+
+```javascript
+event.stopPropagation( );    // 阻止事件的进一步传播，包括（冒泡，捕获），无参数
+event.cancelBubble = true;   // true 为阻止冒泡
+```
+
+## 事件冒泡
+
+HTML内容：
+
+```html
+<body>
+    <div id="parent">
+        父元素
+        <div id="child">
+            子元素
+        </div>
+    </div>
+</body>
+```
+
+css
+
+```css
+#parent{
+    width: 200px;
+    height:200px;
+    text-align: center;
+    line-height: 3;
+    background: green;
+}
+#child{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background: orange;
+}
+```
+
+JavaScript
+
+```javascript
+let parent = document.getElementById("parent");
+let child = document.getElementById("child");
+
+document.body.addEventListener("click",function(e){
+    console.log("click-body");
+},false);
+
+parent.addEventListener("click",function(e){
+    console.log("click-parent");
+},false);
+
+child.addEventListener("click",function(e){
+    console.log("click-child");
+},false);
+```
+
+通过"addEventListener"方法，采用事件冒泡方式给 DOM 元素注册 click 事件，点击“子元素”，控制台依次输出“click-child” --> “click-parent” --> “click-body”。
+
+事件触发顺序是由内到外的，这就是事件冒泡，虽然只点击子元素，但是它的父元素也会触发相应的事件。
+
+如果点击子元素不想触发父元素的事件怎么办？
+那就是停止事件传播---event.stopPropagation();
+
+```javascript
+child.addEventListener("click",function(e){
+　　console.log("click-child");
+  　e.stopPropagation();
+},false)
+```
+
+{% raw %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM 事件</title>
+    <style>
+        #parent{
+            width: 200px;
+            height:200px;
+            text-align: center;
+            line-height: 3;
+            background: green;
+        }
+        #child{
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        父元素
+        <div id="child">
+            子元素
+        </div>
+    </div>
+    <script type="text/javascript">
+        var parent = document.getElementById("parent");
+        var child = document.getElementById("child");
+    
+        document.body.addEventListener("click",function(e){
+            console.log("click-body");
+        },false);
+        
+        parent.addEventListener("click",function(e){
+            console.log("click-parent");
+        },false);
+
+        child.addEventListener("click",function(e){
+            console.log("click-child");
+            e.stopPropagation();
+        },false);
+    </script>
+</body>
+</html>
+{% endraw %}
+
+## 事件捕获
+
+
+
+## 事件委托（事件代理）
+
+事件委托：利用事件冒泡的特性，将里层的事件委托给外层事件，根据event对象的属性进行事件委托，改善性能。
+使用事件委托能够避免对特定的每个节点添加事件监听器；事件监听器是被添加到它们的父元素上。事件监听器会分析从子元素冒泡上来的事件，找到是哪个子元素的事件。
 
 HTML
 
@@ -115,16 +246,7 @@ HTML
 </table>
 ```
 
-css
 
-```css
-.t{
-    width: 100px;
-    height: 50px;
-    margin: 0 auto;
-    background: orange;
-}
-```
 
 JavaScript
 
