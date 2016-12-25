@@ -350,7 +350,7 @@ child.addEventListener("click", function(e) {
 事件委托(事件代理)：利用事件冒泡的特性，将里层的事件委托给外层事件，根据 event 对象的属性进行事件委托，改善性能。
 使用事件委托能够避免对特定的每个节点添加事件监听器；事件监听器是被添加到它们的父元素上。事件监听器会分析从子元素冒泡上来的事件，找到是哪个子元素的事件。
 
-委托在 JQuery 中已经得到了实现，即通过 $(selector).on(event,childSelector,data,function,map) 实现委托，一般用于动态生成的元素，当然 JQuery 也是通过原生的 js 去实现的，下面举一个简单的栗子，如果要单独点击 table 里面的 td，普通做法是 for 循环给每个 td 绑定事件，td 少的话性能什么差别，td 如果多了，就不行了，我们使用事件委托:
+委托在 JQuery 中已经得到了实现，即通过 **$(selector).on(event,childSelector,data,function,map)** 实现委托，一般用于动态生成的元素，当然 JQuery 也是通过原生的 js 去实现的，下面举一个简单的栗子，如果要单独点击 table 里面的 td，普通做法是 for 循环给每个 td 绑定事件，td 少的话性能什么差别，td 如果多了，就不行了，我们使用事件委托:
 
 HTML
 
@@ -467,4 +467,8 @@ function changeStyle(ele) {
 
 # 总结
 
-事件的三个阶段分别为：捕获，目标和冒泡，低版本 IE 不支持捕获。绑定事件的方法为 
+事件的三个阶段分别为：捕获，目标和冒泡，低版本 IE 不支持捕获。绑定事件的方法为 **addEventListener** 和 **attachEvent**。addEventListener 方法的第三个 boolean 型参数表示添加的事件为捕获或者冒泡，true 代表捕获，false 代表冒泡。
+
+事件冒泡的优点为： 
+（1）可以大量节省内存占用，减少事件注册，比如在 table 上代理所有 td 的 click 事件。
+（2）可以实现为动态增加的 DOM 上绑定事件的功能。
