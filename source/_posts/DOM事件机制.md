@@ -176,14 +176,14 @@ child.addEventListener("click",function(e){
     <meta charset="utf-8">
     <title>DOM 事件</title>
     <style>
-        #parent1{
+        #parent{
             width: 200px;
             height:200px;
             text-align: center;
             line-height: 3;
             background: green;
         }
-        #child1{
+        #child{
             width: 100px;
             height: 100px;
             margin: 0 auto;
@@ -192,15 +192,15 @@ child.addEventListener("click",function(e){
     </style>
 </head>
 <body>
-    <div id="parent1">
+    <div id="parent">
         父元素
-        <div id="child1">
+        <div id="child">
             子元素
         </div>
     </div>
     <script type="text/javascript">
-        let parent = document.getElementById("parent1");
-        let child = document.getElementById("child1");
+        let parent = document.getElementById("parent");
+        let child = document.getElementById("child");
     
         document.body.addEventListener("click",function(e){
             console.log("click-body");
@@ -259,18 +259,18 @@ child.addEventListener("click",function(e){
         </div>
     </div>
     <script type="text/javascript">
-        let parent = document.getElementById("parent2");
-        let child = document.getElementById("child2");
+        let parent2 = document.getElementById("parent2");
+        let child2 = document.getElementById("child2");
     
         document.body.addEventListener("click",function(e){
             console.log("click-body");
         },false);
         
-        parent.addEventListener("click",function(e){
+        parent2.addEventListener("click",function(e){
             console.log("click-parent");
         },false);
 
-        child.addEventListener("click",function(e){
+        child2.addEventListener("click",function(e){
             console.log("click-child");
             e.stopPropagation();
         },false);
@@ -335,22 +335,22 @@ child.addEventListener("click", function(e) {
         </div>
     </div>
     <script type="text/javascript">
-        let parent = document.getElementById("parent3");
-        let child = document.getElementById("child3");
+        let parent3 = document.getElementById("parent3");
+        let child3 = document.getElementById("child3");
 
         document.body.addEventListener("click", function(e) {
             console.log("click-body");
         }, false);
 
-        parent.addEventListener("click", function(e) {
+        parent3.addEventListener("click", function(e) {
             console.log("click-parent---事件传播");
         }, false);　　　　　　　　
         //新增事件捕获
-        parent.addEventListener("click", function(e) {
+        parent3.addEventListener("click", function(e) {
             console.log("click-parent--事件捕获");
         }, true);
 
-        child.addEventListener("click", function(e) {
+        child3.addEventListener("click", function(e) {
             console.log("click-child");
         }, false);
     </script>
