@@ -42,7 +42,7 @@ ele.attachEvent('onclick', function(){ });
 ele.detachEvent("onclick", function(){ });
 ```
 
-(4)默认事件行为：href=""链接，submit表单提交等
+(4)默认事件行为：href=""，submit表单提交等
 
 * return false; 阻止独享属性（通过on这种方式）绑定的事件的默认事件
 
@@ -73,9 +73,38 @@ element.attachEvent("onclick", function(e){
 });
 ```
 
-## 例子
+## 事件封装
 
 JavaScript 中实现事件绑定主要使用两个方法： [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)、[attachEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/attachEvent)。
+
+为了兼容浏览器，按照网上通用的方案对事件进行封装
+
+```javascript
+// 事件绑定
+function addEvent(element, eType, handle, bol) {
+ if(element.addEventListener){           //如果支持addEventListener
+     element.addEventListener(eType, handle, bol);
+ }else if(element.attachEvent){          //如果支持attachEvent
+     element.attachEvent("on"+eType, handle);
+ }else{                                  //否则使用兼容的onclick绑定
+     element["on"+eType] = handle;
+ }
+}
+```
+
+```javascript
+// 事件解绑
+function removeEvent(element, eType, handle, bol) {
+ if(element.addEventListener){
+     element.removeEventListener(eType, handle, bol);
+ }else if(element.attachEvent){
+     element.detachEvent("on"+eType, handle);
+ }else{
+     element["on"+eType] = null;
+ }
+}
+```
+
 
 HTML
 
