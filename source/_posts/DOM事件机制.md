@@ -176,14 +176,14 @@ child.addEventListener("click",function(e){
     <meta charset="utf-8">
     <title>DOM 事件</title>
     <style>
-        #parent{
+        #parent1{
             width: 200px;
             height:200px;
             text-align: center;
             line-height: 3;
             background: green;
         }
-        #child{
+        #child1{
             width: 100px;
             height: 100px;
             margin: 0 auto;
@@ -192,15 +192,15 @@ child.addEventListener("click",function(e){
     </style>
 </head>
 <body>
-    <div id="parent">
+    <div id="parent1">
         父元素
-        <div id="child">
+        <div id="child1">
             子元素
         </div>
     </div>
     <script type="text/javascript">
-        var parent = document.getElementById("parent");
-        var child = document.getElementById("child");
+        let parent = document.getElementById("parent1");
+        let child = document.getElementById("child1");
     
         document.body.addEventListener("click",function(e){
             console.log("click-body");
@@ -236,14 +236,14 @@ child.addEventListener("click",function(e){
     <meta charset="utf-8">
     <title>DOM 事件</title>
     <style>
-        #parent{
+        #parent2{
             width: 200px;
             height:200px;
             text-align: center;
             line-height: 3;
             background: green;
         }
-        #child{
+        #child2{
             width: 100px;
             height: 100px;
             margin: 0 auto;
@@ -252,15 +252,15 @@ child.addEventListener("click",function(e){
     </style>
 </head>
 <body>
-    <div id="parent">
+    <div id="parent2">
         父元素
-        <div id="child">
+        <div id="child2">
             子元素
         </div>
     </div>
     <script type="text/javascript">
-        var parent = document.getElementById("parent");
-        var child = document.getElementById("child");
+        let parent = document.getElementById("parent2");
+        let child = document.getElementById("child2");
     
         document.body.addEventListener("click",function(e){
             console.log("click-body");
@@ -281,7 +281,82 @@ child.addEventListener("click",function(e){
 
 ## 事件捕获
 
+修改上面事件冒泡的例子
 
+```javascript
+let parent = document.getElementById("parent");
+let child = document.getElementById("child");
+
+document.body.addEventListener("click", function(e) {
+    console.log("click-body");
+}, false);
+
+parent.addEventListener("click", function(e) {
+    console.log("click-parent---事件传播");
+}, false);　　　　　　　　
+//新增事件捕获
+parent.addEventListener("click", function(e) {
+    console.log("click-parent--事件捕获");
+}, true);
+
+child.addEventListener("click", function(e) {
+    console.log("click-child");
+}, false);
+```
+
+（F12 打开控制台，点击查看效果）
+{% raw %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM 事件</title>
+    <style>
+        #parent3{
+            width: 200px;
+            height:200px;
+            text-align: center;
+            line-height: 3;
+            background: green;
+        }
+        #child3{
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent3">
+        父元素
+        <div id="child3">
+            子元素
+        </div>
+    </div>
+    <script type="text/javascript">
+        let parent = document.getElementById("parent3");
+        let child = document.getElementById("child3");
+
+        document.body.addEventListener("click", function(e) {
+            console.log("click-body");
+        }, false);
+
+        parent.addEventListener("click", function(e) {
+            console.log("click-parent---事件传播");
+        }, false);　　　　　　　　
+        //新增事件捕获
+        parent.addEventListener("click", function(e) {
+            console.log("click-parent--事件捕获");
+        }, true);
+
+        child.addEventListener("click", function(e) {
+            console.log("click-child");
+        }, false);
+    </script>
+</body>
+</html>
+{% endraw %}
 
 ## 事件委托（事件代理）
 
