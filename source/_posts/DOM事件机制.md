@@ -168,6 +168,56 @@ child.addEventListener("click",function(e){
 
 事件触发顺序是由内到外的，这就是事件冒泡，虽然只点击子元素，但是它的父元素也会触发相应的事件。
 
+（F12 打开控制台，点击查看效果）
+{% raw %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM 事件</title>
+    <style>
+        #parent{
+            width: 200px;
+            height:200px;
+            text-align: center;
+            line-height: 3;
+            background: green;
+        }
+        #child{
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        父元素
+        <div id="child">
+            子元素
+        </div>
+    </div>
+    <script type="text/javascript">
+        var parent = document.getElementById("parent");
+        var child = document.getElementById("child");
+    
+        document.body.addEventListener("click",function(e){
+            console.log("click-body");
+        },false);
+        
+        parent.addEventListener("click",function(e){
+            console.log("click-parent");
+        },false);
+
+        child.addEventListener("click",function(e){
+            console.log("click-child");
+        },false);
+    </script>
+</body>
+</html>
+{% endraw %}
+
 如果点击子元素不想触发父元素的事件怎么办？
 那就是停止事件传播---event.stopPropagation();
 
@@ -178,6 +228,7 @@ child.addEventListener("click",function(e){
 },false)
 ```
 
+（F12 打开控制台，点击查看效果）
 {% raw %}
 <!DOCTYPE html>
 <html>
