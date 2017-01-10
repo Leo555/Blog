@@ -1,4 +1,5 @@
-title: 使用Object.defineProperty为对象定义属性
+---
+title: 使用 Object.defineProperty 为对象定义属性
 date: 2016-11-21 22:38:27
 tags: 
 - defineProperty
