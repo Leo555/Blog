@@ -3,6 +3,8 @@ date: 2016-11-16 09:41:44
 tags:
   - JavaScript
   - Algorithm
+  - 快速排序
+  - 水桶问题
 categories: Algorithm
 ---
 

@@ -16,7 +16,7 @@ Node.js 中内建了一个 [child_process](https://nodejs.org/api/child_process.
 
 # [child_process](https://nodejs.org/api/child_process.html)
 
-child_process是 Node.js 中一个非常重要的模块，主要功能有：
+child_process 是 Node.js 中一个非常重要的模块，主要功能有：
 1. 创建子进程
 2. 主进程与子进程通信
 3. 主进程读取子进程返回结果
@@ -34,7 +34,7 @@ child_process是 Node.js 中一个非常重要的模块，主要功能有：
 2. child_process.**execSync**(command[, options])
 3. child_process.**spawnSync**(command[, args][, options])
 
-以异步函数中spawn是最基本的创建子进程的函数，其他三个异步函数都是对spawn不同程度的封装。spawn只能运行指定的程序，参数需要在列表中给出，而exec可以直接运行复杂的命令。
+以异步函数中 spawn 是最基本的创建子进程的函数，其他三个异步函数都是对 spawn 不同程度的封装。spawn 只能运行指定的程序，参数需要在列表中给出，而 exec 可以直接运行复杂的命令。
     
 ## spawn()
 spawn从定义来看，有3个参数。
@@ -58,7 +58,8 @@ child_process.spawn(command[, args][, options])
 8. shell [Boolean] | [String] If true, runs command inside of a shell. Uses '/bin/sh' on UNIX, and 'cmd.exe' on Windows. A different shell can be specified as a string. The shell should understand the -c switch on UNIX, or /d /s /c on Windows. Defaults to false (no shell).
 
 
-spawn方法创建一个子进程来执行特定命令，它没有回调函数，只能通过监听事件，来获取运行结果。属于异步执行，适用于子进程长时间运行的情况。
+spawn 方法创建一个子进程来执行特定命令，它没有回调函数，只能通过监听事件，来获取运行结果。属于异步执行，适用于子进程长时间运行的情况。
+
 ```javascript
 let child_process = require('child_process');
 
@@ -77,18 +78,20 @@ child.on('close', (code) => {
 });
 ```
 
-spawn 方法通过stream的方式发数据传给主进程，从而实现了多进程之间的数据交换。
+spawn 方法通过 stream 的方式发数据传给主进程，从而实现了多进程之间的数据交换。
 
 ## exec()
 
 exec 方法的定义如下：
+
 ```javascript
 child_process.exec(command[, options][, callback])
 ```
 
-exec方法是对spawn方法的封装，增加了shell/bash命令解析和回调函数，更加符合JavaScript的函数调用习惯。
+exec 方法是对 spawn 方法的封装，增加了 shell/bash 命令解析和回调函数，更加符合 JavaScript 的函数调用习惯。
 
 command参数是一个命令字符串
+
 ```javascript
 let exec = require('child_process').exec;
 
@@ -101,9 +104,10 @@ let ls = exec('ls -l', function (error, stdout, stderr) {
 });
 ```
 
-exec方法第二个参数是回调函数，该函数接受三个参数，分别是发生的错误、标准输出的显示结果、标准错误的显示结果。
+exec 方法第二个参数是回调函数，该函数接受三个参数，分别是发生的错误、标准输出的显示结果、标准错误的显示结果。
 
-由于标准输出和标准错误都是流对象（stream），可以监听data事件，因此上面的代码也可以写成下面这样。
+由于标准输出和标准错误都是流对象（stream），可以监听 data 事件，因此上面的代码也可以写成下面这样。
+
 ```javascript
 let exec = require('child_process').exec;
 let child = exec('ls -l');
@@ -119,15 +123,16 @@ child.on('close', (code) => {
 });
 ```
 
-exec方法会直接调用bash（/bin/sh程序）来解释命令，如果用户输入恶意代码，将会带来安全风险。因此，在有用户输入的情况下，最好不使用exec方法，而是使用execFile方法。
+exec 方法会直接调用 bash（/bin/sh程序） 来解释命令，如果用户输入恶意代码，将会带来安全风险。因此，在有用户输入的情况下，最好不使用 exec 方法，而是使用 execFile 方法。
 
 ## execFile()
 
 execFile的定义如下：
+
 ```javascript
 child_process.execFile(file[, args][, options][, callback])
 ```
-execFile 命令有四个参数，file和callbakc为必传参数，options、args为可选参数：
+execFile 命令有四个参数，file 和callbakc 为必传参数，options、args 为可选参数：
 
 * file 要执行程序的文件或命令名。字符串类型
 * args 要执行程序或命令的参数列表。数组类型
@@ -135,7 +140,7 @@ execFile 命令有四个参数，file和callbakc为必传参数，options、args
 * callback 子进程执行完毕的回调函数。与exec的callback函数相同
 * 返回值: ChildProcess 对象
 
-execFile从可执行程序启动子进程。与exec相比，execFile不启动独立的bash/shell，因此更加轻量级，也更加安全。 execFile也可以用于执行命令。
+execFile 从可执行程序启动子进程。与 exec 相比，execFile 不启动独立的 bash/shell，因此更加轻量级，也更加安全。 execFile 也可以用于执行命令。
 
 ```javascript
 let childProcess = require('child_process');
@@ -148,15 +153,16 @@ childProcess.execFile('ls', ['-l', path], (err, result) => {
 });
 ```
 
-那么，什么时候使用exec，什么时候使用execFile呢？
+那么，什么时候使用 exec，什么时候使用 execFile 呢？
 
-如果命令参数是由用户来输入的，对于exec函数来说是有安全性风险的，因为Shell会运行多行命令，比如’ls -l .;pwd，如逗号分隔，之后的命令也会被系统运行。但使用exeFile命令时，命令和参数分来，防止了参数注入的安全风险。
+如果命令参数是由用户来输入的，对于 exec 函数来说是有安全性风险的，因为 Shell 会运行多行命令，比如 ’ls -l .;pwd，如逗号分隔，之后的命令也会被系统运行。但使用 exeFile 命令时，命令和参数分来，防止了参数注入的安全风险。
 
 ## fork()
 
-fork函数，用于在子进程中运行的模块，如 fork('./son.js') 相当于 spawn('node', ['./son.js']) 。与spawn方法不同的是，fork会在父进程与子进程之间，建立一个通信管道，用于进程之间的通信。
+fork 函数，用于在子进程中运行的模块，如 fork('./son.js') 相当于 spawn('node', ['./son.js']) 。与 spawn 方法不同的是，fork 会在父进程与子进程之间，建立一个通信管道，用于进程之间的通信。
 
 假设有一个主进程文件 mian.js:
+
 ```javascript
 let childProcess = require('child_process');
 let son = childProcess.fork('./son.js');
@@ -169,7 +175,8 @@ son.send({
 });
 ```
 有一个子进程文件 son.js:
-```JavaScritp
+
+```javascript
 process.on('message', (m) => {
     console.log('Son Listen:', m);
 });
@@ -185,7 +192,7 @@ Son Listen: { hello: 'son' }
 Main Listen:  { Hello: 'main' }
 ```
 
-通过main.js启动子进程son.js，通过process在两个进程之间传递数据。
+通过 main.js 启动子进程 son.js，通过 process 在两个进程之间传递数据。
 
 使用 child_process.fork() 生成新进程之后，就可以用 son.send(message, [sendHandle]) 向新进程发送消息，新进程中通过监听message事件，来获取消息，这就是主线程与子线程之间的通信方式。
 
@@ -212,7 +219,6 @@ bat.stderr.on('data', (data) => {
 bat.on('exit', (code) => {
   console.log(`Child exited with code ${code}`);
 });
-
 ```
 
 ### exec
@@ -237,5 +243,3 @@ exec('"my script.cmd" a b', (err, stdout, stderr) => {
   // ...
 });
 ```
-
-

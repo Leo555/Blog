@@ -16,7 +16,7 @@ categories: JavaScript
 <!-- more -->
 ECMAScript 2016(ES7) 中已经确定支持 async/await，那我们怎么能够落后呢？
 
-本文是 async/await 的学习笔记，涵盖基本用法以及一些小demo。
+本文是 async/await 的学习笔记，涵盖基本用法以及一些小 demo。
 
 ## async 函数是什么
 
@@ -25,9 +25,6 @@ ECMAScript 2016(ES7) 中已经确定支持 async/await，那我们怎么能够�
 假如有一个Generator函数：
 
 ```javascript
-/**
- * Created by leo on 2016/11/1.
- */
 'use strict';
 const f = (time) => {
     return new Promise(function (resolve) {
@@ -72,13 +69,13 @@ const asyncF = async(()=> {
 
 ### 说明
 
-由于目前的大部分浏览器和NodeJS环境还不支持async/await，所以本文程序借助 “asyncawait” 实现，需要额外安装
+由于目前的大部分浏览器和 NodeJS 环境还不支持 async/await，所以本文程序借助 “asyncawait” 实现，需要额外安装
 
 ```shell
 $ npm install asyncawait
 ```
 
-当然如果你对babel比较熟悉的话，也可以通过babel将async/await编译为ES5，就可直接运行了。
+当然如果你对 babel 比较熟悉的话，也可以通过 babel 将 async/await 编译为 ES5，就可直接运行了。
 
 ##  async/await 使用规则
 
@@ -112,7 +109,7 @@ const f = (time) => {
 
 ```
 
-await等待的虽然是promise对象，但不必写使用 .then()，也可以得到返回值。
+await 等待的虽然是 promise 对象，但不必写使用 .then()，也可以得到返回值。
 
 ## 捕捉异常
 

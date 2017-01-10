@@ -1,12 +1,14 @@
 title: Python协程
 tags:
   - Python
+  - 协程
+  - Coroutine
 categories: Python
 date: 2016-10-25 22:02:48
 ---
 # 背景
 ![](http://p1.bpimg.com/567571/ff584819879044dc.png)
-第一次听同学提到协程Coroutine，说是一个类似于多线程而又不是多线程的东西，听得云里雾里，不觉明厉。后来找了个机会好好看了一下相关的知识，发现协程是一个很有趣的东西。
+第一次听同学提到协程 Coroutine，说是一个类似于多线程而又不是多线程的东西，听得云里雾里，不觉明厉。后来找了个机会好好看了一下相关的知识，发现协程是一个很有趣的东西。
 
 [Wiki百科](https://zh.wikipedia.org/wiki/%E5%8D%8F%E7%A8%8B)给协程的定义是：“与子例程一样，协程也是一种程序组件。。。协程更适合于用来实现彼此熟悉的程序组件，如合作式多任务，迭代器，无限列表和管道。”
 
@@ -83,7 +85,7 @@ z
 
 ## 协程与多线程
 
-协程只有一个线程在执行，由于CPU速度非常快，所以能达到（看起来）多个任务同时执行的效果。
+协程只有一个线程在执行，由于 CPU 速度非常快，所以能达到（看起来）多个任务同时执行的效果。
 
 用小时候非常喜欢看的《龙珠》做比喻就是，协程就是残像拳，悟空不断地在A和B两地移动，速度非常快，看起来就像两个悟空一样；而多线程就是沙鲁分泌出来的小沙鲁，每个小沙鲁都能独立作战。
 
@@ -114,17 +116,17 @@ for i in fib(20):
     print(i)
 ```
 
-当一个函数中包含yield语句时，python会自动将其识别为一个生成器。这时fib()并不会真正调用函数体，而是以函数体生成了一个生成器对象实例。
+当一个函数中包含 yield 语句时，python 会自动将其识别为一个生成器。这时 fib() 并不会真正调用函数体，而是以函数体生成了一个生成器对象实例。
 
-yield在这里可以保留fib函数的计算现场（a, b的值），暂停fib的计算并将b返回。而将fib放入for…in循环中时，每次循环都会调用next(fib())，唤醒生成器，执行到下一个yield语句处，直到抛出StopIteration异常。此异常会被for循环捕获，导致跳出循环。
+yield 在这里可以保留fib函数的计算现场（a, b的值），暂停fib的计算并将 b 返回。而将 fib 放入 for…in 循环中时，每次循环都会调用 next(fib())，唤醒生成器，执行到下一个 yield 语句处，直到抛出 StopIteration 异常。此异常会被 for 循环捕获，导致跳出循环。
 
-执行的时候发现速度非常快，而且不会给内存带来很大的压力，因为每一次i的值都是动态生成的，而不需要把它们存储在列表中。更概括的说上面的例子中使用yield便可获得了一个协程，协程会消费掉发送给它的值。
+执行的时候发现速度非常快，而且不会给内存带来很大的压力，因为每一次i的值都是动态生成的，而不需要把它们存储在列表中。更概括的说上面的例子中使用 yield 便可获得了一个协程，协程会消费掉发送给它的值。
 
 ## send
 
-从上面的程序中可以看到，目前只有数据从fib()中通过yield流向外面的for循环；如果可以向fib()发送数据，那不是就可以在Python中实现协程了嘛。
+从上面的程序中可以看到，目前只有数据从 fib() 中通过 yield 流向外面的 for 循环；如果可以向 fib() 发送数据，那不是就可以在 Python 中实现协程了嘛。
 
-平时写程序的时候总是会遇到一些比较耗时的操作，比如读写文件，读取网络等，所以我们给刚才的fib()函数加上一段休眠变成慢速fib()
+平时写程序的时候总是会遇到一些比较耗时的操作，比如读写文件，读取网络等，所以我们给刚才的 fib() 函数加上一段休眠变成慢速 fib()
 
 ```python
 import time
@@ -151,14 +153,14 @@ while True:
         break
 ```
 
-其中next(sfib)相当于sfib.send(None)，可以使得sfib运行至第一个yield处返回。后续的sfib.send(random.uniform(0, 0.5))则将一个随机的秒数发送给sfib，作为当前中断的yield表达式的返回值。
+其中 next(sfib) 相当于 sfib.send(None)，可以使得sfib运行至第一个 yield 处返回。后续的 sfib.send(random.uniform(0, 0.5))则将一个随机的秒数发送给 sfib，作为当前中断的 yield 表达式的返回值。
 
-于是，Python中的生成器有了send函数，yield表达式也拥有了返回值。
+于是，Python 中的生成器有了 send 函数，yield 表达式也拥有了返回值。
 
 
 ## grep
 
-Python实现的grep也是一个很好的协程的例子
+Python 实现的 grep 也是一个很好的协程的例子
 
 ```python
 def grep(pattern):
@@ -169,14 +171,14 @@ def grep(pattern):
             print(line)
 ```
 
-调用方式：使用next()启动一个协程，协程中包含的生成器并不是立刻执行，而是通过next()方法来响应send()方法。因此，你必须通过next()方法来执行yield表达式。
+调用方式：使用 next() 启动一个协程，协程中包含的生成器并不是立刻执行，而是通过 next() 方法来响应 send() 方法。因此，你必须通过 next() 方法来执行 yield 表达式。
 
 ```python
 search = grep('coroutine') 
 next(search)  #Searching for coroutine
 ```
 
-使用send()向search传值,当传入的值中包含'coroutine'时，输出传入的值
+使用 send() 向 search 传值,当传入的值中包含 'coroutine' 时，输出传入的值
 
 ```python
 search.send("I love you")
@@ -184,7 +186,8 @@ search.send("Don't you love me?")
 search.send("I love coroutine instead!")  #I love coroutine instead!
 ```
 
-通过close()方法来关闭一个协程
+通过 close() 方法来关闭一个协程
+
 ```python
 search.close()
 ```
@@ -220,19 +223,19 @@ produce(c)
 ```
 
 
-注意到consumer函数是一个generator，把一个consumer传入produce后：
-1. 首先调用c.send(None)启动生成器；
-2. 然后，一旦生产了东西，通过c.send(n)切换到consumer执行；
-3. consumer通过yield拿到消息，处理，又通过yield把结果传回；
-4. produce拿到consumer处理的结果，继续生产下一条消息；
-5. produce决定不生产了，通过c.close()关闭consumer，整个过程结束。
+注意到 consumer 函数是一个 generator，把一个 consumer 传入 produce 后：
+1. 首先调用 c.send(None) 启动生成器；
+2. 然后，一旦生产了东西，通过 c.send(n) 切换到 consumer 执行；
+3. consumer 通过 yield 拿到消息，处理，又通过 yield 把结果传回；
+4. produce 拿到 consumer 处理的结果，继续生产下一条消息；
+5. produce 决定不生产了，通过 c.close() 关闭 consumer，整个过程结束。
 
-整个流程无锁，由一个线程执行，produce和consumer协作完成任务，所以称为“协程”。
+整个流程无锁，由一个线程执行，produce 和 consumer 协作完成任务，所以称为“协程”。
 
 # 总结
 
 每次使用协程都要依赖生成器是不是很麻烦呢？
 
-Python3.5引入async/await让协程表面上独立于生成器而存在，让Python写协程更加方便。
+Python3.5 引入 async/await 让协程表面上独立于生成器而存在，让 Python 写协程更加方便。
 
 学习完成后会更新博客，敬请期待。
