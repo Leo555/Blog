@@ -19,7 +19,7 @@ categories: Python
 ## 循环sleep
 这种方式最简单，在循环里面放入要执行的任务，然后sleep一段时间再执行
 
-``` Python
+```python
 import datetime
 import time
 
@@ -100,11 +100,13 @@ s.run()
 [APScheduler](http://apscheduler.readthedocs.io/en/latest/userguide.html)是一个Python定时任务框架，使用起来十分方便。提供了基于日期、固定时间间隔以及crontab类型的任务，并且可以持久化任务、并以daemon方式运行应用。
 
 使用APScheduler需要安装
+
 ```
 $ pip install apscheduler
 ```
 
 首先来看一个周一到周五每天早上6点半喊我起床的例子
+
 ```python
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
@@ -262,12 +264,14 @@ scheduler.remove_job('my_job_id')
 ### 暂停和恢复job
 
 暂停一个job：
+
 ```python
 apscheduler.job.Job.pause()
 apscheduler.schedulers.base.BaseScheduler.pause_job()
 ```
 
 恢复一个job：
+
 ```python
 apscheduler.job.Job.resume()
 apscheduler.schedulers.base.BaseScheduler.resume_job()

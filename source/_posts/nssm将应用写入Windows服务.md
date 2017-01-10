@@ -19,7 +19,7 @@ categories: Windows
 
 ## Node
 
-假设有一个最简单的node服务器程序
+假设有一个最简单的 node 服务器程序
 
 ```javascript
 var express = require('express');
@@ -33,7 +33,7 @@ app.listen(3000, function() {
 	console.log('app is listening at port 3000');
 });
 ```
-需要将其写入Windows服务。
+需要将其写入 Windows 服务。
 
 
 打开控制台工具。输入:
