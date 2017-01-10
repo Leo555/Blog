@@ -3,6 +3,7 @@ title: DOM 事件机制
 date: 2016-12-25 17:44:44
 categories: JavaScript
 tags:
+- DOM    
 - 事件流
 - JavaScript
 - HTML
