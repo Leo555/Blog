@@ -1,7 +1,7 @@
 ---
 title: 机器学习常用算法——支持向量机
 date: 2017-01-08 21:27:24
-categories: Algorithm
+categories: Machine Learning
 tags:
 - Python
 - Algorithm
