@@ -399,4 +399,3 @@ sched.add_job(job_function, 'interval', hours=2)
 sched.add_job(job_function, 'interval', hours=2, start_date='2010-10-10 09:30:00', end_date='2014-06-15 11:00:00')
 sched.start()
 ```
----
