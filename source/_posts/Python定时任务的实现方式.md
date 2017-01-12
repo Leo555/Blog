@@ -20,13 +20,13 @@ categories: Python
 这种方式最简单，在循环里面放入要执行的任务，然后sleep一段时间再执行
 
 ```python
-import datetime
+from datetime import datetime
 import time
 
 # 每n秒执行一次
 def timer(n):
     while True:
-        print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         time.sleep(n)
 
 timer(5)
@@ -39,11 +39,11 @@ timer(5)
 threading模块中的Timer是一个非阻塞函数，比sleep稍好一点，不过依然无法喊我起床。
 
 ```python
-import datetime
+from datetime import datetime
 from threading import Timer
 
 def printTime(inc):
-    print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     t = Timer(inc, printTime, (inc,))
     t.start()
 
@@ -59,14 +59,13 @@ sched模块是Python内置的模块，它是一个调度（延时处理机制）
 ```python
 import sched
 import time
-import datetime
+from datetime import datetime
 # 初始化sched模块的scheduler类
 # 第一个参数是一个可以返回时间戳的函数，第二个参数可以在定时未到达之前阻塞。
 schedule = sched.scheduler(time.time, time.sleep)
-
 # 被周期性调度触发的函数
 def printTime(inc):
-    print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     schedule.enter(inc, 0, printTime, (inc,))
 
 def main(inc=60):
@@ -74,7 +73,7 @@ def main(inc=60):
     # 给该触发函数的参数（tuple形式）
     schedule.enter(0, 0, printTime, (inc,))
     schedule.run()
-
+# 10s 输出一次
 main(10)
 ```
 
@@ -173,11 +172,10 @@ from datetime import datetime
 
 def job():
     print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-
+# 定义BlockingScheduler
 sched = BlockingScheduler()
 sched.add_job(job, 'interval', seconds=5)
 sched.start()
-
 ```
 
 上述代码创建了一个BlockingScheduler，并使用默认内存存储和默认执行器。(默认选项分别是MemoryJobStore和ThreadPoolExecutor，其中线程池的最大线程数为10)。配置完成后使用start()方法来启动。
@@ -191,7 +189,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.jobstores.mongodb import MongoDBJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
-
+# MongoDB 参数
 host = '127.0.0.1'
 port = 27017
 client = MongoClient(host, port)
@@ -232,13 +230,12 @@ scheduler.start()
 
 ```python
 from apscheduler.schedulers.blocking import BlockingScheduler
-
 sched = BlockingScheduler()
-
+# 装饰器
 @sched.scheduled_job('interval', id='my_job_id', seconds=5)
 def job_function():
     print("Hello World")
-
+# 开始
 sched.start()
 ```
 
@@ -256,7 +253,7 @@ job.remove()使用add_job()返回的实例
 ```python
 job = scheduler.add_job(myfunc, 'interval', minutes=2)
 job.remove()
-
+# id
 scheduler.add_job(myfunc, 'interval', minutes=2, id='my_job_id')
 scheduler.remove_job('my_job_id')
 ```
@@ -313,7 +310,7 @@ def my_listener(event):
         print('The job crashed :(')
     else:
         print('The job worked :)')
-
+# 添加监听器
 scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
 ```
 
@@ -366,9 +363,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 def job_function():
     print("Hello World")
-
+# BlockingScheduler
 sched = BlockingScheduler()
-
 # Schedules job_function to be run on the third Friday
 # of June, July, August, November and December at 00:00, 01:00, 02:00 and 03:00
 sched.add_job(job_function, 'cron', month='6-8,11-12', day='3rd fri', hour='0-3')
@@ -396,7 +392,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 def job_function():
     print("Hello World")
-
+# BlockingScheduler
 sched = BlockingScheduler()
 # Schedule job_function to be called every two hours
 sched.add_job(job_function, 'interval', hours=2)
