@@ -72,7 +72,7 @@ SELECT SUBSTR(LISTAGG(**, '; ') WITHIN GROUP(ORDER BY **), 0, 3999)...
 
 # 解决方案
 
-```SQL 
+```sql
 SQL> set long 10000
 SQL> select listagg(id, ',') within group (order by id)
   2    from (select level as id from dual connect by level < 1050)
@@ -83,7 +83,7 @@ ERROR at line 2:
 ORA-01489: result of string concatenation is too long
 ```
 
-```SQL
+```sql
 SQL> select rtrim(xmlagg(xmlelement(e,id,',').extract('//text()') order by id).GetClobVal(),',')
   2    from (select level as id from dual connect by level < 1050)
   3  /
