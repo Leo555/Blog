@@ -268,3 +268,18 @@ gulp.task('task1', function (cb) {
 ```
 
 所以只要依赖的任务是上面三种情况之一，就能保证当前任务在依赖任务执行完成后再执行。这边需要注意的是依赖的任务相互之间还是并行的。需要他们按顺序的话。记得给每个依赖的任务也配置好依赖关系。
+
+```javascript
+var gulp = require('gulp');
+gulp.task('one', () => {
+	console.log('one');
+});
+// two 依赖 one
+gulp.task('two', ['one'], () => {
+	console.log('two');
+});
+// default 依赖 one，two
+gulp.task('default', ['one', 'two'], () => {
+	console.log('default');
+});
+```
