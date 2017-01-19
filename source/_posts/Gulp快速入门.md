@@ -1,5 +1,5 @@
 ---
-title: Gulp快速学习
+title: Gulp快速入门
 date: 2017-01-18 16:09:35
 categories: JavaScript
 tags:
