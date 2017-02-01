@@ -42,12 +42,12 @@ Yarn 在安装模块之前会验证文件完整性。
 |作用|NPM 命令|Yarn 命令|
 | :-| :-|:-|
 |初始化| npm init| yarn init|
-|安装 package.json	|npm install	|yarn|
-|安装某个包	|npm install xxx --save|	yarn add xxx|
-|删除某个包|	npm uninstall xxx --save|	yarn remove xxx|
-|开发模式下安装某个包|	npm install xxx --save-dev|	yarn add xxx —dev|
-|更新	|npm update --save|	yarn upgrade|
-|全局安装	|npm install xxx –global	|yarn global add xxx|
+|安装 package.json 中的包|npm install|yarn|
+|安装某个包|npm install xxx --save|yarn add xxx|
+|删除某个包|	npm uninstall xxx --save|yarn remove xxx|
+|开发模式下安装某个包|npm install xxx --save-dev|	yarn add xxx —dev|
+|更新|npm update --save|	yarn upgrade|
+|全局安装|npm install xxx –global|yarn global add xxx|
 |清除缓存|npm cache clean|yarn cache clean|
 |查看模块信息|npm info xxx|yarn info xxx|
 |运行script|npm run|yarn run|
@@ -65,11 +65,27 @@ Yarn 在安装模块之前会验证文件完整性。
 ```
 理想状态下使用语义化版本发布补丁不会包含大的变化，但不幸的是这必非真理。npm 的这种策略可能导致两台拥有相同 package.json 文件的电脑安装了不同版本的包，这可能导致一些错误。很多模块的安装错误和环境问题都是由于这个原因导致。
 
-为了避免包版本的错误匹配，一个确定的安装版本被固定在一个锁文件中。每次模块被添加时，Yarn 就会创建（或更新） yarn.lock 文件，这样你就可以保证其它机子也安装相同版本的包，同时包含了 package.json 中定义的一系列允许的版本。
+为了避免包版本的错误匹配，一个确定的安装版本被固定在一个锁文件中。每次模块被添加时，Yarn 就会创建（或更新） yarn.lock 文件，这样你就可以保证其它电脑也安装相同版本的包，同时包含了 package.json 中定义的一系列允许的版本。
 
 在 npm 中同样可以使用 [npm shrinkwrap](https://docs.npmjs.com/cli/shrinkwrap) 命令来生成一个锁文件，这样在使用 npm install 时会在读取 package.json 前先读取这个文件，就像 Yarn 会先读取 yarn.lock 一样。这里的区别是 Yarn 总会自动更新 yarn.lock，而 npm 需要你重新操作。
 
+## [yarn install](https://yarnpkg.com/en/docs/cli/install)
+
+npm install 命令会根据 package.json 安装依赖以及允许你添加新的模块； yarn install 仅会按照 yarn.lock 或 package.json 里面的依赖顺序来安装模块。
+
+## [yarn add [–dev]](https://yarnpkg.com/en/docs/cli/add)
+
+与 npm install 类似，yarn add 允许你添加与安装模块，添加依赖的同时也会将依赖写入 package.json，类似 npm 的 --save 参数；Yarn 的 --dev 参数则是添加开发依赖，类似 npm 的 --save-dev 参数。
+
+## [yarn global](https://yarnpkg.com/en/docs/cli/global)
+
+不像 npm 添加 -g 或 --global 可以进行全局安装，Yarn 使用的是 global 前缀（yarn global add xxx）。global 前缀只能用于 yarn add, yarn bin, yarn ls 和 yarn remove。
+
 ## [yarn why](https://yarnpkg.com/en/docs/cli/why)
 
-该命令会查找依赖关系并找出为什么会将某些包安装在你的项目中。也许你明确为什么添加，也许它只是你安装包中的一个依赖，yarn why 可以帮你弄找出
+该命令会查找依赖关系并找出为什么会将某些包安装在你的项目中。也许你知道为什么添加，也许它只是你安装包中的一个依赖，yarn why 可以帮你找出。
 <img src="/assets/img/yarn_why.png" alt="yarn_why">
+
+# 总结
+
+相比 NPM，Yarn 可以方便生成锁文件，安装模块时非常迅速并且会将依赖自动添加进 package.json，模块可以并行安装。不过个人认为，Yarn 的优势不是绝对的，毕竟 NPM 久经考验，或许不久的将来，NPM 也会拥有这些特性。
