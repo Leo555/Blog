@@ -46,7 +46,7 @@ NPM 安装包的时候输出惨不忍睹，而 Yarn 的输出就清晰多了。
 |安装 package.json 中的包|npm install|yarn|
 |安装某个包|npm install xxx --save|yarn add xxx|
 |删除某个包|	npm uninstall xxx --save|yarn remove xxx|
-|开发模式下安装某个包|npm install xxx --save-dev|	yarn add xxx —dev|
+|开发模式下安装某个包|npm install xxx --save-dev|	yarn add xxx -dev|
 |更新|npm update --save|	yarn upgrade|
 |全局安装|npm install xxx –global|yarn global add xxx|
 |清除缓存|npm cache clean|yarn cache clean|
@@ -62,9 +62,10 @@ NPM 安装包的时候输出惨不忍睹，而 Yarn 的输出就清晰多了。
 *: 任意版本
 ~1.1.0: >=1.1.0 && < 1.2.0
 ^1.1.0: >=1.1.0 && < 2.0.0
-1.*: 任意 1.x 版本
+>= 1.0.0: >= 1.0.0
+3.x: 任意 3 版本
 ```
-理想状态下使用语义化版本发布补丁不会包含大的变化，但不幸的很多时候并非如此。NPM 的这种策略可能导致两台拥有相同 package.json 文件的电脑安装了不同版本的包，这可能导致一些错误。很多模块的安装错误和环境问题都是由于这个原因导致。
+理想状态下使用[语义化](http://deadhorse.me/nodejs/2014/04/27/semver-in-nodejs.html)版本发布补丁不会包含大的变化，但不幸的很多时候并非如此。NPM 的这种策略可能导致两台拥有相同 package.json 文件的电脑安装了不同版本的包，这可能导致一些错误。很多模块的安装错误和环境问题都是由于这个原因导致。
 
 为了避免包版本的错误匹配，一个确定的安装版本被固定在一个锁文件中。每次模块被添加时，Yarn 就会创建（或更新） yarn.lock 文件，这样你就可以保证其它电脑也安装相同版本的包，同时包含了 package.json 中定义的一系列允许的版本。
 
