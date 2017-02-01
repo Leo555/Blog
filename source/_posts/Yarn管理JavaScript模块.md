@@ -53,7 +53,7 @@ Yarn 在安装模块之前会验证文件完整性。
 |运行script|npm run|yarn run|
 |测试|npm test|yarn test|
 
-## yarn.lock 文件
+## [yarn.lock](https://yarnpkg.com/docs/configuration/#toc-use-yarn-lock-to-pin-your-dependencies) 文件
 
 在使用 NPM 管理 JavaScript 模块的时候，可以用比较宽松的方式定义某个模块的版本信息，如
 
@@ -67,10 +67,7 @@ Yarn 在安装模块之前会验证文件完整性。
 
 为了避免包版本的错误匹配，一个确定的安装版本被固定在一个锁文件中。每次模块被添加时，Yarn 就会创建（或更新） yarn.lock 文件，这样你就可以保证其它机子也安装相同版本的包，同时包含了 package.json 中定义的一系列允许的版本。
 
-在 npm 中同样可以使用 npm shrinkwrap 命令来生成一个锁文件，这样在使用 npm install 时会在读取 package.json 前先读取这个文件，就像 Yarn 会先读取 yarn.lock 一样。这里的区别是 Yarn 总会自动更新 yarn.lock，而 npm 需要你重新操作。
-
-* [yarn.lock](https://yarnpkg.com/docs/configuration/#toc-use-yarn-lock-to-pin-your-dependencies) 文档
-* [npm shrinkwrap](https://docs.npmjs.com/cli/shrinkwrap) 文档
+在 npm 中同样可以使用 [npm shrinkwrap](https://docs.npmjs.com/cli/shrinkwrap) 命令来生成一个锁文件，这样在使用 npm install 时会在读取 package.json 前先读取这个文件，就像 Yarn 会先读取 yarn.lock 一样。这里的区别是 Yarn 总会自动更新 yarn.lock，而 npm 需要你重新操作。
 
 ## [yarn why](https://yarnpkg.com/en/docs/cli/why)
 
