@@ -10,7 +10,7 @@ tags:
 
 # [Yarn](https://yarnpkg.com/) 简介
 
-Yarn 是 Facebook 开发的一款新的 JavaScript 包管理工具， 作为 NPM 的(部分功能)替代产品，主要是为了解决下面两个问题：
+Yarn 是 Facebook 开发的一款新的 JavaScript 包管理工具， 作为 NPM 的替代产品，主要是为了解决下面两个问题：
 
 - 安装的时候无法保证速度/一致性
 - 安全问题，因为 NPM 安装时允许运行代码
