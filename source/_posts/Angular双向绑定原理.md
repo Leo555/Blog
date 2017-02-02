@@ -107,7 +107,5 @@ debug 发现 $scope.chatMessage 的值已经发生改变了，按理说 Angular 
 
 $scope.chatMessage 发生变化后，没有强制 $digest 循环，监视 chatMessage 的 $watch 没有执行，而我们自己执行一次 $apply，那么这些 $watch 就会看见这些变化，然后根据需要更新 DOM。
 
-要想搞懂上面这句话，还要从 $watch, $apply 和 $digest 讲起。
 
-（1）$watch 队列（$watch list）
 
