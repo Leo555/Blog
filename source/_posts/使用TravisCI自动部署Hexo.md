@@ -112,7 +112,7 @@ env:
 ```
 将上面的nama和email还有GH_REF修改成你自己的。
 
-这里用 Linux 环境变量的引用方式将 **GH_REF** 和 **GitHub_token** 其引入 git push 的url，因此push方法就能通过 GitHub OAuth授权，完成自动push的功能。
+这里用 Linux 环境变量的引用方式将 GH_REF 和 GitHub_token 其引入 git push 的 url，因此 push 方法就能通过 GitHub OAuth 授权，完成自动 push 的功能。
 
 此时就万事俱备了。
 
@@ -127,11 +127,11 @@ $ git push origin master
 ```
 然后回到 Travis 主页面，发现部署已经开始了
 
-<img src="/assets/img/Travis_deploy.png" alt="我是一只的图片">
+<img src="/assets/img/Travis_deploy.png" alt="我是一只图片">
 
 在下面的log中可以看到部署的详细情况。
 
-包括 **nvm install**，**npm install**，**hexo g**等命令都在这里执行。
+包括 **nvm install**，**npm install**，**hexo g** 等命令都在这里执行。
 
 
 # 总结
