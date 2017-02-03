@@ -142,9 +142,3 @@ image_minifier:
   optimizationLevel: 2
   pngquant: false
   progressive: false
-
-baidu_url_submit:
-  count: 1 
-  host: www.lz5z.com 
-  token: rhpKJgHE4X7zLFpE 
-  path: baidu_urls.txt 
