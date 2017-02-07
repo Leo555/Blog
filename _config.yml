@@ -89,7 +89,7 @@ pagination_dir: page
 # Disqus
 disqus_shortname:
 
-theme: hexo-theme-yilia
+theme: yilia
 exclude_generator:
 
 # Deployment
@@ -145,22 +145,3 @@ image_minifier:
   optimizationLevel: 2
   pngquant: false
   progressive: false
-
-jsonContent:
-    meta: false
-    pages: false
-    posts:
-      title: true
-      date: true
-      path: true
-      text: true
-      raw: false
-      content: false
-      slug: false
-      updated: false
-      comments: false
-      link: false
-      permalink: false
-      excerpt: false
-      categories: false
-      tags: true  
