@@ -106,6 +106,7 @@ setInterval(()=>{
 ### React.Component
 
 ```javascript
+
 class HelloMessage extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
@@ -154,3 +155,7 @@ const HelloMessage = React.createClass({
 ```javascript
 document.getElementById('root').style.paddingLeft='104px';
 ```
+
+# 总结
+
+ReactJS 入门暂时就到这里，后面会有更加详细的内容。
