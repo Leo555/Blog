@@ -159,6 +159,7 @@ document.getElementById('root').style.paddingLeft='104px';
 ### 组件组合
 
 ```javascript
+// 组合组件
 class WebSite extends React.Component {
   render() {
     return (
@@ -169,7 +170,7 @@ class WebSite extends React.Component {
     );
   }
 }
-
+// Name组件
 class Name extends React.Component {
   render() {
     return (
@@ -177,7 +178,7 @@ class Name extends React.Component {
     );
   }
 };
-
+// Link组件
 class Link extends React.Component {
   render() {
     return (
@@ -193,58 +194,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-效果如下：
-
-{% raw %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World</title>
-    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/babel">
-    class WebSite extends React.Component {
-      render() {
-        return (
-          <div>
-            <Name name={this.props.name} />
-            <Link site={this.props.site} />
-          </div>
-        );
-      }
-    }
-
-    class Name extends React.Component {
-      render() {
-        return (
-          <h1>{this.props.name}</h1>
-        );
-      }
-    };
-
-    class Link extends React.Component {
-      render() {
-        return (
-          <a href={this.props.site}>
-            {this.props.site}
-          </a>
-        );
-      }
-    };
-
-    ReactDOM.render(
-      <WebSite name="Leo" site=" http://www.lz5z.com" />,
-      document.getElementById('root')
-    );
-    </script>
-  </body>
-</html>
-{% endraw %}
 
 # 最后
 
