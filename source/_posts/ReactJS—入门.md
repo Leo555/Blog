@@ -158,7 +158,7 @@ document.getElementById('root').style.paddingLeft='104px';
 
 ### 组件组合
 
-```javascript
+```html
 // 组合组件
 class WebSite extends React.Component {
   render() {
