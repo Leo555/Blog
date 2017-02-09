@@ -8,9 +8,9 @@ tags:
 - React
 ---
 
-# [ReactJS 组件](https://facebook.github.io/react/docs/react-component.html)
+# ReactJS 组件
 
-React 提倡组件化的开发方式，每个组件只关心自己部分的逻辑，使得应用更加容易维护和复用。
+React 提倡[组件化](https://facebook.github.io/react/docs/react-component.html)的开发方式，每个组件只关心自己部分的逻辑，使得应用更加容易维护和复用。
 
 React 还有一个很大的优势是基于组件的状态更新视图，对于测试非常友好。
 
