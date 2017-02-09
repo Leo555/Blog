@@ -238,3 +238,27 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+## 事件
+
+React 内建的跨浏览器的[事件系统](https://facebook.github.io/react/docs/events.html)，我们可以在组件里添加属性来绑定事件和相应的[处理函数](https://facebook.github.io/react/docs/handling-events.html)。这种事件绑定方法极大的方便了事件操作，不用再像以前先定位到 DOM 节点，再通过 addEventListener 绑定事件，还要用 removeEventListener 解绑。当组件注销时，React 会自动帮我们解绑事件。
+
+```javascript
+class LoggingButton extends React.Component {
+  handleClick = () => {
+    console.log('this is:', this);
+  }
+  //
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        Click me
+      </button>
+    );
+  }
+}
+```
+
+## 最后
+
+第一章 [React 入门](http://www.lz5z.com/ReactJS%E2%80%94%E5%85%A5%E9%97%A8/) 和本章 React 组件都是比较基础的内容，后面会学习全新的程序设计模式 Flux 和 Redux 来管理应用的状态，很多函数式编程的思想正好努力学习一下。
