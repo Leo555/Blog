@@ -101,12 +101,24 @@ setInterval(()=>{
 ```
 ## React 组件
 
-定义 React 组件有两种方法，一个是用 ES6 classes 的方式，一个是用 React.createClass
+定义 React 组件有三种方法，第一种是 JavaScript 函数，第二种是用 ES6 classes 的方式，一个是用 React.createClass
+
+### JavaScript 函数
+
+```javascript
+function HelloMessage(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+ReactDOM.render(
+    <HelloMessage name="Leo"/>,
+    document.getElementById('root')
+);
+```
+注意这里调用属性的时候没有 this。
 
 ### React.Component
 
 ```javascript
-
 class HelloMessage extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
@@ -159,7 +171,7 @@ document.getElementById('root').style.paddingLeft='104px';
 ### 组件组合
 
 ```html
-// 组合组件
+//组合组件
 class WebSite extends React.Component {
   render() {
     return (
@@ -170,7 +182,7 @@ class WebSite extends React.Component {
     );
   }
 }
-// Name组件
+//Name组件
 class Name extends React.Component {
   render() {
     return (
@@ -178,7 +190,7 @@ class Name extends React.Component {
     );
   }
 };
-// Link组件
+//Link组件
 class Link extends React.Component {
   render() {
     return (
