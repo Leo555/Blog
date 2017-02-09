@@ -87,7 +87,7 @@ this.setState((prevState, props) => ({
 }));
 ```
 
-完整代码
+实现一个计数器
 
 ```javascript
 class HelloMessage extends React.Component {
@@ -122,9 +122,17 @@ ReactDOM.render(
 
 React 的数据流是单向的，是自上向下的层级传递的，props 可以对固定的数据进行传递。
 
+```javascript
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+
 ### state vs props
 
-state和props看起来很相似，其实是完全不同的东西。
+state 和 props 看起来很相似，其实是完全不同的东西。
 
 一般来说，this.props 表示那些一旦定义，就不再改变的特性，比如购物车里的商品名称、价格，而 this.state 是会随着用户互动而产生变化的特性，比如用户购买商品的个数。
 
@@ -138,11 +146,11 @@ class HelloMessage extends React.Component {
     super();
     this.handleClick = this.handleClick.bind(this);
   }
-
+  //
   handleClick() {
     alert(this.refs.myInput.value);
   }
-
+  //
   render() {
     return (
       <div>
@@ -197,24 +205,24 @@ class Clock extends React.Component {
     super(props);
     this.state = {date: new Date()};
   }
-
+  //组件初次渲染之后执行
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
       1000
     );
   }
-
+  //组件移除的时候执行
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
-
+  //
   tick() {
     this.setState({
       date: new Date()
     });
   }
-
+  //
   render() {
     return (
       <div>
@@ -224,7 +232,7 @@ class Clock extends React.Component {
     );
   }
 }
-
+//渲染
 ReactDOM.render(
   <Clock />,
   document.getElementById('root')
