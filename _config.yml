@@ -89,7 +89,8 @@ pagination_dir: page
 # Disqus
 disqus_shortname:
 
-theme: hexo-theme-yilia
+# theme: hexo-theme-yilia
+theme: yilia
 exclude_generator:
 
 # Deployment
