@@ -202,7 +202,7 @@ class Link extends React.Component {
 };
 
 ReactDOM.render(
-  <WebSite name="Leo" site=" http://www.lz5z.com" />,
+  <WebSite name="Leo" site="https://lz5z.com" />,
   document.getElementById('root')
 );
 ```

@@ -15,7 +15,7 @@ date: 2016-09-15 20:11:00
 
 ubuntu-16.04-desktop-amd64
 
-安装虚拟机和操作系统的教程可以参考之前的Blog: [Ubuntu系统初识](http://www.lz5z.com/Ubuntu%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/)
+安装虚拟机和操作系统的教程可以参考之前的Blog: [Ubuntu系统初识](https://lz5z.com/Ubuntu%E7%B3%BB%E7%BB%9F%E5%88%9D%E8%AF%86/)
 
 <!-- more -->
 ## 下载Hadoop

@@ -261,4 +261,4 @@ class LoggingButton extends React.Component {
 
 ## 最后
 
-第一章 [React 入门](http://www.lz5z.com/ReactJS%E2%80%94%E5%85%A5%E9%97%A8/) 和本章 React 组件都是比较基础的内容，后面会学习全新的程序设计模式 Flux 和 Redux 来管理应用的状态，很多函数式编程的思想正好努力学习一下。
+第一章 [React 入门](https://lz5z.com/ReactJS%E2%80%94%E5%85%A5%E9%97%A8/) 和本章 React 组件都是比较基础的内容，后面会学习全新的程序设计模式 Flux 和 Redux 来管理应用的状态，很多函数式编程的思想正好努力学习一下。

@@ -55,7 +55,7 @@ Object.defineProperty(obj, prop, descriptor)
 
 我们可以在descriptor参数中设置如下值，来实现对属性的控制：
  - value：默认为 undefined。该属性的值。
- - writable：默认为 false。该属性是否可写，如果设置成 false，则任何对该属性改写的操作都无效（[严格模式](http://www.lz5z.com/JavaScript%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/)会报错，正常模式则什么都不做）
+ - writable：默认为 false。该属性是否可写，如果设置成 false，则任何对该属性改写的操作都无效（[严格模式](https://lz5z.com/JavaScript%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/)会报错，正常模式则什么都不做）
  - configurable：默认为 false。当且仅当该属性的 configurable 为 true 时，该属性描述符才能够被改变，也能够被删除。
  - enumerable：默认为 false。当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中（for...in 或者 Object.keys）
  - get: 默认为 undefined。一个给属性提供 getter 的方法。该方法返回值被用作属性值。
