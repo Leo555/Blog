@@ -48,6 +48,7 @@ ReactDOM.render(
     document.getElementById('root')
 );
 ```
+
 通过在组件的 constructor 中给 this.state 赋值，来设置 state 的初始值，每当 state 的值发生变化， React 重新渲染页面。
 
 注意： 
