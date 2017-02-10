@@ -24,6 +24,7 @@ root:
 
 # Content
 excerpt_link: more
+show_all_link: '展开全文'
 fancybox: true
 mathjax: false
 
