@@ -51,13 +51,28 @@ Web 开发的最终目的是把数据反映到 UI 上，这时就需要对 DOM �
 上面的 Hello World 的例子中，引入了三个库文件，react.js，react-dom.js 和 babel.js，它们必须首先加载。在之前的版本中，需要加载 “JSXTransformer.js”，后来 React 官方不再维护这个库，由 babel 对 JSX 语法进行编译。
 ReactDOM.render 是 React 的最基本方法，用于将模板转为 HTML 语言，并插入指定的 DOM 节点。
 
+## create-react-app
+
+一般我们启动一个 React 项目会使用 React 脚手架工具 [create-react-app](https://github.com/facebookincubator/create-react-app),它会帮助你创建一个基于 webpack、Babel 和 ESLint 的单页面项目。
+
+```shell
+$ yarn global add create-react-app
+$ create-react-app react-demo
+$ cd react-demo
+$ yarn start
+```
+项目启动后会有一个 “Welcome to React” 的页面自动打开。
+
+打开 package.json 文件，发现并没有找到 webpack、Babel 等 package 相关的依赖，所有的工作都是 “react-scripts” 帮助我们做的，这样极大地降低了初学者入门学习 React 的成本。
+
+
 ## [JSX](https://facebook.github.io/react/docs/introducing-jsx.html)
 
 HTML 语言直接写在 JavaScript 语言之中，不加任何引号，这就是 JSX 的语法，它允许 HTML 与 JavaScript 的混写。
 
 例如：
 
-```html
+```javascript
 let names = ['Leo', 'Jack', 'John'];
 ReactDOM.render(
   <div>
@@ -74,7 +89,7 @@ ReactDOM.render(
 
 JSX 允许直接在模板插入 JavaScript 变量。如果这个变量是一个数组，则会展开这个数组的所有成员，代码如下：
 
-```html
+```JavaScript
 let arr = [
   <h1>Hello</h1>, 
   <h1>world</h1>
@@ -101,7 +116,7 @@ setInterval(()=>{
 ```
 ## React 组件
 
-定义 React 组件有三种方法，第一种是 JavaScript 函数，第二种是用 ES6 classes 的方式，一个是用 React.createClass
+定义 React 组件有三种方法，第一种是 JavaScript 函数，第二种是用 ES6 classes 的方式，一个是用 React.createClass(已经过时)
 
 ### JavaScript 函数
 
@@ -170,7 +185,7 @@ document.getElementById('root').style.paddingLeft='104px';
 
 ### 组件组合
 
-```html
+```javascript
 //组合组件
 class WebSite extends React.Component {
   render() {
@@ -190,7 +205,7 @@ class Name extends React.Component {
     );
   }
 };
-//Link组件
+//L****ink组件
 class Link extends React.Component {
   render() {
     return (
@@ -202,7 +217,7 @@ class Link extends React.Component {
 };
 
 ReactDOM.render(
-  <WebSite name="Leo" site=" http://www.lz5z.com" />,
+  <WebSite name="Leo" site="https://lz5z.com" />,
   document.getElementById('root')
 );
 ```

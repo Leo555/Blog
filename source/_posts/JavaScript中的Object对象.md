@@ -329,7 +329,7 @@ Object.freeze() 方法用来冻结一个对象，被冻结的对象将无法添�
 
 ### 其它
 
-Object.defineProperties、Object.defineProperty、Object.freeze、Object.getOwnPropertyDescriptor 的用法请参考[使用Object.defineProperty为对象定义属性](http://www.lz5z.com/Object.defineProperty%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7/)。
+Object.defineProperties、Object.defineProperty、Object.freeze、Object.getOwnPropertyDescriptor 的用法请参考[使用Object.defineProperty为对象定义属性](https://lz5z.com/Object.defineProperty%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7/)。
 
 ## 总结
 

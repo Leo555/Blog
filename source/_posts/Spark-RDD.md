@@ -47,7 +47,7 @@ a: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[0] at parallelize at <c
 
 parallelize 方法接受两个参数，第一个是数据集合，第二个是切片的个数，表示将数据存放在几个分区中。
 
-一旦创建完成，这个分布式数据集(a)就可以被并行操作。例如，我们可以调用 a.reduce((m, n) => m + n) 将这个数组中的元素相加。 更多的操作请见 [Spark RDD 操作](http://www.lz5z.com/rdd-operations)。
+一旦创建完成，这个分布式数据集(a)就可以被并行操作。例如，我们可以调用 a.reduce((m, n) => m + n) 将这个数组中的元素相加。 更多的操作请见 [Spark RDD 操作](https://lz5z.com/rdd-operations)。
 
 
 ## 本地文件

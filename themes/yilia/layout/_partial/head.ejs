@@ -31,15 +31,13 @@
   <% if (theme.favicon){ %>
     <link rel="icon" href="<%- theme.favicon %>">
   <% } %>
-  <%- css('main') %>
+  <%- partial('css') %>
+  <style type="text/css">
+  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
+    #container.show {
+      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
+    }
+  </style>
   <%- partial('google-analytics') %>
-  <script>
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?13e2c0cbf5368cfca0ae7641a42b7723";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();
-  </script>
+  <%- partial('baidu-analytics') %>
 </head>

@@ -48,6 +48,7 @@ ReactDOM.render(
     document.getElementById('root')
 );
 ```
+
 通过在组件的 constructor 中给 this.state 赋值，来设置 state 的初始值，每当 state 的值发生变化， React 重新渲染页面。
 
 注意： 
@@ -261,4 +262,4 @@ class LoggingButton extends React.Component {
 
 ## 最后
 
-第一章 [React 入门](http://www.lz5z.com/ReactJS%E2%80%94%E5%85%A5%E9%97%A8/) 和本章 React 组件都是比较基础的内容，后面会学习全新的程序设计模式 Flux 和 Redux 来管理应用的状态，很多函数式编程的思想正好努力学习一下。
+第一章 [React 入门](https://lz5z.com/ReactJS%E2%80%94%E5%85%A5%E9%97%A8/) 和本章 React 组件都是比较基础的内容，后面会学习全新的程序设计模式 Flux 和 Redux 来管理应用的状态，很多函数式编程的思想正好努力学习一下。

@@ -155,6 +155,6 @@ $ node_test: Unexpected status SERVICE_PAUSED in response to START control.
 
 但是可以把定时任务写入 Services。
 
-如果对 Python 定时任务感兴趣，可以移步[Python定时任务的实现方式](http://www.lz5z.com/Python%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/)
+如果对 Python 定时任务感兴趣，可以移步[Python定时任务的实现方式](https://lz5z.com/Python%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/)
 ---
 
