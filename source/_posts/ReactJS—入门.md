@@ -72,7 +72,7 @@ HTML 语言直接写在 JavaScript 语言之中，不加任何引号，这就是
 
 例如：
 
-```html
+```javascript
 let names = ['Leo', 'Jack', 'John'];
 ReactDOM.render(
   <div>
@@ -89,7 +89,7 @@ ReactDOM.render(
 
 JSX 允许直接在模板插入 JavaScript 变量。如果这个变量是一个数组，则会展开这个数组的所有成员，代码如下：
 
-```html
+```JavaScript
 let arr = [
   <h1>Hello</h1>, 
   <h1>world</h1>
@@ -116,7 +116,7 @@ setInterval(()=>{
 ```
 ## React 组件
 
-定义 React 组件有三种方法，第一种是 JavaScript 函数，第二种是用 ES6 classes 的方式，一个是用 React.createClass
+定义 React 组件有三种方法，第一种是 JavaScript 函数，第二种是用 ES6 classes 的方式，一个是用 React.createClass(已经过时)
 
 ### JavaScript 函数
 
@@ -185,7 +185,7 @@ document.getElementById('root').style.paddingLeft='104px';
 
 ### 组件组合
 
-```html
+```javascript
 //组合组件
 class WebSite extends React.Component {
   render() {
