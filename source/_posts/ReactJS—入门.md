@@ -61,7 +61,7 @@ $ create-react-app react-demo
 $ cd react-demo
 $ yarn start
 ```
-项目启动后会有一个 “Welcome to React” 的页面，
+项目启动后会有一个 “Welcome to React” 的页面自动打开。
 
 打开 package.json 文件，发现并没有找到 webpack、Babel 等 package 相关的依赖，所有的工作都是 “react-scripts” 帮助我们做的，这样极大地降低了初学者入门学习 React 的成本。
 
@@ -205,7 +205,7 @@ class Name extends React.Component {
     );
   }
 };
-//Link组件
+//L****ink组件
 class Link extends React.Component {
   render() {
     return (
