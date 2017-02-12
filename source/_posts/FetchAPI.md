@@ -11,6 +11,7 @@ tags:
 # 背景
 
 在上一章学习 [React 组件](https://lz5z.com/ReactJS%E2%80%94%E7%BB%84%E4%BB%B6/)的时候，想增加 React 对 Ajax 支持的内容，却发现网上的教程竟然用 jQuery 完成 Ajax 请求，个人觉得为了发送一个简单的请求引入 jQuery 库杀鸡焉用宰牛刀啊。其实 W3C 已经有了更好的替代品，那就是： [Fetch API](https://fetch.spec.whatwg.org/)。
+<!-- more -->
 
 ## [Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
 
