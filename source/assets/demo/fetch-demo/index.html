@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react-fetch</title>
+</head>
+<body>
+  <h1>Fetch basic example</h1>
+
+  <img src="" class="my-image">
+</body>
+<script>
+let myImage = document.querySelector('.my-image');
+fetch('https://lz5z.com/assets/img/avatar.png')
+  .then((response) => {
+    if (!response.ok) return new Error(response);
+    return response.blob();
+  })
+  .then((myBlob) => {
+    let objectURL = URL.createObjectURL(myBlob);
+    myImage.src = objectURL;
+  })
+  .catch((err) => {
+    console.log(err);
+  }); 
+</script>
+</html>
