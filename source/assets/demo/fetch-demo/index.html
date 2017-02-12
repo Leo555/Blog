@@ -11,7 +11,7 @@
 </body>
 <script>
 let myImage = document.querySelector('.my-image');
-fetch('/assets/img/avatar.png')
+fetch('https://lz5z.com/assets/img/avatar.png')
   .then((response) => {
     if (!response.ok) return new Error(response);
     return response.blob();
