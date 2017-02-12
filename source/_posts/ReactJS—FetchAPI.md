@@ -30,15 +30,15 @@ fetch() 方法接受一个参数——资源的路径。无论请求成功与否
 ```javascript
 let myImage = document.querySelector('.my-image');
 fetch('https://lz5z.com/assets/img/avatar.png')
-  .then((response) => {
+  .then(response => {
     if (!response.ok) return new Error(response);
     return response.blob();
   })
-  .then((myBlob) => {
+  .then(myBlob => {
     let objectURL = URL.createObjectURL(myBlob);
     myImage.src = objectURL;
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
   }); 
 ```
@@ -55,9 +55,9 @@ Fetch API 引入了3个接口，它们分别是 Headers，Request 以及 Respons
 ```javascript
 //不缓存响应结果， 方法为 GET
 let req = new Request(url, {method: 'GET', cache: 'reload'});
-fetch(req).then((response) => {
+fetch(req).then(response => {
   //
-}).catch((err) => {
+}).catch(err => {
   console.log(err);
 });
 ```
@@ -77,7 +77,7 @@ Headers 接口是一个简单的多映射的名-值表
 let headers = new Headers();
 headers.append('Accept', 'application/json');
 let request = new Request(url, {headers: headers});
-fetch(request).then((response) => {
+fetch(request).then(response => {
   console.log(response.headers);
 });
 ```
@@ -118,7 +118,7 @@ Request 和 Response 对象中的 body 只能被读取一次，它们有一个�
 ```javascript
 let res = new Response("one time use");
 console.log(res.bodyUsed); //false
-res.text().then((v) {
+res.text().then(v => {
   console.log(v); //"one time use"
   console.log(res.bodyUsed); // true
 });
