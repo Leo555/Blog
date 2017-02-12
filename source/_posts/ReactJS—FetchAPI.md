@@ -14,7 +14,7 @@ tags:
 
 ## [Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
 
-Fetch API 的出现与 JavaScript 异步编程模型 Promise 息息相关，在 Fetch API 出现之前，JavaScript 通过 XMLHttpRequest(XHR) 来执行异步请求，XHR 将输入、输出和用事件模型混杂在一个对象里，这种设计并不符合职责分离的原则。而且，基于事件的模型与 Promise 以及基于 Generator 的异步编程模型不太搭。
+Fetch API 的出现与 JavaScript 异步编程模型 Promise 息息相关，在 Fetch API 出现之前，JavaScript 通过 XMLHttpRequest(XHR) 来执行异步请求，XHR 将输入、输出和事件模型混杂在一个对象里，这种设计并不符合职责分离的原则。而且，基于事件的模型与 Promise 以及基于 Generator 的异步编程模型不太搭。
 
 Fetch API 提供了对 [Headers](https://developer.mozilla.org/zh-CN/docs/Web/API/Headers)，[Request](https://developer.mozilla.org/zh-CN/docs/Web/API/Request)，[Response](https://developer.mozilla.org/zh-CN/docs/Web/API/Response) 三个对象的封装，以及一个 [fetch()](https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalFetch) 函数用来获取网络资源，并且在离线用户体验方面，由于 ServiceWorkers 的介入，Fetch API 也能提供强大的支持。
 
