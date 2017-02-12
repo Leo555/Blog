@@ -7,11 +7,11 @@
 <body>
   <h1>Fetch basic example</h1>
 
-  <img src="" class="my-image">
+  <img src="" width="300px">
 </body>
 <script>
 let myImage = document.querySelector('.my-image');
-fetch('https://lz5z.com/assets/img/avatar.png')
+fetch('/assets/img/avatar.png')
   .then((response) => {
     if (!response.ok) return new Error(response);
     return response.blob();
