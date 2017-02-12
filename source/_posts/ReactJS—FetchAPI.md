@@ -50,7 +50,7 @@ fetch('https://lz5z.com/assets/img/avatar.png')
 
 Fetch API 引入了3个接口，它们分别是 Headers，Request 以及 Response 。他们直接对应了相应的 HTTP 概念，但是基于安全考虑，有些区别，例如支持CORS规则以及保证 cookies 不能被第三方获取。
 
-通过 Request 构造器函数创建一个新的请求对象，这也是建议标准的一部分。 第一个参数是请求的 url，第二个参数是一个选项对象，用于配置请求。然后将 Request 对象传递给 fetch() 方法，用于替代默认的URL字符串。
+通过 Request 构造器函数创建一个新的请求对象，这也是建议标准的一部分。 第一个参数是请求的 url，第二个参数是一个选项对象，用于配置请求。然后将 Request 对象传递给 fetch() 方法，用于替代默认的 url 字符串。
 
 ```javascript
 //不缓存响应结果， 方法为 GET
@@ -113,7 +113,7 @@ let response = new Response(
 
 ### steam 支持
 
-Request 和 Response 对象中的 body 只能被读取一次，它们有一个属性叫bodyUsed，读取一次之后设置为true，就不能再读取了。
+Request 和 Response 对象中的 body 只能被读取一次，它们有一个属性叫 bodyUsed，读取一次之后设置为 true，就不能再读取了。
 
 ```javascript
 let res = new Response("one time use");
