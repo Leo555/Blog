@@ -169,22 +169,16 @@ ReactDOM.render(
 
 ## 生命周期
 
-React 组件的生命周期大体分为三类：
+React 组件的生命周期分为三类：
 
-- 挂载(Mounting): 已插入真实 DOM
-- 更新(Updating): 正在被重新渲染
-- 移除(Unmounting): 已移出真实 DOM
-
-从流程上讲，是这样的：
-
-(1) Mounting:
+(1) 挂载(Mounting): 已插入真实 DOM
 
 componentWillMount()： 在初次渲染之前执行一次，最早的执行点
 componentDidMount()： 在初次渲染之后执行
 
 getInitialState() –> componentWillMount() –> render() –> componentDidMount()
 
-(2) Updating:
+(2) 更新(Updating): 正在被重新渲染
 
 componentWillReceiveProps()： 在组件接收到新的 props 的时候调用。在初始化渲染的时候，该方法不会调用。
 shouldComponentUpdate()： 在接收到新的 props 或者 state，将要渲染之前调用。
@@ -193,7 +187,7 @@ componentDidUpdate()： 在组件的更新已经同步到 DOM 中之后立刻被
 
 componentWillReceiveProps() –> shouldComponentUpdate() –> componentWillUpdate –> render() –> componentDidUpdate()
 
-(3) Unmounting:
+(3) 移除(Unmounting): 已移出真实 DOM
 
 componentWillUnmount()： 在组件从 DOM 中移除的时候立刻被调用。
 
@@ -244,12 +238,16 @@ ReactDOM.render(
 
 React 内建的跨浏览器的[事件系统](https://facebook.github.io/react/docs/events.html)，我们可以在组件里添加属性来绑定事件和相应的[处理函数](https://facebook.github.io/react/docs/handling-events.html)。这种事件绑定方法极大的方便了事件操作，不用再像以前先定位到 DOM 节点，再通过 addEventListener 绑定事件，还要用 removeEventListener 解绑。当组件注销时，React 会自动帮我们解绑事件。
 
+React 处理事件与 DOM 处理事件非常相似，有以下两点不同：
+
+- React 事件用驼峰命名法，而不是全小写
+- 通过 JSX 语法传递函数作为事件处理器，而不是字符串
+
 ```javascript
 class LoggingButton extends React.Component {
   handleClick = () => {
     console.log('this is:', this);
   }
-  //
   render() {
     return (
       <button onClick={this.handleClick}>
@@ -259,6 +257,105 @@ class LoggingButton extends React.Component {
   }
 }
 ```
+另外一个不同的是 React 不支持向事件处理函数 `return false`，一般 HTML 事件函数中，可以通过 `return false` 来阻止默认行为，比如
+
+```javascript
+<a href="#" onclick="console.log('The link was clicked.'); return false">
+  Click me
+</a>
+```
+而在 React 中，必须调用 preventDefault 方法才能完成以上功能。
+
+```javascript
+function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  return (
+    <a href="#" onClick={handleClick}>
+      Click me
+    </a>
+  );
+}
+```
+在这里的 `e` 是 React 封装过后的，因此不用担心游览器差异带来的影响。☺
+
+
+## 条件渲染
+
+假设 Greeting 组件根据状态选择渲染 UserGreeting 和 GuestGreeting 中的一个。
+
+```javascript
+function UserGreeting(props) {
+  return <h1>Welcome back!</h1>;
+}
+
+function GuestGreeting(props) {
+  return <h1>Please sign up.</h1>;
+}
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+//定义一个 login 控制组件
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+  }
+  handleLogoutClick() {
+    this.setState({isLoggedIn: !this.state.isLoggedIn});
+  }
+  //条件渲染
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button = null;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLogoutClick} />;
+    }
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
+```
+
+### 行内条件判断
+
+```javascript
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 &&
+        <h2>
+          You have {unreadMessages.length} unread messages.
+        </h2>
+      }
+    </div>
+  );
+}
+
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+ReactDOM.render(
+  <Mailbox unreadMessages={messages} />,
+  document.getElementById('root')
+);
+```
+其它类型的逻辑判断，像三元运算符，`if else` React 也均支持。
+
 
 ## 最后
 
