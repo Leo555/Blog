@@ -19,7 +19,7 @@ Fetch API 的出现与 JavaScript 异步编程模型 Promise 息息相关，在 
 Fetch API 提供了对 [Headers](https://developer.mozilla.org/zh-CN/docs/Web/API/Headers)，[Request](https://developer.mozilla.org/zh-CN/docs/Web/API/Request)，[Response](https://developer.mozilla.org/zh-CN/docs/Web/API/Response) 三个对象的封装，以及一个 [fetch()](https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalFetch) 函数用来获取网络资源，并且在离线用户体验方面，由于 ServiceWorkers 的介入，Fetch API 也能提供强大的支持。
 
 
-### fetch() 兼容性
+### 兼容性
 
 fetch() 方法被定义在 window 对象中，你可以直接在控制台中输入 fetch() 查看浏览器是否支持，gitHub 上有基于低版本浏览器的[兼容实现](https://github.com/github/fetch)。
 
