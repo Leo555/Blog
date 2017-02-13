@@ -12,10 +12,9 @@ tags:
 
 在上一章学习 [React 组件](https://lz5z.com/ReactJS%E2%80%94%E7%BB%84%E4%BB%B6/)的时候，想增加 React 对 Ajax 支持的内容，却发现网上的教程竟然用 jQuery 完成 Ajax 请求，个人觉得为了发送一个简单的请求引入 jQuery 库杀鸡焉用宰牛刀啊。其实 W3C 已经有了更好的替代品，那就是： [Fetch API](https://fetch.spec.whatwg.org/)。
 <!-- more -->
-
 ## [Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
 
-Fetch API 的出现与 JavaScript 异步编程模型 Promise 息息相关，在 Fetch API 出现之前，JavaScript 通过 XMLHttpRequest(XHR) 来执行异步请求，XHR 将输入、输出和用事件模型混杂在一个对象里，这种设计并不符合职责分离的原则。而且，基于事件的模型与 Promise 以及基于 Generator 的异步编程模型不太搭。
+Fetch API 的出现与 JavaScript 异步编程模型 Promise 息息相关，在 Fetch API 出现之前，JavaScript 通过 XMLHttpRequest(XHR) 来执行异步请求，XHR 将输入、输出和事件模型混杂在一个对象里，这种设计并不符合职责分离的原则。而且，基于事件的模型与 Promise 以及基于 Generator 的异步编程模型不太搭。
 
 Fetch API 提供了对 [Headers](https://developer.mozilla.org/zh-CN/docs/Web/API/Headers)，[Request](https://developer.mozilla.org/zh-CN/docs/Web/API/Request)，[Response](https://developer.mozilla.org/zh-CN/docs/Web/API/Response) 三个对象的封装，以及一个 [fetch()](https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalFetch) 函数用来获取网络资源，并且在离线用户体验方面，由于 ServiceWorkers 的介入，Fetch API 也能提供强大的支持。
 
@@ -31,15 +30,15 @@ fetch() 方法接受一个参数——资源的路径。无论请求成功与否
 ```javascript
 let myImage = document.querySelector('.my-image');
 fetch('https://lz5z.com/assets/img/avatar.png')
-  .then((response) => {
+  .then(response => {
     if (!response.ok) return new Error(response);
     return response.blob();
   })
-  .then((myBlob) => {
+  .then(myBlob => {
     let objectURL = URL.createObjectURL(myBlob);
     myImage.src = objectURL;
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
   }); 
 ```
@@ -51,14 +50,14 @@ fetch('https://lz5z.com/assets/img/avatar.png')
 
 Fetch API 引入了3个接口，它们分别是 Headers，Request 以及 Response 。他们直接对应了相应的 HTTP 概念，但是基于安全考虑，有些区别，例如支持CORS规则以及保证 cookies 不能被第三方获取。
 
-通过 Request 构造器函数创建一个新的请求对象，这也是建议标准的一部分。 第一个参数是请求的 url，第二个参数是一个选项对象，用于配置请求。然后将 Request 对象传递给 fetch() 方法，用于替代默认的URL字符串。
+通过 Request 构造器函数创建一个新的请求对象，这也是建议标准的一部分。 第一个参数是请求的 url，第二个参数是一个选项对象，用于配置请求。然后将 Request 对象传递给 fetch() 方法，用于替代默认的 url 字符串。
 
 ```javascript
 //不缓存响应结果， 方法为 GET
 let req = new Request(url, {method: 'GET', cache: 'reload'});
-fetch(req).then((response) => {
+fetch(req).then(response => {
   //
-}).catch((err) => {
+}).catch(err => {
   console.log(err);
 });
 ```
@@ -78,7 +77,7 @@ Headers 接口是一个简单的多映射的名-值表
 let headers = new Headers();
 headers.append('Accept', 'application/json');
 let request = new Request(url, {headers: headers});
-fetch(request).then((response) => {
+fetch(request).then(response => {
   console.log(response.headers);
 });
 ```
@@ -114,12 +113,12 @@ let response = new Response(
 
 ### steam 支持
 
-Request 和 Response 对象中的 body 只能被读取一次，它们有一个属性叫bodyUsed，读取一次之后设置为true，就不能再读取了。
+Request 和 Response 对象中的 body 只能被读取一次，它们有一个属性叫 bodyUsed，读取一次之后设置为 true，就不能再读取了。
 
 ```javascript
 let res = new Response("one time use");
 console.log(res.bodyUsed); //false
-res.text().then((v) {
+res.text().then(v => {
   console.log(v); //"one time use"
   console.log(res.bodyUsed); // true
 });
@@ -139,4 +138,4 @@ console.log(res.bodyUsed); //false
 
 ## 总结
 
-值得一提的是，
+虽然 Fetch API 提供了更加简洁的接口，Promise 形式的编程体验，但是它也不是完美的，最大的问题就是不能中断一个请求，并且无法检测一个请求的进度，这些在 XHR 中早就有很好的解决方案。也行 Fetch API 需要更多的时间。
