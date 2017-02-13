@@ -29,11 +29,11 @@ class HelloMessage extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.state = {enable: false};
   }
-  //
+  
   handleClick() {
     this.setState({enable: !this.state.enable})
   }
-  //
+  
   render() {
     return (
       <div>
@@ -43,6 +43,7 @@ class HelloMessage extends React.Component {
     );
   }
 }
+
 ReactDOM.render(
     <HelloMessage />,
     document.getElementById('root')
@@ -147,11 +148,11 @@ class HelloMessage extends React.Component {
     super();
     this.handleClick = this.handleClick.bind(this);
   }
-  //
+  
   handleClick() {
     alert(this.refs.myInput.value);
   }
-  //
+  
   render() {
     return (
       <div>
@@ -161,6 +162,7 @@ class HelloMessage extends React.Component {
     );
   }
 }
+
 ReactDOM.render(
     <HelloMessage />,
     document.getElementById('root')
@@ -211,13 +213,13 @@ class Clock extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
-  //
+  
   tick() {
     this.setState({
       date: new Date()
     });
   }
-  //
+  
   render() {
     return (
       <div>
@@ -248,6 +250,7 @@ class LoggingButton extends React.Component {
   handleClick = () => {
     console.log('this is:', this);
   }
+
   render() {
     return (
       <button onClick={this.handleClick}>
@@ -282,7 +285,6 @@ function ActionLink() {
 ```
 在这里的 `e` 是 React 封装过后的，因此不用担心游览器差异带来的影响。☺
 
-
 ## 条件渲染
 
 假设 Greeting 组件根据状态选择渲染 UserGreeting 和 GuestGreeting 中的一个。
@@ -295,6 +297,7 @@ function UserGreeting(props) {
 function GuestGreeting(props) {
   return <h1>Please sign up.</h1>;
 }
+
 function Greeting(props) {
   const isLoggedIn = props.isLoggedIn;
   if (isLoggedIn) {
@@ -302,7 +305,7 @@ function Greeting(props) {
   }
   return <GuestGreeting />;
 }
-//定义一个 login 控制组件
+
 class LoginControl extends React.Component {
   constructor(props) {
     super(props);
@@ -312,7 +315,7 @@ class LoginControl extends React.Component {
   handleLogoutClick() {
     this.setState({isLoggedIn: !this.state.isLoggedIn});
   }
-  //条件渲染
+
   render() {
     const isLoggedIn = this.state.isLoggedIn;
     let button = null;
@@ -321,6 +324,7 @@ class LoginControl extends React.Component {
     } else {
       button = <LoginButton onClick={this.handleLogoutClick} />;
     }
+
     return (
       <div>
         <Greeting isLoggedIn={isLoggedIn} />
@@ -356,9 +360,49 @@ ReactDOM.render(
 ```
 其它类型的逻辑判断，像三元运算符，`if else` React 也均支持。
 
+```javascript
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+    </div>
+  );
+}
+```
+
+```javascript
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      {isLoggedIn ? (
+        <LogoutButton onClick={this.handleLogoutClick} />
+      ) : (
+        <LoginButton onClick={this.handleLoginClick} />
+      )}
+    </div>
+  );
+}
+```
+
 ### 阻止组件渲染
 
 通过在组件内部 `return null` 可以达到阻止组件渲染的
+
+```javascript
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+```
 
 ## 最后
 
