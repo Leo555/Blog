@@ -51,7 +51,7 @@ alipay: /assets/img/alipay.jpg
 weixin: /assets/img/wechat.jpg
 
 # Miscellaneous
-baidu_analytics: ''
+baidu_analytics: '0391cafd2247c0b68b9de35abf29c6d1'
 google_analytics: 
   enable: true
   id: UA-87693103-1
