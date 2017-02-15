@@ -267,6 +267,8 @@ class LoggingButton extends React.Component {
   Click me
 </a>
 ```
+Vue 阻止浏览器默认行为的方式最简单，用一个装饰符就可以搞定 `<form v-on:submit.prevent="onSubmit"></form>`。
+
 而在 React 中，必须调用 preventDefault 方法才能完成以上功能。
 
 ```javascript
