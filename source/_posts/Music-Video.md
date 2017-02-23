@@ -9,7 +9,7 @@ categories: 杂记
 ---
 ## 网易云音乐iframe
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=441116287&auto=0&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=441116287&auto=0&height=66"></iframe>
 
 <!-- more -->
 ## 腾讯视频
@@ -25,3 +25,4 @@ categories: 杂记
 ## B站
 
 <embed width="640" height="498"  quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="http://static.hdslb.com/miniloader.swf" flashvars="aid=7125002&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
+
