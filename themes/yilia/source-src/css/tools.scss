@@ -199,11 +199,15 @@
     }
     .aboutme-wrap {
         display: flex;
+        padding: 15px;
         align-items:center;
         justify-content: center;
         width: 100%;
         height: 100%;
         color: #fffdd8;
         text-shadow: 1px 1px rgba(77, 77, 77, 0.45);
+    }
+    sup {
+        color: red;
     }
 }
