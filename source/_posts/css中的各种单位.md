@@ -48,4 +48,20 @@ css 中的百分比是一种相对值，使用百分比的关键是找到它的�
 
 vh 和 vm 也是相对长度，不过其参照是显示窗口的宽度或高度，一般来说 100 vh = viewport 的高度，100vm = viewport 的宽度。
 
-下面一段话是响应式的，你可以缩放浏览器大小来查看字体。
+下面一段话是响应式的，你可以缩放浏览器大小来查看效果。
+
+{% raw %}
+<!DOCTYPE html>
+<html>
+<body>
+	<div class="css-vm-test">缩放浏览器大小来查看效果</div>
+</body>
+<style>
+	.css-vm-test { font-size: 3vw; color: red; }
+</style>
+</html>
+{% endraw %}
+
+## vmin 和 vmax
+
+vmin 和 vmax 的出现主要是为了移动设备横竖屏切换。
