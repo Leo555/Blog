@@ -88,10 +88,13 @@ slider:
 smart_menu:
   innerArchive: '所有文章'
   friends: 'Links'
-  aboutme: false
+  aboutme: '关于我'
 
 friends:
   Leo的学习日志: http://poacherbro.github.io/
   wxsm's space: https://wxsm.space/
   
-aboutme: 
+aboutme: <div>精通 JavaScript、Python、Ruby、Java、Lisp等技术<sup>名词拼写</sup>。
+        擅长各种从入门到放弃。
+        毕业于世界著名学府——北大<sup>青鸟</sup>。
+        如果你也有志于成为一名程序员<sup>鼓励师</sup>的话，请联系我。</div>
