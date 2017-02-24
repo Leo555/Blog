@@ -147,6 +147,7 @@ function init() {
 		app.$set('search', searchWording)
 		searchWording !== '' && handleSearch(searchWording)
 	}).catch((err) => {
+		console.log(err)
 		app.$set('jsonFail', true)
 	});
 
