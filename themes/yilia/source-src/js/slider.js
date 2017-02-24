@@ -7,9 +7,10 @@ import Q from './Q'
 // 神特么safari不支持fetch
 import * as promise from 'es6-promise'
 import * as fetch from 'fetch-ie8'
+import * as fetchPolyfill from 'whatwg-fetch'
 
 window.Promise = window.Promise || promise.Promise
-window.fetch = window.fetch || fetch
+window.fetch = window.fetch || fetchPolyfill
 
 let localTagKey = 'yilia-tag'
 let localSearchKey = 'yilia-search'
