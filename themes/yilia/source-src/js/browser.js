@@ -12,7 +12,7 @@ var browser = {
             iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
             iPad: u.indexOf('iPad') > -1, //是否为iPad
             webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-            weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
+            weixin: u.indexOf('MicroMessenger') > -1 //是否为微信浏览器
         };
     }()
 }
