@@ -12,8 +12,8 @@ Vue 采用基于组件的开发方式，那么组件之间的通信必不可少�
 
 Vue 父子组件之间通信主要采取两种方式，通常可以总结为 **props down**、**events up**，父组件通过 props 向下传递数据给子组件，子组件通过 events 给父组件发送消息，这点跟 React 一模一样。
 
-Vue2.0 废除了 `events`、`$dispatch`、`$broadcast` 几个事件，官方推荐使用 [全局事件驱动 或者 vuex](https://github.com/vuejs/vue/issues/2873)代替，目前只剩下 `vm.$on`、`vm.$once`、`vm.$off`、`vm.$emit` 几个事件。
 <!-- more -->
+Vue2.0 废除了 `events`、`$dispatch`、`$broadcast` 几个事件，官方推荐使用 [全局事件驱动 或者 vuex](https://github.com/vuejs/vue/issues/2873)代替，目前只剩下 `vm.$on`、`vm.$once`、`vm.$off`、`vm.$emit` 几个事件。
 
 ## props down
 
