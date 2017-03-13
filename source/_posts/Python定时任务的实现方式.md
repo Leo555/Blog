@@ -14,9 +14,9 @@ categories: Python
 目前所在的项目组需要经常执行一些定时任务，之前都是用 Node.JS 的 [cron](https://github.com/ncb000gt/node-cron)来实现 schedule job。可是这次需要连接不同的 DB，而且实现的逻辑也有些许不同，于是选择使用 Python 的定时器。
 
 <!-- more -->
-# Python实现定时任务
+# Python 实现定时任务
 
-## 循环sleep
+## 循环 sleep
 这种方式最简单，在循环里面放入要执行的任务，然后 sleep 一段时间再执行
 
 ```python
@@ -35,7 +35,7 @@ timer(5)
 
 ## threading模块中的Timer
 
-threading 模块中的Timer是一个非阻塞函数，比 sleep 稍好一点，不过依然无法喊我起床。
+threading 模块中的 Timer 是一个非阻塞函数，比 sleep 稍好一点，不过依然无法喊我起床。
 
 ```python
 from datetime import datetime
@@ -59,7 +59,7 @@ sched 模块是 Python 内置的模块，它是一个调度（延时处理机制
 import sched
 import time
 from datetime import datetime
-# 初始化sched模块的scheduler类
+# 初始化sched模块的 scheduler 类
 # 第一个参数是一个可以返回时间戳的函数，第二个参数可以在定时未到达之前阻塞。
 schedule = sched.scheduler(time.time, time.sleep)
 # 被周期性调度触发的函数
@@ -226,7 +226,7 @@ scheduler.start()
 1. add_job()
 2. scheduled_job()
 
-第二种方法只适用于应用运行期间不会改变的 job，而第一种方法返回一个[apscheduler.job.Job](http://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job)的实例，可以用来改变或者移除 job。
+第二种方法只适用于应用运行期间不会改变的 job，而第一种方法返回一个[apscheduler.job.Job](http://apscheduler.readthedocs.io/en/latest/modules/job.html#apscheduler.job.Job) 的实例，可以用来改变或者移除 job。
 
 ```python
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -278,9 +278,9 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()
 
 ### 获取 job 列表
 
-获得可调度 job 列表，可以使用[get_jobs()](http://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.get_jobs)来完成，它会返回所有的 job 实例。
+获得可调度 job 列表，可以使用[get_jobs()](http://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.get_jobs) 来完成，它会返回所有的 job 实例。
 
-也可以使用[print_jobs()](http://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.print_jobs)来输出所有格式化的 job 列表。
+也可以使用[print_jobs()](http://apscheduler.readthedocs.io/en/latest/modules/schedulers/base.html#apscheduler.schedulers.base.BaseScheduler.print_jobs) 来输出所有格式化的 job 列表。
 
 
 ### 修改 job
