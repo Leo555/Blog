@@ -10,7 +10,7 @@ author: LeoScript
 email: lizhen55521@gmail.com
 keywords: "Leo, JavaScript, Python, LeoScript"
 avatar: /uploads/avatar.png
-duoshuo_shortname: leo555
+# duoshuo_shortname: leo555
 baidu_analytics: f9325ff33f8e6d5a2bb101146d6a4bcf
 
 # URL
@@ -87,7 +87,7 @@ per_page: 8
 pagination_dir: page
 
 # Disqus
-disqus_shortname:
+disqus_shortname: lz5z-com-1
 
 # theme: hexo-theme-yilia
 theme: yilia
