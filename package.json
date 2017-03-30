@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "hexo": "^3.1.0",
-    "hexo-admin": "^2.1.0",
     "hexo-all-minifier": "0.0.14",
     "hexo-deployer-git": "0.0.4",
     "hexo-deployer-rsync": "^0.1.2",
