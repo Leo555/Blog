@@ -52,7 +52,7 @@ tags:
 ```bash
 $ npm i autoprefixer postcss-loader --save-dev
 ```
-然后修改 webpack 配置文件，在插件系统中更改压缩选项，增加 postcss 
+然后修改 webpack 配置文件，在插件系统中更改 LoaderOptionsPlugin，在 options 中增加 postcss 
 
 ```javascript
 new webpack.LoaderOptionsPlugin({
@@ -71,7 +71,7 @@ new webpack.LoaderOptionsPlugin({
     loader: 'vue-loader',
     options: {
         loaders: {
-            js: 'babel-loader?{"presets":[["es2015", {modules: false}]], "plugins": ["syntax-dynamic-import", "transform-async-to-generator", "transform-regenerator", "transform-runtime", "transform-object-rest-spread"]}',
+            js: '...',
             css: ExtractTextPlugin.extract({
                 use: 'css-loader!postcss-loader',
                 fallback: 'vue-style-loader'
@@ -99,7 +99,7 @@ new webpack.LoaderOptionsPlugin({
 }
 ```
 
-修改刚开始的 css 为
+修改前面出问题的 css 为原生
 
 ```css
 .clz_editor_container {
@@ -113,7 +113,9 @@ new webpack.LoaderOptionsPlugin({
 
 <img src="/assets/img/postcss-css.png" alt="css文件">
 
-## PostCSS
+重新打开查看效果，问题解决。
+
+## [PostCSS](http://postcss.org/)
 
 PostCSS 是什么？官方给出的定义是： PostCSS 是一个用 JavaScript 转化 CSS 的工具。准确的说，PostCSS 是一个平台，通过一些插件，能做很多事情：
 
