@@ -9,6 +9,12 @@ categories: 杂记
 ---
 ## 网易云音乐iframe
 
+首先打开网易云音乐首页找到你想要的音药，点击 「生成外链播放器」
+
+<img src="/assets/img/hexo_music.png" alt="我是一只的图片">
+
+选择合适的尺寸后将生成的 iframe 插件或者 flash 插件代码复制到 markdown 中即可。
+
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=441116287&auto=0&height=66"></iframe>
 
 <!-- more -->
@@ -18,7 +24,7 @@ categories: 杂记
 
 ## 优酷视频
 
-<iframe frameborder="0" width="640" height="498"  src="http://player.youku.com/embed/XMTgyMzM3OTI0NA==" allowfullscreen></iframe>
+<iframe frameborder="0" width="640" height="498"  src="https://player.youku.com/embed/XMTgyMzM3OTI0NA==" allowfullscreen></iframe>
 
 优酷的资源复制出来要稍微修改一下，修改方式参考腾讯视频。
 
