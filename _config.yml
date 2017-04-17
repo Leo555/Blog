@@ -85,7 +85,7 @@ per_page: 8
 pagination_dir: page
 
 # Disqus
-disqus_shortname: lz5z-com-1
+disqus_shortname: lz5z-com
 
 # theme: hexo-theme-yilia
 theme: yilia
