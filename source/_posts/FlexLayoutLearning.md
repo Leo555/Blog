@@ -168,11 +168,11 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 
 | 属性 | 描述 | 效果|
 | :-| :- | :- |
-|ustify-content: flex-start|起始端对齐|<img src="/assets/img/flex-start.png" alt="flex-start">|
-|ustify-content: flex-end|末尾段对齐|<img src="/assets/img/flex-end.png" alt="flex-end">|
-|ustify-content: center|居中对齐|<img src="/assets/img/flex-center.png" alt="flex-center">|
-|ustify-content: space-around|子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。|<img src="/assets/img/space-around.png" alt="space-around">|
-|ustify-content: space-between|子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。|<img src="/assets/img/space-between.png" alt="space-between">|
+|justify-content: flex-start|起始端对齐|<img src="/assets/img/flex-start.png" alt="flex-start">|
+|justify-content: flex-end|末尾段对齐|<img src="/assets/img/flex-end.png" alt="flex-end">|
+|justify-content: center|居中对齐|<img src="/assets/img/flex-center.png" alt="flex-center">|
+|justify-content: space-around|子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。|<img src="/assets/img/space-around.png" alt="space-around">|
+|justify-content: space-between|子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。|<img src="/assets/img/space-between.png" alt="space-between">|
 
 #### 设置自容器沿交叉轴排列：align-items
 
