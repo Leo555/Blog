@@ -163,9 +163,9 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 
 容器具有这样的特点：父容器可以统一设置子容器的排列方式，子容器也可以单独设置自身的排列方式，如果两者同时设置，以子容器的设置为准。
 
-### 父容器
+## 父容器
 
-#### 设置子容器沿主轴排列：justify-content
+### justify-content 设置子容器沿主轴排列
 
 | 属性 | 描述 | 效果|
 | :-| :- | :- |
@@ -175,7 +175,7 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 |justify-content: space-around|子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。|<img src="/assets/img/space-around.png" alt="space-around">|
 |justify-content: space-between|子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。|<img src="/assets/img/space-between.png" alt="space-between">|
 
-#### 设置自容器沿交叉轴排列：align-items
+### align-items 设置自容器沿交叉轴排列
 
 | 属性 | 描述 |效果|
 | :-| :- | :- |
