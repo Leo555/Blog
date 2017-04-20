@@ -169,7 +169,7 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 
 | 属性 | 描述 | 效果|
 | :-| :- | :- |
-|justify-content: flex-start|起始端对齐|<img src="/assets/img/flex-start.png" alt="flex-start">|
+|justify-content: flex-start|（默认值）起始端对齐|<img src="/assets/img/flex-start.png" alt="flex-start">|
 |justify-content: flex-end|末尾段对齐|<img src="/assets/img/flex-end.png" alt="flex-end">|
 |justify-content: center|居中对齐|<img src="/assets/img/flex-center.png" alt="flex-center">|
 |justify-content: space-around|子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。|<img src="/assets/img/space-around.png" alt="space-around">|
@@ -183,4 +183,4 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 |align-items: flex-end|末尾段对齐|<img src="/assets/img/align-flex-end.png" alt="flex-start">|
 |align-items: center|居中对齐|<img src="/assets/img/align-center.png" alt="align-center">|
 |align-items: baseline|基线对齐（首行文字对齐）所有子容器向基线对齐，交叉轴起点到元素基线距离最大的子容器将会与交叉轴起始端相切以确定基线。|<img src="/assets/img/align-baseline.png" alt="align-baseline">|
-|align-items: stretch|子容器沿交叉轴方向的尺寸拉伸至与父容器一致|<img src="/assets/img/align-stretch.png" alt="align-stretch">|
+|align-items: stretch|（默认值）如果项目未设置高度或设为auto，子容器沿交叉轴方向的尺寸拉伸至与父容器一致|<img src="/assets/img/align-stretch.png" alt="align-stretch">|
