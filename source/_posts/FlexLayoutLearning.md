@@ -5,6 +5,7 @@ categories: css
 tags: 
 - flex
 - css
+- 居中
 ---
 
 ## 如何居中的问题
@@ -159,28 +160,108 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 <img src="/assets/img/flex-layout.png" alt="我是一只的图片">
 
 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置叫做 main start，结束位置叫做 main end；交叉轴同理，
-项目默认沿主轴排列。单个项目占据的主轴空间叫做 main size，占据的交叉轴空间叫做 cross size。
+子容器默认沿主轴排列。单个子容器占据的主轴空间叫做 main size，占据的交叉轴空间叫做 cross size。
 
 容器具有这样的特点：父容器可以统一设置子容器的排列方式，子容器也可以单独设置自身的排列方式，如果两者同时设置，以子容器的设置为准。
 
 ## 父容器
 
-### justify-content 设置子容器沿主轴排列
+父容器一共有6个属性
+
+1. flex-direction: 决定主轴的方向
+2. flex-wrap: 设置换行方式
+3. flex-flow: flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
+4. justify-content: 子容器在主轴上的对齐方式
+5. align-items：子容器在交叉轴上的对齐方式
+6. align-content： 多行沿交叉轴对齐，如果子容器只有一根轴线，该属性不起作用
+
+### flex-direction 属性决定主轴的方向
 
 | 属性 | 描述 | 效果|
 | :-| :- | :- |
-|justify-content: flex-start|（默认值）起始端对齐|<img src="/assets/img/flex-start.png" alt="flex-start">|
+|flex-direction: row|（默认值）主轴为水平方向，起点在左端|<img src="/assets/img/flex-direction-row.png" alt="flex-direction-row">|
+|flex-direction: row-reverse|主轴为水平方向，起点在右端|<img src="/assets/img/flex-direction-row-reverse.png" alt="flex-direction-row-reverse">|
+|flex-direction: column|主轴为垂直方向，起点在上沿|<img src="/assets/img/flex-direction-column.png" alt="flex-direction-column">|
+|flex-direction: column-reverse|主轴为垂直方向，起点在下沿|<img src="/assets/img/flex-direction-column-reverse.png" alt="flex-direction-column-reverse">|
+
+
+### flex-wrap 决定子容器是否换行排列，不但可以顺序换行而且支持逆序换行
+
+| 属性 | 描述 | 效果|
+| :-| :- | :- |
+|flex-wrap: nowrap|（默认）不换行|<img src="/assets/img/flex-wrap-nowrap.png" alt="flex-wrap-nowrap">|
+|flex-wrap: wrap|换行，第一行在上方|<img src="/assets/img/flex-wrap-wrap.png" alt="flex-wrap-wrap">|
+|flex-wrap: wrap-reverse|换行，第一行在下方|<img src="/assets/img/flex-wrap-wrap-reverse.png" alt="flex-wrap-wrap-reverse">|
+
+### justify-content 设置子容器在主轴上的对齐方式
+
+| 属性 | 描述 | 效果|
+| :-| :- | :- |
+|justify-content: flex-start|（默认）起始端对齐|<img src="/assets/img/flex-start.png" alt="flex-start">|
 |justify-content: flex-end|末尾段对齐|<img src="/assets/img/flex-end.png" alt="flex-end">|
 |justify-content: center|居中对齐|<img src="/assets/img/flex-center.png" alt="flex-center">|
 |justify-content: space-around|子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。|<img src="/assets/img/space-around.png" alt="space-around">|
 |justify-content: space-between|子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。|<img src="/assets/img/space-between.png" alt="space-between">|
 
-### align-items 设置自容器沿交叉轴排列
+### align-items 设置自容器沿交叉轴的对齐方式
 
 | 属性 | 描述 |效果|
 | :-| :- | :- |
-|align-items: flex-start|起始端对齐|<img src="/assets/img/align-flex-start.png" alt="flex-start">|
-|align-items: flex-end|末尾段对齐|<img src="/assets/img/align-flex-end.png" alt="flex-start">|
-|align-items: center|居中对齐|<img src="/assets/img/align-center.png" alt="align-center">|
+|align-items: flex-start|交叉轴的起点对齐|<img src="/assets/img/align-flex-start.png" alt="flex-start">|
+|align-items: flex-end|交叉轴的终点对齐|<img src="/assets/img/align-flex-end.png" alt="flex-start">|
+|align-items: center|交叉轴的中点对齐|<img src="/assets/img/align-center.png" alt="align-center">|
 |align-items: baseline|基线对齐（首行文字对齐）所有子容器向基线对齐，交叉轴起点到元素基线距离最大的子容器将会与交叉轴起始端相切以确定基线。|<img src="/assets/img/align-baseline.png" alt="align-baseline">|
-|align-items: stretch|（默认值）如果项目未设置高度或设为auto，子容器沿交叉轴方向的尺寸拉伸至与父容器一致|<img src="/assets/img/align-stretch.png" alt="align-stretch">|
+|align-items: stretch|（默认）如果子容器未设置高度或设为auto，子容器沿交叉轴方向的尺寸拉伸至与父容器一致|<img src="/assets/img/align-stretch.png" alt="align-stretch">|
+
+
+## 子容器
+
+子容器一共有6个属性
+
+1. order: 定义子容器的排列顺序。
+2. flex-grow: 设置扩展比例
+3. flex-shrink: 设置收缩比例
+4. flex-basis: 设置基准大小
+5. flex: flex-grow, flex-shrink 和 flex-basis 的简写，默认值为 0 1 auto
+6. align-self: 覆盖父容器的 align-items 属性
+
+### order 改变子容器的排列顺序
+
+默认值为 0，可以为负值，数值越小排列越靠前。order 只能为整数。
+
+| 属性 |效果|
+| :-| :- |
+|order: -1|<img src="/assets/img/flex-order.png" alt="flex-order">|
+
+### flex-grow 定义子容器如何瓜分剩余空间
+
+默认值为 0，就是即使存在剩余空间，也不瓜分。如果定义了非 0 值，则按照比例瓜分。flex-grow 只能为整数。
+
+| 属性 |效果|
+| :-| :- |
+|flex-grow: 1|<img src="/assets/img/flex-grow.png" alt="flex-grow">|
+
+### flex-shrink 定义了子容器的缩小比例。
+
+默认为1，即如果空间不足，则子容器将缩小。如果所有子容器的 flex-shrink 都为1，当空间不足时，都将等比例缩小。如果某个子容器的 flex-shrink 为0，其他子容器都为1，则空间不足时，前者不缩小。
+
+| 属性 |效果|
+| :-| :- |
+|flex-shrink: 0|<img src="/assets/img/flex-shrink.png" alt="flex-shrink">|
+
+### flex-basis 用来改变子容器占据主轴空间的大小
+
+表示在不伸缩的情况下子容器占据主轴空间的大小，默认为 auto，表示子容器本来的大小。
+
+### align-self 用来覆盖父容器的 align-items 属性
+
+align-self 属性允许单个子容器有与其他子容器不一样的对齐方式，默认值为auto，表示继承父元素的 align-items 属性，如果没有父元素，则等同于 stretch。改属性的取值与 align-items 相同。
+
+| 属性 |效果|
+| :-| :- |
+|align-self: flex-end|<img src="/assets/img/flex-align-self.png" alt="flex-align-self">|
+
+
+> 参考资料
+1. [MDN CSS Flexible Box Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout)
+2. [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool)
