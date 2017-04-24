@@ -166,14 +166,7 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 
 ## 父容器
 
-父容器一共有6个属性
-
-1. flex-direction: 决定主轴的方向
-2. flex-wrap: 设置换行方式
-3. flex-flow: flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
-4. justify-content: 子容器在主轴上的对齐方式
-5. align-items：子容器在交叉轴上的对齐方式
-6. align-content： 多行沿交叉轴对齐，如果子容器只有一根轴线，该属性不起作用
+父容器一共有6个属性: **flex-direction, flex-wrap, flex-flow, justify-content, align-items, align-content**
 
 ### flex-direction 属性决定主轴的方向
 
@@ -185,13 +178,17 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 |flex-direction: column-reverse|主轴为垂直方向，起点在下沿|<img src="/assets/img/flex-direction-column-reverse.png" alt="flex-direction-column-reverse">|
 
 
-### flex-wrap 决定子容器是否换行排列，不但可以顺序换行而且支持逆序换行
+### flex-wrap 决定子容器是否换行排列
 
 | 属性 | 描述 | 效果|
 | :-| :- | :- |
 |flex-wrap: nowrap|（默认）不换行|<img src="/assets/img/flex-wrap-nowrap.png" alt="flex-wrap-nowrap">|
 |flex-wrap: wrap|换行，第一行在上方|<img src="/assets/img/flex-wrap-wrap.png" alt="flex-wrap-wrap">|
 |flex-wrap: wrap-reverse|换行，第一行在下方|<img src="/assets/img/flex-wrap-wrap-reverse.png" alt="flex-wrap-wrap-reverse">|
+
+## flex-flow
+
+flex-direction 属性和 flex-wrap 属性的简写形式，默认值为 row nowrap
 
 ### justify-content 设置子容器在主轴上的对齐方式
 
@@ -203,7 +200,7 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 |justify-content: space-around|子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。|<img src="/assets/img/space-around.png" alt="space-around">|
 |justify-content: space-between|子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。|<img src="/assets/img/space-between.png" alt="space-between">|
 
-### align-items 设置自容器沿交叉轴的对齐方式
+### align-items 设置子容器沿交叉轴的对齐方式
 
 | 属性 | 描述 |效果|
 | :-| :- | :- |
@@ -216,14 +213,7 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 
 ## 子容器
 
-子容器一共有6个属性
-
-1. order: 定义子容器的排列顺序。
-2. flex-grow: 设置扩展比例
-3. flex-shrink: 设置收缩比例
-4. flex-basis: 设置基准大小
-5. flex: flex-grow, flex-shrink 和 flex-basis 的简写，默认值为 0 1 auto
-6. align-self: 覆盖父容器的 align-items 属性
+子容器一共有6个属性： **order, flex-grow, flex-shrink, flex-basis, flex, align-self**
 
 ### order 改变子容器的排列顺序
 
@@ -252,6 +242,12 @@ flex 的核心的概念就是 **容器** 和 **轴**。容器包括外层的 **�
 ### flex-basis 用来改变子容器占据主轴空间的大小
 
 表示在不伸缩的情况下子容器占据主轴空间的大小，默认为 auto，表示子容器本来的大小。
+
+
+### flex
+
+flex-grow, flex-shrink 和 flex-basis 的简写，默认值为 0 1 auto
+
 
 ### align-self 用来覆盖父容器的 align-items 属性
 
