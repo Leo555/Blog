@@ -162,13 +162,15 @@ for (var i = 0; i < 5; i++) {
 }
 ```
 
-还有一种使用闭包的方式是使用 Array 的 forEach 循环
+还有一种使用闭包的方式是使用 Array 的 forEach 循环，forEach 里的执行函数也行成了一个闭包
 
+```javascript
 [0, 1, 2, 3, 4].forEach((i) => {
     setTimeout(() => {
         console.log(i)
     }, i * 1000)
 })
+```
 
 当然使用 ES6 的 let 才是最好的选择
 
