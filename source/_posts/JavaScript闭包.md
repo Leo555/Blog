@@ -135,7 +135,52 @@ console.log(leo.getName());
 ，所以在 JavaScript 中，new 后面跟的是构造函数。
 上面的代码里面定义了 Student 继承自 Person，所以拥有 getName 方法，然后通过prototype添加自己的方法。
 
-# 闭包总结
+
+## 经典题目
+
+实现每隔一秒输出一个递增的数字（0 到 5）
+
+```javascript
+for (var i = 0; i < 5; i++) {
+    setTimeout(() => {
+        console.log(i)
+    }, i * 1000)
+}
+```
+
+上面这种写法想必大家都知道结果是什么，那就是每隔一秒输出一个5
+
+使用闭包实现输出数字为 0 到 5
+
+```javascript
+for (var i = 0; i < 5; i++) {
+    ((a) => {
+        setTimeout(() => {
+            console.log(a)
+        }, a * 1000)
+    })(i)
+}
+```
+
+还有一种使用闭包的方式是使用 Array 的 forEach 循环
+
+[0, 1, 2, 3, 4].forEach((i) => {
+    setTimeout(() => {
+        console.log(i)
+    }, i * 1000)
+})
+
+当然使用 ES6 的 let 才是最好的选择
+
+```javascript
+for (var i = 0; i < 5; i++) {
+    setTimeout(() => {
+        console.log(i)
+    }, i * 1000)
+}
+```
+
+## 闭包总结
 
 闭包三个特性：
 1. 函数嵌套函数
