@@ -48,7 +48,7 @@ def printTime(inc):
 # 5s
 printTime(5)
 ```
-Timer 函数第一个参数是时间间隔（单位是秒），第二个参数是要调用的函数名，第三个参数是调用函数的参数(tuple
+Timer 函数第一个参数是时间间隔（单位是秒），第二个参数是要调用的函数名，第三个参数是调用函数的参数(tuple)
 
 
 ## 使用sched模块
@@ -180,7 +180,7 @@ sched.start()
 
 上述代码创建了一个 BlockingScheduler，并使用默认内存存储和默认执行器。(默认选项分别是 MemoryJobStore 和 ThreadPoolExecutor，其中线程池的最大线程数为10)。配置完成后使用 start() 方法来启动。
 
-如果想要显示设置 job store(使用mongo存储)和 executor 可以这样写：
+如果想要显式设置 job store(使用mongo存储)和 executor 可以这样写：
 
 ```python
 from datetime import datetime
