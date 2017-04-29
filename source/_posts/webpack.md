@@ -259,12 +259,13 @@ $ npm install babel-loader babel-core --save-dev
 module: {
     loaders: [{
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: path.resolve(__dirname, 'node_modules/'),
+        include: path.resolve(__dirname, 'src/')
         loader: "babel-loader"
     }]
 }
 ```
-注意这里一定要加上 exclude，因为 babel-loader 处理的速度非常慢，当然也可以使用  `include: './src/'`。
+注意这里一定要加上 exclude 或者 include，因为 babel-loader 处理的速度非常慢。
 然后还需要指定所用 ECMAScript 的版本，假如使用 ES6 语法
 
 ```shell
