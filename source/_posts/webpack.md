@@ -264,7 +264,8 @@ module: {
     }]
 }
 ```
-然后还需要指定当然 ES 的版本，假如使用 ES6 语法
+注意这里一定要加上 exclude，因为 babel-loader 处理的速度非常慢，当然也可以使用  `include: './src/'`。
+然后还需要指定所用 ECMAScript 的版本，假如使用 ES6 语法
 
 ```shell
 $ npm install babel-preset-es2015 --save-dev
