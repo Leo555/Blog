@@ -289,7 +289,7 @@ module: {
 }
 ```
 
-(2) 在根目录创建 babelrc 文件，文件内容如下
+(2) 在根目录创建 .babelrc 文件，文件内容如下
 
 ```
 {
@@ -424,7 +424,9 @@ module.exports = {
 
 运行`npm run webpack`后生成 3 个 html 文件，分别引入其所需要的依赖。
 
-## webpack 处理 less/sass
+## webpack 处理资源文件
+
+### 样式文件 less/sass
 
 假如有这么一段 less
 
@@ -461,4 +463,68 @@ $ npm install less less-loader --save-dev
 
 loader 的执行顺序为从后往前执行，所以其顺序为 less-loader -> css-loader -> style-loader。 如果需要引入 postcss-loader 的话，应该放在 less-loader 和 css-loader 中间。
 
-## webpack sourceMap
+###  图片文件
+
+图片文件一般使用 [file-loader](https://github.com/webpack-contrib/file-loader) 配合 [url-loader](https://github.com/webpack-contrib/url-loader)，如果有压缩需求的话，可以使用 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)
+
+安装两个 loader
+
+```shell
+$ npm i file-loader url-loader --save-dev
+```
+
+url-loader 的功能与 file-loader 十分相似，不同的是 url-loader 可以指定一个 limit 参数， 当图片或者文件的大小大于 limit 的时候，url-loader 把资源直接交给 file-loader 处理，而当资源小于 limit 的时候，url-loader 会把图片转为 base64 的编码，并直接打包到引用的文件中。
+
+file-loader 打包的文件通过 http 请求获取，url-loader 打包的文件通过 base64 的方式获取，这两个方法各有各的优势。通过 http 载入的图片可以享受到浏览器的图片缓存，当图片重复使用次数比较多的时候具有一定的便利。base64 的方式引入图片可以降低 http 请求的次数，但是也会带来一定程度的代码冗余。
+
+(1) 使用 file-loader
+
+```javascript
+module: {
+    loaders: [{
+        test: /\.(ico|jpg|png|svg|gif)$/i,
+        loader: 'file-loader'
+    }]
+}
+```
+
+(2) 使用 url-loader
+
+```javascript
+module: {
+    loaders: [{
+        test: /\.(ico|jpg|png|svg|gif)$/i,
+        loader: 'url-loader',
+        query: {
+            limit: 10000,
+            name: 'asserts/[name]-[hash].[ext]'
+        }
+    }]
+}
+```
+
+(3) image-webpack-loader 可以对图片文件进行压缩，并且配合 url-loader 和 file-loader 共同使用
+
+```javascript
+module: {
+    loaders: [{
+        test: /\.(ico|jpg|png|svg|gif)$/i,
+        loaders: [
+            'url-loader?limit=10000&name=asserts/[name]-[hash].[ext]',
+            'image-webpack-loader?options={}'
+        ]
+    }]
+}
+```
+
+image-webpack-loader 可以针对不同的图片类型就行压缩，详细的信息可以在[官网](https://github.com/tcoopman/image-webpack-loader)里面查询。
+
+注：在 image-webpack-loader 实际使用过程中，必须传入一个 options 参数，否则会报错，不知道怎么回事。
+
+>ERROR in   Error: Child compilation failed:
+  Module build failed: TypeError: Cannot read property 'bypassOnDebug' of null
+
+## 总结
+
+本文只是 webpack 打包的一些知识，只涉及到一些基本使用，关于 webpack 在项目中的实际应用，以及打包的一些技巧和优化，会在下一节中讲起。
+
