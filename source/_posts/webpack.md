@@ -87,7 +87,7 @@ webpack 默认不支持 css 文件类型，所以我们来安装 css-loader 和 
 $ npm i css-loader style-loader --save-dev
 ```
 
-css-loader 是使 webpack 可以处理 css 文件；style-loader 把 css-loader 处理完的代码，新建一个 style 便签，插入到 HTML 代码中。
+css-loader 是使 webpack 可以处理 css 文件；style-loader 把 css-loader 处理完的代码，新建一个 style 标签，插入到 HTML 代码中。
 
 然后将这两个个 loader 引入 hello.js
 
@@ -424,4 +424,41 @@ module.exports = {
 
 运行`npm run webpack`后生成 3 个 html 文件，分别引入其所需要的依赖。
 
+## webpack 处理 less/sass
 
+假如有这么一段 less
+
+```css
+.layer {
+    width: 600px;
+    height: 200px;
+    background-color: green;
+    > div {
+        width: 400px;
+        height: 200px;
+        background: gray;
+    }
+}
+```
+
+首先安装 less 和 less-loader
+
+```shell
+$ npm install less less-loader --save-dev
+```
+
+在 webpack 配置文件中加入 less-loader
+
+```javascript
+    module: {
+        loaders: [
+        {
+            test: /\.less$/,
+            loader: 'style-loader!css-loader!less-loader'
+        }]
+    },
+```
+
+loader 的执行顺序为从后往前执行，所以其顺序为 less-loader -> css-loader -> style-loader。 如果需要引入 postcss-loader 的话，应该放在 less-loader 和 css-loader 中间。
+
+## webpack sourceMap

@@ -78,7 +78,7 @@ new webpack.LoaderOptionsPlugin({
             }),
             less: ExtractTextPlugin.extract({
                 fallback: 'vue-style-loader',
-                use: 'css-loader!less-loader!postcss-loader'
+                use: 'css-loader!postcss-loader!less-loader'
             })
         }
     }
@@ -94,10 +94,13 @@ new webpack.LoaderOptionsPlugin({
     test: /\.less$/,
     loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader!less-loader!postcss-loader'
+        use: 'css-loader!postcss-loader!less-loader'
     })
 }
 ```
+
+注意 postcss-loader 应该放在 less-loader 和 css-loader 之间，处理顺序为:
+less-loader -> postcss-loader -> css-loader -> style-loader
 
 修改前面出问题的 css 为原生
 
@@ -114,6 +117,19 @@ new webpack.LoaderOptionsPlugin({
 <img src="/assets/img/postcss-css.png" alt="css文件">
 
 重新打开查看效果，问题解决。
+
+注意如果你在 css 中使用 `@import` 引入其它 css 文件，而被引入的文件在 webpack 打包后又没有加入浏览器前缀的话，建议在 css-loader 中加入 `importLoaders=1` 参数
+
+```javascript
+{
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader?importLoaders=1!postcss-loader'
+    })
+}
+```
+
 
 ## [PostCSS](http://postcss.org/)
 
@@ -230,7 +246,7 @@ div {
 
 webpack 配置文件下
 
-```
+```javascript
 var cssnext = require('cssnext');
 var autoprefixer = require('autoprefixer');
 var px2rem = require('postcss-px2rem');
