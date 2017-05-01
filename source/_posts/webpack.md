@@ -218,23 +218,28 @@ webpack 中把所有的资源都当做一个模块，无论这个文件是代码
 前面「引入css文件」中已经展示了如何使用 loader，通常配置方式如下：
 
 ```javascript
-rules: [
-    {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader'
-    }
-]
+module: {
+    rules: [
+        {
+            test: /\.(js|jsx)$/,
+            use: 'babel-loader'
+        }
+    ]
+}    
 ```
 test 说明了当前 loader 能处理那些类型的文件的正则匹配，use 则指定了 loader 的类型。
 
-一下 loader 还可以在使用的时候传入相关的参数，比如我们使用 style-loader 时
+注：这里说一下 webpack1 与 webpack2 的区别，在 webpack1 中，使用 module.loaders 声明 loader，而 webpack2 中使用功能更为强大的 module.rules。 为了兼容旧版，module.loaders 语法仍然有效，旧的属性名依然可以被解析。
+
+loader 还可以在使用的时候传入相关的参数，比如我们使用 css-loader 时
 
 ```javascript
 module: {
     rules: [{
         test: /\.css$/,
         use: [
-            'style-loader', {
+            'style-loader', 
+            {
                 loader: 'css-loader',
                 options: {
                     importLoaders: 1
@@ -244,6 +249,8 @@ module: {
     }]
 }
 ```
+
+注：在 webpack 1 中，loader 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader，通常被用 ! 连写，如 `loader: "style-loader!css-loader!less-loader"`。这一写法在 webpack 2 中只在使用旧的选项 module.loaders 时才有效。使用 rule.use 配置选项，use 可以设置为一个 loader 数组。使用 module.rules 时，如果只有一个 loader，既可以用 loader 又可以用 use，但是如果是多 loader，则只能使用 use。
 
 #### 处理 ES6 语法
 
@@ -257,7 +264,7 @@ $ npm install babel-loader babel-core --save-dev
 
 ```javascript
 module: {
-    loaders: [{
+    rules: [{
         test: /\.js$/,
         exclude: path.resolve(__dirname, 'node_modules/'),
         include: path.resolve(__dirname, 'src/')
@@ -278,7 +285,7 @@ $ npm install babel-preset-es2015 --save-dev
 
 ```javascript
 module: {
-    loaders: [{
+    rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader",
@@ -288,6 +295,18 @@ module: {
     }]
 }
 ```
+
+注： 如果 loader 需要传参数的话，既可以写成 query 的形式，也可以写成像 url 传参一样的形式：
+
+```javascript
+rules: [{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: "babel-loader?presets=es2015"
+}]
+```
+
+但是如果为多 loader 的话，只能用 use + options 的形式。
 
 (2) 在根目录创建 .babelrc 文件，文件内容如下
 
@@ -452,13 +471,17 @@ $ npm install less less-loader --save-dev
 在 webpack 配置文件中加入 less-loader
 
 ```javascript
-    module: {
-        loaders: [
-        {
-            test: /\.less$/,
-            loader: 'style-loader!css-loader!less-loader'
-        }]
-    },
+module: {
+    rules: [
+    {
+        test: /\.less$/,
+        use: [
+            "style-loader",
+            "css-loader",
+            "less-loader"
+       ]
+    }]
+},
 ```
 
 loader 的执行顺序为从后往前执行，所以其顺序为 less-loader -> css-loader -> style-loader。 如果需要引入 postcss-loader 的话，应该放在 less-loader 和 css-loader 中间。
@@ -481,7 +504,7 @@ file-loader 打包的文件通过 http 请求获取，url-loader 打包的文件
 
 ```javascript
 module: {
-    loaders: [{
+    rules: [{
         test: /\.(ico|jpg|png|svg|gif)$/i,
         loader: 'file-loader'
     }]
@@ -492,7 +515,7 @@ module: {
 
 ```javascript
 module: {
-    loaders: [{
+    rules: [{
         test: /\.(ico|jpg|png|svg|gif)$/i,
         loader: 'url-loader',
         query: {
@@ -507,12 +530,32 @@ module: {
 
 ```javascript
 module: {
-    loaders: [{
+    rules: [{
         test: /\.(ico|jpg|png|svg|gif)$/i,
-        loaders: [
+        use: [
             'url-loader?limit=10000&name=asserts/[name]-[hash].[ext]',
             'image-webpack-loader?options={}'
         ]
+    }]
+}
+```
+
+loader 的参数也可以通过 options 传递
+
+```javascript
+{
+test: /\.(ico|jpg|png|svg|gif)$/i,
+use: [
+    {
+        loader: 'url-loader',
+        options: {
+            limit: 10000,
+            name: 'asserts/[name]-[hash].[ext]'
+        }
+    },
+    {
+        loader: 'image-webpack-loader',
+        options: {}
     }]
 }
 ```
