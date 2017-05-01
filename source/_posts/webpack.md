@@ -359,7 +359,7 @@ const config = {
 module.exports = config;
 ```
 
-#### html-webpack-plugin
+### html-webpack-plugin 使用
 
 下面我们以最常用的 **[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)** 为例，讲解插件的用法。
 
@@ -537,7 +537,7 @@ file-loader 打包的文件通过 http 请求获取，url-loader 打包的文件
 ```javascript
 module: {
     rules: [{
-        test: /\.(ico|jpg|png|svg|gif)$/i,
+        test: /\.(ico|jpe?g|png|svg|gif)$/i,
         loader: 'file-loader'
     }]
 }
@@ -548,11 +548,11 @@ module: {
 ```javascript
 module: {
     rules: [{
-        test: /\.(ico|jpg|png|svg|gif)$/i,
+        test: /\.(ico|jpe?g|png|svg|gif)$/i,
         loader: 'url-loader',
         query: {
             limit: 10000,
-            name: 'asserts/[name]-[hash].[ext]'
+            name: 'assets/[name]-[hash].[ext]'
         }
     }]
 }
@@ -563,9 +563,9 @@ module: {
 ```javascript
 module: {
     rules: [{
-        test: /\.(ico|jpg|png|svg|gif)$/i,
+        test: /\.(ico|jpe?g|png|svg|gif)$/i,
         use: [
-            'url-loader?limit=10000&name=asserts/[name]-[hash].[ext]',
+            'url-loader?limit=10000&name=assets/[name]-[hash].[ext]',
             'image-webpack-loader?options={}'
         ]
     }]
@@ -576,13 +576,13 @@ loader 的参数也可以通过 options 传递
 
 ```javascript
 {
-test: /\.(ico|jpg|png|svg|gif)$/i,
+test: /\.(ico|jpe?g|png|svg|gif)$/i,
 use: [
     {
         loader: 'url-loader',
         options: {
             limit: 10000,
-            name: 'asserts/[name]-[hash].[ext]'
+            name: 'assets/[name]-[hash].[ext]'
         }
     },
     {
