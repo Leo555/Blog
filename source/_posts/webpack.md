@@ -89,7 +89,7 @@ $ npm i css-loader style-loader --save-dev
 
 css-loader 是使 webpack 可以处理 css 文件；style-loader 把 css-loader 处理完的代码，新建一个 style 标签，插入到 HTML 代码中。
 
-然后将这两个个 loader 引入 hello.js
+然后将这两个 loader 引入 hello.js
 
 ```javascript
 require('style-loader!css-loader!./style.css')
@@ -267,7 +267,7 @@ module: {
     rules: [{
         test: /\.js$/,
         exclude: path.resolve(__dirname, 'node_modules/'),
-        include: path.resolve(__dirname, 'src/')
+        include: path.resolve(__dirname, 'src/'),
         loader: "babel-loader"
     }]
 }
@@ -327,7 +327,39 @@ rules: [{
 
 ### [plugins](https://webpack.js.org/concepts/plugins/)
 
-插件是 webpack 的骨架，功能比 loader 更为强大，在[这个页面](https://webpack.js.org/plugins/)你可以看到一些 webpack 常用的插件。
+插件是 wepback 的支柱功能。在你使用 webpack 配置时，webpack 自身也构建于同样的插件系统上！插件目的在于解决 loader 无法实现的其他事，在[这个页面](https://webpack.js.org/plugins/)你可以看到一些 webpack 常用的插件。
+
+由于 plugin 可以传递参数，你必须在 wepback 配置中，向 plugins 属性传入 new 实例。
+
+```javascript
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //通过 npm 安装
+const webpack = require('webpack'); //访问内置的插件
+const path = require('path');
+
+const config = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    filename: 'my-first-webpack.bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader'
+      }
+    ]
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new HtmlWebpackPlugin({template: './src/index.html'})
+  ]
+};
+
+module.exports = config;
+```
+
+#### html-webpack-plugin
 
 下面我们以最常用的 **[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)** 为例，讲解插件的用法。
 
@@ -340,7 +372,7 @@ $ npm i html-webpack-plugin --save-dev
 然后在 webpack.config.js 配置文件中使用。
 
 ```javascript
-var htmlWebpackPlugin = require('html-webpack-plugin')
+const htmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: {
         app: './src/script/main.js'
@@ -392,7 +424,7 @@ plugins: [
 对于一个多页面应用程序，需要生成多少个页面，就 new 多少个 htmlWebpackPlugin 实例。假如不同的页面依赖不同的 chunks， 那么我们可以使用 chunks 参数指定当前页面所使用的 chunks。也可以使用 excludeChunks 来指定排除了某些 chunks 以后的全部 chunks。 
 
 ```javascript
-var htmlWebpackPlugin = require('html-webpack-plugin')
+const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -562,7 +594,7 @@ use: [
 
 image-webpack-loader 可以针对不同的图片类型就行压缩，详细的信息可以在[官网](https://github.com/tcoopman/image-webpack-loader)里面查询。
 
-注：在 image-webpack-loader 实际使用过程中，必须传入一个 options 参数，否则会报错，不知道怎么回事。
+注：在 image-webpack-loader 实际使用过程中，必须传入一个 options 参数，否则会报错，使用的时候注意一下。
 
 >ERROR in   Error: Child compilation failed:
   Module build failed: TypeError: Cannot read property 'bypassOnDebug' of null
