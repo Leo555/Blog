@@ -52,10 +52,7 @@ weixin: /assets/img/wechat.jpg
 
 # Miscellaneous
 baidu_analytics: '0391cafd2247c0b68b9de35abf29c6d1'
-google_analytics: 
-  enable: true
-  id: UA-87693103-1
-  site: auto
+
 favicon: /assets/img/favicon.ico
 
 #你的头像url
@@ -93,7 +90,7 @@ smart_menu:
 friends:
   Leo的学习日志: http://poacherbro.github.io/
   wxsm's space: https://wxsm.space/
-  Whitesaber-James: http://whitesaber.farbox.com/
+  James Whitesaber: http://whitesaber.farbox.com/
   
 aboutme: <div>精通 JavaScript、Python、Ruby、Java、Lisp等技术<sup>名词拼写</sup>。
         擅长各种从入门到放弃。
