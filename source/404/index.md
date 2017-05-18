@@ -3,7 +3,7 @@ permalink: /404
 comments: false
 ---
 
-## You are so lucky to see this page
+## You are so lucky to see this page.
 
 <img src="/assets/img/404-dribb.gif" alt="404-pic"/>
 
