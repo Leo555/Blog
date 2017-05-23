@@ -8,7 +8,6 @@ import Q from './Q'
 import * as promise from 'es6-promise'
 import * as fetch from 'fetch-ie8'
 
-
 window.Promise = window.Promise || promise.Promise
 window.fetch = window.fetch || fetch
 
@@ -147,7 +146,6 @@ function init() {
 		app.$set('search', searchWording)
 		searchWording !== '' && handleSearch(searchWording)
 	}).catch((err) => {
-		console.log('++++++++++++++++++', err)
 		app.$set('jsonFail', true)
 	});
 

@@ -1,4 +1,3 @@
-import Browser from './browser'
 function init() {
 	// 由于hexo分页不支持，手工美化
 	var $nav = document.querySelector('#page-nav')
@@ -11,12 +10,13 @@ function init() {
 
 	// 新窗口打开
 	if (yiliaConfig && yiliaConfig.open_in_new) {
-		if (!Browser.versions.weixin) {
-			let $a = document.querySelectorAll(('.article-entry a:not(.article-more-a)'))
-			$a.forEach(($em) => {
-				$em.setAttribute('target', '_blank')
-			})
-		}
+		let $a = document.querySelectorAll(('.article-entry a:not(.article-more-a)'))
+		$a.forEach(($em) => {
+			let target = $em.getAttribute('target');
+			if (!target || target === '') {
+				$em.setAttribute('target', '_blank');
+			}
+		})
 	}
 
 	// about me 转义
