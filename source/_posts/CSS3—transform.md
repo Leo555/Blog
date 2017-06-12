@@ -1,5 +1,5 @@
 ---
-title: CSS3--transform
+title: CSS3—transform
 date: 2017-06-09 16:23:31
 categories: CSS
 tags:
@@ -8,7 +8,7 @@ tags:
 - 变形
 ---
 
-在 CSS3 中，跟动画相关的属性有：变形 transform、过度 transition、动画 animation。先放一个 Lea Verou 大神的链接 [animatable](http://leaverou.github.io/animatable/)。
+在 CSS3 中，跟动画相关的属性有：变形 transform、过渡 transition、动画 animation。先放一个 Lea Verou 大神的链接 [animatable](http://leaverou.github.io/animatable/)。
 
 本章学习 CSS3 中的 transform 属性。
 <!--more-->

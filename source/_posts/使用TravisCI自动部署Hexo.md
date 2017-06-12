@@ -41,7 +41,7 @@ $ hexo deploy
 
 ## 配置 Travis 仓库
 
-首先使用 GitHub 账号登录[Travis SI](https://travis-ci.org/)，登录后会进入如下页面
+首先使用 GitHub 账号登录[Travis CI](https://travis-ci.org/)，登录后会进入如下页面
 
 <img src="/assets/img/Travis_main_page.png" alt="我是一只的图片">
 
