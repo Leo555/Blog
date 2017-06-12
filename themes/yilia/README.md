@@ -180,3 +180,9 @@ aboutme: 很惭愧<br><br>只做了一点微小的工作<br>谢谢大家
 ```
 
 
+### update
+
+themes\yilia\layout\_partial\after-footer.ejs
+themes\yilia\source-src\css\tools.scss
+themes\yilia\source-src\js\main.js
+themes\hexo-theme-yilia-master\source-src\js\report.js
