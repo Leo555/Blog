@@ -1,5 +1,5 @@
 ---
-title: CSS3—transition
+title: CSS3动画—transition
 date: 2017-06-12 10:21:22
 categories: CSS
 tags:
@@ -18,7 +18,6 @@ transition-delay(过渡延迟时间)
 transition-duration(过渡持续时间)
 transition-property(过渡属性) 
 transition-timing-function(过渡效果的时间曲线)
-
 <!--more-->
 
 ```css
@@ -104,6 +103,19 @@ transition: width 2s, height 2s, background-color 2s, transform 2s;
 
 写复合属性的时候，四个属性是可以改变顺序的，不过两个时间属性若同时出现，第一个代表 duration，第二个代表 delay，如果只出现一个时间属性，则表示 duration。
 
+### transition 结合 transform
+
+使用 transition 结合 transform 能够完成一些简单的动画效果
+
+<script async src="//jsfiddle.net/Leo555/e7j3p7ru/2/embed/result,html,css/"></script>
+
+使用 transition 做动画简单易用，不过也存在一些缺点：
+
+（1）动画需要事件触发
+（2）动画只能执行一次
+（3）transition 只能定义开始状态和结束状态，不能定义中间状态
+
+因此如果想要完成比较复杂的动画，还是要用 css3 中的 animation 属性。
 
 ## 参考资料
 [CSS动画简介](http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html)
