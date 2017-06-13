@@ -25,9 +25,9 @@ animation 属性目前还存在浏览器兼容性问题，建议使用 PostCSS �
   @keyframes animated_div {
     0%  {transform: rotate(0deg);left:0px;}
     25%  {transform: rotate(20deg);left:0px;}
-    50%  {transform: rotate(0deg);left:500px;}
-    55%  {transform: rotate(0deg);left:500px;}
-    70%  {transform: rotate(0deg);left:500px;background:#1ec7e6;}
+    50%  {transform: rotate(0deg);left:350px;}
+    55%  {transform: rotate(0deg);left:350px;}
+    70%  {transform: rotate(0deg);left:350px;background:#1ec7e6;}
     100%  {transform: rotate(-360deg);left:0px;}
   }
   </style>
@@ -106,8 +106,6 @@ animation: first_animation 5s infinite;
 
 animation-fill-mode 指定动画执行后跳回到初始状态还是保留在结束状态。
 
-语法: 
-
 > animation-fill-mode : none | forwards | backwards | both;
 
 none: 不改变默认行为
@@ -129,7 +127,7 @@ alternate-reverse：动画从反向开始，再正反方向交替运动
 
 ### animation-play-state
 
-animation-play-state 用于手动控制动画的状态，有 paused 和 running 两种取值。
+animation-play-state 用于手动控制动画的状态，有 paused 和 running 两种取值：
 
 running：默认值，表示动画正常运动
 paused：表示暂停动画
