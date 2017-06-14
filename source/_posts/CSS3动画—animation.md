@@ -25,9 +25,9 @@ animation 属性目前还存在浏览器兼容性问题，建议使用 PostCSS �
   @keyframes animated_div {
     0%  {transform: rotate(0deg);left:0px;}
     25%  {transform: rotate(20deg);left:0px;}
-    50%  {transform: rotate(0deg);left:350px;}
-    55%  {transform: rotate(0deg);left:350px;}
-    70%  {transform: rotate(0deg);left:350px;background:#1ec7e6;}
+    50%  {transform: rotate(0deg);left:300px;}
+    55%  {transform: rotate(0deg);left:300px;}
+    70%  {transform: rotate(0deg);left:300px;background:#1ec7e6;}
     100%  {transform: rotate(-360deg);left:0px;}
   }
   </style>
