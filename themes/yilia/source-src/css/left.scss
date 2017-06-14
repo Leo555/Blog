@@ -87,7 +87,7 @@
 			margin: 0 auto;
 			position: relative;
 			overflow: hidden;
-			background: #88acdb;
+			background: white;
 			-webkit-transition: all 0.2s ease-in;
 			display: -webkit-box;
 			-webkit-box-orient: horizontal;
@@ -103,6 +103,14 @@
 					height: 100%;
 					opacity: 1;
 				}
+				animation-duration: 2s;
+				animation-name: ticktock;
+				animation-iteration-count: infinite;
+				animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+				animation-direction: alternate;
+				animation-fill-mode: both;
+				animation-play-state: running;
+				transform-origin: 50% -70%;
 			}
 		}
 		.header-author{

@@ -56,7 +56,7 @@ baidu_analytics: '0391cafd2247c0b68b9de35abf29c6d1'
 favicon: /assets/img/favicon.ico
 
 #你的头像url
-avatar: /assets/img/avatar.png
+avatar: /assets/img/avatar.svg
 
 #是否开启分享
 share_jia: true

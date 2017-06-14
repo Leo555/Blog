@@ -376,3 +376,12 @@
     animation-fill-mode: both;
     animation-name: smallleftOut;
 }
+
+@keyframes ticktock {
+  0% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
