@@ -31,6 +31,8 @@ CSS Modules 的用法很简单，不过现阶段还需要 webpack 的支持。CS
 └── webpack.config.js
 ```
 
+<!--more-->
+
 把文件 clone 下来后，安装依赖，然后就可以运行了
 
 ```shell
@@ -286,6 +288,9 @@ CSS Modules 解决了哪些问题呢？
 3. CSS 变量 可以在 CSS 和 JS 中共享，对于复杂组件的使用会有奇效。
 4. 对代码压缩也有一定帮助。
 
+>CSS 模块化的解决方案有很多，但主要有两类。一类是彻底抛弃 CSS，使用 JS 或 JSON 来写样式。Radium，jsxstyle，react-style 属于这一类。优点是能给 CSS 提供 JS 同样强大的模块化能力；缺点是不能利用成熟的 CSS 预处理器（或后处理器） Sass/Less/PostCSS，:hover 和 :active 伪类处理起来复杂。另一类是依旧使用 CSS，但使用 JS 来管理样式依赖，代表是 CSS Modules。CSS Modules 能最大化地结合现有 CSS 生态和 JS 模块化能力，API 简洁到几乎零学习成本。发布时依旧编译出单独的 JS 和 CSS。它并不依赖于 React，只要你使用 Webpack，可以在 Vue/Angular/jQuery 中使用。是我认为目前最好的 CSS 模块化解决方案。
+
+引自 [CSS Modules 详解及 React 中实践](https://github.com/camsong/blog/issues/5)
 
 ## 参考资料
 
