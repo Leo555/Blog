@@ -48,7 +48,7 @@ $ npm run start
 
 ### webpack
 
-首先配置 webpack 环境，给 css-loader 增加一个 modules 查询参数，表示打开 CSS Modules 功能。
+首先配置 webpack 环境(本文使用webpack2)，给 css-loader 增加一个 modules 查询参数，表示打开 CSS Modules 功能。
 
 简单的示例如下：
 
