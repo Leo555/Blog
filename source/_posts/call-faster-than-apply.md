@@ -66,39 +66,46 @@ Fastest is call
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/benchmark/2.1.4/benchmark.min.js"></script>
     <script>
     window.onload = () => {
-        const suite = new Benchmark.Suite
+        let log = document.getElementById("log")
+        let btn = document.getElementById("btn")
         const applyFun = str => {
             return [].slice.apply(str, [1])
         }
         const callFun = str => {
             return [].slice.call(str, 1)
         }
+        const logMessage = arg => {
+            let eDiv = document.createElement("div")
+            eDiv.innerHTML = typeof arg === "string" ? arg : arg.toString()
+            log.appendChild(eDiv)
+        }
+        const prepare = () => {
+            log.innerHTML = ''
+            btn.disabled = true
+        }
 
         window.run = () => {
+            prepare()
+            const suite = new Benchmark.Suite
             // add tests
             suite.add('apply', function() {
                 applyFun('apple')
             }).add('call', function() {
                 callFun('apple')
             }).on('cycle', function(event) {
-                console.log(String(event.target))
+                logMessage(String(event.target))
             }).on('complete', function() {
-                console.log('Fastest is ' + this.filter('fastest').map('name'))
+                logMessage('Fastest is ' + this.filter('fastest').map('name'))
+                btn.disabled = false
             }).run({
                 'async': true
             })
-        }
-        let log = document.getElementById("log")
-        console.log = arg => {
-            let eDiv = document.createElement("div")
-            eDiv.innerHTML = typeof arg === "string" ? arg : arg.toString()
-            log.appendChild(eDiv)
         }
     }
     </script>
 </head>
 <body>
-    <button onclick="run()">run test</button>
+    <button id="btn" onclick="run()">run test</button>
     <span id="log"></span>
     <hr>
 </body>
