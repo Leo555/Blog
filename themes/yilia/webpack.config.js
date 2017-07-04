@@ -26,7 +26,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './source'),
         publicPath: './',
-        filename: '[name].[chunkhash:6].js'
+        filename: isProd ? '[name].[chunkhash:6].js' : '[name].js'
     },
     module: {
         rules: [{
@@ -86,7 +86,7 @@ module.exports = {
                 })]
             }
         }),
-        new ExtractTextPlugin('[name].[chunkhash:6].css'),
+        new ExtractTextPlugin(isProd ? '[name].[chunkhash:6].css' : '[name].css'),
         new HtmlWebpackPlugin({
             inject: false,
             cache: false,
@@ -130,6 +130,6 @@ if (isProd) {
             }
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new CleanPlugin('builds')
+        new CleanPlugin('source')
     ])
 }
