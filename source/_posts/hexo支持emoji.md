@@ -9,7 +9,7 @@ tags:
 
 ### 添加方法
 
-很简单，换一个 markdown 引擎，然后再增加 emoji 插件即可。:joy:
+很简单，换一个 markdown 引擎，然后再增加 emoji 插件即可。:blush:
 
 ```shell
 $ npm un hexo-renderer-marked --save
