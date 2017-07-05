@@ -130,6 +130,6 @@ if (isProd) {
             }
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new CleanPlugin('builds')
+        new CleanPlugin('source')
     ])
 }
