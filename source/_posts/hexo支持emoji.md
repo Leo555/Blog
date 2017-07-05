@@ -47,7 +47,7 @@ markdown:
 ### 使用方法
 
 1. 在 [Emoji](https://emoji.codes/) 中找到你想要的表情，然后点击即可复制。
-2. 比如你想发一个笑脸 :smile: 直接输入笑脸对应的 emmoji 编码 `:smile:` 就可以。
+2. 比如你想发一个笑脸 :smile: 直接输入笑脸对应的 emoji 编码 `:smile:` 就可以。
 
 
 [CommonMark]: http://commonmark.org/
