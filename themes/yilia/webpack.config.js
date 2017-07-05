@@ -4,8 +4,8 @@ var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
-var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-var WebpackChunkHash = require('webpack-chunk-hash');
+// var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+// var WebpackChunkHash = require('webpack-chunk-hash');
 var isProd = process.env.NODE_ENV !== 'development';
 
 // 模板压缩
