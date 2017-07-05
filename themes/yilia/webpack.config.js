@@ -52,7 +52,7 @@ module.exports = {
                     options: {
                         plugins: function() {
                             return [
-                                require('autoprefixer')('last 2 versions', 'ie 11')
+                                require('autoprefixer')('last 3 versions', 'ie 11')
                             ]
                         },
                         sourceMap: false
