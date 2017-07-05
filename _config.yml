@@ -91,6 +91,21 @@ disqus_shortname: lz5z-com
 theme: yilia
 exclude_generator:
 
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: false
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  plugins:
+    - markdown-it-footnote
+    - markdown-it-sup
+    - markdown-it-sub
+    - markdown-it-abbr
+    - markdown-it-emoji
+
 # Deployment
 deploy:
   type: git
@@ -157,4 +172,4 @@ jsonContent:
       permalink: false
       excerpt: false
       categories: false
-      tags: true     
+      tags: true

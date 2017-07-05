@@ -7,7 +7,6 @@ tags:
 - call
 - apply
 ---
-
 在 stackoverflow 看到一个有趣的问题: [Why is call so much faster than apply?](https://stackoverflow.com/questions/23769556/why-is-call-so-much-faster-than-apply) 于是使用 [benchmark.js](https://benchmarkjs.com/) 在 node 中自己测试了一下：
 
 ```javascript

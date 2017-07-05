@@ -4,8 +4,8 @@ var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
-// var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-// var WebpackChunkHash = require('webpack-chunk-hash');
+var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+var WebpackChunkHash = require('webpack-chunk-hash');
 var isProd = process.env.NODE_ENV !== 'development';
 
 // 模板压缩
@@ -26,7 +26,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './source'),
         publicPath: './',
-        filename: isProd ? '[name].[chunkhash:6].js' : '[name].js'
+        filename: '[name].[chunkhash:6].js'
     },
     module: {
         rules: [{
@@ -86,7 +86,7 @@ module.exports = {
                 })]
             }
         }),
-        new ExtractTextPlugin(isProd ? '[name].[chunkhash:6].css' : '[name].css'),
+        new ExtractTextPlugin('[name].[chunkhash:6].css'),
         new HtmlWebpackPlugin({
             inject: false,
             cache: false,
@@ -130,6 +130,6 @@ if (isProd) {
             }
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new CleanPlugin('source')
+        new CleanPlugin('builds')
     ])
 }
