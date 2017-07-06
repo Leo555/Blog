@@ -79,24 +79,8 @@
 
 
 <% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
   <% if (theme.wangyiyun){ %>
   <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
       key: post.slug,
       title: post.title,
       url: config.url+url_for(post.path)

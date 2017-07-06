@@ -26,7 +26,7 @@ rss: /atom.xml
 # 是否需要修改 root 路径
 # 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
 # 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
-root: 
+root:
 
 # Content
 
@@ -70,9 +70,6 @@ duoshuo: false
 #2、网易云跟帖
 wangyiyun: false
 
-#3、畅言
-changyan_appid: false
-changyan_conf: false
 
 # 样式定制 - 一般不需要修改，除非有很强的定制欲望…
 style:
@@ -101,7 +98,7 @@ friends:
   wxsm's space: https://wxsm.space/
   James Whitesaber: http://whitesaber.farbox.com/
   wps便签: https://note.wps.cn
-  
+
 aboutme: <div>精通 JavaScript、Python、Ruby、Java、Lisp等技术<sup>名词拼写</sup>。
         擅长各种从入门到放弃。
         毕业于世界著名学府——北大<sup>青鸟</sup>。
