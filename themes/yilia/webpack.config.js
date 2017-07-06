@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
 // var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 // var WebpackChunkHash = require('webpack-chunk-hash');
-var isProd = process.env.NODE_ENV !== 'development';
+var isProd = process.env.NODE_ENV === 'production';
 
 // 模板压缩
 // 详见：https://github.com/kangax/html-minifier#options-quick-reference
@@ -115,18 +115,13 @@ module.exports = {
     ],
     watch: !isProd
 }
-
+//js文件可以不用压缩
 if (isProd) {
     module.exports.devtool = '#source-map'
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
             }
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
