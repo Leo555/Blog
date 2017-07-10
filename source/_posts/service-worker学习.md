@@ -8,31 +8,22 @@ tags:
 - 离线缓存
 ---
 
-## 什么是 service worker
+## service worker 简介
 
 service worker 的功能和特性可以总结为以下几点：
 
-- 就是一个独立 worker 线程，独立于当前网页进程，有自己独立的 worker context。
-- service worker 通过 postMessage 进行线程之间的通信
-- 一旦被 install 之后，就永远存在，除非被 uninstall
-- 需要的时候可以直接唤醒，不需要的时候自动睡眠
+- service worker 是一个独立 worker 线程，独立于当前网页进程，有自己独立的 worker context
+- service worker 的线程能力基于 webworker 而生，通过 postMessage 和 onMessage 进行线程之间的通信；缓存机制是依赖 [cache API](https://developer.mozilla.org/zh-CN/docs/Web/API/Cache) 实现的。service worker = webworker + cache API
+- 一旦被 install 之后，就永远存在，除非被 uninstall；需要的时候可以直接唤醒，不需要的时候自动睡眠
 - 可以可编程拦截代理请求( https 请求)和缓存文件，缓存的文件直接可以被网页进程取到（包括网络离线状态）
-- 离线内容开发者可控
-- 能向客户端推送消息
-- 不能直接操作 dom
-- 必须在 https 环境下才能工作
-- 异步实现，内部大都是通过 Promise 实现
-- service worker 内不许用使用 loaclStorage
+- 离线内容开发者可控；能向客户端推送消息；不能直接操作 dom
+- 必须在 https 环境下才能工作，当然 localhost 或者 127.0.0.1 也是 ok 的
+- service worker 是异步的，内部通过 Promise 实现， localStorage 是同步的，因此 service worker 内不许用使用 loaclStorage
+- 依赖 HTML5 fetch API 和 Promise
 
 <!--more-->
 
-## 前提条件
-
-service worker 出于安全性和其实现原理，在使用的时候有一定的前提条件。
-
-- service worker 要求 https 的环境，当然 localhost 或者 127.0.0.1 也是 ok 的。
-- service worker 的缓存机制是依赖 [cache API](https://developer.mozilla.org/zh-CN/docs/Web/API/Cache) 实现的
-- 依赖 HTML5 fetch API 和 Promise
+# service worker 使用
 
 ## 注册
 
@@ -182,3 +173,4 @@ navigator.serviceWorker.register('/sw.js').then(function (reg) {
 ## service worker 生命周期
 
 <img src="/assets/img/sw-lifecycle.png" alt="sw-lifecycle">
+
