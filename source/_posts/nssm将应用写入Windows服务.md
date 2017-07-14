@@ -65,7 +65,7 @@ $ nssm install node_test
 $ nssm start node_test
 ```
 
-在浏览器中输入**http://localhost:3000/**查看效果
+在浏览器中查看效果
 ![3000](http://i1.piimg.com/567571/527e0e7fe0357a2e.png)
 
 在控制台输入 nssm 查看所有命令，可以看出 nssm 使用极其简单，参考[官方文档](http://nssm.cc/usage)
