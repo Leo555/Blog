@@ -6,20 +6,21 @@ tags:
 - service worker
 - HTML5
 - 离线缓存
+- postMessage
 ---
 
 ## service worker 简介
 
 service worker 的功能和特性可以总结为以下几点：
 
-- service worker 是一个独立 worker 线程，独立于当前网页进程，有自己独立的 worker context
-- service worker 的线程能力基于 webworker 而生，通过 postMessage 和 onMessage 进行线程之间的通信；缓存机制是依赖 [cache API](https://developer.mozilla.org/zh-CN/docs/Web/API/Cache) 实现的。service worker = webworker + cache API
-- 一旦被 install 之后，就永远存在，除非被 uninstall；需要的时候可以直接唤醒，不需要的时候自动睡眠
-- 可以可编程拦截代理请求( https 请求)和缓存文件，缓存的文件直接可以被网页进程取到（包括网络离线状态）
-- 离线内容开发者可控；能向客户端推送消息；不能直接操作 dom
-- 必须在 https 环境下才能工作，当然 localhost 或者 127.0.0.1 也是 ok 的
-- service worker 是异步的，内部通过 Promise 实现， localStorage 是同步的，因此 service worker 内不许用使用 loaclStorage
-- 依赖 HTML5 fetch API 和 Promise
+1. service worker 是一个独立 worker 线程，独立于当前网页进程，有自己独立的 worker context
+2. service worker 的线程能力基于 webworker 而生，通过 postMessage 和 onMessage 进行线程之间的通信；缓存机制是依赖 [cache API](https://developer.mozilla.org/zh-CN/docs/Web/API/Cache) 实现的。service worker = webworker + cache API
+3. 一旦被 install 之后，就永远存在，除非被 uninstall；需要的时候可以直接唤醒，不需要的时候自动睡眠
+4. 可以可编程拦截代理请求( https 请求)和缓存文件，缓存的文件直接可以被网页进程取到（包括网络离线状态）
+5. 离线内容开发者可控；能向客户端推送消息；不能直接操作 dom
+6. 必须在 https 环境下才能工作，当然 localhost 或者 127.0.0.1 也是 ok 的
+7. service worker 是异步的，内部通过 Promise 实现， localStorage 是同步的，因此 service worker 内不许用使用 loaclStorage
+8. 依赖 HTML5 fetch API 和 Promise
 
 <!--more-->
 
@@ -124,7 +125,7 @@ this.addEventListener('fetch', function (event) {
 - 新服务工作线程取得控制权后，将会触发其 activate 事件。
 
 ```javascript
-// 安装阶段跳过等待，直接进入 active
+// 安装阶段跳过等待，直接进入 activate
 self.addEventListener('install', function (event) {
     event.waitUntil(self.skipWaiting());
 });
@@ -174,3 +175,43 @@ navigator.serviceWorker.register('/sw.js').then(function (reg) {
 
 <img src="/assets/img/sw-lifecycle.png" alt="sw-lifecycle">
 
+### service worker 工作流程
+
+service worker 基于注册、安装、激活等步骤在浏览器 js 主线程中独立分担缓存任务。
+
+- 首先在页面的 javaScript 主线程中使用 navigator.serviceWorker.register() 来注册 servcie worker。
+- 如果注册成功，service worker 在 ServiceWorkerGlobalScope 环境中运行； 这是一个特殊的 worker context，与主脚本的运行线程相独立，同时也没有访问 DOM 的能力。
+- 后台开始安装步骤，通常在安装的过程中需要缓存一些静态资源。install 事件回调中有两个方法：
+    - event.waitUntil()：传入一个 Promise 为参数，等到该 Promise 为 resolve 状态为止。
+    - self.skipWaiting()：self 是当前 context 的 global 变量，执行该方法表示强制当前处在 waiting 状态的 Service Worker 进入 activate 状态。
+- 当 service worker 安装完成后，会接收到一个激活事件（activate event）。激活事件的处理函数中，主要操作是清理旧版本的 service worker 脚本中使用资源。activate 回调中有两个方法：
+    - event.waitUntil()：传入一个 Promise 为参数，等到该 Promise 为 resolve 状态为止。
+    - self.clients.claim()：在 activate 事件回调中执行该方法表示取得页面的控制权, 这样之后打开页面都会使用版本更新的缓存。旧的 Service Worker 脚本不再控制着页面，之后会被停止。
+- 激活成功后 service worker 可以控制页面了，刷新页面可以查看 service worker 的工作成果。
+
+### service worker 事件
+
+- install: service worker 安装成功后被触发的事件，在事件处理函数中可以添加需要缓存的文件。
+- activate：当 service worker 安装完成后并进入激活状态，会触发 activate 事件。通过监听 activate 事件你可以做一些预处理，如对于旧版本的更新、对于无用缓存的清理等。
+- message：service worker 通过 postMessage API，可以实现与主线程之间的通信。
+
+下面是一个使用 service worker 的 postMessage API 做的一个简单计算器，其中计算部分在 service worker 线程中完成。假如有一些比较耗时的工作，比如大量计算，或者 fetch 数据，可以将其放入 service worker 线程中，以达到提高页面响应的目的。
+
+<iframe defer src="https://lz5z.com/service_worker_postMessage/" frameBorder=0 marginwidth=0 marginheight=0 scrolling=no style="width:500px;height:50px;" width=500  height=50 scrolling=no ALLOWTRANSPARENCY="true"></iframe>
+
+[在线演示](https://lz5z.com/service_worker_postMessage/)
+[源码](https://github.com/Leo555/service_worker_postMessage)
+
+- fetch (请求)：当浏览器在当前指定的 scope 下发起请求时，会触发 fetch 事件，并得到传有 response 参数的回调函数，回调中就可以做各种代理缓存的事情了。
+- push (推送)：push 事件是为推送准备的。不过首先需要了解一下 [Notification API](https://developer.mozilla.org/zh-CN/docs/Web/API/notification) 和 [PUSH API](https://developer.mozilla.org/zh-CN/docs/Web/API/Push_API)。通过 PUSH API，当订阅了推送服务后，可以使用推送方式唤醒 Service Worker 以响应来自系统消息传递服务的消息，即使用户已经关闭了页面。
+
+
+## 示例
+
+这个[网站](http://service-worker.org/)记录了很多 service worker demo。
+
+## 参考文档
+
+[lavas](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)
+[Service Worker API-MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
+[服务工作线程](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn)
