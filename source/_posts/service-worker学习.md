@@ -120,6 +120,7 @@ this.addEventListener('fetch', function (event) {
 
 `/sw.js` 控制着页面资源和请求的缓存，如果 `/sw.js` 需要更新应该怎么办呢？
 
+- service worker 控制着整个 App 的离线缓存。 为了避免 service worker 缓存自己导致死锁无法升级，通常将 sw.js 本身的缓存直接交给 HTTP 服务器缓存。
 - 更新 `sw.js` 文件，当浏览器获取到了新的文件，发现 `sw.js` 文件发生更新，就会安装新的文件并触发 install 事件。
 - 但是此时已经处于激活状态的旧的 service worker 还在运行，新的 service worker 完成安装后会进入 waiting 状态，直到所有已打开的页面都关闭。
 - 新服务工作线程取得控制权后，将会触发其 activate 事件。
@@ -171,6 +172,16 @@ navigator.serviceWorker.register('/sw.js').then(function (reg) {
 
 除了浏览器触发更新之外，service worker 还有一个特殊的缓存策略： 如果该文件已 24 小时没有更新，当 Update 触发时会强制更新。这意味着最坏情况下 service worker 会每天更新一次。
 
+### 调试时更新
+
+可以单独设置调试时 service worker 安装后立即激活：
+
+```javascript
+self.addEventListener('install', function() {
+    self.skipWaiting();
+});
+```
+
 ## service worker 生命周期
 
 <img src="/assets/img/sw-lifecycle.png" alt="sw-lifecycle">
@@ -215,3 +226,4 @@ service worker 基于注册、安装、激活等步骤在浏览器 js 主线程�
 [lavas](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)
 [Service Worker API-MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
 [服务工作线程](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn)
+[Service Worker 更新机制](http://harttle.com/2017/04/10/service-worker-update.html)
