@@ -5,10 +5,10 @@
 # Site
 title: Leo's Blog
 subtitle: 人生苦短，我再睡会
-description:
+description: Leo Li's personal static blog.
 author: LeoScript
 email: lizhen55521@gmail.com
-keywords: "Leo, JavaScript, Python, LeoScript"
+keywords: "Leo, JavaScript, Python, LeoScript, Webpack, Node, Machine Learning, animataion, vue, css, 机器学习, hexo, travis, movie, service worker"
 avatar: /uploads/avatar.png
 
 # URL
