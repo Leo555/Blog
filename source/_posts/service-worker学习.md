@@ -46,9 +46,7 @@ if ('serviceWorker' in navigator) {
 ```
 
 每次页面加载成功后，就会调用 register() 方法，浏览器将会判断 service worker 线程是否已注册并做出相应的处理。
-
 scope 参数是可选的，默认值为 `sw.js` 所在的文件目录。
-
 打开 chrome 浏览器, 输入 chrome://inspect/#service-workers 可以可以用 DevTools 查看 Service workers 的工作情况。
 
 
