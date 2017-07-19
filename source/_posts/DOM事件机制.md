@@ -18,14 +18,14 @@ DOM 事件流（event  flow）存在三个阶段：事件捕获 --> 事件目标
 <!-- more -->
 # 事件
 
-(1)onlick -->事件冒泡，重写onlick会覆盖之前属性，没有兼容性问题
+(1) onlick -->事件冒泡，重写onlick会覆盖之前属性，没有兼容性问题
 
 ```javascript
 //解绑单击事件，将onlick属性设为null即可
 el.onclik = null; 
 ```
 
-(2)addEventListener(event, listener, useCapture)　　
+(2) addEventListener(event, listener, useCapture)　　
 参数定义：event---（事件名称，如click，不带on），listener---事件监听函数，useCapture---是否采用事件捕获进行事件捕捉，默认为false，即采用事件冒泡方式。 IE8 及以下不支持，属于DOM级的方法，可添加多个方法不被覆盖
 
 ```javascript
@@ -35,7 +35,7 @@ ele.addEventListener('click', function(){ }, false);
 ele.removeEventListener(event.type, handle, boolean);
 ```
 
-(3)attachEvent(event.type, handle ); IE特有，兼容IE8及以下，可添加多个事件处理程序，只支持冒泡阶段
+(3) attachEvent(event.type, handle ); IE特有，兼容IE8及以下，可添加多个事件处理程序，只支持冒泡阶段
 
 ```javascript
 //如果handle是同一个方法，绑定几次执行几次，这点和addEventListener不同,事件类型要加on,例如onclick而不是click
@@ -44,7 +44,7 @@ ele.attachEvent('onclick', function(){ });
 ele.detachEvent("onclick", function(){ });
 ```
 
-(4)默认事件行为：href=""，submit表单提交等
+(4) 默认事件行为：href=""，submit表单提交等
 
 * return false; 阻止独享属性（通过on这种方式）绑定的事件的默认事件
 
@@ -474,5 +474,5 @@ function changeStyle(ele) {
 事件的三个阶段分别为：捕获，目标和冒泡，低版本 IE 不支持捕获。绑定事件的方法为 **addEventListener** 和 **attachEvent**。addEventListener 方法的第三个 boolean 型参数表示添加的事件为捕获或者冒泡，true 代表捕获，false 代表冒泡。
 
 事件冒泡的优点为： 
-（1）可以大量节省内存占用，减少事件注册，比如在 table 上代理所有 td 的 click 事件。
-（2）可以实现为动态增加的 DOM 绑定事件的功能。
+1. 可以大量节省内存占用，减少事件注册，比如在 table 上代理所有 td 的 click 事件。
+2. 可以实现为动态增加的 DOM 绑定事件的功能。

@@ -99,5 +99,5 @@ transform: rotate(30deg);
 
 ## 参考资料
 
-[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)
-[CSS3的变形transform、过渡transition、动画animation学习](http://www.cnblogs.com/imwtr/p/5885885.html)
+- [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)
+- [CSS3的变形transform、过渡transition、动画animation学习](http://www.cnblogs.com/imwtr/p/5885885.html)

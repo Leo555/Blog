@@ -223,7 +223,7 @@ service worker 基于注册、安装、激活等步骤在浏览器 js 主线程�
 
 ## 参考文档
 
-[lavas](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)
-[Service Worker API-MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
-[服务工作线程](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn)
-[Service Worker 更新机制](http://harttle.com/2017/04/10/service-worker-update.html)
+- [lavas](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)
+- [Service Worker API-MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API)
+- [服务工作线程](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn)
+- [Service Worker 更新机制](http://harttle.com/2017/04/10/service-worker-update.html)

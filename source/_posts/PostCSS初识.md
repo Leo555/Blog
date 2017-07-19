@@ -301,6 +301,6 @@ div {
 
 ## 参考资料
 
- (1) 参考 [PostCSS](http://postcss.org/) 官方网站，了解 PostCSS 的更多内容。
- (2) [autoprefixer](https://github.com/postcss/autoprefixer)
- (3) [cssnext](http://cssnext.io/)
+1. 参考 [PostCSS](http://postcss.org/) 官方网站，了解 PostCSS 的更多内容。
+2. [autoprefixer](https://github.com/postcss/autoprefixer)
+3. [cssnext](http://cssnext.io/)

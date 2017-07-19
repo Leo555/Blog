@@ -118,5 +118,5 @@ transition: width 2s, height 2s, background-color 2s, transform 2s;
 因此如果想要完成比较复杂的动画，还是要用 css3 中的 animation 属性。
 
 ## 参考资料
-[CSS动画简介](http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html)
-[MDN-Using CSS transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions)
+- [CSS动画简介](http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html)
+- [MDN-Using CSS transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions)

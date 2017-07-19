@@ -136,6 +136,6 @@ paused：表示暂停动画
 
 ## 参考资料
 
-[MDN-CSS Animations](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Animations)
-[CSS3的变形transform、过渡transition、动画animation学习](http://www.cnblogs.com/imwtr/p/5885885.html)
-[CSS动画简介](http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html)
+- [MDN-CSS Animations](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Animations)
+- [CSS3的变形transform、过渡transition、动画animation学习](http://www.cnblogs.com/imwtr/p/5885885.html)
+- [CSS动画简介](http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html)
