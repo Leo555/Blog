@@ -16,7 +16,7 @@ var minifyHTML = {
 module.exports = {
   watch: true,
   entry: {
-    main: './source-src/js/main.js',
+    main: './source-src/css/main.scss',
     slider: './source-src/js/slider.js',
     mobile: ['babel-polyfill', './source-src/js/mobile.js']
   },

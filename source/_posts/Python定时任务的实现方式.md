@@ -356,6 +356,7 @@ sched.start()
 + timezone (datetime.tzinfo|str) – time zone to use for the date/time calculations (defaults to scheduler timezone)
 
 表达式:
+
 ![python 定时任务](/assets/img/python_timer_expression.png)
 
 ```python
