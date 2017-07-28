@@ -6,7 +6,7 @@ tags:
 categories: Python
 ---
 
-![](http://i1.piimg.com/567571/a82439199ab27e51.png)
+![](/assets/img/python_timer.png)
 
 # 背景 
 ---
