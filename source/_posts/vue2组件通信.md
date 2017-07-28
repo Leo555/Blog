@@ -87,7 +87,7 @@ button-counter 组件的模板中包含一个 button，其 click 事件会触发
 - 在组件 B 创建的钩子中监听事件（订阅消息）
 	`bus.$on('id-selected', function (id) {})`
  
- 下面是 [stackoverflow](http://stackoverflow.com/questions/38064054/vue-js-global-event-bus) 上面的一个例子
+ 下面是 [stackoverflow](https://stackoverflow.com/questions/38064054/vue-js-global-event-bus) 上面的一个例子
 
 ```html
 <div id="example">

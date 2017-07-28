@@ -16,4 +16,10 @@
 	<% for (var asset in compilation.assets) { %><% if (asset.indexOf('slider') >= 0) { %><% var slider = asset %><% } %><% } %>loadScript("<%= left %>config.root<%= right %><%= right2 %><%= slider %>")
 })();
 </script>
-
+<script>
+(function() {
+    var host = "lz5z.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+})();        
+</script>

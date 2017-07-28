@@ -11,7 +11,7 @@ tags:
 
 Webpack + ES6 已经成为目前最流行的前端解决方案，本文是 Webpack2 学习教程。
 
-在 「[What is webpack](http://webpack.github.io/docs/what-is-webpack.html)」一文中作者讲述了自己为什么要开发出 webpack。
+在 「[What is webpack](https://webpack.github.io/docs/what-is-webpack.html)」一文中作者讲述了自己为什么要开发出 webpack。
 
 1. 切分代码依赖树到不同的代码块，按需加载
 2. 保持更少的初始化加载时间
