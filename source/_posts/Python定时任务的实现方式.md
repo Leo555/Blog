@@ -217,7 +217,7 @@ scheduler.start()
 在运行程序5秒后，第一次输出时间。
 在 MongoDB 中可以看到 job 的状态
 
-![job](http://p1.bqimg.com/567571/e9279f3fb0b6c3ee.png)
+![job](/assets/img/python_timer_job.png)
 
 
 ## 对 job 的操作
@@ -356,7 +356,7 @@ sched.start()
 + timezone (datetime.tzinfo|str) – time zone to use for the date/time calculations (defaults to scheduler timezone)
 
 表达式:
-![](http://p1.bpimg.com/567571/e60b1f77f80e5f1b.png)
+![python 定时任务](/assets/img/python_timer_expression.png)
 
 ```python
 from apscheduler.schedulers.blocking import BlockingScheduler
