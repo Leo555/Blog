@@ -6,7 +6,7 @@ tags:
 categories: Python
 ---
 
-![](/assets/img/python_timer.png)
+![python 定时任务](/assets/img/python_timer.png)
 
 # 背景 
 ---
