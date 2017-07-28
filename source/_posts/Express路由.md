@@ -146,7 +146,4 @@ function handleArticleRequest(req, res) {
 类似的，当path含有query部分的时候，Express也会自动把query的部分存到req.query这个对象里面。假如说一个path含有query为?p1=v1&p2=v2，那么在处理它的逻辑里，我们可以通过req.query.p1和req.query.p2来访问相应的值（都会是string对象）。
 
 # 结语
-以上就是对Express的routing机制的一点简单的介绍。更详细的内容参加 [官网](http://www.expressjs.com.cn/guide/routing.html)。
-
----
-
+以上就是对Express的routing机制的一点简单的介绍。更详细的内容参见 [官网](http://www.expressjs.com.cn/guide/routing.html)。

@@ -44,13 +44,13 @@ animation 属性目前还存在浏览器兼容性问题，建议使用 PostCSS �
 
 animation 是复合属性，其子属性有：
 
-（1）animation-delay 动画延时
-（2）animation-direction 动画在每次运行完后是反向运行还是重新回到开始位置重复运行
-（3）animation-duration 动画一个周期的时长
-（4）animation-iteration-count 动画重复次数，infinite无限次重复动画
-（5）animation-name 指定由 @keyframes
-（6）animation-timing-function 设置动画速度曲线，默认是 "ease"
-（7）animation-fill-mode 指定动画执行后跳回到初始状态还是保留在结束状态
+(1) animation-delay 动画延时
+(2) animation-direction 动画在每次运行完后是反向运行还是重新回到开始位置重复运行
+(3) animation-duration 动画一个周期的时长
+(4) animation-iteration-count 动画重复次数，infinite无限次重复动画
+(5) animation-name 指定由 @keyframes
+(6) animation-timing-function 设置动画速度曲线，默认是 "ease"
+(7) animation-fill-mode 指定动画执行后跳回到初始状态还是保留在结束状态
 此外，还有 animation-play-state 属性，但是不能简写到 animation 属性中，该属性允许暂停和恢复动画。
 
 基本语法
@@ -109,8 +109,8 @@ animation-fill-mode 指定动画执行后跳回到初始状态还是保留在结
 > animation-fill-mode : none | forwards | backwards | both;
 
 none: 不改变默认行为
-forwards：当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）
-backwards：让动画回到第一帧的状态（在第一个关键帧中定义）
+forwards：当动画完成后，保持最后一个属性值(在最后一个关键帧中定义) 
+backwards：让动画回到第一帧的状态(在第一个关键帧中定义) 
 both：根据 animation-direction 轮流应用 forwards 和 backwards 规则
 
 <script async src="//jsfiddle.net/Leo555/3nrjmak2/1/embed/result,html,css/"></script>

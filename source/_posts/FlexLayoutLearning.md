@@ -21,7 +21,7 @@ tags:
 </div> 
 ```
 
-1. 绝对布局，使用 margin
+### 绝对布局，使用 margin
 
 ```css
 .box {
@@ -38,7 +38,7 @@ tags:
 }
 ```
 
-2. 相对布局，计算 left 和 top
+### 相对布局，计算 left 和 top
 
 ```css
 .box {
@@ -56,7 +56,7 @@ tags:
 }
 ```
 
-3. 父容器宽高不确定或者不容易确定，综合相对布局 + 绝对布局
+### 父容器宽高不确定或者不容易确定，综合相对布局 + 绝对布局
 
 ```css
 .box {
@@ -78,7 +78,7 @@ tags:
 }
 ```
 
-4. 使用 flex
+### 使用 flex
 
 ``` css
 .box {
@@ -97,7 +97,7 @@ tags:
 }
 ```
 
-5. flex + margin
+### flex + margin
 
 ```css
 .box {
@@ -118,11 +118,8 @@ tags:
 使用 flex 布局的优势不可谓不明显：
 
 （一） 免去了很多计算。最后两个使用 flex 布局的例子中，无论父元素还是子元素的宽度和高度发生改变，都能依然能保持居中；而前面三种方法中，则需要都要改变其他值，才能保持居中。
-
 （二） 使用 flex 布局的语义化要比前面几种都好，前面三种方法给了一大堆数字，不去认真看一看、算一算，很难确定是否是居中，这对代码阅读者也是非常不友好。
-
 （三） flex 对响应式布局的支持更好。虽然前面几种方法也能实现响应式布局，但是实现起来比较麻烦，不如 flex 来得实在。
-
 （四） flex 支持行内元素。
 
 ## 什么是 flex 布局
@@ -258,6 +255,6 @@ align-self 属性允许单个子容器有与其他子容器不一样的对齐方
 |align-self: flex-end|<img src="/assets/img/flex-align-self.png" alt="flex-align-self">|
 
 
-> 参考资料
+## 参考资料
 1. [MDN CSS Flexible Box Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout)
 2. [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool)

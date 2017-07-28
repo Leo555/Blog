@@ -111,9 +111,9 @@ transition: width 2s, height 2s, background-color 2s, transform 2s;
 
 使用 transition 做动画简单易用，不过也存在一些缺点：
 
-（1）动画需要事件触发
-（2）动画只能执行一次
-（3）transition 只能定义开始状态和结束状态，不能定义中间状态
+(1) 动画需要事件触发
+(2) 动画只能执行一次
+(3) transition 只能定义开始状态和结束状态，不能定义中间状态
 
 因此如果想要完成比较复杂的动画，还是要用 css3 中的 animation 属性。
 

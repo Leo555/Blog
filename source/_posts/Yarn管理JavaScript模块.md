@@ -34,6 +34,7 @@ Yarn 在安装模块之前会验证文件完整性。
 ## 输出清晰
 
 NPM 安装包的时候输出惨不忍睹，而 Yarn 的输出就清晰多了。
+
 <img src="/assets/img/yarn.png" alt="yarn">
 
 # 使用

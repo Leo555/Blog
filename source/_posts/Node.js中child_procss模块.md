@@ -24,12 +24,14 @@ child_process 是 Node.js 中一个非常重要的模块，主要功能有：
 使用 child_process 模块创建进程一共有六种方法（Node.js v7.1.0）
 
 ### 异步创建进程
+
 1. child_process.**exec**(command[, options][, callback])
 2. child_process.**execFile**(file[, args][, options][, callback])
 3. child_process.**fork**(modulePath[, args][, options])
 4. child_process.**spawn**(command[, args][, options])
 
 ### 同步创建进程
+
 1. child_process.**execFileSync**(file[, args][, options])
 2. child_process.**execSync**(command[, options])
 3. child_process.**spawnSync**(command[, args][, options])
@@ -37,6 +39,7 @@ child_process 是 Node.js 中一个非常重要的模块，主要功能有：
 以异步函数中 spawn 是最基本的创建子进程的函数，其他三个异步函数都是对 spawn 不同程度的封装。spawn 只能运行指定的程序，参数需要在列表中给出，而 exec 可以直接运行复杂的命令。
     
 ## spawn()
+
 spawn从定义来看，有3个参数。
 ```javascript
 child_process.spawn(command[, args][, options])
@@ -47,8 +50,8 @@ child_process.spawn(command[, args][, options])
 4. return: 返回一个ChildProcess 类的实例
 
 ### options
-> 
-1. cwd [String] Current working directory of the child process
+
+> 1. cwd [String] Current working directory of the child process
 2. env [Object] Environment key-value pairs
 3. argv0 [String] Explicitly set the value of argv[0] sent to the child process. This will be set to command if not specified.
 4. stdio [Array] | [String] Child's stdio configuration. (See options.stdio)

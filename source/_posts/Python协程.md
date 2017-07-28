@@ -90,10 +90,12 @@ z
 用小时候非常喜欢看的《龙珠》做比喻就是，协程就是残像拳，悟空不断地在A和B两地移动，速度非常快，看起来就像两个悟空一样；而多线程就是沙鲁分泌出来的小沙鲁，每个小沙鲁都能独立作战。
 
 协程：
-![](http://p1.bpimg.com/567571/8ec32950a6ea1e7a.jpg)
+
+![协程](http://p1.bpimg.com/567571/8ec32950a6ea1e7a.jpg)
 
 多线程：
-<img src='http://p1.bpimg.com/567571/8a1dbea42410bec0.jpg', width="25%">
+
+![多线程](/assets/img/python_multiple_process.jpg)
 
 
 # 协程的使用

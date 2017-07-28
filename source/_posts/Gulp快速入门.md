@@ -80,16 +80,14 @@ gulp.task('default', ['task1', 'task2'], () => {
 
 ## 流式处理
 
-1. 在项目根目录下创建 src 文件目录，里面创建 index.js
-
-2. 在项目根目录下创建 dist 文件目录
-
-3. 安装 gulp-uglify
+(1) 在项目根目录下创建 src 文件目录，里面创建 index.js
+(2) 在项目根目录下创建 dist 文件目录
+(3) 安装 gulp-uglify
  
 ```shell
 $ npm install gulp-uglify --save-dev
 ```
-4. 使用 gulp 压缩 index.js 并将结果输出
+(4) 使用 gulp 压缩 index.js 并将结果输出
 
 ```javascript
 var gulp = require('gulp');
@@ -101,9 +99,9 @@ gulp.task('default', () => {
 		.pipe(gulp.dest('dist'))
 });
 ```
-5. 运行 “gulp” 命令后发现在 dist 目录下生产了压缩后的 index.js
+(5) 运行 “gulp” 命令后发现在 dist 目录下生产了压缩后的 index.js
 
-6. 解释
+(6) 解释
 
 gulp.src 是输入； gulp.dest 是输出
 pipe 是管道的意思，也是 stream 里核心概念，pipe 将上一个的输出作为下一个的输入。src 里所有 js，经过处理1，处理2，变成输出结果，中间的处理 pipe 可以1步，也可以是n步。第一步处理的结果是第二步的输入，以此类推，就像生产线一样，每一步都是一个 task 是不是很好理解呢？
@@ -157,34 +155,34 @@ app.listen(3000, () => {
 ```
 使用 babel 转化为 ES5 语法：
 
-1. 安装 babel-core babel-preset-es2015
+(1) 安装 babel-core babel-preset-es2015
 
 ```shell
 $ npm install --save-dev babel-core babel-preset-es2015
 ```
 
-2. 创建 **.babelrc** 文件， 配置如下
+(2) 创建 **.babelrc** 文件， 配置如下
 
 > {
   "presets": ["es2015"]
 }
 
-3. 手动使用 babel 转译：
+(3) 手动使用 babel 转译：
 
 ```shell
 $ babel src -d lib
 ```
-4. 安装 gulp-babel
+(4) 安装 gulp-babel
 
 ```shell
 $  npm install --save-dev gulp-babel
 ```
-5. 编写 gulpfile
+(5) 编写 gulpfile
 
 在根目录新建一个 gulpfile.babel.js 文件。
 gulp 原生并不支持 ES6 语法，但是我们可以告诉 gulp 使用 babel 将 gulpfile 转换为 ES5，方法就是将 gulpfile 命名为 **gulpfile.babel.js**。
  
-6. 使用 ES6 编写 **gulpfile.babel.js**
+(6) 使用 ES6 编写 **gulpfile.babel.js**
 
 ```javascript
 import gulp from 'gulp';
@@ -203,12 +201,12 @@ gulp.task('default', () => {
 
 开始工作以后，每次改动 index.js 都要手动 gulp 一下实在太麻烦了，使用 gulp-watch 可以监听文件变化，当文件被修改之后，自动将文件转换。
 
-1. 安装 gulp-watch
+(1) 安装 gulp-watch
 
 ```shell
 $ npm install gulp-watch --save-dev
 ```
-2. 新增 task
+(2) 新增 task
 
 ```javascript
 gulp.task('watch', () => {
@@ -221,14 +219,12 @@ gulp.task('watch', () => {
 });
 ```
 
-3. 启动 watch task
+(3) 启动 watch task
 
 ```shell
 $ gulp watch
 ```
 修改 index.js 后 lib/index.js 也会随之改变。(≧∀≦)ゞ
-
-
 
 ## 查看全部 tasks
 
@@ -248,7 +244,7 @@ $ gulp -T
 
 假如我想要 task1 执行完成后再执行 task2， 可以用以下三种方式：
 
-1. 直接返回一个流
+### 直接返回一个流
 
 ```javascript
 gulp.task('task1', function () {
@@ -257,7 +253,7 @@ gulp.task('task1', function () {
 //只要加一个return就好了
 ```
 
-2. 返回一个promise
+### 返回一个promise
 
 ```javascript
 gulp.task('task1', function () {
@@ -272,7 +268,7 @@ gulp.task('task1', function () {
 });
 ```
 
-3. 使用回调callback
+### 使用回调callback
 
 task 的执行函数其实都有个回调，我们只需要在异步队列完成的时候调用它就好了。
 

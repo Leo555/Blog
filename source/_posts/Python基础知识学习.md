@@ -6,11 +6,14 @@ tags:
 categories: Python
 ---
 <img src="/assets/img/Python_logo.png" alt="我是一只的图片">
+
 # Python 数据类型
 ---
 这里只列举一些Python与Java和JavaScript不一样的地方，如果你有任何语言基础，相信看完这篇文章就可以轻松写Python程序。
 <!-- more -->
+
 ## 字符串 
+
 Py字符串可以用单引号 **'...'**，双引号**"..."**，三引号 **'''...'''** 表示, 可以把单引号放在双引号里面。如下：
 
 ```python
