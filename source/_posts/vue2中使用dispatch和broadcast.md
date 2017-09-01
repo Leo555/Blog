@@ -1,5 +1,5 @@
 ---
-title: vue2 中使用 dispatch 和 broadcast
+title: vue2 组件通信——使用 dispatch 和 broadcast
 date: 2017-09-01 09:37:44
 categories: Vue
 tags: 
