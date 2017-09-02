@@ -8,7 +8,7 @@ tags:
 - broadcast
 ---
 
-最近在使用 Element 过程中发现组件通信大量使用 dispatch 和 broadcast 两个方法，之前在 [vue2 组件通信](https://lz5z.com/vue2%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/)也提到过 vue2 中取消了 $dispatch、$broadcast 两个重要的事件，而 Element 重新实现了这两个函数。
+最近在使用 [Element](http://element.eleme.io/) 过程中发现组件通信大量使用 `dispatch` 和 `broadcast` 两个方法，之前在 [vue2 组件通信](https://lz5z.com/vue2%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/) 也提到过 vue2 中取消了 `$dispatch` 和 `$broadcast` 两个重要的事件，而 Element 重新实现了这两个函数。
 
 代码地址放在 [`element-ui/lib/mixins/emitter`](https://github.com/ElemeFE/element/blob/dev/src/mixins/emitter.js)
 
@@ -54,6 +54,7 @@ exports.default = {
   }
 };
 ```
+
 ### 解析
 
 `dispatch` 和 `broadcast` 方法都需要 3 个参数，`componentName` 组件名称， `eventName` 事件名称， `params` 传递的参数。
@@ -64,11 +65,10 @@ exports.default = {
 
 ### 使用方式
 
-兄弟组件之间的通信可以很好的诠释上述两个事件。假设父组件 App.vue 中引入了两个子组件 Hello.vue 和 Fuck.vue。
-
+兄弟组件之间的通信可以很好的诠释上述两个事件。假设父组件 **App.vue** 中引入了两个子组件 **Hello.vue** 和 **Fuck.vue**。
 如果你的项目中巧合使用了 Element，那可以按照下面的方式将其引入进来，如果没有用 Element 也不用担心，复制上面的 `emitter.js`，通过 mixins 的方式引入即可。
 
-在 **App.vue** 中监听 `message` 事件，收到事件后，通过 `broadcast` 传播给相关组件。
+在 **App.vue** 中监听 `message` 事件，收到事件后，通过 `broadcast` 和接收到的参数，将事件定向传播给相关组件。
 
 ```html
 <template>
@@ -150,5 +150,14 @@ export default {
 }
 ```
 
+**Fuck.vue** 中监听了 `message` 事件，当收到消息时，向 `tableData` 中加入新的值。而 `summit` 方法则调用 `event.js` 中的 `communicate` 方法，通过 `dispatch` 方法将事件传播给 `ROOT` 组件。
+
 [完整代码地址](https://github.com/Leo555/vue_communication)
 
+## vue 组件通信方式总结
+
+1. 父组件向子组件传递信息使用 props down
+2. 子组件向父组件传递信息使用 event up
+3. 其它关系类型组件通信使用 global event bus
+4. 大型 SPA 组件之间通信使用 Vuex 管理组件状态
+5. 使用 Element 下 emitter.js 中的 dispatch 和 broadcast 做事件定向传播
