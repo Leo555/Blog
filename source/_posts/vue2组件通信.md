@@ -230,3 +230,5 @@ const app = new Vue({
 2. 子组件向父组件传递信息使用 event up
 3. 其它关系类型组件通信使用 global event bus
 4. 大型 SPA 组件之间通信使用 Vuex 管理组件状态
+
+如果想要在 vue2 中使用 dispatch 和 broadcast，可以参考 [vue2 组件通信——使用 dispatch 和 broadcast](https://lz5z.com/vue2%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1-%E4%BD%BF%E7%94%A8dispatch%E5%92%8Cbroadcast/)
