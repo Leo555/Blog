@@ -3,8 +3,10 @@ title: JavaScript中的let和const
 date: 2016-10-16 10:12:21
 categories: JavaScript
 tags:
-- JavaScript
+- let 
+- const
 - ES6
+- TDZ
 ---
 
 在 JavaScript 中，是没有块级作用域的概念的，在代码块内声明的变量，其作用域是整个函数作用域而不是块级作用域。let 和 const 作为加强版的 var，让程序员写出更安全，更高效的代码。
@@ -20,51 +22,51 @@ var 是函数作用域；let 是块作用域。在 ES6 之前，是没有块级�
 
 ```javascript
 while (true) {
-    var name = 'Leo';
-    break;
+  var name = 'Leo'
+  break
 }
-console.log(name); // Leo
+console.log(name) // Leo
 ```
 
 while 体里面定义的变量在代码块外也可以访问到，而使用 let 就不会出现这个问题。
 
 ```javascript
 while (true) {
-    let name = 'Leo';
-    break;
+  let name = 'Leo'
+  break
 }
-console.log(name); // ReferenceError: name is not defined
+console.log(name) // ReferenceError: name is not defined
 ```
 
 ### 变量提升
 
 ```javascript
 function test() {
-    console.log(value); // undefined
-    var value = 'something';
-    console.log(value); // something
+  console.log(value) // undefined
+  var value = 'something'
+  console.log(value) // something
 }
-test();
+test()
 ```
 
 使用 var 定义的变量，JavaScript 解析器会自动把定义搬到最前面，然后在原来定义的地方赋值。所以上述代码就变成了：
 
 ```javascript
-var value;
-console.log(value); // undefined
-value = 'something';
-console.log(value); // something
+var value
+console.log(value) // undefined
+value = 'something'
+console.log(value) // something
 ```
 
 而 let 则不会出现这样的问题
 
 ```javascript
 function test () {
-  console.log(value); // ReferenceError: value is not defined
-  let value = 'something';
+  console.log(value) // ReferenceError: value is not defined
+  let value = 'something'
 }
 
-test();
+test()
 ```
 
 ### 同名变量
@@ -72,35 +74,35 @@ test();
 用 var 定义变量时，我们可以多次对它进行定义，例如：
 
 ```javascript
-var a = 1;
-var a = 2;
-var a = 3;
+var a = 1
+var a = 2
+var a = 3
 ```
 
-这样的代码是不会报错的，在let定义的相同块中定义同名变量时就会报错了，例如：
+这样的代码是不会报错的，在 let 定义的相同块中定义同名变量时就会报错了，例如：
 
 ```javascript
-let a = 1;
-let a = 2; // SyntaxError: Identifier 'a' has already been declared
+let a = 1
+let a = 2 // SyntaxError: Identifier 'a' has already been declared
 
 // or
-var a = 1;
-let a = 2; // SyntaxError: Identifier 'a' has already been declared
+var a = 1
+let a = 2 // SyntaxError: Identifier 'a' has already been declared
 ```
 
 ## const
 
-const除了具有let的块级作用域和不会变量提升外，还有就是它定义的是常量，在用const定义变量后，我们就不能修改它了。
+const 除了具有 let 的块级作用域和不会变量提升外，还有就是它定义的是常量，在用 const 定义变量后，我们就不能修改它了。
 
 ```javascript
-const AA = 2;
-AA = 3; //TypeError: Assignment to constant variable.
+const AA = 2
+AA = 3 //TypeError: Assignment to constant variable.
 ```
 
 每一个通过 const 声明的变量必须进行初始化，否则抛出语法错误。
 
 ```javascript
-const name; //Uncaught SyntaxError: Missing initializer in const declaration
+const name //Uncaught SyntaxError: Missing initializer in const declaration
 ```
 
 const 声明的对象不能修改绑定，但是允许修改值，这也就意味着 const 声明的对象可以修改属性值。
@@ -108,14 +110,14 @@ const 声明的对象不能修改绑定，但是允许修改值，这也就意�
 ```javascript
 const person = {
 	name: 'Leo'
-};
+}
 // 可以修改属性值
-person.name = 'Leo555';
-person.age = 18;
+person.name = 'Leo555'
+person.age = 18
 // {name: "Leo555", age: 18}
 person = {
 	name: 'Leo'
-}; // Uncaught TypeError: Assignment to constant variable. 	
+} // Uncaught TypeError: Assignment to constant variable. 	
 ```
 
 ## 临时死区
@@ -124,13 +126,13 @@ var 声明的变量会自动提升， let 和 const 声明的变量则不会，�
 
 ```javascript
 if (true) {
-	console.log(typeof value); // undefined
-	var value = '555';
+	console.log(typeof value) // undefined
+	var value = '555'
 }
 
 if (true) {
-	console.log(typeof value); // Uncaught ReferenceError: value is not defined
-	let value = '555';
+	console.log(typeof value) // Uncaught ReferenceError: value is not defined
+	let value = '555'
 }
 ```
 
@@ -139,9 +141,9 @@ if (true) {
 如果在 let 和 const 作用域之外使用该变量则不会报错。
 
 ```javascript
-console.log(value); // undefined
+console.log(value) // undefined
 if (true) {
-	let value = '555';
+	let value = '555'
 }
 ```
 
@@ -151,9 +153,9 @@ var 声明使得在循环中创建和使用函数总是有一些问题。比如�
 
 ```javascript
 for (var i = 0; i < 5; i++) {
-    setTimeout(() => {
-        console.log(i)
-    }, i * 1000)
+  setTimeout(() => {
+    console.log(i)
+  }, i * 1000)
 }
 ```
 本来预期输出 0 - 4，结果输出了 5 个 5。 
@@ -161,17 +163,17 @@ for (var i = 0; i < 5; i++) {
 ```javascript
 // 在 let 和 const 出现之前是使用闭包
 for (var i = 0; i < 5; i++) {
-    (function (a) {
-        setTimeout(() => {
-            console.log(a)
-        }, a * 1000)
-    })(i)
+  (function (a) {
+    setTimeout(() => {
+      console.log(a)
+    }, a * 1000)
+  })(i)
 }
 // 使用 let 就简单很多了
 for (let i = 0; i < 5; i++) {
-    setTimeout(() => {
-        console.log(i)
-    }, i * 1000)
+  setTimeout(() => {
+    console.log(i)
+  }, i * 1000)
 }
 ```
 let 在循环中每一次都创建一个新的变量，并且将其初始化为当前 i 的值，所以循环内部创建的每个函数都能得到 i 值得副本。for-in 循环和 for-of 循环也是一样的。
@@ -189,10 +191,10 @@ for-in 循环和 for-of 循环由于都是创建新的变量将其绑定为当�
 ```javascript
 const aa = [0, 1, 2, 3, 4, 5]
 for (const a of aa) {
-    console.log(a)
+  console.log(a)
 }
 
 for (const a in aa) {
-    console.log(a)
+  console.log(a)
 }
 ```
