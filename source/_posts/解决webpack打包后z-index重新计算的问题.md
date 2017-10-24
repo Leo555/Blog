@@ -9,9 +9,7 @@ tags:
 
 ## 背景
 
-与 PC 端共同开发一个页面，页面由 PC 端提供内部 iframe 则由我们前端提供。开发时候遇到了一个问题，webpack 将 css 的 z-index 重新计算，导致 iframe 里面 z-index 比较大的 toast 被 iframe 外面 z-index 较小的 dialog 覆盖。
-
-给 z-index 加上 !important 后依然无效，查资料发现是 OptimizeCssAssetsPlugin 调用 cssProcessor cssnano 对 z-index 进行了重新计算导致的。
+与 PC 端共同开发一个页面，页面由 PC 端提供，内部 iframe 则由我们前端提供。开发时候遇到了一个问题，webpack 打包后 css 的 z-index 值与原始值不符，导致 iframe 里面的 toast 被外面 z-index 较小的 dialog 覆盖。更改 toast 的 z-index，发现没起作用，页面上的 z-index 依然是之前的值，而不是 css 中赋予的值。给 z-index 加上 !important 后依然无效，查资料发现是 OptimizeCssAssetsPlugin 调用 cssProcessor cssnano 对 z-index 进行了重新计算导致的。
 
 这本来是 webpack 插件的一个善举（让 z-index 数值更加合理），但是具体情况来看，这里显然不需要这个 “善举”。
 
@@ -33,7 +31,7 @@ new OptimizeCSSPlugin({
 })
 ```
 
-cssnano 将 z-index rebase 归类为 unsafe，而不是 bug，只有在单个网页的 css 全部写入一个 css 文件，并且不通过 JavaScript 进行改动时是 safe。
+cssnano 将 z-index rebase 归类为 unsafe，只有在单个网页的 css 全部写入一个 css 文件，并且不通过 JavaScript 进行改动时是 safe。
 
 参考： http://cssnano.co/optimisations/zindex/
 
@@ -62,3 +60,6 @@ unsafe (potential bug) 优化项默认不开启应该比较友好。
 })()
 ```
 
+## 总结
+
+webpack 在对代码进行打包之前，会扫描所有的模块，建立模块之间的依赖树，而插件的运作时机也是相对于此时的静态代码，因此用 js 动态插入 css，webpack 显然不会知道要插入的 css 是什么样的，因此动态插入的 css 内容就不会经过插件的处理，也就避免了 OptimizeCssAssetsPlugin 的 “善举”。

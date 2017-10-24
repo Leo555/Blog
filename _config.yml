@@ -110,8 +110,11 @@ markdown:
 # Deployment
 deploy:
   type: git
-  repo: git@github.com:Leo555/Leo555.github.io.git
-  branch: master
+  # repo: git@github.com:Leo555/Leo555.github.io.git
+  repo: 
+        github: git@github.com:Leo555/Leo555.github.io.git,master
+        coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git,master
+
 
 sitemap:
     path: sitemap.xml
