@@ -53,7 +53,11 @@ tags:
 
 > 注意：申请 SSL/TLS 证书需要通过 Let's Encrypt 的 HTTP 方式验证域名所有权。如果您的域名在境外无法访问 Coding Pages 的服务器，将导致 SSL/TLS 证书申请失败。
 
-查阅资料发现大家的解决方式都是设置双线解析，也就是国外访问通过 github pages，国内访问通过 coding.net，因此要为域名设置解析路线，因为我的域名服务商不支持自定义解析路线，因此选择免费的 [DNSPod](https://www.dnspod.cn/) 做 DNS 解析。
+查阅资料发现大家的解决方式都是设置双线解析，也就是国外访问通过 github pages，国内访问通过 coding.net，因此要为域名设置解析路线，如果域名服务商自定义解析路线，可以选择免费的 [DNSPod](https://www.dnspod.cn/) 做 DNS 解析。
+
+DNSPod 提供双线解析的原理我不是很明白，而且比较困惑的是 github pages 自定义域名原生是不资辞 SSL 的，之前的做法是使用 cloudflare 的 SSL 服务进行重定向，假如使用双线解析的话，那国外地址为什么能够看到合法的 SSL 呢？
+
+而且安装网上的做法改了 DNS 解析后，并没有发生双线解析，无论是国外还是国内都是解析到 coding.net，但是解决了国外地址访问报 SSL 证书错误的问题。着实很奇怪，以下是我的做法。
 
 ### DNSPod
 
@@ -77,4 +81,4 @@ DNSPod DNS 记录如下：
 
 ## 总结
 
-DNSPod 提供双线解析的原理我不是很明白，而且比较困惑的是 github pages 自定义域名原生是不资辞 SSL 的，之前的做法是使用 cloudflare 的 SSL 服务进行重定向，假如目前的解析真的是双线解析的话，那国外地址为什么能够看到合法的 SSL 呢？
+这次切换 github pages 到 coding.net 真的费时费力，不过好在现在网页能够正常访问，而且速度也比之前快很多，所以还是比较满意的。
