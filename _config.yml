@@ -13,6 +13,7 @@ avatar: /uploads/avatar.png
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+base: lz5z.com
 url: https://lz5z.com
 enforce_ssl: www.lz5z.com
 root: /
@@ -110,11 +111,11 @@ markdown:
 # Deployment
 deploy:
   type: git
-  repo: git@github.com:Leo555/Leo555.github.io.git
+  # repo: git@github.com:Leo555/Leo555.github.io.git
+  repo:
+        github: git@github.com:Leo555/Leo555.github.io.git
+        coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git
   branch: master
-  #repo: 
-  #      github: git@github.com:Leo555/Leo555.github.io.git,master
-  #      coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git,master
 
 
 sitemap:

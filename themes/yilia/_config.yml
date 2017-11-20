@@ -5,6 +5,9 @@ menu:
   归档: /archives/
   动画: /animatable/
 
+sub:
+  电影: movie.
+
 # SubNav
 subnav:
   mail: "mailto:lizhen55521@gmail.com"
@@ -77,7 +80,7 @@ friends:
   wxsm's space: https://wxsm.space/
   James Whitesaber: http://whitesaber.farbox.com/
   Jason's Blog: https://blog.aquariuslt.com/
-  wps便签: https://note.wps.cn
+  Movie: https://movie.lz5z.com/
 
 aboutme: <div>精通 JavaScript、Python、Ruby、Java、Lisp等技术<sup>名词拼写</sup>。
         擅长各种从入门到放弃。
