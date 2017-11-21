@@ -19,8 +19,11 @@
 			<% for (var i in theme.menu){ %>
 				<% count++ %>
 			<% } %>
+      <% for (var i in theme.sub){ %>
+      <% count++ %>
+      <% } %>
 			<% var ulWidth = count > 2 ? '70%' : '50%' %>
-			
+
 			<nav class="header-nav">
 				<div class="social">
 					<% for (var i in theme.subnav){ %>
@@ -35,9 +38,12 @@
 				<% for (var i in theme.menu){ %>
 					<li style="width: <%= divide %>"><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
 		        <%}%>
+        <% for (var i in theme.sub){ %>
+          <li style="width: <%= divide %>"><%- link_to('https://'+theme.sub[i]+config.base, i, {external: true}) %></li>
+          <%}%>
 				</ul>
 			</nav>
-		</header>				
+		</header>
 	</div>
 	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
 </nav>

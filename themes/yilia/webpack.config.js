@@ -66,7 +66,7 @@ module.exports = {
       loader: 'url-loader?limit=500&name=img/[name].[ext]'
     }, {
       test: /\.(woff|svg|eot|ttf)\??.*$/,
-      loader: 'file-loader?name=fonts/[name].[hash:6].[ext]'
+      loader: 'file-loader?name=fonts/[name].[ext]'
     }]
   },
   resolve: {

@@ -3,7 +3,6 @@
 menu:
   主页: /
   归档: /archives/
-  动画: /animatable/
 
 sub:
   电影: movie.
@@ -81,6 +80,7 @@ friends:
   James Whitesaber: http://whitesaber.farbox.com/
   Jason's Blog: https://blog.aquariuslt.com/
   Movie: https://movie.lz5z.com/
+  动画: https://lz5z.com/animatable/
 
 aboutme: <div>精通 JavaScript、Python、Ruby、Java、Lisp等技术<sup>名词拼写</sup>。
         擅长各种从入门到放弃。
