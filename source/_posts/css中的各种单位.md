@@ -1,8 +1,9 @@
 ---
-title: css 中的各种单位
+title: CSS 中的各种单位
 date: 2017-02-23 14:15:49
 categories: CSS
-tags: css
+tags: 
+- CSS
 ---
 
 之前遇到 css 中需要使用单位的情况，都草草用 px 或者百分比糊弄过去，导致当需要做一个响应式的页面的时候，要重新补一下 css 单位的技术债。
