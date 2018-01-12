@@ -309,8 +309,6 @@ $ bin/start-hbase.sh
 
 启动HBase之后可以通过 Web 页面查看运行状况： http://localhost:16010/master-status
 
-![](http://p1.bqimg.com/567571/ca249d5a624f81d0.png)
-
 ## HBase shell操作
 
 用shell连接你的HBase

@@ -11,7 +11,6 @@ categories: JavaScript
 
 前面说到Express有两个核心概念：Middleware和Routing。什么是Routing呢，简单来说就是http请求与服务端应答逻辑之间的映射关系。
 
-![routing](http://p1.bqimg.com/567571/ae38457a9cc5a93a.png)
 <!-- more -->
 路由是由一个 URI、HTTP 请求（GET、POST等）和若干个句柄组成，它的结构如下： app.METHOD(path, [callback...], callback)， app 是 express 对象的一个实例， METHOD 是一个 HTTP 请求方法， path 是服务器上的路径， callback 是当路由匹配时要执行的函数。
 
@@ -83,8 +82,6 @@ Express的Router对象，也就是之前提到的router-level middleware，可�
 
 可以等同于整个应用中的一个子应用，比如一个RESTful API；它有自己的middleware栈
 抽象地来看，可以简单视为整个应用middleware栈中的一片
-
-![Router对象](http://p1.bqimg.com/567571/b1fb950685120d13.png)
 
 在开发Express应用的时候，我们可以想想，整个应用是不是可以分拆为许多子应用，例如像上面所提到的，可以有个子应用专门来负责和数据库沟通并返回JSON格式的信息，即一个RESTful API。那么，在代码里，我们就可以新建一个子应用如下：
 

@@ -130,6 +130,18 @@ IE8 有自己独特的写法 X-UA-Compatible 对于 IE8 之外的浏览器是不
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 ```
 
+(4) format-detection
+
+防止 ios 把数字/字符串识别为电话/邮件/日期/地址
+
+```html
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="date=no">
+<meta name="format-detection" content="address=no">
+<meta name="format-detection" content="email=no">
+```
+
+
 # 参考资料
 
 [MDN-meta](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta)

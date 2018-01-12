@@ -65,43 +65,26 @@ Genymotion需要注册才能下载，如果本地没有VM VirtualBox，
 
 **“File -- Settings -- Plugins -- Browse Repositories -- Genymotion Download and install”**
 
-![](http://p1.bpimg.com/567571/8ce31e7a3ab1d2e7.png) 
-
 重启Android Studio后，选择菜单栏“View--Toolbar”，让工具栏显示出来，可以看到工具栏多了个Genymotion Device Manager的图标：
 
-![](http://p1.bqimg.com/567571/a8438291d5e060b6.png)
-
 点击这个图标，加载之前安装好的Genymotion文件夹，启动Genymotion模拟器。
-
-![](http://p1.bpimg.com/567571/4394d82bf3ebba68.png)
 
 启动后选择你所需要的Android版本和手机型号就可以了。
 当然了，如果要在模拟器上运行程序，还要确保模拟器加载了Android SDK：
 
-![](http://p1.bpimg.com/567571/b25279917e251377.png)
 
 ## Hello World
 终于到了鸡冻人心的Hello World环节
 
 **“File -- New -- New Projct”**创建新的工程文件
 
-![](http://p1.bpimg.com/567571/0b2a119095c7ce10.png)
-
 输入应用程序的名字和 Company Domain
-
-![](http://i1.piimg.com/567571/2b7d1569addca78d.png)
 
 选择Empty Activity
 
-![](http://i1.piimg.com/567571/56bc6911b473cf37.png)
-
-创建后的效果如下：
-
-![](http://i1.piimg.com/567571/885a7eb2b34c0342.png)
+点击创建
 
 ## 目录文件解析
-
-![](http://i1.piimg.com/567571/9cb0b222c24e6400.png)
 
 1. app/manifests AndroidManifest.xml配置文件目录
 2. app/java 源码目录
@@ -121,9 +104,7 @@ Activity是一个应用程序组件，提供用户与程序交互的界面
 
 ### Activity生命周期
 
-[官方](https://developer.android.com/reference/android/app/Activity.html)文档给出的图如下：
-
-![](http://p1.bpimg.com/567571/75a197c753928d46.png)
+[官方](https://developer.android.com/reference/android/app/Activity.html)文档：
 
 1. onCreate();创建 
 2. onStart();运行 
@@ -138,5 +119,3 @@ Activity是一个应用程序组件，提供用户与程序交互的界面
 2. Paused Activity失去焦点，但是对用户可见。
 3. Stopped Activity完全被遮挡，但保留所有的状态和成员信息。
 4. Killed Activity被销毁
-
-![](http://p1.bqimg.com/567571/2924ef5e1b85bbf1.png)

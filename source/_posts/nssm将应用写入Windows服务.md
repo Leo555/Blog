@@ -26,11 +26,11 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res) {
-	res.send('Hello World');
+  res.send('Hello World');
 });
 
 app.listen(3000, function() {
-	console.log('app is listening at port 3000');
+  console.log('app is listening at port 3000');
 });
 ```
 需要将其写入 Windows 服务。
@@ -43,21 +43,11 @@ $ nssm install node_test
 ```
 之后会显示出GUI界面：
 
-![GUI](http://i1.piimg.com/567571/bae4d79ec7252de9.png)
-
 输入**Path**为 node.exe安装路径，**Startup directory** 为应用文件路径，**Arguments** 为启动文件
-
-![参数](http://i1.piimg.com/567571/f75d03875221178c.png)
 
 点击 Install service
 
-![success](http://p1.bqimg.com/567571/92475175737060e3.png)
-
-然后打开 Windows 的 Services
-
-![Windows Service](http://p1.bqimg.com/567571/b47f06fe33d04914.png)
-
-看到刚才安装的应用已经在 Services 里面了，并且为 “Automatic”，说明它会随着 Windows 启动而自动启动。
+然后打开 Windows 的 Services，看到刚才安装的应用已经在 Services 里面了，并且为 “Automatic”，说明它会随着 Windows 启动而自动启动。
 
 右击-“start”启动该服务，或者在命令行中输入
 
@@ -66,7 +56,6 @@ $ nssm start node_test
 ```
 
 在浏览器中查看效果
-![3000](http://i1.piimg.com/567571/527e0e7fe0357a2e.png)
 
 在控制台输入 nssm 查看所有命令，可以看出 nssm 使用极其简单，参考[官方文档](http://nssm.cc/usage)
 ```
@@ -95,8 +84,6 @@ $ nssm install node_test_bat
 ```
 这次路径直接选择 bat 文件即可，因为它是可执行文件。
 
-![bat](http://p1.bpimg.com/567571/13de8c2c5d5396a2.png)
-
 启动 bat 文件
 
 ```
@@ -117,8 +104,6 @@ app is listening at port 3000
 ### nssm 启动 bat 服务报错
 
 遇到 bat 文件双击可以运行，但是写入服务却不能运行的情况。
-
-![](http://p1.bqimg.com/567571/311affdfb01653db.png)
 
 通过 Google 发现是可能是因为同时安装 Python2 和 Python3 导致的，因此改变 bat 文件为：
 
@@ -142,14 +127,11 @@ print('Hello')
 ```
 使用 Windows 自带的 Services 手动启动：
 
-![](http://p1.bpimg.com/567571/15d4d4abfb4ebb47.png)
-
 使用 nssm 启动：
 
 ```
 $ node_test: Unexpected status SERVICE_PAUSED in response to START control.
 ```
-![](http://p1.bpimg.com/567571/b2fb46ada936946f.png)
 
 因为应用启动后立即结束，所以应用进入**Paused** 的状态。
 
