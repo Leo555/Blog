@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 李振的博客
+title: lizhen's blog
 subtitle: 人生苦短，我再睡会
 description: Lizhen's personal static blog.
-author: Lizhen
+author: lizhen
 email: lizhen55521@gmail.com
 keywords: "Lizhen, JavaScript, Python, LeoScript, Webpack, Node, Machine Learning, animataion, vue, css, 机器学习, hexo, travis, movie, service worker"
 avatar: /uploads/avatar.png
