@@ -58,7 +58,6 @@ Block：将一个文件进行分块，通常是64M。
 NameNode：保存整个文件系统的目录信息、文件信息及分块信息，这是由唯一一台主机专门保存，当然这台主机如果出错，NameNode就失效了。在Hadoop2.0 开始支持activity-standy模式----如果主NameNode失效，启动备用主机运行NameNode。
 DataNode：分布在普通的计算机上，用于存储Block块文件。
 
-![HDFS](http://i4.piimg.com/567571/e14b5c00a00daa85.jpg)
 
 ### HDFS原理
 
@@ -98,12 +97,6 @@ Mapreduce是一个计算框架，既然是做计算的框架，那么表现形�
 
 我们要学习的就是这个计算模型的运行规则。在运行一个mapreduce计算任务时候，任务过程被分为两个阶段：map阶段和reduce阶段，每个阶段都是用键值对（key/value）作为输入（input）和输出（output）。而程序员要做的就是定义好这两个阶段的函数：map函数和reduce函数。
 
-从网上找了两个图
-
-![mapreduce](http://i2.buimg.com/567571/ebc8b48d7b9bbb22.jpg)
-
-
-![mapreduce](http://i2.buimg.com/567571/1f5b3c3d963edb93.jpg)
 
 ### Mapreduce运行机制
 

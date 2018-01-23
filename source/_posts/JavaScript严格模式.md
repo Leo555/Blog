@@ -6,7 +6,6 @@ tags:
 categories: JavaScript
 ---
 
-![](http://tuku02-qn.icp114.cn/public/16-11-9/47166681.jpg)
 
 # 简介
 

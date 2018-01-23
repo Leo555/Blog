@@ -9,15 +9,12 @@ categories: 杂记
 
 # 背景
 
-<img src="http://i1.piimg.com/567571/8338c9170ee94051.jpg" width="50%">
 
 公司业务网站上有一个可以 Free input 的 textarea，长度没有限制，可是存到 DB 的时候 Oracle varchar2 最大长度限制是4000，于是聪明的同事使用分而治之的方式解决了这个问题。如果长度大于某个值就新建一个 record 存储，然后使用 seq_num 记录表示其顺序。
 <!-- more -->
 # listagg
 
 上周做 report 的时候需要把这个 column 的数据生成给别的部门的同事，于是首先想到的是用 Oracle 的 listagg 函数。
-
-![listagg](http://p1.bqimg.com/567571/d767c741445ffd2e.gif)
 
 listagg 可以将多行合并成为一行。
 具体使用如下：
