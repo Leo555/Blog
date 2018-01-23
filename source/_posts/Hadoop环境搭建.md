@@ -25,8 +25,6 @@ ubuntu-16.04-desktop-amd64
 
 我们选择最新的稳定版本2.7.3
 
-![download](http://p1.bpimg.com/567571/a492d2482490772d.png)
-
 下载速度非常快
 
 ## 安装Hadoop

@@ -7,7 +7,6 @@ tags:
 categories: JavaScript
 ---
 
-![](http://p1.bpimg.com/567571/bb6a3b877f2a8024.png)
 
 # 背景
 ---
