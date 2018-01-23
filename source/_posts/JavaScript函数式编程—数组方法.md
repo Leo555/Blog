@@ -13,8 +13,8 @@ categories: JavaScript
 闲逛的时候发现一个有趣的网站，[ECMAScript](http://kangax.github.io/compat-table/es5/) 里面介绍了各种JS引擎和Node版本对JavaScript特性的支持，从ECMAScript5开始到未来2017将会有的特性。 ES5是JavaScript历史上最具革命的一个版本，开发者们开始摒弃对旧版本 IE 浏览器的支持，使用统一的风格编写JavaScript，并且新的ECMAScript规范也开始启动。目前几乎所有的浏览器环境和Node.JS环境都支持ES5。
 <!-- more -->
 本文将介绍在JavaScript函数式编程中最常使用的几个数组方法，这些我们都习以为常的方法，来自[ES5](http://kangax.github.io/compat-table/es5/)
-ES5中一共有10个数组方法
-![数组方法](http://i1.piimg.com/567571/14b64c75ee0bcc33.png)
+ES5中一共有10个数组方法。
+
 从后面的全绿我们可以知道，ES5的标准以及普及，以上这些方法可以放心使用。
 下面是JavaScript函数式编程最常见的三个方法：filter、 map、 reduce。
 
