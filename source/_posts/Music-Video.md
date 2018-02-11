@@ -24,11 +24,11 @@ categories: 杂记
 
 ## 优酷视频
 
-<iframe frameborder="0" width="640" height="498"  src="https://player.youku.com/embed/XMTgyMzM3OTI0NA==" allowfullscreen></iframe>
+优酷暂时没有 https，这个比较讨厌。
 
-优酷的资源复制出来要稍微修改一下，修改方式参考腾讯视频。
 
 ## B站
 
-<embed width="640" height="498"  quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="http://static.hdslb.com/miniloader.swf" flashvars="aid=7125002&page=1" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
+B 站的视频，找到想要分享的视频，点击下方的分享即可。
 
+<embed height="415" width="544" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="//static.hdslb.com/miniloader.swf" flashvars="aid=18827465&page=1" pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
