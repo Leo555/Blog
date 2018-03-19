@@ -580,3 +580,25 @@ $ ./test2.sh
 > 注：被包含的文件 test1.sh 不需要可执行权限。
 
 
+## read
+
+-p 输入提示信息
+-t 等待时间（单位是秒）
+-n 字符数，read只
+-s 输入隐藏数据
+
+
+```shell
+#!/bin/bash
+read -p "please input your name: " -t 30 name
+echo $name
+
+read -p "please input your sex [M/F]: " -n 1 sex
+echo -e "\n"
+echo $sex
+
+read -p "please input your password: " -s password
+echo -e "\n"
+echo $password
+```
+
