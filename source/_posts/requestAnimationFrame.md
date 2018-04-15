@@ -28,10 +28,10 @@ tags:
     .animate-div {
       width: 60px;
       height: 40px;
-      border-radius: 5px;
-      background: #92B901;
       position: absolute;
       left: 0;
+      border-radius: 5px;
+      background: #92B901;
       transform: translateZ(0);
       -webkit-transform: translateZ(0);
       animation: move_animation 5s linear 2s infinite alternate;
@@ -53,15 +53,21 @@ tags:
 用 css 实现是最合理也是最高效的。
 
 ```css
-@keyframes move_animation {
+@keyframes move_animation1 {
   0% { left: 0px; }
   100% { left: calc(100% - 60px); }
+}
+@keyframes move_animation {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(250px); }
+  100% { transform: translateX(500px)); }    
 }
 .animate-div {
   width: 60px;
   height: 40px;
   border-radius: 5px;
   background: #92B901;
+  left: 0;
   position: absolute;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
@@ -69,7 +75,8 @@ tags:
 }
 ```
 
-> 注：`-webkit-transform:translateZ(0);` 用来开启 chrome GPU 加速，解决动画”卡顿”。
+> 注：`transform:translateZ(0);` 用来开启 chrome GPU 加速，解决动画”卡顿”。
+> 在动画中使用 transform 比 left/top 性能更好，能减少浏览器 repaint。
 
 （2）假如用 JS 实现呢
 
