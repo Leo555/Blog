@@ -18,28 +18,30 @@ tags:
 <head>
   <style>
     .animate-warpper {
-        width: 100%;
-        height: 70px;
+      width: 100%;
+      height: 70px;
     }
     @keyframes move_animation {
-        0% { left: 0px; }
-        50% { left: 50%; }
-        100% { left: calc(100% - 60px); }
+      0% { left: 0px; }
+      100% { left: calc(100% - 60px); }
     }
     .animate-div {
-        width: 60px;
-        height: 40px;
-        border-radius: 5px;
-        background: #92B901;
-        position: absolute;
-        animation: move_animation 5s linear infinite alternate;
+      width: 60px;
+      height: 40px;
+      border-radius: 5px;
+      background: #92B901;
+      position: absolute;
+      left: 0;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      animation: move_animation 5s linear 2s infinite alternate;
     }
   </style>
 </head>
 <body>
   <section class="animate-warpper"> 
     <div class="animate-div"></div>
-  </section>  
+  </section>
 </body>
 </html>
 {% endraw %}
@@ -52,19 +54,22 @@ tags:
 
 ```css
 @keyframes move_animation {
-    0% { left: 0px; }
-    50% { left: 50%; }
-    100% { left: calc(100% - 60px); }
+  0% { left: 0px; }
+  100% { left: calc(100% - 60px); }
 }
 .animate-div {
-    width: 60px;
-    height: 40px;
-    border-radius: 5px;
-    background: #92B901;
-    position: absolute;
-    animation: move_animation 5s linear infinite alternate;
+  width: 60px;
+  height: 40px;
+  border-radius: 5px;
+  background: #92B901;
+  position: absolute;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  animation: move_animation 5s linear 2s infinite alternate;
 }
 ```
+
+> 注：`-webkit-transform:translateZ(0);` 用来开启 chrome GPU 加速，解决动画”卡顿”。
 
 （2）假如用 JS 实现呢
 
@@ -187,3 +192,4 @@ if (!Date.now)
 
 - [MDN-CSS requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
 - [深入理解 requestAnimationFrame](http://mp.weixin.qq.com/s/_m1flYySn6sgAROYbXqltg)
+- [CSS动画之硬件加速](https://www.w3cplus.com/css3/introduction-to-hardware-acceleration-css-animations.html)
