@@ -7,7 +7,7 @@ tags:
 - typeof
 ---
 
-JavaScript 语言可以识别 7 中不同的数据类型：
+JavaScript 语言可以识别 7 中不同的数据类型，除 Object 外，其它均为基本数据类型，Object 为引用数据类型。
 
 - Undefined, 只有一个值，即特殊值 undefined，使用 var/let/const 声明但未初始化的值。
 - Null，只有一个值，即特殊值 null，null 值表示一个空对象指针。
@@ -16,6 +16,8 @@ JavaScript 语言可以识别 7 中不同的数据类型：
 - String, 字符串，由零个或者多个 16 位 Unicode 字符串组成的字符序列。
 - Symbol, ES6 新增类型，它的实例是唯一且不可改变的。
 - Object, 一组数据和功能的集合。可以通过 new 加对象名称创建。
+
+<!--more-->
 
 ### Undefined 类型
 
@@ -42,7 +44,7 @@ null == undefined // true
 null === undefined // false
 ```
 
-#### null vs undefined
+null vs undefined
 
 尽管 null 和 undefined 之间的相等操作符（==）返回 true，不过它们的用途完全不同，如前所述，无论什么情况下，没有必要把一个变量的值设为 undefined，而如果一个变量将来要保存对象，应该将其显式地设为 null。
 
@@ -60,7 +62,7 @@ Boolean('/t') // false
 
 ### Number 类型
 
-#### 整数：
+(1) 整数：
 
 ```javascript
 var intNum = 55
@@ -70,7 +72,7 @@ var hexNum = 0xA // 十六进制的 10
 +0 === -0 // true
 ```
 
-#### 浮点数：
+(2) 浮点数：
 
 ```javascript
 3e-17 // 0.000...03
@@ -89,7 +91,7 @@ ECMAScript 最大数：Number.MAX_VALUE，在大多数浏览器中为 1.79769313
 isFinite(Number.MAX_VALUE + Number.MAX_VALUE) // false
 ```
 
-#### NaN （Not a Number）
+(3) NaN （Not a Number）
 
 NaN 用来表示本来要返回数值的操作数未返回数值的情况，避免抛出错误。
 
@@ -114,9 +116,7 @@ isNaN('blue') // true 不能转换为数值
 isNaN(true) // false 可以转换为数值 1
 ```
 
-#### 数值转换
-
-Number(), parseInt(), parseFloat()
+(4) 数值转换
 
 Number() 函数转换规则如下：
 
@@ -178,7 +178,7 @@ var o = new Object
 
 ### 如何判断数据类型
 
-#### typeof 操作符
+(1) typeof 操作符
 
 typeof 操作符返回值一共有7种：number，boolean，symbol，string，object，undefined，function。
 
@@ -195,13 +195,12 @@ typeof new Date() //object 无效
 typeof new RegExp() //object 无效
 ```
 
-总结：
 - 对于基本类型，除 null 以外，均可以返回正确的结果。
 - 对于引用类型，除 function 以外，一律返回 object 类型。
 - 对于 null ，返回 object 类型。
 - 对于 function 返回  function 类型。
 
-### instanceof
+(2) instanceof
 
 instanceof 用来判断 A 是否为 B 的实例，需要注意的是，instanceof 检测的是原型。
 
@@ -230,7 +229,7 @@ new A() instanceof Object // true
 
 [] 的 `__proto__` 指向了 Array.prototype，而 `Array.prototype.__proto__` 又指向了 Object.prototype，而 `Object.prototype.__proto__` 指向了 null，因此 []、Array、Object 在内部形成了一条原型链。instanceof 只能用来判断两个对象是否属于实例关系，而不能判断一个对象实例具体属于哪种类型。
 
-### constructor
+(3) constructor
 
 当一个函数 F 被定义的时候，JS 引擎会自动帮其添加 prototype，并在 prototype 上添加一个 constructor 属性，并让其指向 F 的引用。
 
@@ -257,7 +256,7 @@ window.constructor === Window
 1. null 和 undefined 是无效对象，因此没有 constructor 存在。
 2. 函数的 constructor 可以被重写，因此可能会出现判断错误。
 
-#### toString
+(4) toString
 
 toString() 是 Object 的原型方式，调用该方法，默认返回当前对象的 `[[CLass]]`，其格式为 [object Xxx]，其中 Xxx 就是对象的类型。
 
@@ -276,6 +275,23 @@ Object.prototype.toString.call(new Error()) // [object Error]
 Object.prototype.toString.call(document) // [object HTMLDocument]
 Object.prototype.toString.call(window) // [object Window]
 ```
+
+## 引用数据类型 vs 基本数据类型
+
+基本数据类型复制相当于在内存中新开辟一块内存，引用数据类型的复制相当于在内存中创建了一个新的指针，指向存储在堆中的一个对象。
+
+ECMAScript 中所有的函数都是 **按值传递参数** 的。也就是说，把函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另外一个变量一样。
+在向参数传递基本数据类型的值时，被传递的值会被复制给一个局部变量（即命名参数，也就是 arguments 对象中的一个元素）。在向参数传递引用类型的值时，会把这个值在内存中的地址复制给一个局部变量，因此这个局部变量的变化会反映在函数外部。
+
+```javascript
+function setName (obj) {
+  obj.name = 'Leo'
+}
+var person = new Object()
+setName(person)
+console.log(person.name) // "Leo"
+```
+
 
 ## 参考资料
 
