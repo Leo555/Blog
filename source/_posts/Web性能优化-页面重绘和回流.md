@@ -25,7 +25,7 @@ tags:
 
 >1.  浏览器把获取到的 HTML 代码解析成1个 DOM 树，HTML 中的每个 tag 都是 DOM 树中的1个节点，根节点是 document 对象。DOM 树里包含了所有 HTML 标签，包括 `display:none` 隐藏的标签，还有用 JS 动态添加的元素等。
 >2. 浏览器把所有样式解析成样式结构体，在解析的过程中会去掉浏览器不能识别的样式，比如 IE 会去掉 -moz 开头的样式。
->3. DOM Tree 和样式结构体组合后构建 render tree, render tree 类似于 DOM tree，但区别很大，render tree 能识别样式，render tree 中每个 NODE 都有自己的 style，而且 render tree 不包含隐藏的节点 (比如 `display:none` 的节点，还有 head 节点)，因为这些节点不会用于呈现，而且不会影响呈现的，所以就不会包含到 render tree 中。注意 `visibility:hidden` 隐藏的元素还是会包含到 render tree 中的，因为 `visibility:hidden` 会影响布局(layout)，会占有空间。根据 CSS2 的标准，render tree 中的每个节点都称为 Box (Box dimensions)，理解页面元素为一个具有填充、边距、边框和位置的盒子。
+>3. DOM Tree 和样式结构体组合后构建 render tree, render tree 类似于 DOM tree，但区别很大，render tree 能识别样式，render tree 中每个 NODE 都有自己的 style，而且 render tree 不包含隐藏的节点 (比如 `display:none` 的节点，还有 head 节点)，因为这些节点不会用于呈现，而且不会影响呈现的节点，所以就不会包含到 render tree 中。注意 `visibility:hidden` 隐藏的元素还是会包含到 render tree 中的，因为 `visibility:hidden` 会影响布局(layout)，会占有空间。根据 CSS2 的标准，render tree 中的每个节点都称为 Box (Box dimensions)，理解页面元素为一个具有填充、边距、边框和位置的盒子。
 >4. 一旦 render tree 构建完毕后，浏览器就可以根据 render tree 来绘制页面了。
 
 总结为下图：
@@ -81,9 +81,9 @@ document.body.appendChild(document.createTextNode('abc!')) // 回流+重绘
 
 ### 浏览器
 
-如果向上述代码中那样，浏览器不停地回流+重绘，很可能性能开销非常大，实际上浏览器会优化这些操作，将所有引起回流和重绘的操作放入一个队列中，等待队列达到一定的数量或者时间间隔，就 flush 这个队列，一次性处理相关的所有回流和重绘。
+如果向上述代码中那样，浏览器不停地回流+重绘，很可能性能开销非常大，实际上浏览器会优化这些操作，将所有引起回流和重绘的操作放入一个队列中，等待队列达到一定的数量或者时间间隔，就 flush 这个队列，一次性处理所有的回流和重绘。
 
-虽然有浏览器优化，但是当我们向浏览器请求一些 style 信息的时候，就会让浏览器提前 flush 队列，因为浏览器要确保我们能拿到精确的值。
+虽然有浏览器优化，但是当我们向浏览器请求一些 style 信息的时候，浏览器为了确保我们能拿到精确的值，就会提前 flush 队列。
 
 1. offsetTop/Left/Width/Height
 2. scrollTop/Left/Width/Height
@@ -143,7 +143,7 @@ el.style.top = left + 'px'
 
 - 对元素进行“离线操作”，完成后再一起更新：
 
-1. 使用DocumentFragment进行缓存操作,引发一次回流和重绘 [了解DocumentFragment 给我们带来的性能优化](http://www.cnblogs.com/blueSkys/p/3685740.html)
+1. 使用 DocumentFragment 进行缓存操作,引发一次回流和重绘 [了解DocumentFragment 给我们带来的性能优化](http://www.cnblogs.com/blueSkys/p/3685740.html)
 2. 元素操作前使用 `display: none`，完成后再将其显示出来，这样只会触发一次回流和重绘。
 3. 使用 cloneNode + replaceChild 技术，引发一次回流和重绘。
 
