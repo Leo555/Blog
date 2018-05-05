@@ -18,13 +18,14 @@ CSS3 硬件加速又叫做 GPU 加速，是利用 GPU 进行渲染，减少 CPU 
     
 [查看地址](https://lz5z.com/css3_hardware_speedup/)
 
+从 demo 中可以看到左边的图形在运动时外层有一圈绿色的边框，表示元素不停地 repaint，并且可以看到其运动过程中有丢帧现象，具体表现为运动不连贯，有轻微闪动。
+<!--more-->
+
 ### 动画与帧
 
 之前学习 flash 的时候，就知道动画是由一帧一帧的图片组成，在浏览器中也是如此。我们首先看一下，浏览器每一帧都做了什么。
 
 <img src="/assets/img/css3_gpu_speedup.png" alt="css3_gpu_speedup" style="max-width: 680px">
-
-<!--more-->
 
 >1. JavaScript：JavaScript 实现动画效果，DOM 元素操作等。
 >2. Style（计算样式）：确定每个 DOM 元素应该应用什么 CSS 规则。
