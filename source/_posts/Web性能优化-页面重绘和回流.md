@@ -147,6 +147,48 @@ el.style.top = left + 'px'
 2. 元素操作前使用 `display: none`，完成后再将其显示出来，这样只会触发一次回流和重绘。
 3. 使用 cloneNode + replaceChild 技术，引发一次回流和重绘。
 
+假如需要在下面的 html 中添加两个 li 节点：
+
+```html
+<ul id="">
+</ul>
+```
+
+使用 JavaScript：
+
+```javascript
+let ul = document.getElementByTagName('ul')
+let man = document.createElement('li')
+man.innerHTML = 'man'
+ul.appendChild(li)
+ 
+let woman = document.createElement('li')
+woman.innerHTML = 'woman'
+ul.appendChild(woman)
+```
+
+上述代码会发生两次回流，假如使用 `display: none` 的方案，虽然能够减少回流次数，但是会发生一次闪烁，这时候使用 DocumentFragment  的优势就体现出来了。
+
+DocumentFragment 有两大特点：
+
+1. DocumentFragment 节点不属于文档树，继承的 parentNode 属性总是 null。
+2. 当请求把一个 DocumentFragment 节点插入文档树时，插入的不是 DocumentFragment 自身，而是它的所有子孙节点。这使得 DocumentFragment 成了有用的占位符，暂时存放那些一次插入文档的节点。它还有利于实现文档的剪切、复制和粘贴操作。、
+
+```javascript
+let fragment = document.createDocumentFragment()
+
+let man = document.createElement('li')
+let woman = document.createElement('li')
+man.innerHTML = 'man'
+woman.innerHTML = 'woman'
+fragment.appendChild(man)
+fragment.appendChild(woman)
+
+document.body.appendChild(spanNode)
+```
+
+可见 DocumentFragment 是一个孤儿节点，没爹就能出生，但是在需要它的时候，它又无私地把孩子奉献给文档树，然后自己默默离开。是不是有点像《银翼杀手2049》？
+
 ## 参考资料
 
 - [16毫秒的优化
