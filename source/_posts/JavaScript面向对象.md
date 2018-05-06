@@ -23,17 +23,18 @@ tags:
 
 ```javascript
 function createPerson(name, age, job) {
-    let o = new Object();
-    o.name = name;
-    o.age = age;
-    o.job = job;
+    let o = new Object()
+    o.name = name
+    o.age = age
+    o.job = job
     o.sayName = function () {
-        console.log(this.name);
+        console.log(this.name)
     };
-    return o;
+    return o
 }
-let leo = createPerson('Leo', 18, "Engineer");
+let leo = createPerson('Leo', 18, "Engineer")
 ```
+
 工厂模式虽然解决了创建多个相似对象的问题，但没有解决对象识别的问题（即怎样知道一个对象的类型）。
 
 ## 构造函数模式
@@ -42,28 +43,36 @@ ECMAScript 中的构造函数可以用来创建特定类型的对象，像 Objec
 
 ```javascript
 function Person(name, age, job) {
-    this.name = name;
-    this.age = age;
-    this.job = job;
+    this.name = name
+    this.age = age
+    this.job = job
     this.sayName = function() {
-        console.log(this.name);
-    };
+        console.log(this.name)
+    }
 }
-let leo = new Person('Leo', 18, "Engineer");
-let jack = new Person('Jack', 18, "Engineer");
+let leo = new Person('Leo', 18, "Engineer")
+let jack = new Person('Jack', 18, "Engineer")
 ```
+
 构造函数模式与工厂模式有以下不同：
 
 1. 没有显式的创建对象； 
 2. 直接将属性和方法赋给了this对象； 
 3. 没有return语句； 
 
+构造函数应该以大写字母开头，使用 new 操作符。new 操作符创建对象经历以下 4 个步骤：
+
+1. 创建新的对象；
+2. 将构造函数的作用域赋给新对象（因此 this 就指向了这个新对象）；
+3. 执行构造函数中的代码（为这个新对象添加属性）；
+4. 返回新对象；
+
 生成的对象 leo 中有一个 constructor 属性，该属性指向 Person，并且可以用 instanceof 做类型检测。
 
 ```javascript
 leo.constructor === Person // true
-leo instanceof  Object; // true
-leo instanceof Person; // true
+leo instanceof  Object // true
+leo instanceof Person // true
 ```
 
 构造函数的缺点在于每个方法都要在每个实例上重新创建一遍。在前面例子中，leo 和 jack 都有一个名为 sayName 的方法，但是这两个方法不属于同一个对象。
@@ -72,17 +81,17 @@ leo instanceof Person; // true
 
 ```javascript
 function Person(name, age, job) {
-    this.name = name;
-    this.age = age;
-    this.job = job;
-    this.sayName = sayName;
+    this.name = name
+    this.age = age
+    this.job = job
+    this.sayName = sayName
 }
 
 function sayName() {
-    console.log(this.name);
+    console.log(this.name)
 };
-let leo = new Person('Leo', 18, "Engineer");
-let jack = new Person('Jack', 18, "Engineer");
+let leo = new Person('Leo', 18, "Engineer")
+let jack = new Person('Jack', 18, "Engineer")
 
 console.log(leo.sayName === jack.sayName) // true
 ```
@@ -95,16 +104,17 @@ JavaScript 中创建的每个函数都有一个 prototype 属性，这个属性�
 
 ```javascript
 function Person() {}
-Person.prototype.name = 'Leo';
-Person.prototype.age = 18;
+Person.prototype.name = 'Leo'
+Person.prototype.age = 18
 Person.prototype.sayName = function() {
-	console.log(this.name);
+	console.log(this.name)
 }
-let leo1 = new Person;
-let leo2 = new Person;
-leo1.sayName();
-leo2.sayName();
+let leo1 = new Person
+let leo2 = new Person
+leo1.sayName()
+leo2.sayName()
 ```
+
 在此，我们将 sayName() 方法和所有的属性直接添加到了 Person 的 prototype 属性中，构造函数变成了空函数，而通过 new 创建出来的对象具有相同的属性和方法。但是与构造函数模式不同对的是，新对象的这些属性和方法是由所有的实例共享的，也就是说
 
 ```javascript
