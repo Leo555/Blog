@@ -29,7 +29,7 @@ function createPerson(name, age, job) {
     o.job = job
     o.sayName = function () {
         console.log(this.name)
-    };
+    }
     return o
 }
 let leo = createPerson('Leo', 18, "Engineer")
@@ -89,7 +89,7 @@ function Person(name, age, job) {
 
 function sayName() {
     console.log(this.name)
-};
+}
 let leo = new Person('Leo', 18, "Engineer")
 let jack = new Person('Jack', 18, "Engineer")
 
@@ -118,7 +118,7 @@ leo2.sayName()
 在此，我们将 sayName() 方法和所有的属性直接添加到了 Person 的 prototype 属性中，构造函数变成了空函数，而通过 new 创建出来的对象具有相同的属性和方法。但是与构造函数模式不同对的是，新对象的这些属性和方法是由所有的实例共享的，也就是说
 
 ```javascript
-leo1.sayName === leo2.sayName; // true
+leo1.sayName === leo2.sayName // true
 ```
 
 ## 组合使用构造函数模式和原型模式
@@ -127,22 +127,22 @@ leo1.sayName === leo2.sayName; // true
 
 ```javascript
 function Person(name, age) {
-    this.name = name;
-    this.age = age;
-    this.friends = [];
+    this.name = name
+    this.age = age
+    this.friends = []
 }
 Person.prototype = {
     constructor: Person,
     sayName: function() {
-        console.log(this.name);
+        console.log(this.name)
     }
 }
-let leo = new Person('Leo', 18);
-let jack = new Person('Jack', 18);
-leo.friends.push('Elsa');
-jack.friends.push('Lucy');
-leo.sayName === jack.sayName; // true
-jack.friends === leo.friends; // false
+let leo = new Person('Leo', 18)
+let jack = new Person('Jack', 18)
+leo.friends.push('Elsa')
+jack.friends.push('Lucy')
+leo.sayName === jack.sayName // true
+jack.friends === leo.friends // false
 ```
 
 实例属性都是在构造函数中定义的，而实例共享属性 constructor 和方法 sayName() 则是在原型中定义的。这种构造函数与原型混成的模式，是目前 ECMAScript 中使用最广泛、认同度最高的一种创建自定义对象的方法。
@@ -153,16 +153,16 @@ jack.friends === leo.friends; // false
 
 ```javascript
 function Person(name, age) {
-    this.name = name;
-    this.age = age;
+    this.name = name
+    this.age = age
     if (typeof this.sayName != 'function') {
         Person.prototype.sayName = function() {
-            console.log(this.name);
+            console.log(this.name)
         }
     }
 }
-let leo = new Person('Leo', 18);
-leo.sayName();
+let leo = new Person('Leo', 18)
+leo.sayName()
 ```
 
 
@@ -174,9 +174,9 @@ Person 是一个构造函数，通过 new Person() 来生成实例对象。每�
 
 ```javascript
 if (typeof this.sayName != "function") {
-    Person.prototype.sayName = function() {...};
-    Person.prototype.sayBye = function() {...};
-    Person.prototype.cry = function() {...};
+    Person.prototype.sayName = function() {...}
+    Person.prototype.sayBye = function() {...}
+    Person.prototype.cry = function() {...}
 }
 ```
 这样一来，要么它们全都还没有定义(new 第一个实例时)，要么已经全都定义了(new 其他实例后)，即它们的存在性是一致的，用同一个判断就可以了，而不需要分别对它们进行判断。
@@ -190,16 +190,16 @@ if (typeof this.sayName != "function") {
 
 ```javascript
 function Person(name, age) {
-    let o = new Object();
-    o.name = name;
-    o.age = age;
+    let o = new Object()
+    o.name = name
+    o.age = age
     o.sayName = function() {
         console.log(this.name)
     }
-    return o;
+    return o
 }
-let leo = new Person('Leo', 18);
-leo.sayName();
+let leo = new Person('Leo', 18)
+leo.sayName()
 ```
 
 在这个例子中，Person 函数创建了一个新对象，并以相应的属性和方法初始化该对象，然后返回这个对象。除了使用 new 操作符并把使用的包装函数叫做构造函数外，这个模式跟工厂模式一模一样。构造函数在不返回值的情况下，默认会返回新的对象实例。
@@ -208,15 +208,15 @@ leo.sayName();
 
 ```javascript
 function SpecialArray() {
-    let values = new Array();
-    values.push.apply(values, arguments);
+    let values = new Array()
+    values.push.apply(values, arguments)
     values.toPipedString = function() {
-        return this.join('|');
+        return this.join('|')
     }
-    return values;
+    return values
 }
-let colors = new SpecialArray('red', 'blue', 'green');
-console.log(colors.toPipedString()); // 'red|blue|green'
+let colors = new SpecialArray('red', 'blue', 'green')
+console.log(colors.toPipedString()) // 'red|blue|green'
 ```
 
 关于寄生构造函数模式，有一点需要说明：返回的对象与构造函数或者构造函数的原型属性直接没有关系，所以不能依赖 instanceof 操作符来确定对象类型。
@@ -227,15 +227,15 @@ console.log(colors.toPipedString()); // 'red|blue|green'
 
 ```javascript
 function Person(name, age) {
-    let o = new Object();
+    let o = new Object()
     o.sayName = function() {
-        console.log(this.name);
-    };
-    return o;
+        console.log(this.name)
+    }
+    return o
 }
 
-let leo = Person('Leo', 18);
-leo.sayName();
+let leo = Person('Leo', 18)
+leo.sayName()
 ```
 注意在这种模式创建的对象中，除了使用 sayName 方法之外，没有其他办法访问 name 属性，即使有其他代码给这个对象添加属性或者方法，也不可能有别的办法访问传入到构造函数中的原始数据。
 
