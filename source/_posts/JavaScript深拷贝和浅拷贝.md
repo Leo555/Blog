@@ -146,4 +146,27 @@ console.log(obj2.n[0]) // [1, 2]
 
 使用递归拷贝对象的方法，在目标非常大，层级关系非常深的时候会出现性能问题，具体解决方案可以参考我之前写的 [JavaScript递归优化](https://lz5z.com/JavaScript%E9%80%92%E5%BD%92%E4%BC%98%E5%8C%96/) 使用栈代替递归的方式解决。
 
-详细上述方法已经能够满足我们平时大部分的需求了，如果有额外的需求，只需要修改递归和循环条件即可。
+### lodash
+
+lodash 中提供 4 个对象[拷贝](https://lodash.com/docs/4.17.10#clone)相关的方法： 
+
+_.clone()： 提供浅拷贝
+_.cloneDeep()： 提供深拷贝
+_.cloneDeepWith()：提供递归拷贝，并且可以自定义拷贝内容
+_.cloneWith()：提供浅拷贝，并且可以自定义拷贝内容
+
+```javascript
+function customizer(value) {
+  if (_.isElement(value)) {
+    return value.cloneNode(true)
+  }
+}
+ 
+let el = _.cloneDeepWith(document.body, customizer)
+ 
+console.log(el === document.body) // => false
+console.log(el.nodeName) // => 'BODY'
+console.log(el.childNodes.length) // => 20
+```
+
+相信上述几种方法已经能够满足我们平时大部分的需求了，如果有额外的需求，只能自己定义实现深/浅拷贝的方式了。
