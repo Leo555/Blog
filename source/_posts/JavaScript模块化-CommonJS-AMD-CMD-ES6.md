@@ -133,11 +133,139 @@ CMD 推崇依赖就近，可以把依赖写进你的代码中的任意一行，A
 
 ### UMD
 
-UMD 并不是一种规范，而是结合 AMD 和 CommonJS 的一种更为通用的 JS 模块解决方案。
+UMD（Universal Module Definition）并不是一种规范，而是结合 AMD 和 CommonJS 的一种更为通用的 JS 模块解决方案。
 
-在打包模块的时候经常会见到
+在打包模块的时候经常会见到这样的写法：
+
+```javascript
+output: {
+  path: path.resolve(__dirname, '../dist'),
+  filename: 'vue.js',
+  library: 'Vue',
+  libraryTarget: 'umd'
+},
+```
+
+表示打包出来的模块为 umd 模块，既能在服务端（node）运行，又能在浏览器端运行。我们来看 vue 打包后的源码 [vue.js](https://github.com/vuejs/vue/blob/master/dist/vue.js)
+
+```javascript
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.Vue = factory());
+}(this, (function () { 'use strict';
+// ...
+})))
+```
+
+代码翻译过来就是：
+
+1. 首先判断是否为 node 环境：exports 为一个对象，并且 module 存在。
+2. 如果是 node 环境就用 `module.exports = factory()` 把 vue 导出 （通过 require('vue') 进行引用）。
+3. 如果不是 node 环境判断是否支持 AMD：define 为 function 并且 define.amd 存在。
+4. 如果支持 AMD 就使用 define 定义模块，（通过 require(['vue']) 引用）。
+5. 否则的话直接将 vue 绑定在全局变量上（通过 window.vue 引用）。
+
 
 ### ES6
+
+
+终于到了 ES6 的时代，JS 开始从语言层面支持模块化，从 node8.5 版本开始支持原生 ES 模块。不过有两点限制：
+
+1. 模块名（文件名）必须为 mjs
+2. 启动参数要加上 `--experimental-modules`
+
+假如有 a.mjs 如下：
+
+```javascript
+export default {
+  name: 'Jack'	
+}
+```
+
+在 b.mjs 中可以引用：
+
+```javascript
+import a from './a.mjs'
+console.log(a) // { name: 'Jack' }
+```
+
+chrome61 开始也支持 JS module，只需要在 script 属性中添加 `type="module"` 即可。
+
+
+```html
+<script type="module" src="module.js"></script>
+<script type="module">
+  import { sayHello } from './main.js'
+  sayHello()
+</script>
+
+// main.js
+
+export function sayHello () {
+  console.info('Hello World')	
+}
+```
+
+
+### ES6 module 详解
+
+ES6 module 主要由两个命令组成：export 和 import。
+
+
+(1) export 命令
+
+```javascript
+// 输出变量
+export let num = 123
+export const name = 'Leo'
+
+// 输出一组变量
+let num = 123
+let name = 'Leo'
+export { num, name }
+
+// 输出函数
+export function foo (x, y) { return x ** y }
+
+// 使用别名
+function a () {}
+function b () {}
+export {
+  a as name,
+  b as value
+}
+// 引用的时候按照别名引用
+import { name, value } from '..'
+```
+
+
+需要注意的是，export 命令只能对外输出接口，以下的输出方式均为错误的：
+
+```javascript
+// 报错
+export 1
+var m = 1
+export m
+function f () {}
+export f
+
+// 正确的写法
+export var m = 1
+var m = 1
+export { m }
+export { m as n}
+export function f () {}
+function f () {}
+export { f }
+```
+
+export 输出的值是动态绑定的，这点与 CommonJS 不同，CommonJS 输出的是值的缓存，不存在动态更新。
+
+export 命令必须处于模块顶层，如果处于块级作用域内，就会报错。
+
+(2) import 命令
+
 
 ## 总结
 
