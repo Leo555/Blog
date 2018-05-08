@@ -1,5 +1,5 @@
 ---
-title: 在Hexo中插入音乐与视频
+title: 在 Hexo 中插入音乐与视频
 date: 2016-11-22 21:28:11
 tags:
 - Hexo

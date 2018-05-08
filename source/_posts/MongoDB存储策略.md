@@ -1,5 +1,5 @@
 ---
-title: MongoDB3.2存储策略
+title: MongoDB3.2 存储策略
 date: 2016-9-2 16:46:42
 tags: 
 - MongDB

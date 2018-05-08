@@ -1,5 +1,5 @@
 ---
-title: 深入学习JavaScript——继承
+title: 深入学习 JavaScript——继承
 date: 2016-12-05 23:50:08
 categories: JavaScript
 tags:

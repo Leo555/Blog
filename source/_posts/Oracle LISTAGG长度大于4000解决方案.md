@@ -1,5 +1,5 @@
 ---
-title: Oracle LISTAGG长度大于4000解决方案
+title: Oracle LISTAGG 长度大于 4000 解决方案
 date: 2016-10-24 10:11:35
 tags: 
 - Oracle

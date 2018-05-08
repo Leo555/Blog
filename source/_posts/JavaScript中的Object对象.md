@@ -1,4 +1,5 @@
-title: 深入学习JavaScript——Object对象
+---
+title: 深入学习 JavaScript——Object 对象
 date: 2016-11-25 15:52:44
 tags:
 - JavaScript

@@ -1,5 +1,5 @@
 ---
-title: JavaScript中的let和const
+title: JavaScript 中的 let 和 const
 date: 2016-10-16 10:12:21
 categories: JavaScript
 tags:

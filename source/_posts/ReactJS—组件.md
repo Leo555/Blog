@@ -1,5 +1,5 @@
 ---
-title: ReactJS学习——组件
+title: ReactJS 学习——组件
 date: 2017-02-08 17:02:15
 categories: React
 tags:

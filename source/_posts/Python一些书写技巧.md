@@ -1,7 +1,8 @@
-title: 'Python一些书写技巧'
+---
+title: Python一些书写技巧
 date: 2016-11-13 21:36:55
 tags:
-    - Python
+- Python
 categories: Python
 ---
 # 简介

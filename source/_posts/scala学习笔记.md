@@ -1,5 +1,5 @@
 ---
-title: scala学习笔记
+title: scala 学习笔记
 date: 2016-10-02 19:28:00
 tags: 
 - scala

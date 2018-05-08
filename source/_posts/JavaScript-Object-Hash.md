@@ -1,5 +1,5 @@
 ---
-title: JavaScript对象与Hash表
+title: JavaScript 对象与 Hash 表
 date: 2016-12-01 10:02:04
 categories: JavaScript
 tags:

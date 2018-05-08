@@ -1,5 +1,5 @@
 ---
-title: 深入学习JavaScript——理解原型
+title: 深入学习 JavaScript——理解原型
 date: 2016-12-02 13:21:53
 categories: JavaScript
 tags:

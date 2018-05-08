@@ -1,5 +1,5 @@
 ---
-title: JavaScript严格模式
+title: JavaScript 严格模式
 date: 2016-11-09 12:58:12
 tags: 
 - JavaScript

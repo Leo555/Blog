@@ -1,5 +1,5 @@
 ---
-title: 记一次艰难的bug寻找
+title: 记一次艰难的 bug 寻找
 date: 2016-07-14 13:54:48
 tags: 
 - bug

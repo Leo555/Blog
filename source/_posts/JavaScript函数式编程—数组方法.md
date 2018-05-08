@@ -1,5 +1,5 @@
 ---
-title: JavaScript函数式编程—数组方法
+title: JavaScript 函数式编程—数组方法
 date: 2016-9-23 10:59:11
 tags: 
 - JavaScript

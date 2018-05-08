@@ -1,5 +1,5 @@
 ---
-title: Yarn管理JavaScript模块
+title: Yarn 管理 JavaScript 模块
 date: 2017-02-01 19:42:03
 categories: JavaScript
 tags:

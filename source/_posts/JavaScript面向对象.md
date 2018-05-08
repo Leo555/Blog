@@ -1,5 +1,5 @@
 ---
-title: 深入学习JavaScript——面向对象
+title: 深入学习 JavaScript——面向对象
 date: 2016-12-01 18:14:29
 categories: JavaScript
 tags:

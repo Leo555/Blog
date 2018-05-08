@@ -1,5 +1,5 @@
 ---
-title: 换了一个Blog主题
+title: 换了一个 Blog 主题
 date: 2016-11-11 09:17:09
 tags: 
 - Hexo

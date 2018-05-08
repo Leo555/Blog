@@ -1,5 +1,5 @@
 ---
-title: 深入学习JavaScript——闭包
+title: 深入学习 JavaScript——闭包
 date: 2016-11-24 22:39:45
 tags:
 - JavaScript

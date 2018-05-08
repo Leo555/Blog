@@ -1,5 +1,5 @@
 ---
-title: 使用Travis CI自动部署Hexo
+title: 使用 Travis CI 自动部署 Hexo
 tags:
   - Travis
   - 持续集成
