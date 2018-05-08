@@ -86,9 +86,56 @@ CommonJS 能够避免全局命名空间污染，并且明确代码之间的依�
 
 ### AMD
 
+[AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) 全称异步模块化定义规范（Asynchronous Module Definition），采用异步加载模块的方式，模块的加载不影响后面语句的执行，并且使用 callback 回调函数的方式来运行模块加载完成后的代码。
+
+(1) 使用方式
+
+定义一个 myModule 的模块，它依赖 jQuery 模块：
+
+```javascript
+define('myModule', ['jQuery'], function ($) {
+  // $ 是 jQuery 的输出模块
+  $('#app').text('Hello World')
+})
+```
+
+第一个参数表示模块 id，为可选参数，第二个参数表示模块依赖，也是可选参数。
+
+使用 myModule 模块：
+
+```javascript
+require(['myModule', function (myModule) {}])
+```
+
+[requirejs](http://requirejs.org/) 是 AMD 规范的一个实现，详细的使用方法可以查看官方文档。
 
 
 ### CMD
+
+CMD 规范来源于 [seajs](https://seajs.github.io/seajs/docs/)，CMD 总体于 AMD 使用起来非常接近，AMD 与 CMD 的区别，可以查看 与 RequireJS 的异同](https://github.com/seajs/seajs/issues/277)
+
+(1) 使用方式：
+
+```javascript
+// CMD
+define(function(require, exports, module) {
+  var a = require('./a')
+  a.doSomething()
+  // ...
+  var b = require('./b')
+  // 依赖可以就近书写
+  b.doSomething()
+  // ...
+})
+```
+
+CMD 推崇依赖就近，可以把依赖写进你的代码中的任意一行，AMD 是依赖前置的，在解析和执行当前模块之前，模块必须指明当前模块所依赖的模块。
+
+### UMD
+
+UMD 并不是一种规范，而是结合 AMD 和 CommonJS 的一种更为通用的 JS 模块解决方案。
+
+在打包模块的时候经常会见到
 
 ### ES6
 

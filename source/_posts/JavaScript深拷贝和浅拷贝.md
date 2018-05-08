@@ -21,6 +21,8 @@ console.log(obj2) // { x: 2, y: 2 }
 
 以上的拷贝方式就是浅拷贝，当 obj2 的值改变时，obj1 的值也随之发生改变。
 
+<!--more-->
+
 ### 浅拷贝
 
 ```javascript
@@ -150,10 +152,14 @@ console.log(obj2.n[0]) // [1, 2]
 
 lodash 中提供 4 个对象[拷贝](https://lodash.com/docs/4.17.10#clone)相关的方法： 
 
-_.clone()： 提供浅拷贝
-_.cloneDeep()： 提供深拷贝
-_.cloneDeepWith()：提供递归拷贝，并且可以自定义拷贝内容
-_.cloneWith()：提供浅拷贝，并且可以自定义拷贝内容
+```javascript
+_.clone() // 提供浅拷贝
+_.cloneDeep() // 提供深拷贝
+_.cloneDeepWith() // 提供递归拷贝，并且可以自定义拷贝内容
+_.cloneWith() // 提供浅拷贝，并且可以自定义拷贝内容
+```
+
+demo
 
 ```javascript
 function customizer(value) {
