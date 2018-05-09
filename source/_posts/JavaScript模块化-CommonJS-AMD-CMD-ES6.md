@@ -266,6 +266,89 @@ export 命令必须处于模块顶层，如果处于块级作用域内，就会�
 
 (2) import 命令
 
+```javascript
+// import 的变量是只读的
+import { a } from './a.js'
+a = 33 // Syntax Error : 'a' is read-only
+
+// 但是可以修改其属性值
+a.name = 'Jack'
+
+// import 命令可以提升变量
+foo()
+import { foo } from './a.js'
+
+// import 是静态执行，不能使用表达式和变量
+import { a + b } from './a.ls' // 报错
+
+// 报错
+let module = 'my_module'
+import { foo } from module
+
+// 报错
+if (x === 1) {
+  import { foo } from 'module1'
+} else {
+  import { foo } from 'module2'
+}
+
+// 加载整个模块
+import * as utils from './utils.js'
+```
+
+(3) export default
+
+```javascript
+// a.js
+export default function () {
+  console.log('Hello World')	
+}
+
+// 引用 a
+import a from 'a.js'
+a()
+
+// b.js
+export default funtion foo () {
+  console.log('Hello World')	
+}
+
+// 引用 b
+import foo from 'b.js'
+foo()
+```
+
+export default 与 export 输出的模块在引用的时候，差别仅仅是是否用 `{}` 将变量包起来。
+
+```javascript
+function add (x, y) {
+  return x + y	
+}
+export { add as default }
+
+// 引用
+import { default as foo } from 'a.js'
+
+// 正确
+export var a = 1
+
+// 正确
+var a = 1;
+export default a
+
+// 错误
+export default var a = 1
+```
+
+(4) export 与 import 复合写法
+
+```javascript
+export { foo, bar } from 'a.js'
+// 相当于
+import { foo, bar } from 'a.js'
+export { foo, bar }
+```
+
 
 ## 总结
 
