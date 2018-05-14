@@ -33,5 +33,12 @@ DOM3 级进一步扩展 DOM，引入了以统一方式加载和保存文档的�
 
 > DOM0 级，DOM0 级标准本质上不存在，所谓 DOM0 只是 DOM 历史坐标中的一个参照点，具体来说，DOM0 级是指 Internet Explorer 4.0 和 Netscape Navigator 4.0 最初支持的 DHTML。
 
+可以通过以下代码确定浏览器是否支持 DOM 模块：
 
-
+```javascript
+var supportsDOM2Core = document.implementation.hasFeature('core', '2.0')
+var supportsDOM3Core = document.implementation.hasFeature('core', '3.0')
+var supportsDOM2HTML = document.implementation.hasFeature('HTML', '2.0')
+var supportsDOM2Views = document.implementation.hasFeature('Views', '2.0')
+var supportsDOM2XML =  document.implementation.hasFeature('XML', '2.0')
+```
