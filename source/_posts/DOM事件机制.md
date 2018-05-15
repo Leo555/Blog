@@ -21,11 +21,17 @@ DOM 事件流（event  flow）存在三个阶段：事件捕获 --> 事件目标
 (1) onlick -->事件冒泡，重写 onlick 会覆盖之前属性，没有兼容性问题。DOM0 级事件处理程序，每个元素都有自己的事件处理程序属性，这些属性通常全部小写，将这些属性的值全部设置为一个函数，就可以指定事件处理程序。
 
 ```javascript
-// 解绑单击事件，将 o0nlick 属性设为 null 即可
-el.onclik = null 
+var el = document.getElementById('myBtn')
+// 绑定单击事件
+el.onclick = function () {
+  alert('hello')
+}
+// 解绑单击事件，将 onclick 属性设为 null 即可
+el.onclick = null 
 ```
 
-(2) addEventListener(event, listener, useCapture)  
+(2) addEventListener(event, listener, useCapture) 
+
 参数定义：event---（事件名称，如 click，不带 on），listener---事件监听函数，useCapture---是否采用事件捕获进行事件捕捉，默认为 false，即采用事件冒泡方式。 IE8  及以下不支持，属于 DOM2 级的方法，**可添加多个方法不被覆盖**。
 
 ```javascript
