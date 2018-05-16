@@ -262,6 +262,17 @@ export { f }
 
 export 输出的值是动态绑定的，这点与 CommonJS 不同，CommonJS 输出的是值的缓存，不存在动态更新。
 
+如何删除 node 缓存？
+
+```javascript
+let config
+setInterval(() => {
+  delete require.cache[require.resolve('./config')]
+  config = require('./config')
+  console.log(config)
+}, 3000)
+```
+
 export 命令必须处于模块顶层，如果处于块级作用域内，就会报错。
 
 (2) import 命令
