@@ -1,10 +1,10 @@
 ---
 title: Web 性能优化-CSS3 硬件加速(GPU 加速)
 date: 2018-05-03 20:10:40
-categories: CSS
+categories: 性能
 tags:
 - CSS
-- 性能
+- 动画
 - GPU
 ---
 

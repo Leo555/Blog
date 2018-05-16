@@ -1,9 +1,8 @@
 ---
 title: Web 性能优化-页面重绘和回流（重排）
 date: 2018-05-02 21:46:24
-categories: CSS
+categories: 性能
 tags:
-- 性能
 - CSS
 - 重绘
 - 回流    
