@@ -361,6 +361,7 @@ export { foo, bar }
 ```
 
 
-## 总结
-
 ## 参考资料
+
+- [关于 CommonJS AMD CMD UMD 规范的差异总结](http://www.cnblogs.com/imwtr/p/4666181.html)
+- [Module 的语法](http://es6.ruanyifeng.com/#docs/module)
