@@ -44,7 +44,6 @@ tags:
         <script>
             // 白屏结束时间
             window.firstPaint = Date.now()
-
             // 白屏时间
             console.log(firstPaint - performance.timing.navigationStart)
         </script>
