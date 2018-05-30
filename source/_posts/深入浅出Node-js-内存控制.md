@@ -170,3 +170,66 @@ var get = function (key) {
 直接将内存作为缓存的方案要十分慎重，除了要限制缓存大小外，还需要考虑的事情是进程直接无法共享内存。解决方案是使用进程外缓存，比如 Redis 和 Memcached。
 
 ### 关注队列状态
+
+Node 通过生产者-消费者模式构建消息队列，假如队列的消费速度低于队列的生成速度，很容易造成堆积。举一个例子，有的应用会收集日志，假如采用数据库来记录日志，由于数据库构于文件系统之上，写入的效率低于文件直接写入，于是会形成数据库写入操作的堆积，而 JavaScript 中相关的作用域得不到释放，从而导致内存泄漏。
+
+解决方法：
+
+1. 使用更快消费速度的技术。比如日志使用文件系统读写代替数据库。
+2. 监控队列的长度，一旦堆积，监控系统产生警报并通知相关人员。
+3. 任意的异步调用都应该包含超时机制，一旦在限定时间内未完成响应，通过回掉函数传递超时异常，使异步调用有可控的响应时间。
+4. Bagpipe 中提供超时模式和拒绝模式，启动超时模式时，函数超时就返回超时错误，启动拒绝模式时，当队列拥塞时，新来的调用会直接响应拥塞错误。
+
+## 内存泄漏排查
+
+[node-heapdump](https://github.com/bnoordhuis/node-heapdump) 允许对 V8 堆内存抓取快照，用于事后分析。
+
+[node-memwatch](https://github.com/lloyd/node-memwatch)
+
+```javascript
+var memwatch = require('memwatch')
+memwatch.on('leak', function (info) {
+  console.log('leak:')
+  console.log(info)
+})
+memwatch.on('stats', function (stats) {
+  console.log('stats:')
+  console.log(stats)
+})
+```
+
+### stats 事件
+
+在进程中使用 node-memwatch 之后，每次进行垃圾回收的时候，都会触发一次 stats 事件，这个事件将会传递内存的统计信息。
+
+```javascript
+{
+  "num_full_gc": 17,  // 第 17 次进行全队垃圾回收
+  "num_inc_gc": 8, // 第几次增量垃圾回收
+  "heap_compactions": 8, // 第几次对老生代进行整理
+  "estimated_base": 2592568, // 预估基数
+  "current_base": 2592568, // 当前基数
+  "min": 2499912, // 最小
+  "max": 2592568, // 最大
+  "usage_trend": 0
+}
+```
+
+### leak 事件
+
+leak 事件记录 Node 中存在的内存泄漏。如果经过 5 次垃圾回收，内存仍然没有释放，这意味着可能存在内存泄漏，node-memwatch 会发出一个 leak 事件。
+
+```javascript
+{ start: Fri, 29 Jun 2012 14:12:13 GMT,
+  end: Fri, 29 Jun 2012 14:12:33 GMT,
+  growth: 67984,
+  reason: 'heap growth over 5 consecutive GCs (20s) - 11.67 mb/hr' }
+```
+
+growth 显示了 5 次垃圾回收的过程中内存增长了多少。
+
+## 大内存应用
+
+Node 中使用 Stream 模块处于处理大文件
+
+Stream 模块
