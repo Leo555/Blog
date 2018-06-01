@@ -232,4 +232,26 @@ growth 显示了 5 次垃圾回收的过程中内存增长了多少。
 
 Node 中使用 Stream 模块处于处理大文件
 
-Stream 模块
+Stream 模块是 Node 的原生模块，继承自 EventEmitter，具备基本自定义事件功能和标准的事件和方法。Stream 分为读和写两种，Node 中很多模块依赖于 Stream 模块，比如 fs.createReadStream() 和 fs.createWriteStream() 分别用来创建文件的可读流和可写流。
+
+```javascript
+var reader = fs.createReadStream('in.txt')
+var writer = fs.createWriteStream('out.txt')
+reader.on('data', function (chunk) {
+  writer.write(chunk)
+})
+reader.on('end', function () {
+  writer.end()
+})
+```
+
+或者使用管道方法
+
+```javascript
+var reader = fs.createReadStream('in.txt')
+var writer = fs.createWriteStream('out.txt')
+reader.pipe(writer)
+```
+
+通过流的方式进行文件的读写，不会受 V8 内存限制，如果不需要进行字符串层面的操作，可以借助 Buffer 操作，但是大片使用内存的情况依然需要消息，即使 V8 不限制内存，物理内存依然有限制。
+
