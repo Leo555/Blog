@@ -171,6 +171,147 @@ setEncoding() 的作用是让 data 事件中传递的不再是一个 Buffer 对�
 
 ## Buffer 性能
 
-## 总结
+Buffer 在文件 I/O 和网络 I/O 中运用广泛，在应用中，通常操作字符串，但一旦在网络中传输，都需要转换为 Buffer，以二进制数据进行传输。
 
+### 测试
 
+构造一个 10kb 大小的字符串，通过纯字符串的方式向客户端发送：
+
+```javascript
+var http = require('http')
+var helloworld = ''
+for (var i = 0; i < 1024 * 10; i++) {
+  helloworld += 'a'
+}
+// helloworld = new Buffer(helloworld)
+http.createServer(function (req, res) {
+  res.writeHead(200)
+  res.end(helloworld)
+}).listen(8001)
+```
+
+使用 ab 进行性能测试，发起 200 个并发客户端：
+
+```shell
+ab -c 200 -t 100 http://127.0.0.1:8001
+```
+在我的腾讯云上单核 1G CPU，1G 内存的服务器上测试结果如下：
+
+```shell
+Server Software:
+Server Hostname:        127.0.0.1
+Server Port:            8001
+
+Document Path:          /
+Document Length:        10240 bytes
+
+Concurrency Level:      200
+Time taken for tests:   13.104 seconds
+Complete requests:      50000
+Failed requests:        0
+Write errors:           0
+Total transferred:      515750000 bytes
+HTML transferred:       512000000 bytes
+Requests per second:    3815.61 [#/sec] (mean)
+Time per request:       52.416 [ms] (mean)
+Time per request:       0.262 [ms] (mean, across all concurrent requests)
+Transfer rate:          38435.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   16 129.3      1    3014
+Processing:     7   35  10.2     38     255
+Waiting:        1   34  10.4     37     254
+Total:          7   51 130.0     39    3047
+
+Percentage of the requests served within a certain time (ms)
+  50%     39
+  66%     40
+  75%     40
+  80%     40
+  90%     43
+  95%     52
+  98%     56
+  99%   1040
+ 100%   3047 (longest request)
+```
+测试的 QPS（每秒查询次数）为 3815.61，传输率为 38435.54。
+去掉 helloworld = new Buffer(helloworld) 前面的注释，再次测试：
+
+```javascript
+Server Software:
+Server Hostname:        127.0.0.1
+Server Port:            8001
+
+Document Path:          /
+Document Length:        10240 bytes
+
+Concurrency Level:      200
+Time taken for tests:   7.260 seconds
+Complete requests:      50000
+Failed requests:        0
+Write errors:           0
+Total transferred:      515750000 bytes
+HTML transferred:       512000000 bytes
+Requests per second:    6886.98 [#/sec] (mean)
+Time per request:       29.040 [ms] (mean)
+Time per request:       0.145 [ms] (mean, across all concurrent requests)
+Transfer rate:          69374.22 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    7  71.0      2    1012
+Processing:     7   17  10.1     14     417
+Waiting:        7   15  10.3     12     401
+Total:         10   24  72.7     16    1234
+
+Percentage of the requests served within a certain time (ms)
+  50%     16
+  66%     17
+  75%     18
+  80%     18
+  90%     30
+  95%     32
+  98%     41
+  99%     48
+ 100%   1234 (longest request)
+```
+测试的 QPS（每秒查询次数）为 6886.98，传输率为 69374.22。性能提升了近一倍。
+
+通过预先转换静态内容为 Buffer 对象，可以有效减少 CPU 重复使用，节省服务器资源。在 Node 构建的 Web 应用中，可以选择将页面中的动态内容和静态内容分类，静态内容预先转换为 Buffer 对象，使性能得到提升。由于文件本身是二进制数据，所以在不需要改变内容的场景中，设置 Buffer 为只读，不做额外的转换能达到更好的效果。
+
+### 文件读取
+
+通过 fs.createReadStream(path, opts) 创建文件读流，其中可以传入的参数为：
+
+```javascript
+{
+  flags: 'r',
+  encoding: null,
+  fd: null,
+  mode: 0666,
+  autoClose: true,
+  highWaterMark: 64 & 1024    
+}
+```
+opts 可以包括 start 和 end 值，使其可以从文件读取一定范围的字节而不是整个文件。例如从 100 个字节的文件中读取最后 10 个字节：
+
+```javascript
+fs.createReadStream('sample.txt', { start: 90, end: 99 })
+```
+
+fs.createReadStream() 的工作方式是在内存中准备一段 Buffer，然后在 fs.read() 读取时逐步从磁盘中将字节复制到 Buffer，完成一次读取后，从这个 Buffer 中通过 slice() 方法取出部分数据作为一个小 Buffer 对象，再通过 data 事件传递给调用方。如果 Buffer 用完，则重新分配一个，如果还有剩余则继续使用。
+
+```javascript
+var pool 
+function allocNewPool (poolSize) {
+  pool = new Buffer(poolSize)
+  pool.used = 0  
+}
+```
+理想状况下，每次读取的长度就是用户指定的 highWaterMark，但是假如读到文件最后，剩下的内容不到 highWaterMark 那么大，这是预先指定的 Buffer 对象将会有剩余，不过这部分内存可以分配给下次读取时用。
+
+highWaterMark 的大小对性能有以下两个影响：
+
+- highWaterMark 的设置对 Buffer 内存分配和使用有影响。
+- highWaterMark 设置过小，可能导致系统调用次数过多。
