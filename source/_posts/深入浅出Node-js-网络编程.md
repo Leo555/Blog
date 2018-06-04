@@ -194,8 +194,232 @@ UDP 相对于 TCP 更简单，它只是一个 EventEmitter 的实例，而非 St
 
 ## 构建 HTTP 服务
 
-## 构建 WebSocket 服务
+TCP 与 UDP 都属于网络传输层协议，如果要构造高效的网络应用，就应该从传输层进行着手。但是一般使用应用层协议就能满足我们大部分开发需求。Node 提供基本的 http 和 https 模块用于 HTTP 和 HTTPS 的封装。
 
-## 网络服务与安全
+```javascript
+var http = require('http')
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'})
+  res.end('Hello World')
+}).listen(1337, '127.0.0.1')
+console.log('Server running at http://127.0.0.1:1337/')
+```
 
-## 总结
+### HTTP
+
+HTTP 构建于 TCP 之上，属于应用层协议。
+
+使用 curl 查看网络通信的报文信息。
+
+```shell
+$ curl -v http://127.0.0.1:1337
+* About to connect() to 127.0.0.1 port 1337 (#0)
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 1337 (#0)
+> GET / HTTP/1.1
+> User-Agent: curl/7.29.0
+> Host: 127.0.0.1:1337
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Date: Mon, 04 Jun 2018 15:34:30 GMT
+< Connection: keep-alive
+< Transfer-Encoding: chunked
+< 
+Hello World
+* Connection #0 to host 127.0.0.1 left intact
+* Closing connection #0 
+```
+
+报文解析：
+
+(1) TCP 三次握手
+
+```shell
+* About to connect() to 127.0.0.1 port 1337 (#0)
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 1337 (#0)
+```
+(2) 客户端向服务端发送请求报文
+
+```shell
+> GET / HTTP/1.1
+> User-Agent: curl/7.29.0
+> Host: 127.0.0.1:1337
+> Accept: */*
+> 
+```
+(3) 服务器响应客户端内容
+
+```shell
+< HTTP/1.1 200 OK
+< Date: Mon, 04 Jun 2018 15:34:30 GMT
+< Connection: keep-alive
+< Transfer-Encoding: chunked
+< 
+Hello World
+```
+
+(4) 结束会话
+
+```shell
+* Connection #0 to host 127.0.0.1 left intact
+* Closing connection #0 
+```
+
+从上述报文信息中可以看出 HTTP 的特点：基于请求响应式的，以一问一答的方式实现服务，虽然基于 TCP 会话，但是本身并无会话的特点。
+
+### http 模块
+
+Node 的 http 模块包含对 HTTP 处理的封装，在 Node 中，HTTP 服务继承自 TCP 服务（net 模块），它能够与多个客户端保持连接，采用事件驱动的形式，并不为每一个连接创建额外的线程或者进程，占用很低的内存，并且实现高并发。
+
+HTTP 服务与 TCP 服务的区别在于，开启 keepalive 后，一个 TCP 会话可以用于多次请求和响应，TCP 以 connection 为单位进行服务，HTTP 服务以 request 为单位进行服务。http 模块即是将 connection 到 request 的过程进行了封装。
+
+除此之外，http 模块将连接所用的 socket 的读写抽象为 ServerRequest 和 ServerResponse 对象，它们分别对应请求和响应操作。在请求产生的过程中，http 模块拿到连接中传来的数据，调用二进制模块 http_parser 进行解析，在解析完请求报文的报头后，触发 request 事件，调用用户的业务逻辑。
+
+(1) HTTP 请求
+
+对于 TCP 连接的读操作，http 模块将其封装为 ServerRequest 对象。报头通过 http_parser 进行解析。
+
+```shell
+> GET / HTTP/1.1
+> User-Agent: curl/7.29.0
+> Host: 127.0.0.1:1337
+> Accept: */*
+> 
+```
+- req.method 属性： GET
+- req.url 属性： /
+- req.httpVersion 属性： 1.1
+其余报头是很规律的 key: Value 格式，被解析后放置在 req.headers 属性上传递给业务逻辑调用。
+
+```shell
+headers: {
+  'user-agent': 'curl/7.29.0',
+  host: '127.0.0.7:1337',
+  accept: '*/*'
+}
+```
+报文体部分则抽象为一个只读流对象，如果业务逻辑需要读取报文体中的数据，则要在这个数据流结束后才能进行操作。
+
+```javascript
+function (req, res) {
+  var buffers = []
+  req.on('data', function (trunk) {
+    buffers.push(trunk)
+  }).on('end', function () {
+    var buffer = Buffer.concat(buffers)
+    res.end('')
+  })
+}
+```
+
+(2) HTTP 响应
+
+HTTP 响应对象封装了底层连接的写操作，可以将其看作一个可写的流对象，通过 res.setHeader() 和 res.writeHead() 响应报文头部信息。
+
+```javascript
+res.writeHead(200, {'Content-Type': 'text/plain'})
+```
+转化为报文如下：
+
+```shell
+< HTTP/1.1 200 OK
+< Content-Type: text/plain
+```
+
+setHeader 可以进行多次调用，但只有调用 writeHead 后，报文才会写入到连接中，此外，http 模块还会自动设置一些头信息。
+
+```shell
+< Date: Mon, 04 Jun 2018 15:34:30 GMT
+< Connection: keep-alive
+< Transfer-Encoding: chunked
+< 
+```
+
+报文体则是通过调用 res.write() 和 res.end() 方法实现，区别在于 res.end() 会调用 write() 发送数据，然后发送信号告知服务器这次响应结束。
+
+响应结束后，HTTP 服务器可能将当期连接用于下一次请求，或者关闭连接。另外，无法服务器在处理业务逻辑时是否发生异常，务必在结束时调用 res.end() 结束请求，否则客户端将一直处于等待的状态。当然也可以通过延迟 res.end() 的方式实现客户端与服务器之间的长连接，但结束时务必关闭连接。
+
+(3) HTTP 服务的事件
+
+HTTP 服务器抽象了一些事件，供应用层使用，服务器也是一个 EventEmitter 实例。
+
+- connection 事件：HTTP 请求响应前触发，客户端与服务器建立底层的 TCP 连接时触发。
+- request 事件：建立 TCP 连接后，http 模块底层将在数据流中抽象出 HTTP 请求和响应，当解析出 HTTP 请求头时，触发该事件。
+- close 事件：调用 server.close() 方法停止接受新的连接，并且已有连接全部断开时触发。
+- checkContinue 事件：客户端发送较大的数据时，并不会直接将数据发送，而是先发一个头部带 `Expect: 100-continue` 的请求到服务器，服务器将触发 checkContinue 事件。如果服务器没有监听这个事件，则会自动响应客户端 100 Continue 的状态码，表示接受数据上传。如果不接受，或者客户端数据较多时，响应 400 Bad Request 拒绝客户端继续发送数据。
+- connect 事件：当客户端发起 CONNECT 请求时触发。而发起 CONNECT 请求通常在 HTTP 代理时出现，如果不监听该事件，发起请求的连接将会关闭。
+- upgrade 事件：客户端要求升级连接协议时触发。
+- clientError 事件：连接的客户端触发 error 事件时，这个错误会传递到服务器，此时触发该事件。
+
+(4) HTTP 客户端
+
+http 模块通过调用 http.request(options, connect) 构造客户端。与上文的 curl 大致相同：
+
+```javascript
+var options = {
+  hostname: '127.0.0.1',
+  port: 1334,
+  path: '/',
+  method: 'GET'
+}
+var req = http.request(options, function (res) {
+  console.log('STATUS: ' + res.statusCode)
+  console.log('HEADERS: ' + JSON.stringify(res.headers))
+  res.setEncoding('utf8')
+  res.on('data', function (chunk) {
+    console.log(chunk)
+  })
+})
+req.end()
+```
+执行：
+
+```shell
+$ node client.js
+STATUS: 200
+HEADERS: {"date":"Mon, 04 Jun 2018 15:34:30 GMT","connection":"keep-alive","transfer-encoding":"chunked"}
+Hello World 
+```
+options 中选项有如下这些：
+
+- host
+- hostname
+- port：默认 80
+- localAddress：建立网络连接的本地网卡
+- socketPath
+- method：默认为 GET
+- path：请求路径，默认为 /
+- headers
+- auth: Basic 认证，这个值将被计算成请求头中的 Authorization 部分。
+
+(5) HTTP 代理
+
+http 提供的 ClientRequest 对象也是基于 TCP 层实现的，在 keepalive 的情况下，一个底层的会话连接可以用于多次请求。为了重用 TCP 连接，http 模块包含一个默认的客户端代理对象 http.globalAgent。
+
+http.globalAgent 对每个服务器端（host + port）创建的连接进行管理，默认情况下，每个请求最多可以创建 5 个连接，它的实质是一个连接池。
+
+调用 HTTP 客户端对一个服务器发起 10 次 HTTP 请求时，其实质只有 5 个请求处于并发状态，后续的请求需要等待某个请求完成后才真正发出，与浏览器对同一域名的并发限制相同。
+
+```javascript
+var agent = new http.Agent({
+  maxSockets: 10
+})
+var options = {
+  hostname: '127.0.0.1',
+  port: 1334,
+  path: '/',
+  method: 'GET',
+  agent: agent
+}
+```
+也可以设置 agent 选项为 false，以脱离连接池管理，使请求不受并发限制。
+
+(6) HTTP 客户端事件
+
+- response：客户端收到服务器的响应时触发。
+- socket：当底层连接池中简历的连接分配给当前请求对象时触发该事件。
+- connect：客户端向服务器发起 CONNECT 请求时，如果服务器响应了 200 状态码，客户端触发。
+- upgrade：客户端发起 Upgrade 请求时，如果服务器响应了 101 Switching Protocols 状态，客户端触发。
+- continue：客户端向服务器发起 Expect: 100-continue 头信息，服务服务器响应 100 Continue 状态，客户端触发。
