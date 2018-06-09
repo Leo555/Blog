@@ -103,3 +103,65 @@ WebSocket.prototype.setSocket = function (socket) {
   this.socket.on('data', this.receiver)
 }
 ```
+
+客户端调用 send() 发送数据时，服务端出发 onmessage()；当服务器调用 send() 发送数据时，客户端的 onmessage() 触发。send() 发送的数据会被协议封装为一帧或者多帧，然后逐帧发送。
+
+为了安全考虑，客户端需要对发送的数据帧进行掩码处理，服务器一旦收到无掩码帧的数据，连接将关闭；而服务器的数据则不需要掩码处理。
+
+### 客户端 [API](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
+
+(1) WebSocket 对象作为构造函数，用于新建 WebSocket 实例。
+
+```javascript
+var ws = new WebSocket('ws://localhost:8080')
+```
+
+(2) readyState 
+
+- CONNECTING	0	连接还没开启。
+- OPEN	1	连接已开启并准备好进行通信。
+- CLOSING	2	连接正在关闭的过程中。
+- CLOSED	3	连接已经关闭，或者连接无法建立。
+
+(3) 事件
+
+```javascript
+ws.onopen = function () {}
+ws.onclose = function () {}
+ws.onmessage = function () {
+  // 服务器返回的数据可能是文本，也可能是二进制	
+}
+ws.onerror = function () {}
+```
+
+
+### 基于 Node 的 WebSocket 服务端实现
+
+[socket.io](https://socket.io/)
+
+```javascript
+var app = require('express')()
+var http = require('http').Server(app)
+var io = require('socket.io')(http)
+
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html')
+})
+
+io.on('connection', function(socket){
+  console.log('a user connected')
+})
+
+http.listen(3000, function(){
+  console.log('listening on *:3000')
+})
+```
+
+## 总结
+
+在所有的 WebSocket 服务器实现中，Node 最贴近 WebSocket 的使用方式：
+
+- 基于事件的编程接口
+- 基于 JavaScript，API 在服务端与客户端高度相似
+
+另外，Node 基于事件驱动的方式使得它应对 WebSocket 这类长连接的应用场景时可以轻松处理大量并发请求。
