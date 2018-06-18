@@ -5,7 +5,7 @@ cache:
 node_js: stable
 
 install:
-  - npm install
+  - yarn install
 
 script:
   - hexo clean
