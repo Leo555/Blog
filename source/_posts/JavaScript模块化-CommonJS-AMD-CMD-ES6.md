@@ -1,6 +1,6 @@
 ---
 title: 前端模块化-CommonJS,AMD,CMD,ES6
-date: 2018-05-06 23:03:17
+date: 2018-04-26 23:03:17
 categories: JavaScript
 tags:
 - CommonJS
