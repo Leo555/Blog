@@ -121,7 +121,64 @@ CSRF(Cross-Site Request Forgery) 跨站请求伪造攻击，是指攻击者通�
 ### CSRF 原理
 
 1. 用户登录信任网站 A，通过验证后，在浏览器中产生 cookie，记录登录状态。
-2. 
+2. 用户在没有登出的情况下登录危险的网站 B。
+3. 网站 B 要求访问网站 A，发出一个请求。
+4. 浏览器带着 A 产生的 Cookie 访问网站 A，此时 A 不知道中请求是用户发出的还是 B 发出的，A 根据 Cookie 中的信息处理该请求，网站 B 达到了模拟用户请求的目的。
+
+要完成一次 CSRF 攻击，用户必须依次完成两个步骤：
+
+1. 登录受信任网站 A，并在本地生成 Cookie。
+2. 在不登出 A 的情况下，访问危险网站 B。
+
+### CRSF 例子
+
+假如一家银行的转账操作的 URL 地址是：`http://lz5z.com/withdraw?account=AccountName&amount=1000&for=PayeeName`，恶意网站 B 中放置一段代码：`<img src=http://lz5z.com/withdraw?account=lizhen&amount=1000&for=BadGuy>`。由于 img、script、iframe 标签不受同源策略现在，假如用户在未登出 A 的情况下打开了 B 网站，在 Cookie 未过期的情况下，用户就会损失 1000 块。
+
+### CSRF 防御
+
+1. 正确使用 GET、POST 请求和 cookie。
+2. 检查请求报头中的 Referer 参数。Referer 用来标明请求来源于哪个地址。检查 Referer 字段存在局限性，因其完全依赖浏览器发送正确的 Referer 字段，虽然 HTTP 协议对此字段的内容有明确的规定，但浏览器具体实现的时候可能存在问题，比如早期 IE 中就存在 Referer 可以被修改的 bug。
+3. 在非 GET 请求中添加校验 token。
+4. 关键请求增加验证码。缺点是用户多次输入验证码，用户体验较差。
+5. 渲染表单的时候，为每一个表单生成一个 csrfToken，提交表单的时候，后端做 csrf 验证。
+6. 对每个用户创建 token，将其存放于服务端的 session 和客户端的 cookie 中，对每次请求，都检查二者是否一致。缺点是如果用户被 xss 攻破，黑客可能同时获取用户的 cookie。
+
+## DDoS 攻击
+
+DDos(Distributed Denial of Service) 分布式拒绝服务。原理是利用大量的请求造成资源过载，导致服务不可用。DDoS 攻击从层次上可以分为网络层攻击和应用层攻击。
+
+### 网络层 DDoS
+
+网络层 DDoS 攻击包括 SYN Flood、ACK Flood、UDP Flood、ICMP Flood 等。
+
+1. SYN Flood 攻击：主要利用 TCP 三次握手过程中存在的问题，TCP 三次握手过程是要建立连接的双方发送 SYN，SYN + ACK，ACK 数据包，攻击者构造 IP 去发送 SYN 包时，服务器返回的 SYN + ACK 就得不到应答，此时服务器会尝试重新发送，并且至少有 30s 的等待时间，导致资源和服务不可用。
+2. ACK Flood 攻击：TCP 连接建立后，所有的数据传输 TCP 都是带有 ACK 标志的，主机收到 ACK 标志的数据包后，需要检查数据包状态合法性。当攻击程序每秒发送 ACK 的速率达到一定程度时，使主机和防火墙负载变大。
+3. UDP Flood 攻击：当大量 UDP 数据包发送给受害系统时，可能会导致带宽饱和从而使得合法服务无法请求访问受害系统。
+4. ICMP Flood 攻击：ICMP（互联网控制消息协议）洪水攻击是通过向未良好设置的路由器发送广播信息占用系统资源的做法。
+
+### 应用层 DDoS
+
+应用层 DDoS 攻击不是发生在网络层，是发生在 TCP 建立握手成功之后，应用程序处理请求的时候，现在很多常见的 DDoS 攻击都是应用层攻击。
+
+1. CC 攻击：Challenge Collapasar，就是针对消耗资源比较大的页面不断发起不正常的请求，导致资源耗尽。
+2. DNS Flood：攻击者向服务器发送大量的域名解析请求，通常请求解析的域名是随机生成或者是网络世界上根本不存在的域名，域名解析的过程给服务器带来了很大的负载。
+3. HTTP 慢连接攻击：针对 HTTP 协议，先建立起 HTTP 连接，设置一个较大的 Conetnt-Length，每次只发送很少的字节，让服务器一直以为 HTTP 头部没有传输完成，这样连接一多就很快会出现连接耗尽。
+
+
+### 防御方式
+
+1. 防火墙：通过设置防火墙规则，比如允许或者拒绝特点通讯协议、端口或者 IP 地址。
+2. 交换机：通过使用交换机的访问控制，比如限速、假 IP 过滤、流量整形，深度包检测等功能，可以检测并过滤拒绝服务攻击。
+3. 路由器：与交换机类似。
+4. 流量清洗：当流量被送到 DDoS 防护清洗中心时，通过采用抗 DDoS 软件处理，将正常流量与恶意流量区分。
+
+
+## 参考资料
+
+- [跨站脚本](https://zh.wikipedia.org/zh-cn/跨網站指令碼)
+- [常见 Web 安全攻防总结](https://zoumiaojiang.com/article/common-web-security/)
+- [跨站请求伪造](https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0)
+- [拒绝服务攻击](https://zh.wikipedia.org/wiki/%E9%98%BB%E6%96%B7%E6%9C%8D%E5%8B%99%E6%94%BB%E6%93%8A)
 
 
 
