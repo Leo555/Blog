@@ -150,19 +150,19 @@ otherClassName 继承 className，因为拥有了 color 和 margin 属性，而 
 ```css
 @keyframes tada {
   from {
-  transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   10%, 20% {
-  transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
   }
   30%, 50%, 70%, 90% {
-  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
   }
   40%, 60%, 80% {
-  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
   }
   to {
-  transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
