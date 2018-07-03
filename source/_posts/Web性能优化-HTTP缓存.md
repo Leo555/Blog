@@ -56,7 +56,7 @@ HTTP 缓存通常要配合客户端（浏览器）使用才能发挥效果，所
 - private 表明响应只能被单个用户缓存，其它用户或者代理服务器不能缓存这些数据。
 
 
-(2) **Last-Modified/If-Modified-Since:**：
+(2) **Last-Modified/If-Modified-Since**：
 
 - Last-Modified 表示响应资源最后修改时间，需要与 Cache-Control 共同使用，是检查服务端资源更新的一种方式。
 
