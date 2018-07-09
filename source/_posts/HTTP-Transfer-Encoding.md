@@ -11,7 +11,7 @@ tags:
 
 Transfer-Encoding (传输编码) 是常见的 HTTP 头 字段，表示将实体安全传递给用户所采用的编码形式。与另外一个更为常见的 Content-Encoding 不同，Content-Encoding 表示内容编码，通常用于对实体内容进行压缩编码，比如 gzip，deflate 等。而 Transfer-Encoding 不会减少实体内容传输大小，但是会改变实体传输的形式。Content-Encoding 和 Transfer-Encoding 二者是相辅相成的，对于一个 HTTP 报文，很可能同时进行了内容编码和传输编码。
 
-在 HTTP 请求头中，Transfer-Encoding 被称为 TE，表示浏览器预期接受的传输编码方式，可使用 Response 头 Transfer-Encoding 字段中的值，比如 chunked；另外还可用 "trailers" 这个值来表明浏览器希望在最后一个大小为 0 的块之后还接收到一些额外的字段。
+在 HTTP 请求头中，Transfer-Encoding 被称为 TE，表示浏览器预期接受的传输编码方式，可使用 Response 头 Transfer-Encoding 字段中的值，比如 chunked；另外还可用 trailers 这个值来表明浏览器希望在最后一个大小为 0 的块之后还接收到一些额外的字段。
 
 <!--more-->
 
@@ -51,7 +51,7 @@ require('net').createServer(function(sock) {
 
 ## [Transfer-Encoding: chunked (分块传输编码)](https://zh.wikipedia.org/wiki/%E5%88%86%E5%9D%97%E4%BC%A0%E8%BE%93%E7%BC%96%E7%A0%81)
 
-`Transfer-Encoding` 的出现正是为了解决这个问题。如果一个 HTTP 消息（请求消息或应答消息）的 Transfer-Encoding 消息头的值为 chunked，那么，消息体由数量未定的块组成，并以最后一个大小为 0 的块为结束。分块传输编码只在 HTTP/1.1 中提供。
+Transfer-Encoding 的出现正是为了解决这个问题。如果一个 HTTP 消息（请求消息或应答消息）的 Transfer-Encoding 消息头的值为 chunked，那么，消息体由数量未定的块组成，并以最后一个大小为 0 的块为结束。分块传输编码只在 HTTP/1.1 中提供。
 
 使用方式也很简单，在响应头部加上 `Transfer-Encoding: chunked` 后，就表示这个报文采用分块编码。每一个非空的块都以该块包含数据的字节数（字节数以十六进制表示）开始，跟随一个 CRLF （回车及换行），然后是数据本身，最后以一个大小为 0 的块 + CRLF 结束。
 
