@@ -6,7 +6,7 @@ tags:
 - CommonJS
 - AMD
 - CMD
-- ES6    
+- ES6
 ---
 
 ## 模块化解决什么问题
@@ -51,9 +51,7 @@ circle.js
 
 ```javascript
 const { PI } = Math
-
 exports.area = (r) => PI * r ** 2
-
 exports.circumference = (r) => 2 * PI * r
 ```
 
@@ -68,8 +66,8 @@ console.log(circle.area(4))
 
 ```javascript
 (function (exports, require, module, __filename, __dirname) {
-    const circle = require('./circle.js')
-    console.log(circle.area(4))
+  const circle = require('./circle.js')
+  console.log(circle.area(4))
 })
 ```
 
@@ -150,9 +148,9 @@ output: {
 
 ```javascript
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.Vue = factory());
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) : 
+  (global.Vue = factory());
 }(this, (function () { 'use strict';
 // ...
 })))
@@ -201,17 +199,14 @@ chrome61 开始也支持 JS module，只需要在 script 属性中添加 `type="
 </script>
 
 // main.js
-
 export function sayHello () {
   console.info('Hello World')	
 }
 ```
 
-
 ### ES6 module 详解
 
 ES6 module 主要由两个命令组成：export 和 import。
-
 
 (1) export 命令
 
@@ -238,7 +233,6 @@ export {
 // 引用的时候按照别名引用
 import { name, value } from '..'
 ```
-
 
 需要注意的是，export 命令只能对外输出接口，以下的输出方式均为错误的：
 
@@ -359,7 +353,6 @@ export { foo, bar } from 'a.js'
 import { foo, bar } from 'a.js'
 export { foo, bar }
 ```
-
 
 ## 参考资料
 
