@@ -10,7 +10,7 @@ tags:
 
 ## Symbol 简介
 
-Symbol() 函数返回 symbol 类型的值，该类型具有静态属性和静态方法，并且不支持 `new Symbol()` 语法。每个从 Symbol() 函数中返回的 symbol 值都是唯一的。一个 symbol 值能作为对象属性的标识符，这是该数据类型仅有的目的。
+Symbol() 函数返回 symbol 类型的值，该类型具有静态属性和静态方法，并且不支持 `new Symbol()` 语法。每个从 Symbol() 函数中返回的 symbol 值都是唯一的。一个 symbol 值能作为对象属性的标识符，这是该数据类型最大的目的。
 
 <!--more-->
 
@@ -105,7 +105,12 @@ obj[a](123)
 
 ## Symbol 属性
 
-### Symbol.length: 0
+### Symbol.length
+
+```javascript
+Symbol.length // 0
+```
+
 ### Symbol.iterator
 
 返回对象默认迭代器方法，使用 `for...of` 进行迭代。
