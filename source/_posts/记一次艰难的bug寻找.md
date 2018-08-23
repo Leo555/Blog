@@ -5,7 +5,7 @@ tags:
 - bug
 - JavaScript
 - Mean
-categories: 杂记
+categories: Others
 ---
 
 # 背景

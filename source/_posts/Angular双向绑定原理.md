@@ -8,7 +8,6 @@ tags:
 - socket.io
 - $digest
 - $apply
-- 双向数据绑定
 ---
 
 # 从一个 demo 讲起

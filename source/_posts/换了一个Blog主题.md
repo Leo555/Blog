@@ -5,7 +5,7 @@ tags:
 - Hexo
 - Yilia
 - Theme
-categories: 杂记
+categories: Blog
 ---
 
 # yilia

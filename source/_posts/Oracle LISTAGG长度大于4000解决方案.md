@@ -4,7 +4,7 @@ date: 2016-10-24 10:11:35
 tags: 
 - Oracle
 - listagg
-categories: 杂记
+categories: Oracle
 ---
 
 # 背景

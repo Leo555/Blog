@@ -1,9 +1,9 @@
 ---
 title: 再见2017，你好2018
 date: 2018-02-11 20:11:42
-categories: 杂记
+categories: Others
 tags: 
-    - 总结
+- 总结
 ---
 
 ## 2017

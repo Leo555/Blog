@@ -1,7 +1,7 @@
 ---
 title: 迁移 github pages 到 coding.net
 date: 2017-10-27 15:37:59
-categories: 杂记
+categories: Blog
 tags:
 - github pages
 - coding.net

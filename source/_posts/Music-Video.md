@@ -5,7 +5,7 @@ tags:
 - Hexo
 - Music
 - Video
-categories: 杂记
+categories: Blog
 ---
 ## 网易云音乐iframe
 

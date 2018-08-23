@@ -1,7 +1,7 @@
 ---
 title: hexo 支持 emoji
 date: 2017-07-05 16:24:06
-categories: 杂记
+categories: Blog
 tags:
 - Hexo
 - emoji
