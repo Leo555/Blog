@@ -42,11 +42,16 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
-highlight:                                                                                                                                                                                                   
-  enable: true                                                                                                                                                                                               
-  auto_detect: true                                                                                                                                                                                          
-  line_number: true                                                                                                                                                                                          
+highlight:
+  enable: true
+  auto_detect: true
+  line_number: true
   tab_replace: ''
+
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
 
 # Category & Tag
 default_category: uncategorized
@@ -83,7 +88,7 @@ time_format: HH:mm:ss
 auto_spacing: true
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 12 
+per_page: 12
 pagination_dir: page
 
 # Disqus
@@ -102,32 +107,32 @@ markdown:
     typographer: true
     quotes: '“”‘’'
   plugins:
-    - markdown-it-footnote
-    - markdown-it-sup
-    - markdown-it-sub
-    - markdown-it-abbr
-    - markdown-it-emoji
+  - markdown-it-footnote
+  - markdown-it-sup
+  - markdown-it-sub
+  - markdown-it-abbr
+  - markdown-it-emoji
 
 # Deployment
 deploy:
   type: git
   # repo: git@github.com:Leo555/Leo555.github.io.git
   repo:
-        github: git@github.com:Leo555/Leo555.github.io.git
-        coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git
+    github: git@github.com:Leo555/Leo555.github.io.git
+    coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git
   branch: master
 
 
 sitemap:
-    path: sitemap.xml
+  path: sitemap.xml
 
 baidusitemap:
-    path: baidusitemap.xml    
+  path: baidusitemap.xml
 
 feed:
-    type: atom
-    path: atom.xml
-    limit: 100
+  type: atom
+  path: atom.xml
+  limit: 100
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
@@ -135,47 +140,21 @@ feed:
 plugin:
 - hexo-generator-feed
 
-#压缩文件
-html_minifier:
-  enable: true
-  exclude:
-
-css_minifier:
-  enable: true
-  exclude: 
-    - '*.min.css'
-
-js_minifier:
-  enable: true
-  mangle: true
-  output:
-  compress:
-  exclude: 
-    - '*.min.js'
-
-image_minifier:
-  enable: true
-  interlaced: false
-  multipass: false
-  optimizationLevel: 2
-  pngquant: false
-  progressive: false
-
 jsonContent:
-    meta: false
-    pages: false
-    posts:
-      title: true
-      date: true
-      path: true
-      text: false
-      raw: false
-      content: false
-      slug: false
-      updated: false
-      comments: false
-      link: false
-      permalink: false
-      excerpt: false
-      categories: false
-      tags: true
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
