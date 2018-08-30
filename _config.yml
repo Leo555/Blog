@@ -48,11 +48,6 @@ highlight:
   line_number: true
   tab_replace: ''
 
-index_generator:
-  path: ''
-  per_page: 12
-  order_by: -date
-
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -139,6 +134,32 @@ feed:
 #RSS订阅
 plugin:
 - hexo-generator-feed
+
+#压缩文件
+html_minifier:
+  enable: true
+  exclude:
+
+css_minifier:
+  enable: true
+  exclude:
+  - '*.min.css'
+
+js_minifier:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+  - '*.min.js'
+
+image_minifier:
+  enable: true
+  interlaced: false
+  multipass: false
+  optimizationLevel: 2
+  pngquant: false
+  progressive: false
 
 jsonContent:
   meta: false
