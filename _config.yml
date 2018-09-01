@@ -113,69 +113,43 @@ deploy:
   type: git
   # repo: git@github.com:Leo555/Leo555.github.io.git
   repo:
-        github: git@github.com:Leo555/Leo555.github.io.git
-        coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git
+    github: git@github.com:Leo555/Leo555.github.io.git
+    coding: git@git.coding.net:LeoScript/LeoScript.coding.me.git
   branch: master
 
 
 sitemap:
-    path: sitemap.xml
+  path: sitemap.xml
 
 baidusitemap:
-    path: baidusitemap.xml    
+  path: baidusitemap.xml
 
 feed:
-    type: atom
-    path: atom.xml
-    limit: 100
+  type: atom
+  path: atom.xml
+  limit: 100
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 #RSS订阅
 plugin:
-- hexo-generator-feed
-
-#压缩文件
-html_minifier:
-  enable: true
-  exclude:
-
-css_minifier:
-  enable: true
-  exclude: 
-    - '*.min.css'
-
-js_minifier:
-  enable: true
-  mangle: true
-  output:
-  compress:
-  exclude: 
-    - '*.min.js'
-
-image_minifier:
-  enable: true
-  interlaced: false
-  multipass: false
-  optimizationLevel: 2
-  pngquant: false
-  progressive: false
+  - hexo-generator-feed
 
 jsonContent:
-    meta: false
-    pages: false
-    posts:
-      title: true
-      date: true
-      path: true
-      text: false
-      raw: false
-      content: false
-      slug: false
-      updated: false
-      comments: false
-      link: false
-      permalink: false
-      excerpt: false
-      categories: false
-      tags: true
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
