@@ -338,6 +338,10 @@ UI 组件库：Ant Design/Element;
 
 webpack 插件是一个具有 apply 方法的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
 
+- 定义 apply 方法。
+- 指定一个绑定到 webpack 自身的事件钩子。
+- 使用 webpack 提供的 plugin API 操作构建结果。
+
 ```javascript
 const pluginName = 'BasicPlugin'
 
@@ -364,9 +368,53 @@ module.export = {
 }
 ```
 
+### 插件运作原理
+ 
+webpack 基于插件的运行模式非常强大，也是其能够迅速占领市场，社区活跃的主要原因。如果把 webpack 比作流水线，插件就是流水线上一个个工人。webpack 通过 [Tapable](https://github.com/webpack/tapable) 来组织这条复杂的流水线。
 
+webpack 在运行过程中会广播事件，每个插件只需要监听它所关心的事件，就能加入到这条生产线中，从而改变生产线的运作。webpack 中基于观察者模式的事件流机制保证了其运行的有序性。
 
+插件的核心是两个继承于 Tapable 的对象： Compiler 和 Compilation，它们是连接插件与 webpack 之间的桥梁。在插件代码的编写中，只要拿到了这两个对象，就可以实现广播和监听事件。
 
+- Compiler 对象包含了 Webpack 环境所有的的配置信息，包含 options，loaders，plugins 这些信息，这个对象在 Webpack 启动时候被实例化，它是全局唯一的，可以简单地把它理解为 Webpack 实例。
+- Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。当 Webpack 以开发模式运行时，每当检测到一个文件变化，一次新的 Compilation 将被创建。Compilation 对象也提供了很多事件回调供插件做扩展。通过 Compilation 也能读取到 Compiler 对象。
+
+Compiler 和 Compilation 的区别在于：Compiler 代表了整个 Webpack 从启动到关闭的生命周期，而 Compilation 只是代表了一次新的编译。
+
+### 插件事件流变化
+
+webpack4 插件的编写方式与之前发生了变化，主要表现在 Compiler 和 Compilation 中事件监听和广播的表现形式。
+
+webpack3:
+
+```javascript
+/**
+* 广播出事件
+* event-name 为事件名称，注意不要和现有的事件重名
+* params 为附带的参数
+*/
+compiler.apply('event-name', params);
+
+/**
+* 监听名称为 event-name 的事件，当 event-name 事件发生时，函数就会被执行。
+* 同时函数中的 params 参数为广播事件时附带的参数。
+*/
+compiler.plugin('event-name', function(params) {
+
+});
+
+// compilation.apply 和 compilation.plugin 使用方法和上面一致。
+```
+
+webpack4:
+
+[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) 中在 compilation.hooks 上添加了 htmlWebpackPluginBeforeHtmlGeneration 对象：
+
+<img src="/assets/img/webpack-plugin-hooks-2.png" alt="webpack-plugin-hooks">
+
+来看下 [html-webpack-include-assets-plugin](https://github.com/jharris4/html-webpack-include-assets-plugin) 的兼容写法。
+
+<img src="/assets/img/webpack-plugin-hooks.png" alt="webpack-plugin-hooks">
 
 
 ## 参考资料
@@ -374,5 +422,6 @@ module.export = {
 - [webpack](https://webpack.docschina.org/)
 - [手摸手，带你用合理的姿势使用 webpack 4](https://mp.weixin.qq.com/s/bQvRFb3luLkvj0MEOvbsJw)
 - [没有了CommonsChunkPlugin，咱拿什么来分包（译）](https://github.com/yesvods/Blog/issues/15)
+- [Webpack原理-编写Plugin](https://segmentfault.com/a/1190000012840742)
 
 
