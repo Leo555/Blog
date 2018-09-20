@@ -65,7 +65,7 @@ Vue CLI3 内部的 webpack 配置是通过 [webpack-chain](https://github.com/mo
 
 > 由于 webpack4 以后对 css 模块支持的逐步完善和 commonChunk 插件的移除，在处理 css 文件提取的计算方式上也做了些调整。所以之前一直使用的 extract-text-webpack-plugin 也完成了它的历史使命，将让位于 mini-css-extract-plugin。
 
-extract-text-webpack-plugin 会将 css 内联在 js 中，这样带来的问题是：css 或者 js 的改动都会影响整个 bundle 的缓存。而 mini-css-extract-plugin 在 code spliting 的时候会将原先内联写在每一个 js chunk bundle 的 css，单独拆成了一个个 css 文件。然后再通过 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 这个插件对 css 进行压缩和优化。
+extract-text-webpack-plugin 会将 css 内联在 js 中，这样带来的问题是：css 或者 js 的改动都会影响整个 bundle 的缓存。而 mini-css-extract-plugin 在 code Splitting 的时候会将原先内联写在每一个 js chunk bundle 的 css，单独拆成了一个个 css 文件。然后再通过 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 这个插件对 css 进行压缩和优化。
 
 <span style="opacity:0.7">备注：optimize-css-assets-webpack-plugin 默认使用 cssnano 进行 css 代码优化，但是也会导致一些问题，比如我之前遇到的 z-index 重新计算的问题和 keyframes 重命名的问题：[解决 webpack 打包后 z-index 重新计算的问题](https://lz5z.com/%E8%A7%A3%E5%86%B3webpack%E6%89%93%E5%8C%85%E5%90%8Ez-index%E9%87%8D%E6%96%B0%E8%AE%A1%E7%AE%97%E7%9A%84%E9%97%AE%E9%A2%98/)。 </span>
 
@@ -376,10 +376,10 @@ webpack 在运行过程中会广播事件，每个插件只需要监听它所关
 
 插件的核心是两个继承于 Tapable 的对象： Compiler 和 Compilation，它们是连接插件与 webpack 之间的桥梁。在插件代码的编写中，只要拿到了这两个对象，就可以实现广播和监听事件。
 
-- Compiler 对象包含了 Webpack 环境所有的的配置信息，包含 options，loaders，plugins 这些信息，这个对象在 Webpack 启动时候被实例化，它是全局唯一的，可以简单地把它理解为 Webpack 实例。
-- Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。当 Webpack 以开发模式运行时，每当检测到一个文件变化，一次新的 Compilation 将被创建。Compilation 对象也提供了很多事件回调供插件做扩展。通过 Compilation 也能读取到 Compiler 对象。
+- Compiler 对象包含了 webpack 环境所有的的配置信息，包含 options，loaders，plugins 这些信息，这个对象在 webpack 启动时候被实例化，它是全局唯一的，可以简单地把它理解为 webpack 实例。
+- Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。当 webpack 以开发模式运行时，每当检测到一个文件变化，一次新的 Compilation 将被创建。Compilation 对象也提供了很多事件回调供插件做扩展。通过 Compilation 也能读取到 Compiler 对象。
 
-Compiler 和 Compilation 的区别在于：Compiler 代表了整个 Webpack 从启动到关闭的生命周期，而 Compilation 只是代表了一次新的编译。
+Compiler 和 Compilation 的区别在于：Compiler 代表了整个 webpack 从启动到关闭的生命周期，而 Compilation 只是代表了一次新的编译。
 
 ### 插件事件流变化
 
