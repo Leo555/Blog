@@ -1,12 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const safeParser = require('postcss-safe-parser');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-// 模板压缩
-// 详见：https://github.com/kangax/html-minifier#options-quick-reference
 var minifyHTML = {
   collapseInlineTagWhitespace: true,
   collapseWhitespace: true,
@@ -35,32 +36,31 @@ module.exports = {
       loader: 'html'
     }, {
       test: /\.(scss|sass|css)$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [{
-          loader: "css-loader",
-          options: {
-            sourceMap: false,
-            modules: false,
-            importLoaders: true
-          }
-        }, {
-          loader: "postcss-loader",
-          options: {
-            plugins: function () {
-              return [
-                require('autoprefixer')('last 3 versions', 'ie 11')
-              ]
-            },
-            sourceMap: false
-          }
-        }, {
-          loader: "sass-loader",
-          options: {
-            sourceMap: false
-          }
-        }]
-      })
+      loader: [MiniCssExtractPlugin.loader, {
+        loader: "css-loader",
+        options: {
+          sourceMap: false,
+          modules: false,
+          importLoaders: true
+        }
+      }, {
+        loader: require.resolve('postcss-loader'),
+        options: {
+          ident: 'postcss',
+          plugins: () => [
+            require('postcss-flexbugs-fixes'),
+            autoprefixer({
+              flexbox: 'no-2009',
+            }),
+          ],
+          sourceMap: false,
+        },
+      }, {
+        loader: "sass-loader",
+        options: {
+          sourceMap: false
+        }
+      }]
     }, {
       test: /\.(gif|jpg|png)\??.*$/,
       loader: 'url-loader?limit=500&name=img/[name].[ext]'
@@ -69,10 +69,18 @@ module.exports = {
       loader: 'file-loader?name=fonts/[name].[ext]'
     }]
   },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.common.js'
-    }
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin(),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          parser: safeParser,
+          discardComments: {
+            removeAll: true
+          }
+        }
+      }),
+    ]
   },
   plugins: [
     new CleanPlugin('source'),
@@ -84,7 +92,6 @@ module.exports = {
         })]
       }
     }),
-    new ExtractTextPlugin('[name].[chunkhash:6].css'),
     new HtmlWebpackPlugin({
       inject: false,
       cache: false,
@@ -98,6 +105,10 @@ module.exports = {
       minify: minifyHTML,
       template: './source-src/css.ejs',
       filename: '../layout/_partial/css.ejs'
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
+      chunkFilename: '[name].[contenthash:8].chunk.css',
+    }),
   ]
 }
