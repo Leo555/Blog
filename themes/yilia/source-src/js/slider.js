@@ -37,7 +37,6 @@ function init() {
 			friends: false,
 			aboutme: false,
 			items: [],
-			jsonFail: false,
 			showTags: false,
 			search: ''
 		},
@@ -146,7 +145,7 @@ function init() {
 		app.$set('search', searchWording)
 		searchWording !== '' && handleSearch(searchWording)
 	}).catch((err) => {
-		app.$set('jsonFail', true)
+		console.log(err)
 	});
 
 	// 隐藏

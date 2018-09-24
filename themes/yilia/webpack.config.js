@@ -15,7 +15,6 @@ var minifyHTML = {
 }
 
 module.exports = {
-  watch: true,
   entry: {
     main: './source-src/css/main.scss',
     slider: './source-src/js/slider.js',
