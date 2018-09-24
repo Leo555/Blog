@@ -109,15 +109,15 @@ const 声明的对象不能修改绑定，但是允许修改值，这也就意�
 
 ```javascript
 const person = {
-	name: 'Leo'
+  name: 'Leo'
 }
 // 可以修改属性值
 person.name = 'Leo555'
 person.age = 18
 // {name: "Leo555", age: 18}
 person = {
-	name: 'Leo'
-} // Uncaught TypeError: Assignment to constant variable. 	
+  name: 'Leo'
+} // Uncaught TypeError: Assignment to constant variable. 
 ```
 
 ## 临时死区
@@ -126,13 +126,13 @@ var 声明的变量会自动提升， let 和 const 声明的变量则不会，�
 
 ```javascript
 if (true) {
-	console.log(typeof value) // undefined
-	var value = '555'
+  console.log(typeof value) // undefined
+  var value = '555'
 }
 
 if (true) {
-	console.log(typeof value) // Uncaught ReferenceError: value is not defined
-	let value = '555'
+  console.log(typeof value) // Uncaught ReferenceError: value is not defined
+  let value = '555'
 }
 ```
 
@@ -143,7 +143,7 @@ if (true) {
 ```javascript
 console.log(value) // undefined
 if (true) {
-	let value = '555'
+  let value = '555'
 }
 ```
 
@@ -182,7 +182,7 @@ let 在循环中每一次都创建一个新的变量，并且将其初始化为�
 
 ```javascript
 for (const i = 0; i < 5; i++) { //TypeError: Assignment to constant variable.
-	console.log(i)
+  console.log(i)
 }
 ```
 
