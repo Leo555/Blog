@@ -98,10 +98,16 @@ export default class ScrollingObserver {
         window.removeEventListener('touchend', this.onWindowTouchEnd.bind(this))
     }
 
+    /**
+     * 只有发生 touchmove 才会滚动
+     */
     onWindowTouchMove () {
         this.isScrolling = true
     }
 
+    /**
+     * touchend 后进行判断
+     */
     onWindowTouchEnd (e) {
         if (!this.isScrolling) return
         if (this.useRaf) {
