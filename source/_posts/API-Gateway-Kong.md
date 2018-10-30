@@ -12,8 +12,7 @@ tags:
 
 Kong 是一款基于 OpenResty 的 API 网关平台，在客户端和（微）服务之间转发 API 通信。Kong 通过插件的方式扩展自己的功能，其中包括身份验证、安全控制、流量控制、熔断机制、日志、黑名单、API 分发等等众多功能。下图是官网给出的传统项目架构和使用 Kong 的架构：
 
-<img src="/assets/img/legacy-architecture.svg" alt="legacy-architecture" style="float: left;width: 48%;">
-<img src="/assets/img/legacy-architecture.svg" alt="legacy-architecture" style="float: right;width: 48%;">
+<img src="/assets/img/kong.png" alt="kong">
 
 Next-Generation API Platform for Modern Architectures。
 
@@ -111,7 +110,7 @@ $ kong reload
 (1) 创建一个名为 kong-net 的 network
 
 ```sh
-$ docker network create kong-net                
+$ docker network create kong-net
 ```
 
 (2) 启动数据库（PostgreSQL）
@@ -244,15 +243,3 @@ $ curl -i -X GET \
 ## 总结
 
 以上只是 Kong 简单的安装和工具的使用，由于之前对 docker、PostgresSQL 等周边工具并不熟悉，所以学习起来需要扩展的东西比较多，暂时先写到这里吧。关于 Kong 插件的使用已经编写，用户操作、授权、负载均衡、熔断等信息，这里先埋坑，后面有时间再补上吧。
-
-
-
-
-
-
-
-
-
-
-
-
