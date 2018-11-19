@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Leo555/Blog.png)](https://travis-ci.org/Leo555/Blog)
+
 BlogBackup
 ==========
 
