@@ -59,132 +59,28 @@ function step (timestamp) {
 raf = window.requestAnimationFrame(step)
 ```
 
-下面贴一下完整代码：
+完整代码 [scrolling-observer](https://github.com/Leo555/scrolling-observer)：
 
-ScrollingObserver.js 
-
-```javascript
-let scrollTimer
-let raf
-
-export default class ScrollingObserver {
-
-    /**
-     * 构造函数
-     * @param isScrolling 初始值是否为滚动
-     * @param scrollTime 设置初始滚动时间
-     * @param useRaf 是否使用 requestAnimationFrame
-     */
-    constructor (isScrolling = false, scrollTime = Date.now(), useRaf = false) {
-        this.isScrolling = isScrolling
-        this.scrollTime = scrollTime
-        this.useRaf = useRaf
-        this.initEvents()
-    }
-
-    /**
-     * 初始化 touch 事件
-     */
-    initEvents () {
-        window.addEventListener('touchmove', this.onWindowTouchMove.bind(this))
-        window.addEventListener('touchend', this.onWindowTouchEnd.bind(this))
-    }
-
-    /**
-     * 移除 touch 事件
-     */
-    destroy () {
-        window.removeEventListener('touchmove', this.onWindowTouchMove.bind(this))
-        window.removeEventListener('touchend', this.onWindowTouchEnd.bind(this))
-    }
-
-    /**
-     * 只有发生 touchmove 才会滚动
-     */
-    onWindowTouchMove () {
-        this.isScrolling = true
-    }
-
-    /**
-     * touchend 后进行判断
-     */
-    onWindowTouchEnd (e) {
-        if (!this.isScrolling) return
-        if (this.useRaf) {
-            this.rafHandler(e)
-        } else {
-            this.setIntervalHandler(e)
-        }
-    }
-
-    /**
-     * 使用 requestAnimationFrame 判断元素位置是否发生变化
-     * @param e
-     */
-    rafHandler (e) {
-        let element = e.target
-        let rectObject0 = element.getBoundingClientRect()
-        let _this = this
-        window.cancelAnimationFrame(raf)
-
-        function step (timestamp) {
-            _this.scrollTime = Date.now()
-            let rectObject1 = element.getBoundingClientRect()
-            if (rectObject0.top !== rectObject1.top) {
-                rectObject0 = rectObject1
-                raf = window.requestAnimationFrame(step)
-            } else {
-                _this.isScrolling = false
-                window.cancelAnimationFrame(raf)
-                return
-            }
-        }
-
-        raf = window.requestAnimationFrame(step)
-    }
-
-    /**
-     * 使用 setInterval 判断元素位置是否发生变化
-     * @param e
-     */
-    setIntervalHandler (e) {
-        let element = e.target
-        clearInterval(scrollTimer)
-        let rectObject0 = element.getBoundingClientRect()
-        scrollTimer = setInterval(() => {
-            let rectObject1 = element.getBoundingClientRect()
-            this.scrollTime = Date.now()
-            if (rectObject0.top === rectObject1.top) {
-                this.isScrolling = false
-                clearInterval(scrollTimer)
-            }
-            rectObject0 = rectObject1
-        }, 16.7 * 5)
-    }
-}
-```
-注意要将实例写成单例模式：
+包已经发布在 npm 上了，可以 npm 或者 yarn 使用：
 
 ```javascript
-import ScrollingObserver from './ScrollingObserver'
-
-let instance;
-
-export default function Scroll () {
-    if (!instance) {
-        instance = new ScrollingObserver();
-    }
-    return instance
-}
+$ npm install scrolling-observer --save
+$ yarn add scrolling-observer
 ```
 
 使用方式：
 
 ```javascript
-import Scroll from './scroll'
+import scroll from 'scrolling-observer'
 
-let isScrolling = Scroll().isScrolling // 页面是否在滚动
-let scrollTime = Scroll().scrollTime // 最后滚动时间
+// 初始化
+scroll()
+// 页面是否在滚动
+let isScrolling = scroll().isScrolling
+// 最后滚动时间
+let scrollTime = scroll().scrollTime
+// destroy
+scroll().destroy()
 ```
 
 需要使用 ssr 的同学请注意不要在 node 端初始化，因为构造函数中使用了 window 对象。
