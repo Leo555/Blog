@@ -89,6 +89,30 @@ function loadjs (event) {
 
 这种方式的缺点是目前 onerror 中的 event 参数无法区分究竟是什么原因导致的错误，可能是资源不存在，也可能是 SRI 校验失败，不过目前来看，除非有统计需求，无差别对待并没有多大问题。
 
+除此之外，我们还需要使用 [script-ext-html-webpack-plugin](https://www.npmjs.com/package/script-ext-html-webpack-plugin) 将 onerror 事件注入进去：
+
+```javascript
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+
+module.exports = {
+  //...
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new SriPlugin({
+      hashFuncNames: ['sha256', 'sha384']
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      custom: {
+        test: /.js*/,
+        attribute: 'onerror="loadjs.call(this, event)" onsuccess="loadSuccess.call(this)"'
+      }
+    })
+  ]
+}
+```
+
+然后将 loadjs 和 loadSuccess 两个方法注入到 html 中，可以使用 inline 的方式。
+
 还在知乎上看到一位大神另辟蹊径，通过 jsonp 的方式解决 CDN 劫持。个人感觉这种方式目前能够完美应对 CDN 劫持的主要原因是运营商通过文件名匹配的方式进行劫持，作者的方式就是通过 onerror 检测拦截，并且去掉资源文件的 js 后缀以应对 CDN 劫持。
 
 [应对流量劫持，前端能做哪些工作？](https://www.zhihu.com/question/35720092)
