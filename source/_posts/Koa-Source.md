@@ -15,7 +15,7 @@ tags:
 
 ### Koa 代码结构
 
-<img src="/assets/img/koa-source.png" alt="koa-source" style="max-width: 300px">
+<img src="/assets/img/koa-source.png" alt="koa-source" style="max-width: 300px;display: block;">
 
 <!--more-->
 
