@@ -34,6 +34,36 @@ application 是 koa 的入口文件，export 出一个 Application 的类（继�
 
 - toJSON: 返回一个去除私有属性（`_`开头）的对象。
 
+
+```javascript
+module.exports = class Application extends Emitter {
+  listen(...args) {
+    debug('listen');
+    const server = http.createServer(this.callback());
+    return server.listen(...args);
+  }
+  
+  use(fn) {
+    if (typeof fn !== 'function') throw new TypeError('middleware must be a function!');
+    this.middleware.push(fn);
+    return this;
+  }
+  
+  callback() {
+    const fn = compose(this.middleware);
+    
+    if (!this.listenerCount('error')) this.on('error', this.onerror);
+    
+    const handleRequest = (req, res) => {
+      const ctx = this.createContext(req, res);
+      return this.handleRequest(ctx, fn);
+    };
+  
+    return handleRequest;
+  }
+}
+```
+
 ### context.js
 
 context 是我们在使用 koa 中最常接触到的 ctx，就是一个暴露出来的对象。context 中实现了对 cookie 的 get set 操作，这也是我们可以直接使用 ctx 对 cookie 操作的原理。除此之外，ctx 中最重要的是 delegate，也就是委托。我们简单看一下代码：
@@ -99,7 +129,47 @@ delegate(proto, 'request')
 ctx.hostname 即是 ctx.request.hostname。
 
 
-### request.js
+### request.js && response.js
+
+request.js 和 response.js 中完成对 Koa Request/Response 对象的封装，可以通过 request.xxx/response.xxx 对其进行操作。其中使用了很多 get 和 set 方法。
 
 
-### response.js
+
+## 实现一个简单的 moa
+
+- 首先需要完成对 http 模块的封装，可以使用创建服务器。
+- 然后完成 request 和 response 对象的封装，以及将其代理到 context 对象上。
+- 然后需要处理中间件以及实现洋葱模型。
+- 最后需要完成对错误的处理和异常捕获。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
