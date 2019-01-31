@@ -161,8 +161,7 @@ if (isMainThread) {
 上述代码在主线程中开启五个子线程，并且主线程向子线程发送简单的消息。
 
 
-由于 worker_thread 目前仍然处于实验阶段，所以启动时需要增加 `--experimental-worker` flag
-，运行后观察活动监视器：
+由于 worker_thread 目前仍然处于实验阶段，所以启动时需要增加 `--experimental-worker` flag，运行后观察活动监视器：
 
 <img src="/assets/img/node_thread_4.png" alt="node_thread" style="max-width: 600px">
 
