@@ -63,6 +63,57 @@ function Example() {
 
 这样写的好处是每个 state 独立管理，避免状态复杂的时候 state 臃肿。
 
+基本用法描述如下：
+
+
+```javascript
+const [state, setState] = useState(initialState);
+setState(newState);
+```
+
+useState 返回一个数组，第一个值是一个 stateful（有状态）的值，第二个值是更新这个状态值的函数。在初始渲染的时候，返回的 state 与 initialState 相同，在后续重新渲染时，useState 返回的第一个值将始终是应用更新后的最新 state(状态) 。
+
+setState 函数用于更新 state(状态) ，它接受一个新的 state(状态) 值，并将组件排入重新渲染的队列。
+
+
+由于 setState 使用函数式的更新方式，所以可以传递函数给 setState，该函数将接收先前的值，并返回更新的值。
+
+```javascript
+function Counter({initialCount}) {
+  const [count, setCount] = useState(initialCount);
+  return (
+    <>
+      Count: {count}
+      <button onClick={() => setCount(0)}>Reset</button>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+      <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
+    </>
+  );
+}
+```
+
+上述代码可以使用上次的 state 来计算新的 state。与 React 类组件中的 setState 不同，useState 不会自动合并更新对象。所以如果要更新的 state 依赖前一个 state 的时候，需要使用对象扩展的方式：
+
+```javascript
+setState(prevState => {
+  // Object.assign 也是可行的
+  return {...prevState, ...updatedValues};
+});
+```
+
+initialState 参数既可以是一个值，也可以是一个函数，如果初始状态是高开销的计算结果，则可以改为提供函数，该函数仅在初始渲染时执行：
+
+
+```javascript
+const [state, setState] = useState(() => {
+  const initialState = someExpensiveComputation(props);
+  return initialState;
+});
+```
+
+initialState 参数只有在初始渲染期间才会使用，在随后的渲染中，它会被忽略。
+
+
 
 ### Effect Hooks
 
@@ -94,7 +145,7 @@ function Example() {
 }
 ```
 
-如果没有 useEffect，我们需要在 componentDidMount 和 componentDidUpdate 中同时去调用更改 title 的方法，以完成组件初始化的状态和数据更新的状态。useEffect 本质上就是传递一个函数给 React，React 在组件渲染完成后和更新后调用这个函数。默认情况下，它在第一次渲染之后和每次更新之后都运行。
+在 useEffect 之前，我们需要在 componentDidMount 和 componentDidUpdate 中同时去调用更改 title 的方法，以完成组件初始化的状态和数据更新的状态。useEffect 传递一个函数给 React，React 在组件渲染完成后和更新后调用这个函数来完成上述功能。默认情况下，它在第一次渲染之后和每次更新之后都运行。
 
 可以将 useEffect Hook 视为 componentDidMount，componentDidUpdate 和 componentWillUnmount 的组合。
 
@@ -163,7 +214,7 @@ useEffect(() => {
 }, [props.friend.id]); // Only re-subscribe if props.friend.id changes
 ```
 
-如果希望 effect 只在组件 componentDidMount 和 componentWillUnmount 的时候执行，则只需要给第二个参数传一个空数组即可。
+如果希望 effect 只在组件 componentDidMount 和 componentWillUnmount 的时候执行，则只需要给第二个参数传一个空数组即可。传入一个空数组 [] 输入告诉 React 你的 effect 不依赖于组件中的任何值，因此该 effect 仅在 mount 时运行，并且在 unmount 时执行清理，从不在更新时运行。
 
 
 ## Hooks 的规则
@@ -252,35 +303,193 @@ function FriendListItem(props) {
 }
 ```
 
-可以看出，自定义 Hooks 就是一个 JavaScript 函数而已，并没有什么特别。
-
-- 自定义 Hooks 函数名必须以 use 开头（规约优先）。
-- 两个组件使用相同的 Hooks，但是其内部 state 是独立的。
+可以看出，自定义 Hooks 就是一个 JavaScript 函数而已，并没有什么特别。不过需要注意的是，自定义 Hooks 函数也必须以 use 开头（规约优先）。
 
 
+### useContext
 
 
+```javascript
+const context = useContext(Context);
+```
+
+接受一个 context（上下文）对象（从 React.createContext 返回的值）并返回当前 context 值，当提供程序更新时，此 Hook 将使用最新的 context 值触发重新渲染。
 
 
+### useReducer
+
+```javascript
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+useReducer 可以理解为 Redux 的 Hooks，接受的第一个参数是 `(state, action) => newState` 的 reducer，并返回与 dispatch 方法配对的当前状态。 
+
+```javascript
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'reset':
+      return initialState;
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      // A reducer must always return a valid state.
+      // Alternatively you can throw an error if an invalid action is dispatched.
+      return state;
+  }
+}
+
+function Counter({initialCount}) {
+  const [state, dispatch] = useReducer(reducer, {count: initialCount});
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'reset'})}>
+        Reset
+      </button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+    </>
+  );
+}
+```
 
 
+useReducer 接受可选的第三个参数 initialAction，表示在组件初始化期间执行的操作。比如利用 props 传递的值来初始化 state 的操作。
+
+```javascript
+
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'reset':
+      return {count: action.payload};
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      // A reducer must always return a valid state.
+      // Alternatively you can throw an error if an invalid action is dispatched.
+      return state;
+  }
+}
+
+function Counter({initialCount}) {
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState,
+    {type: 'reset', payload: initialCount},
+  );
+
+  return (
+    <>
+      Count: {state.count}
+      <button
+        onClick={() => dispatch({type: 'reset', payload: initialCount})}>
+        Reset
+      </button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+    </>
+  );
+}
+```
+
+### useRef
 
 
+```javascript
+const refContainer = useRef(initialValue);
+```
+
+useRef 返回一个可变的 ref 对象，通过 `.current` 属性对其进行访问，返回的对象将存留在整个组件的生命周期中。
+
+```javascript
+function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // `current` points to the mounted text input element
+    inputEl.current.focus();
+  };
+  return (
+    <>
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}
+```
 
 
+### useImperativeMethods
 
 
+```javascript
+useImperativeMethods(ref, createInstance, [inputs]);
+```
+
+useImperativeMethods 与 forwardRef 共同使用，表示强制方法。通过 ref 将子组件的某个方法暴露给父组件。
+
+子组件：
+
+```javascript
+function FancyInput(props, ref) {
+  const inputRef = useRef();
+  useImperativeMethods(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    }
+  }));
+  return <input ref={inputRef} ... />;
+}
+FancyInput = forwardRef(FancyInput);
+```
+
+父组件：
+
+```javascript
+
+function FancyParent() {
+  const fancyInputRef = useRef(null);	
+  useEffect(() => {
+    fancyInputRef.current.focus(); 
+  });
+
+  return (
+    <FancyInput ref={fancyInputRef} />
+  );
+}
+```
 
 
+### useLayoutEffect
 
 
+用法与 useEffect 相同，但在所有 DOM 变化后同步触发。使用它来从 DOM 读取布局并同步重新渲染。 在浏览器绘制之前 useLayoutEffect 将同步刷新。
+
+useEffect 中的函数会在 layout(布局) 和 paint(绘制) 后触发。 这使得它适用于许多常见的 side effects ，例如设置订阅和事件处理程序，因为大多数类型的工作不应阻止浏览器更新屏幕。
+
+但是如果 effect 不能够推迟，比如要 DOM 改变必须在下一次绘制之前同步触发，使用 useLayoutEffect 会更加合适。
 
 
+## Hooks API
+
+参考 [Hooks API Reference](https://reactjs.org/docs/hooks-reference.html)
 
 
+## 总结
+
+Hooks 通过设定某些特殊函数，在 React 组件内部“钩住”其生命周期和 state，帮助开发者解决一些逻辑复用的问题，通过自定义的 Hooks 对代码进行抽象，让我们写出更加符合函数式编程的规范，同时也减少了层层嵌套带来的问题。
 
 
+## 参考文档
 
-
-
+- [精读《React Hooks》](https://juejin.im/post/5be8d3def265da611a476231)
+- [React docs - Introducing Hooks
+](https://reactjs.org/docs/hooks-intro.html)
 
