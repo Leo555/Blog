@@ -371,7 +371,7 @@ function getAllLogsByIndex (db) {
 
 具体可以查看 [wardjs-report](https://github.com/iv-web/wardjs-report/blob/master/src/offline/OfflineDB.js) 项目中的 offline 模块。
 
-小程序中因为有 [`wx.getStorage(Object object)`](https://developers.weixin.qq.com/miniprogram/dev/api/wx.getStorage.html?search-key=getStorage) 接口，因此也可以模拟离线日志的存储功能。 这个分支 [feat_miniprogram](https://github.com/iv-web/wardjs-report/tree/feat_miniprogram) 是我们小程序离线上报的结局方案。
+小程序中因为有 [`wx.getStorage(Object object)`](https://developers.weixin.qq.com/miniprogram/dev/api/wx.getStorage.html?search-key=getStorage) 接口，因此也可以模拟离线日志的存储功能。 这个分支 [feat_miniprogram](https://github.com/iv-web/wardjs-report/tree/feat_miniprogram) 是我们小程序离线上报的解决方案。
 
 
 ### IndexedDB 性能测试
