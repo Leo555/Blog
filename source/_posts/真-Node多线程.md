@@ -68,7 +68,7 @@ process.env.UV_THREADPOOL_SIZE = 64
 
 一行代码轻松把线程变成 71 :blush:
 
-<img src="/assets/img/node_thread_2.png" alt="node_thread" style="max-width: 850px">
+<img src="/assets/img/node_thread_2.png" alt="node_thread">
 
 
 ## cluster 是多线程吗？
@@ -104,7 +104,7 @@ if (cluster.isMaster) {
 
 这个时候看下活动监视器：
 
-<img src="/assets/img/node_thread_3.png" alt="node_thread" style="max-width: 600px">
+<img src="/assets/img/node_thread_3.png" alt="node_thread">
 
 一共有 9 个进程，其中一个主进程，cpu 个数 * cpu 核数 = 2 * 4 = 8 个 子进程。
 
@@ -163,7 +163,7 @@ if (isMainThread) {
 
 由于 worker_thread 目前仍然处于实验阶段，所以启动时需要增加 `--experimental-worker` flag，运行后观察活动监视器：
 
-<img src="/assets/img/node_thread_4.png" alt="node_thread" style="max-width: 600px">
+<img src="/assets/img/node_thread_4.png" alt="node_thread">
 
 不多不少，正好多了五个子线程。:blush:
 
