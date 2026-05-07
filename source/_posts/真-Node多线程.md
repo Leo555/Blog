@@ -22,7 +22,7 @@ setInterval(() => {
 }, 3000)
 ```
 
-<img src="/assets/img/node_thread.png" alt="node_thread" style="max-width: 650px">
+<img src="/assets/img/node_thread.png" alt="node_thread">
 
 可以看到 Node 进程占用了 7 个线程。为什么会有 7 个线程呢？
 
@@ -56,7 +56,7 @@ setInterval(() => {
 
 fs.readFile('./index.html', () => {})
 ```
-<img src="/assets/img/node_thread_1.png" alt="node_thread" style="max-width: 650px">
+<img src="/assets/img/node_thread_1.png" alt="node_thread">
 
 线程数量变成了 11 个，这是因为在 Node 中有一些 IO 操作（DNS，FS）和一些 CPU 密集计算（Zlib，Crypto）会启用 Node 的线程池，而线程池默认大小为 4，因为线程数变成了 11。
 
