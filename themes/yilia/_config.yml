@@ -75,12 +75,16 @@ smart_menu:
   aboutme: '关于我'
 
 friends:
-  Leo的学习日志: http://poacherbro.github.io/
-  wxsm's space: https://wxsm.space/
-  James Whitesaber: http://whitesaber.farbox.com/
-  Jason's Blog: https://blog.aquariuslt.com/
   Movie: https://movie.lz5z.com/
   动画: https://lz5z.com/animatable/
+  LeetCode: https://leetcode.lz5z.com/
+  HarryPotter: https://harrypotter.lz5z.com/
+  活点地图: https://map.lz5z.com/
+  纳指标普晴雨表: https://investing.lz5z.com/
+  Leo的学习日志: http://poacherbro.github.io/
+  wxsm's space: https://wxsm.space/
+  Jason's Blog: https://blog.aquariuslt.com/
+
 
 aboutme: <div>精通 JavaScript、Python、Ruby、Java、Lisp等技术<sup>名词拼写</sup>。
         擅长各种从入门到放弃。
