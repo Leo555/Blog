@@ -7,9 +7,9 @@ title: lizhen's blog
 subtitle: 人生苦短，我再睡会
 description: Lizhen's personal static blog.
 author: lizhen
-email: lizhen55521@gmail.com
-keywords: "Lizhen, JavaScript, Python, LeoScript, Webpack, Node, Machine Learning, animataion, vue, css, 机器学习, hexo, travis, movie, service worker"
-avatar: /uploads/avatar.png
+language: zh-CN
+timezone: Asia/Shanghai
+keywords: "Lizhen, JavaScript, Python, Webpack, Node, Machine Learning, animation, vue, css, 机器学习, hexo, movie, service worker"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -45,9 +45,9 @@ post_asset_folder: false
 relative_link: false
 highlight:
   enable: true
-  auto_detect: true
   line_number: true
   tab_replace: ''
+  wrap: true
 
 # Category & Tag
 default_category: uncategorized
@@ -66,13 +66,7 @@ category: 1
 tag: 1
 
 # Server
-## Hexo uses Connect as a server
-## You can customize the logger format as defined in
-## http://www.senchalabs.org/connect/logger.html
 port: 4000
-server_ip: localhost
-logger: false
-logger_format: dev
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
