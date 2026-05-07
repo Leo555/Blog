@@ -29,9 +29,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.DEPLOY_TOKEN }}
-          external_repository: Leo555/Leo555.github.io
-          publish_branch: master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          user_name: 'Leo555'
-          user_email: 'lizhen55521@gmail.com'
