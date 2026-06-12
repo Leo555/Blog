@@ -4,12 +4,32 @@ import os
 import sys
 import traceback
 import mimetypes
+import threading
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from qcloud_cos import CosConfig, CosS3Client
 
 BUCKET = os.environ['COS_BUCKET']
 REGION = os.environ['COS_REGION']
 PUBLIC_DIR = Path('./public')
+
+def get_content_type(f: Path) -> str:
+    ct, _ = mimetypes.guess_type(str(f))
+    if ct:
+        return ct
+    ext = f.suffix.lower()
+    return {
+        '.html': 'text/html',
+        '.css': 'text/css',
+        '.js': 'application/javascript',
+        '.json': 'application/json',
+        '.xml': 'application/xml',
+        '.svg': 'image/svg+xml',
+        '.woff2': 'font/woff2',
+        '.woff': 'font/woff',
+        '.ttf': 'font/ttf',
+        '.eot': 'application/vnd.ms-fontobject',
+    }.get(ext, 'application/octet-stream')
 
 def main():
     secret_id = os.environ.get('COS_SECRET_ID', '').strip()
@@ -25,7 +45,14 @@ def main():
         print("[FATAL] Missing required environment variables. Check GitHub Secrets.")
         sys.exit(1)
 
-    config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key)
+    config = CosConfig(
+        Region=region,
+        SecretId=secret_id,
+        SecretKey=secret_key,
+        Token=None,
+        Scheme='https',
+        Timeout=30,
+    )
     client = CosS3Client(config)
 
     # 1. Delete all existing objects
@@ -59,49 +86,40 @@ def main():
         print(f"[ERROR] {PUBLIC_DIR} does not exist! Hexo build may have failed.")
         sys.exit(1)
 
-    count = 0
     files = sorted(f for f in PUBLIC_DIR.rglob('*') if f.is_file())
     total = len(files)
     print(f"[INFO] Found {total} files to upload.")
 
-    for f in files:
+    uploaded = 0
+    failed = 0
+    lock = threading.Lock()
+
+    def upload_one(f: Path) -> bool:
+        nonlocal uploaded, failed
         cos_key = str(f.relative_to(PUBLIC_DIR))
-        content_type, _ = mimetypes.guess_type(str(f))
-        extra = {}
-        if content_type:
-            extra['ContentType'] = content_type
-        # fallback for .html files when mimetypes fails
-        elif f.suffix.lower() == '.html':
-            extra['ContentType'] = 'text/html'
-        elif f.suffix.lower() == '.css':
-            extra['ContentType'] = 'text/css'
-        elif f.suffix.lower() == '.js':
-            extra['ContentType'] = 'application/javascript'
-        elif f.suffix.lower() == '.json':
-            extra['ContentType'] = 'application/json'
-        elif f.suffix.lower() == '.xml':
-            extra['ContentType'] = 'application/xml'
-        elif f.suffix.lower() == '.svg':
-            extra['ContentType'] = 'image/svg+xml'
-        elif f.suffix.lower() == '.woff2':
-            extra['ContentType'] = 'font/woff2'
-        elif f.suffix.lower() == '.woff':
-            extra['ContentType'] = 'font/woff'
-        elif f.suffix.lower() == '.ttf':
-            extra['ContentType'] = 'font/ttf'
-        elif f.suffix.lower() == '.eot':
-            extra['ContentType'] = 'application/vnd.ms-fontobject'
+        extra = {'ContentType': get_content_type(f)}
         try:
             with open(f, 'rb') as fp:
                 client.put_object(Bucket=BUCKET, Body=fp, Key=cos_key, **extra)
-            count += 1
-            if count % 50 == 0 or count == total:
-                print(f"  Uploaded {count}/{total}...")
+            with lock:
+                uploaded += 1
+                if uploaded % 50 == 0 or uploaded == total:
+                    print(f"  Uploaded {uploaded}/{total}...")
+            return True
         except Exception as e:
+            with lock:
+                failed += 1
             print(f"[ERROR] Failed to upload {cos_key}: {e}")
-            traceback.print_exc()
+            return False
 
-    print(f"\n[{BUCKET}] Done! Total {count}/{total} files uploaded.")
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {executor.submit(upload_one, f): f for f in files}
+        for future in as_completed(futures):
+            future.result()
+
+    print(f"\n[{BUCKET}] Done! Total {uploaded}/{total} files uploaded, {failed} failed.")
+    if failed > 0:
+        sys.exit(1)
 
 if __name__ == '__main__':
     try:
