@@ -54,5 +54,8 @@ jobs:
                 region: ${COS_REGION}
                 endpoint: cos.${COS_REGION}.myqcloud.com
           EOF
-          coscli rm -r cos://default/ || true
+          # 先清空桶内旧文件（排除保留的系统文件）
+          coscli ls cos://default/ | awk 'NR>2 {print $1}' | while read obj; do
+            coscli rm cos://default/"$obj" 2>/dev/null || true
+          done
           coscli cp -r ./public/ cos://default/
