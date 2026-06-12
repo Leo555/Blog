@@ -12,12 +12,20 @@ REGION = os.environ['COS_REGION']
 PUBLIC_DIR = Path('./public')
 
 def main():
-    secret_id = os.environ['COS_SECRET_ID']
-    secret_key = os.environ['COS_SECRET_KEY']
-    print(f"[CONFIG] Bucket={BUCKET} Region={REGION}")
-    print(f"[CONFIG] SecretId={secret_id[:6]}...{secret_id[-4:]}")
+    secret_id = os.environ.get('COS_SECRET_ID', '').strip()
+    secret_key = os.environ.get('COS_SECRET_KEY', '').strip()
+    bucket = os.environ.get('COS_BUCKET', '').strip()
+    region = os.environ.get('COS_REGION', '').strip()
 
-    config = CosConfig(Region=REGION, SecretId=secret_id, SecretKey=secret_key)
+    print(f"[CONFIG] Bucket={bucket} Region={region}")
+    print(f"[CONFIG] SecretId={'set(' + secret_id[:6] + '...' + secret_id[-4:] + ')' if len(secret_id) > 10 else 'EMPTY!'}")
+    print(f"[CONFIG] SecretKey={'set' if secret_key else 'EMPTY!'}")
+
+    if not secret_id or not secret_key or not bucket or not region:
+        print("[FATAL] Missing required environment variables. Check GitHub Secrets.")
+        sys.exit(1)
+
+    config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key)
     client = CosS3Client(config)
 
     # 1. Delete all existing objects
