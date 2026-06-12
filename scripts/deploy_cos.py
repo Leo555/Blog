@@ -66,10 +66,31 @@ def main():
 
     for f in files:
         cos_key = str(f.relative_to(PUBLIC_DIR))
-        content_type, _ = mimetypes.guess_type(f.name)
+        content_type, _ = mimetypes.guess_type(str(f))
         extra = {}
         if content_type:
             extra['ContentType'] = content_type
+        # fallback for .html files when mimetypes fails
+        elif f.suffix.lower() == '.html':
+            extra['ContentType'] = 'text/html'
+        elif f.suffix.lower() == '.css':
+            extra['ContentType'] = 'text/css'
+        elif f.suffix.lower() == '.js':
+            extra['ContentType'] = 'application/javascript'
+        elif f.suffix.lower() == '.json':
+            extra['ContentType'] = 'application/json'
+        elif f.suffix.lower() == '.xml':
+            extra['ContentType'] = 'application/xml'
+        elif f.suffix.lower() == '.svg':
+            extra['ContentType'] = 'image/svg+xml'
+        elif f.suffix.lower() == '.woff2':
+            extra['ContentType'] = 'font/woff2'
+        elif f.suffix.lower() == '.woff':
+            extra['ContentType'] = 'font/woff'
+        elif f.suffix.lower() == '.ttf':
+            extra['ContentType'] = 'font/ttf'
+        elif f.suffix.lower() == '.eot':
+            extra['ContentType'] = 'application/vnd.ms-fontobject'
         try:
             with open(f, 'rb') as fp:
                 client.put_object(Bucket=BUCKET, Body=fp, Key=cos_key, **extra)
