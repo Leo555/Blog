@@ -28,15 +28,17 @@ jobs:
           npx hexo generate
 
       # 同步到腾讯云 COS
-      # zkonge/coscli-action 会用 SecretId/SecretKey 直接调用 COS API
-      # --delete 会删除桶内本次构建产物中没有的旧文件，保持桶内容与 public/ 完全一致
+      # 使用腾讯云官方 coscli 命令行工具直接上传
+      - name: Install coscli
+        run: |
+          wget -q https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64 -O coscli
+          chmod +x coscli
+          sudo mv coscli /usr/local/bin/coscli
+
       - name: Deploy to Tencent Cloud COS
-        uses: zkonge/coscli-action@v1
-        with:
-          secret_id: ${{ secrets.TENCENT_SECRET_ID }}
-          secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
-          cos_bucket: ${{ secrets.COS_BUCKET }}        # 例如 blog-1234567890
-          cos_region: ${{ secrets.COS_REGION }}        # 例如 ap-guangzhou
-          local_path: ./public
-          remote_path: /
-          remove_files: true                            # 同步时删除桶内多余文件
+        env:
+          SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+          SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+        run: |
+          coscli config add -b ${{ secrets.COS_BUCKET }} -r ${{ secrets.COS_REGION }} -i "$SECRET_ID" -k "$SECRET_KEY"
+          coscli cp -r --force ./public/ cos://${{ secrets.COS_BUCKET }}/
