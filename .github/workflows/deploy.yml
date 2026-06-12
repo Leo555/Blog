@@ -39,6 +39,20 @@ jobs:
         env:
           COS_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           COS_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          COS_BUCKET: ${{ secrets.COS_BUCKET }}
+          COS_REGION: ${{ secrets.COS_REGION }}
         run: |
-          coscli rm -r cos://${{ secrets.COS_BUCKET }}/ || true
-          coscli cp -r ./public/ cos://${{ secrets.COS_BUCKET }}/
+          cat > ~/.cos.yaml <<EOF
+          cos:
+            base:
+              secretid: ${COS_SECRET_ID}
+              secretkey: ${COS_SECRET_KEY}
+              sessiontoken: ""
+            buckets:
+              - name: ${COS_BUCKET}
+                alias: default
+                region: ${COS_REGION}
+                endpoint: cos.${COS_REGION}.myqcloud.com
+          EOF
+          coscli rm -r cos://default/ || true
+          coscli cp -r ./public/ cos://default/
