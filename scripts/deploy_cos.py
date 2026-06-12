@@ -54,7 +54,7 @@ def main():
         log("[FATAL] Missing required environment variables. Check GitHub Secrets.")
         sys.exit(1)
 
-    # Retry=1 + Timeout=10 避免单个请求卡死几分钟
+    # Timeout=10 避免单个请求卡死几分钟（Retry 参数部分 SDK 版本不支持，故不传）
     config = CosConfig(
         Region=REGION,
         SecretId=secret_id,
@@ -62,7 +62,6 @@ def main():
         Token=None,
         Scheme='https',
         Timeout=10,
-        Retry=1,
     )
     client = CosS3Client(config)
 
