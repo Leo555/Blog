@@ -27,7 +27,7 @@ jobs:
           npx hexo clean
           npx hexo generate
 
-      # 同步到腾讯云 COS（使用 coscmd，多线程并发上传，速度快）
+      # 同步到腾讯云 COS（使用官方 Python SDK，最稳定）
       - name: Deploy to Tencent Cloud COS
         env:
           COS_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
@@ -35,14 +35,5 @@ jobs:
           COS_BUCKET: ${{ secrets.COS_BUCKET }}
           COS_REGION: ${{ secrets.COS_REGION }}
         run: |
-          pip install coscmd -q
-          cat > ~/.coscos.conf <<EOF
-          [common]
-          secret_id = ${COS_SECRET_ID}
-          secret_key = ${COS_SECRET_KEY}
-          bucket = ${COS_BUCKET}
-          region = ${COS_REGION}
-          schema = https
-          EOF
-          coscmd -r ${COS_REGION} -b ${COS_BUCKET} delete -r -f / 2>/dev/null || true
-          coscmd -r ${COS_REGION} -b ${COS_BUCKET} upload -r ./public/ /
+          pip install cos-python-sdk-v5 -q
+          python3 scripts/deploy_cos.py
