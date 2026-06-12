@@ -34,6 +34,7 @@ jobs:
           COS_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           COS_BUCKET: ${{ secrets.COS_BUCKET }}
           COS_REGION: ${{ secrets.COS_REGION }}
+          PYTHONUNBUFFERED: "1"
         run: |
           pip install cos-python-sdk-v5 -q
-          python3 scripts/deploy_cos.py
+          python3 -u scripts/deploy_cos.py
