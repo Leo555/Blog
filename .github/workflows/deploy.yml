@@ -41,4 +41,5 @@ jobs:
           SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
         run: |
           coscli config add -b ${{ secrets.COS_BUCKET }} -r ${{ secrets.COS_REGION }} -i "$SECRET_ID" -k "$SECRET_KEY"
-          coscli cp -r --force ./public/ cos://${{ secrets.COS_BUCKET }}/
+          coscli rm -r cos://${{ secrets.COS_BUCKET }}/ || true
+          coscli cp -r ./public/ cos://${{ secrets.COS_BUCKET }}/
