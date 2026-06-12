@@ -37,9 +37,8 @@ jobs:
 
       - name: Deploy to Tencent Cloud COS
         env:
-          SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
-          SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          COS_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+          COS_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
         run: |
-          coscli config add -b ${{ secrets.COS_BUCKET }} -r ${{ secrets.COS_REGION }} -i "$SECRET_ID" -k "$SECRET_KEY"
           coscli rm -r cos://${{ secrets.COS_BUCKET }}/ || true
           coscli cp -r ./public/ cos://${{ secrets.COS_BUCKET }}/
