@@ -1,4 +1,4 @@
-name: Deploy Hexo to GitHub Pages
+name: Deploy Hexo to Tencent Cloud COS
 
 on:
   push:
@@ -8,8 +8,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout source
@@ -29,9 +27,16 @@ jobs:
           npx hexo clean
           npx hexo generate
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      # 同步到腾讯云 COS
+      # zkonge/coscli-action 会用 SecretId/SecretKey 直接调用 COS API
+      # --delete 会删除桶内本次构建产物中没有的旧文件，保持桶内容与 public/ 完全一致
+      - name: Deploy to Tencent Cloud COS
+        uses: zkonge/coscli-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./public
+          secret_id: ${{ secrets.TENCENT_SECRET_ID }}
+          secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
+          cos_bucket: ${{ secrets.COS_BUCKET }}        # 例如 blog-1234567890
+          cos_region: ${{ secrets.COS_REGION }}        # 例如 ap-guangzhou
+          local_path: ./public
+          remote_path: /
+          remove_files: true                            # 同步时删除桶内多余文件
