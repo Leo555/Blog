@@ -54,14 +54,14 @@ def main():
         log("[FATAL] Missing required environment variables. Check GitHub Secrets.")
         sys.exit(1)
 
-    # Timeout=10 避免单个请求卡死几分钟（Retry 参数部分 SDK 版本不支持，故不传）
+    # Timeout=60 给较大文件留足上传时间（死循环已修复，无需极短超时）
     config = CosConfig(
         Region=REGION,
         SecretId=secret_id,
         SecretKey=secret_key,
         Token=None,
         Scheme='https',
-        Timeout=10,
+        Timeout=60,
     )
     client = CosS3Client(config)
 
