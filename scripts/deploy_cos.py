@@ -87,17 +87,20 @@ def main():
             traceback.print_exc()
             sys.exit(1)
         objs = resp.get('Contents', [])
-        if objs:
-            delete_keys = [{'Key': o['Key']} for o in objs]
-            try:
-                client.delete_objects(Bucket=BUCKET, Delete={'Object': delete_keys})
-                total_deleted += len(objs)
-                log(f"  Deleted {len(objs)} objects (total: {total_deleted})")
-            except Exception as e:
-                log(f"[WARN] delete_objects failed: {e}")
-        if not resp.get('IsTruncated'):
+        # 没有更多对象，退出（COS SDK 的 IsTruncated 是字符串，不能直接用作布尔判断）
+        if not objs:
             break
-        marker = resp.get('NextMarker', '')
+        delete_keys = [{'Key': o['Key']} for o in objs]
+        try:
+            client.delete_objects(Bucket=BUCKET, Delete={'Object': delete_keys})
+            total_deleted += len(objs)
+            log(f"  Deleted {len(objs)} objects (total: {total_deleted})")
+        except Exception as e:
+            log(f"[WARN] delete_objects failed: {e}")
+        # IsTruncated 是字符串 'true'/'false'，显式判断
+        if str(resp.get('IsTruncated', 'false')).lower() != 'true':
+            break
+        marker = resp.get('NextMarker') or objs[-1]['Key']
     log(f"[{BUCKET}] Cleared {total_deleted} objects.")
 
     # 2. Upload all files from public/
