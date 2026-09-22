@@ -1,0 +1,6 @@
+{
+  "buildCommand": "hexo clean && hexo generate",
+  "outputDirectory": "public",
+  "framework": null,
+  "installCommand": "npm ci"
+}
