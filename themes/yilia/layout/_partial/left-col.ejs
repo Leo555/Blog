@@ -18,7 +18,7 @@
 				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
 	        <%}%>
       <% for (var i in theme.sub){ %>
-        <li><%- link_to('https://'+theme.sub[i]+config.base, i, {external: true}) %></li>
+        <li><%- link_to('https://'+theme.sub[i], i, {external: true}) %></li>
         <%}%>
 			</ul>
 		</nav>
