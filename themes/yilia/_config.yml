@@ -50,7 +50,10 @@ open_in_new: true
 baidu_analytics: '018cd2c2239b3d67796a17a6e03091c3'
 
 # Vercel Web Analytics（仅当站点部署在 Vercel 上时才会正常上报）
+# 脚本只在下列 Vercel 域名下加载，避免在 COS 等平台上请求 insights 脚本导致 404
 vercel_analytics: true
+vercel_analytics_hosts:
+  - blog.lz5z.com
 
 favicon: /assets/img/favicon.ico
 

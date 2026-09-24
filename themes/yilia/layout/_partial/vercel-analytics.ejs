@@ -1,6 +1,15 @@
 <% if (theme.vercel_analytics){ %>
 <script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  // Vercel Web Analytics 仅在部署于 Vercel 的域名下加载，
+  // 避免在 COS 等非 Vercel 平台上请求 /_vercel/insights/script.js 导致 404。
+  (function () {
+    var vercelHosts = <%- JSON.stringify(theme.vercel_analytics_hosts || ['blog.lz5z.com']) %>;
+    if (vercelHosts.indexOf(location.hostname) === -1) return;
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    var s = document.createElement('script');
+    s.defer = true;
+    s.src = '/_vercel/insights/script.js';
+    document.head.appendChild(s);
+  })();
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
 <% } %>
