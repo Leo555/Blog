@@ -60,6 +60,9 @@ favicon: /assets/img/favicon.ico
 #你的头像url
 avatar: /assets/img/avatar.svg
 
+# 全站默认分享卡片图（首页/归档/分类/标签等非文章页使用；文章页优先用正文配图）
+default_og_image: /assets/img/og-image.png
+
 #2、网易云跟帖
 wangyiyun: false
 
