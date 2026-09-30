@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lz5z.com/sitemap.xml
+Sitemap: https://lz5z.com/baidusitemap.xml
