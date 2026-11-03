@@ -5,9 +5,15 @@
   "installCommand": "npm ci",
   "headers": [
     {
-      "source": "/.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|otf|map|json|txt|xml|pdf|zip)$",
+      "source": "/.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot|otf|map|json|pdf|zip)$",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(robots\\.txt|sitemap\\.xml|baidusitemap\\.xml|atom\\.xml)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
       ]
     },
     {
