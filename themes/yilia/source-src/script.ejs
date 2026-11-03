@@ -18,8 +18,9 @@
 </script>
 <script>
 (function() {
-    var host = 'lz5z.com';
-    if ((host === window.location.host) && (window.location.protocol === "http:"))
+    // 主域及其所有子域（lz5z.com / www.lz5z.com / blog.lz5z.com）都强制走 https
+    var host = window.location.hostname;
+    if ((/(^|\.)lz5z\.com$/.test(host)) && (window.location.protocol === "http:"))
         window.location.protocol = "https";
 })();        
 </script>
