@@ -1,9 +1,10 @@
 name: Deploy Hexo to Tencent Cloud COS
 
+# 2026-11-02：根域名 lz5z.com 迁移到 Vercel，COS 部署不再自动触发
+# （腾讯云 COS 账号欠费导致主站 451 / 525，改由 Vercel 统一承载）
+# 保留为手动触发（workflow_dispatch），需要时可手动跑一次
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
